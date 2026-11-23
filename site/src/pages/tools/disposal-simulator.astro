@@ -103,12 +103,12 @@ const schema = {
     <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900">
       実家を「壊して売る」「壊さずそのまま手放す」「空き家で維持」どれが一番手元に残る？
     </h1>
-    <p class="mt-1.5 text-xs sm:text-sm text-slate-600 leading-relaxed">
+    <p class="mt-1.5 text-xs sm:text-sm text-slate-600 leading-relaxed print-header-desc">
       「先に150万〜250万円も払って解体しないと売れないの？」「このまま空き家で置いておくと年いくらかかる？」という疑問を、<strong>4つの項目を選ぶだけ</strong>で即試算します。正確な面積や築年数がわからなくても、<strong>だいたいの目安</strong>で安心してお試しいただけます。
     </p>
   </div>
 
-  <div class="grid gap-6 lg:grid-cols-12 items-start">
+  <div class="grid gap-6 lg:grid-cols-12 items-start print-tool-grid">
     <!-- 左：4ステップの選択パネル -->
     <div class="lg:col-span-5 min-w-0 space-y-4 no-print">
       <!-- STEP 1. 地域・試算年数 -->
@@ -317,10 +317,10 @@ const schema = {
     </div>
 
     <!-- 右：診断結果・ユーザーメリット・3ルート比較（改行落ち防止設計） -->
-    <div class="lg:col-span-7 min-w-0 space-y-5">
-      <div class="card-surface rounded p-5 sm:p-6">
+    <div class="lg:col-span-7 min-w-0 space-y-5 print-result-col">
+      <div class="card-surface rounded p-5 sm:p-6 print-result-card">
         <!-- 最上段：結論カード -->
-        <div id="verdict-hero" class="rounded border border-slate-200 border-l-4 border-l-emerald-700 bg-emerald-50/60 p-4 sm:p-5 mb-5">
+        <div id="verdict-hero" class="rounded border border-slate-200 border-l-4 border-l-emerald-700 bg-emerald-50/60 p-4 sm:p-5 mb-5 print-keep-together">
           <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
             <span id="verdict-eyebrow" class="text-[11px] font-bold tracking-wider text-emerald-800 uppercase whitespace-nowrap">
               10年間の手残り・維持費シミュレーション
@@ -387,7 +387,7 @@ const schema = {
           <span class="text-[11px] text-slate-400">※仲介手数料・解体費・税金すべて差し引き後の手残り目安</span>
         </div>
 
-        <div class="grid sm:grid-cols-3 gap-3 mb-5">
+        <div class="grid sm:grid-cols-3 gap-3 mb-5 print-grid-3 print-keep-together">
           <!-- ① 空き家のまま維持 -->
           <div id="card-keep" class="rounded border border-slate-200 border-t-3 border-t-rose-600 bg-rose-50/30 p-3.5 flex flex-col justify-between transition-colors min-w-0">
             <div>
@@ -429,11 +429,11 @@ const schema = {
         </div>
 
         <!-- ③「壊さず手放す」場合の2つの方法（仲介 vs 専門買取）の比較 -->
-        <div class="rounded-xs bg-slate-50 border border-slate-200 px-3.5 py-3 mb-5">
+        <div class="rounded-xs bg-slate-50 border border-slate-200 px-3.5 py-3 mb-5 print-keep-together">
           <div class="text-[11px] font-bold text-slate-700 mb-2">
             ③「建物を壊さず手放す」場合の2ルート内訳（仲介で買主を探す vs 専門会社へ直接買取）
           </div>
-          <div class="grid sm:grid-cols-2 gap-2.5 text-xs tabular-nums">
+          <div class="grid sm:grid-cols-2 gap-2.5 text-xs tabular-nums print-grid-2">
             <div class="rounded-xs border border-slate-200 bg-white px-3 py-2.5">
               <div class="flex items-center justify-between gap-2 whitespace-nowrap">
                 <span class="font-bold text-slate-700">A. 古家付き仲介売却</span>

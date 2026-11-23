@@ -64,12 +64,12 @@ const schema = [
     <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900">
       相続手続きの期限＆空き家3,000万円特別控除 逆算カレンダー
     </h1>
-    <p class="mt-1.5 text-xs sm:text-sm text-slate-600 leading-relaxed">
+    <p class="mt-1.5 text-xs sm:text-sm text-slate-600 leading-relaxed print-header-desc">
       相続開始日（お亡くなりになった日）を入力するだけで、<strong>相続放棄・相続税・相続登記（義務化）・空き家3,000万円特別控除の売却締切日</strong>を一覧で自動計算します。結果はそのまま<strong>LINE共有・印刷（PDF保存）</strong>してご家族の話し合いにご活用いただけます。
     </p>
   </div>
 
-  <div class="grid gap-6 lg:grid-cols-12 items-start">
+  <div class="grid gap-6 lg:grid-cols-12 items-start print-tool-grid">
     <!-- 左：入力パネル -->
     <div class="lg:col-span-5 min-w-0 space-y-4 no-print">
       <!-- STEP 1: 相続開始日 -->
@@ -183,8 +183,8 @@ const schema = [
     </div>
 
     <!-- 右：逆算結果パネル -->
-    <div class="lg:col-span-7 min-w-0 space-y-5">
-      <div class="card-surface rounded p-5 sm:p-6">
+    <div class="lg:col-span-7 min-w-0 space-y-5 print-result-col">
+      <div class="card-surface rounded p-5 sm:p-6 print-result-card">
         <!-- 最重要の2大締切カード -->
         <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
           <div>
@@ -215,7 +215,7 @@ const schema = [
           </div>
         </div>
 
-        <div class="grid sm:grid-cols-2 gap-3 mb-5">
+        <div class="grid sm:grid-cols-2 gap-3 mb-5 print-grid-2 print-keep-together">
           <div class="rounded border border-emerald-200 border-t-3 border-t-emerald-700 bg-emerald-50/40 p-4">
             <div class="flex items-center justify-between gap-2">
               <span class="text-[11px] font-bold text-emerald-900">空き家3,000万円控除 売却期限</span>

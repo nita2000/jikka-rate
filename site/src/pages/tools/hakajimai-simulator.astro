@@ -25,12 +25,12 @@ const schema = {
     <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900">
       遠方のお墓をこのまま維持するのと、墓じまいして永代供養・樹木葬にするのは何年で元が取れる？
     </h1>
-    <p class="mt-1.5 text-xs sm:text-sm text-slate-600 leading-relaxed">
+    <p class="mt-1.5 text-xs sm:text-sm text-slate-600 leading-relaxed print-header-desc">
       「お墓が遠くてお参りや掃除が大変」「子ども世代にお墓の負担を残したくない」という方のために、<strong>4つの項目を選ぶだけ</strong>で墓石の撤去費用から新しい供養先の費用、毎年の帰省交通費・管理料との損益分岐（回収年数）までやさしく試算します。
     </p>
   </div>
 
-  <div class="grid gap-6 lg:grid-cols-12 items-start">
+  <div class="grid gap-6 lg:grid-cols-12 items-start print-tool-grid">
     <!-- 左：4ステップ選択パネル -->
     <div class="lg:col-span-5 min-w-0 space-y-4 no-print">
       <!-- STEP 1 -->
@@ -156,10 +156,10 @@ const schema = {
     </div>
 
     <!-- 右：診断結果・15年比較カード（改行落ち防止設計） -->
-    <div class="lg:col-span-7 min-w-0 space-y-5">
-      <div class="card-surface rounded p-5 sm:p-6">
+    <div class="lg:col-span-7 min-w-0 space-y-5 print-result-col">
+      <div class="card-surface rounded p-5 sm:p-6 print-result-card">
         <!-- 最上段：結論ヒーロー -->
-        <div id="hk-hero" class="rounded border border-slate-200 border-l-4 border-l-emerald-700 bg-emerald-50/60 p-4 sm:p-5 mb-5">
+        <div id="hk-hero" class="rounded border border-slate-200 border-l-4 border-l-emerald-700 bg-emerald-50/60 p-4 sm:p-5 mb-5 print-keep-together">
           <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
             <span class="text-[11px] font-bold tracking-wider text-emerald-800 uppercase whitespace-nowrap">15年間の維持費 vs 墓じまい 試算結果</span>
             <span id="hk-payback-badge" class="px-2 py-0.5 rounded-xs bg-emerald-700 text-white text-[11px] font-bold tabular-nums whitespace-nowrap">約—年で元が取れる</span>
@@ -200,7 +200,7 @@ const schema = {
         </div>
 
         <!-- 15年総支出 2大比較カード（見出し＋バッジ・金額・内訳の改行落ちゼロ設計） -->
-        <div class="grid sm:grid-cols-2 gap-3.5 mb-5">
+        <div class="grid sm:grid-cols-2 gap-3.5 mb-5 print-grid-2 print-keep-together">
           <div id="hk-card-keep" class="rounded border border-slate-200 border-t-3 border-t-slate-400 bg-slate-50/70 p-4 flex flex-col justify-between min-w-0">
             <div>
               <div class="flex items-center justify-between gap-1.5 whitespace-nowrap">

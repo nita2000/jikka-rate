@@ -173,27 +173,100 @@ input[type="range"]::-moz-range-thumb {
   cursor: pointer;
 }
 
-/* 親族会議・PDF保存向けの印刷レイアウト */
+/* 親族会議・PDF保存向けのA4試算書レイアウト */
 @media print {
+  @page {
+    size: A4 portrait;
+    margin: 9mm 11mm;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
   header,
   footer,
-  .no-print {
+  .no-print,
+  .print-header-desc {
     display: none !important;
   }
 
+  html,
   body {
     background: #ffffff !important;
     color: #1e1c19 !important;
+    font-size: 12px !important;
   }
 
   main {
     max-width: 100% !important;
     padding: 0 !important;
+    margin: 0 !important;
   }
 
-  .card-surface,
   .page-header-clean {
+    padding: 10px 14px !important;
+    margin-bottom: 10px !important;
+    border-top-width: 2px !important;
     box-shadow: none !important;
     break-inside: avoid;
+  }
+
+  .page-header-clean h1 {
+    font-size: 15px !important;
+    line-height: 1.3 !important;
+  }
+
+  .print-tool-grid {
+    display: block !important;
+  }
+
+  .print-result-col {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* 結果カード全体の改ページ禁止を外し、1ページ目先頭から自然に出力する */
+  .card-surface {
+    box-shadow: none !important;
+    break-inside: auto !important;
+    page-break-inside: auto !important;
+  }
+
+  .print-result-card {
+    padding: 12px 14px !important;
+  }
+
+  .print-grid-3 {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .print-grid-2 {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .print-keep-together,
+  tr {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  table th,
+  table td {
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+    font-size: 11px !important;
+  }
+
+  /* 印刷時はアフィリエイトCTA枠（aside）を非表示にして純粋な試算表のみ出力 */
+  aside {
+    display: none !important;
   }
 }

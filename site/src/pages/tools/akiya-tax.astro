@@ -25,12 +25,12 @@ const schema = {
     <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900">
       空き家の固定資産税はいくら上がる？住宅用地の軽減（1/6特例）と相続登記の費用シミュレーター
     </h1>
-    <p class="mt-1.5 text-xs sm:text-sm text-slate-600 leading-relaxed">
+    <p class="mt-1.5 text-xs sm:text-sm text-slate-600 leading-relaxed print-header-desc">
       ニュースでよく聞く「空き家の固定資産税が最大6倍（実際の負担は約4.2倍）に上がる仕組み」や「相続登記（名義変更）の義務化」について、<strong>あなたのご実家だといくら変わるのか・どうすれば負担を防げるのか</strong>を4つの選択だけでわかりやすく試算します。
     </p>
   </div>
 
-  <div class="grid gap-6 lg:grid-cols-12 items-start">
+  <div class="grid gap-6 lg:grid-cols-12 items-start print-tool-grid">
     <!-- 左：4ステップ選択パネル -->
     <div class="lg:col-span-5 min-w-0 space-y-4 no-print">
       <!-- STEP 1 -->
@@ -179,10 +179,10 @@ const schema = {
     </div>
 
     <!-- 右：診断結果・安心の対策ガイド -->
-    <div class="lg:col-span-7 min-w-0 space-y-5">
-      <div class="card-surface rounded p-5 sm:p-6">
+    <div class="lg:col-span-7 min-w-0 space-y-5 print-result-col">
+      <div class="card-surface rounded p-5 sm:p-6 print-result-card">
         <!-- 最上段：結論ヒーロー -->
-        <div id="at-hero" class="rounded border border-slate-200 border-l-4 border-l-rose-600 bg-rose-50/50 p-4 sm:p-5 mb-5">
+        <div id="at-hero" class="rounded border border-slate-200 border-l-4 border-l-rose-600 bg-rose-50/50 p-4 sm:p-5 mb-5 print-keep-together">
           <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
             <span class="text-[11px] font-bold tracking-wider text-rose-800 uppercase">固定資産税・相続登記の試算結果</span>
             <span id="at-status-badge" class="px-2 py-0.5 rounded-xs text-[11px] font-bold bg-rose-100 text-rose-800">住宅用地の軽減が外れた場合</span>
@@ -220,7 +220,7 @@ const schema = {
         </div>
 
         <!-- 3枚の主要KPIカード -->
-        <div class="grid sm:grid-cols-3 gap-3 mb-5">
+        <div class="grid sm:grid-cols-3 gap-3 mb-5 print-grid-3 print-keep-together">
           <div class="rounded border border-slate-200 bg-slate-50 p-3.5">
             <div class="text-[11px] font-bold text-slate-600">① 今の年間税額（1/6軽減中）</div>
             <div id="at-cur-tax" class="mt-1 font-display text-xl font-extrabold text-slate-900 tabular-nums">—</div>
