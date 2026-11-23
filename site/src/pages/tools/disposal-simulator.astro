@@ -1,0 +1,922 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import AffiliateCta from "../../components/AffiliateCta.astro";
+import propertyCases from "../../data/property_cases.json";
+import prefectures from "../../data/prefectures.json";
+import taxRules from "../../data/tax_rules.json";
+
+const houseCases = propertyCases.filter((c) => c.structure !== "grave");
+
+const quickPresets = [
+  {
+    slug: "_preset_wood_30",
+    shortLabel: "標準的な2階建",
+    subLabel: "延床30坪・敷地45坪",
+    name: "【標準】木造2階建 30坪・敷地45坪（もっとも一般的）",
+    structure: "wood",
+    floor_tsubo: 30,
+    land_tsubo: 45,
+    building_age_years: 38,
+    has_asbestos_risk: true,
+    annual_extra_maint_yen: 0,
+  },
+  {
+    slug: "_preset_wood_25",
+    shortLabel: "小さめ2階建",
+    subLabel: "延床25坪・敷地35坪",
+    name: "【コンパクト】木造2階建 25坪・敷地35坪",
+    structure: "wood",
+    floor_tsubo: 25,
+    land_tsubo: 35,
+    building_age_years: 35,
+    has_asbestos_risk: true,
+    annual_extra_maint_yen: 0,
+  },
+  {
+    slug: "_preset_wood_40",
+    shortLabel: "ゆとり2階建・庭付き",
+    subLabel: "延床40坪・敷地60坪",
+    name: "【ゆとり】木造2階建 40坪・敷地60坪（庭・塀あり）",
+    structure: "wood",
+    floor_tsubo: 40,
+    land_tsubo: 60,
+    building_age_years: 40,
+    has_asbestos_risk: true,
+    annual_extra_maint_yen: 15000,
+  },
+  {
+    slug: "_preset_hiraya_24",
+    shortLabel: "木造の平屋",
+    subLabel: "延床24坪・敷地60坪",
+    name: "【平屋】木造平屋 24坪・敷地60坪",
+    structure: "wood",
+    floor_tsubo: 24,
+    land_tsubo: 60,
+    building_age_years: 45,
+    has_asbestos_risk: true,
+    annual_extra_maint_yen: 15000,
+  },
+  {
+    slug: "_preset_farm_55",
+    shortLabel: "広い実家・母屋＋納屋",
+    subLabel: "延床55坪・敷地150坪",
+    name: "【大型・農家】木造55坪（母屋＋納屋）・敷地150坪",
+    structure: "wood",
+    floor_tsubo: 55,
+    land_tsubo: 150,
+    building_age_years: 52,
+    has_asbestos_risk: true,
+    annual_extra_maint_yen: 60000,
+  },
+  {
+    slug: "_preset_steel_35",
+    shortLabel: "鉄骨造・RC造",
+    subLabel: "延床35坪・敷地50坪",
+    name: "【鉄骨・ハウスメーカー】鉄骨造 35坪・敷地50坪",
+    structure: "steel",
+    floor_tsubo: 35,
+    land_tsubo: 50,
+    building_age_years: 36,
+    has_asbestos_risk: true,
+    annual_extra_maint_yen: 15000,
+  },
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "実家の手放し方・手残り金額シミュレーター（解体売却 vs そのまま売却・買取 vs 空き家維持）",
+  applicationCategory: "FinanceApplication",
+  operatingSystem: "All",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "JPY" },
+};
+---
+
+<BaseLayout
+  title="実家を「壊して売る」「そのまま売る」「空き家で維持」手残り金額シミュレーター"
+  description="住所や個人情報の入力なし・4つの選択だけで30秒試算。都道府県別の土地相場・解体費用・空き家の固定資産税をもとに、先に解体して売る場合と、壊さずそのまま売却・買取する場合の手残り金額を比較します。"
+  canonicalPath="/tools/disposal-simulator/"
+  schema={schema}
+>
+  <div class="page-header-clean rounded p-5 sm:p-6 mb-6">
+    <div class="eyebrow-label mb-1">実家の手放し方・30秒シミュレーター｜住所・個人情報の入力不要</div>
+    <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900">
+      実家を「壊して売る」「壊さずそのまま手放す」「空き家で維持」どれが一番手元に残る？
+    </h1>
+    <p class="mt-1.5 text-xs sm:text-sm text-slate-600 leading-relaxed">
+      「先に150万〜250万円も払って解体しないと売れないの？」「このまま空き家で置いておくと年いくらかかる？」という疑問を、<strong>4つの項目を選ぶだけ</strong>で即試算します。正確な面積や築年数がわからなくても、<strong>だいたいの目安</strong>で安心してお試しいただけます。
+    </p>
+  </div>
+
+  <div class="grid gap-6 lg:grid-cols-12 items-start">
+    <!-- 左：4ステップの選択パネル -->
+    <div class="lg:col-span-5 min-w-0 space-y-4">
+      <!-- STEP 1. 地域・試算年数 -->
+      <div class="card-surface rounded p-5 space-y-3.5">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+          <div class="flex items-center gap-2">
+            <span class="inline-flex items-center justify-center rounded-xs bg-emerald-700 px-1.5 py-0.5 text-[10px] font-extrabold text-white">STEP 1</span>
+            <span class="text-xs font-extrabold text-slate-900">実家のある都道府県</span>
+          </div>
+          <span class="text-[11px] text-slate-500">地価・解体相場に連動</span>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
+          <label class="block text-xs sm:col-span-7">
+            <span class="font-bold text-slate-700">都道府県を選択</span>
+            <select id="disp-pref" class="mt-1 w-full rounded-xs border border-slate-300 bg-white px-2.5 py-2 text-xs font-bold text-slate-900 focus:border-emerald-700 focus:outline-none">
+              {prefectures.map((p) => (
+                <option value={p.slug} selected={p.slug === "tokyo"}>
+                  {p.name}（解体目安 {p.wood_man_per_tsubo.toFixed(1)}万/坪）
+                </option>
+              ))}
+            </select>
+          </label>
+          <div class="text-xs sm:col-span-5">
+            <span class="font-bold text-slate-700 block">空き家維持の比較期間</span>
+            <div class="mt-1 grid grid-cols-2 gap-1.5" id="span-group">
+              <button type="button" data-span="5" class="span-btn rounded-xs border border-slate-300 bg-white py-2 text-xs font-bold text-slate-600 transition-colors">5年間</button>
+              <button type="button" data-span="10" class="span-btn rounded-xs border border-emerald-700 bg-emerald-700 py-2 text-xs font-bold text-white transition-colors">10年間</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2. 実家の広さタイプ ＆ 築年数の目安 -->
+      <div class="card-surface rounded p-5 space-y-3.5 border-l-3 border-l-emerald-700">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+          <div class="flex items-center gap-2">
+            <span class="inline-flex items-center justify-center rounded-xs bg-emerald-700 px-1.5 py-0.5 text-[10px] font-extrabold text-white">STEP 2</span>
+            <span class="text-xs font-extrabold text-slate-900">実家の広さ・築年数の目安</span>
+          </div>
+          <span class="text-[11px] text-emerald-800 font-bold">だいたいでOK</span>
+        </div>
+
+        <!-- 2-A: よく選ばれる6つの広さボタン -->
+        <div>
+          <div class="text-xs font-bold text-slate-700 mb-1.5">① 建物のタイプ・だいたいの広さ</div>
+          <div class="grid grid-cols-2 gap-2" id="preset-btn-group">
+            {quickPresets.map((g, idx) => (
+              <button
+                type="button"
+                data-preset-slug={g.slug}
+                class={`preset-btn rounded-xs border py-2 px-2.5 text-left transition-colors ${
+                  idx === 0
+                    ? "border-emerald-700 bg-emerald-700 text-white"
+                    : "border-slate-300 bg-white text-slate-700 hover:bg-slate-50"
+                }`}
+              >
+                <div class="text-[11px] font-extrabold leading-snug">{g.shortLabel}</div>
+                <div class="text-[10px] font-normal opacity-85 mt-0.5">{g.subLabel}</div>
+              </button>
+            ))}
+          </div>
+
+          <div class="mt-2.5">
+            <label class="block text-[11px] text-slate-500">
+              <span>さらに詳しい条件・訳ありタイプから選ぶ場合：</span>
+              <select id="disp-case" class="mt-1 w-full rounded-xs border border-slate-200 bg-slate-50 px-2.5 py-1.5 text-xs text-slate-700 focus:border-emerald-700 focus:bg-white focus:outline-none">
+                <optgroup label="代表的な実家タイプ（上のボタンと連動）">
+                  {quickPresets.map((g) => (
+                    <option value={g.slug} selected={g.slug === "_preset_wood_30"}>
+                      {g.name}
+                    </option>
+                  ))}
+                </optgroup>
+                <optgroup label="詳細ケース・訳あり実家から選ぶ">
+                  {houseCases.map((c) => (
+                    <option value={c.slug}>
+                      {c.short_name}｜{c.spec_note}
+                    </option>
+                  ))}
+                </optgroup>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <!-- 2-B: 築年数の目安（3択ボタン） -->
+        <div class="pt-2 border-t border-slate-100">
+          <div class="text-xs font-bold text-slate-700 mb-1.5">② 築年数の目安（わかる範囲で選択）</div>
+          <div class="grid grid-cols-3 gap-1.5" id="age-group">
+            <button type="button" data-age="old45" class="age-btn rounded-xs border border-slate-300 bg-white py-2 px-2 text-center text-[11px] font-bold text-slate-600 transition-colors">
+              築45年以上<br /><span class="text-[10px] font-normal opacity-85">昭和56年以前</span>
+            </button>
+            <button type="button" data-age="mid35" class="age-btn rounded-xs border border-emerald-700 bg-emerald-700 py-2 px-2 text-center text-[11px] font-bold text-white transition-colors">
+              築30〜44年<br /><span class="text-[10px] font-normal opacity-90">もっとも一般的</span>
+            </button>
+            <button type="button" data-age="new25" class="age-btn rounded-xs border border-slate-300 bg-white py-2 px-2 text-center text-[11px] font-bold text-slate-600 transition-colors">
+              築30年未満<br /><span class="text-[10px] font-normal opacity-85">平成中期以降</span>
+            </button>
+          </div>
+          <p class="mt-2 rounded-xs bg-slate-50 border border-slate-200/70 px-2.5 py-2 text-[11px] text-slate-600 leading-relaxed">
+            <strong>正確な広さや築年数がわからなくても大丈夫です。</strong>築30年以上の木造実家は建物の固定資産税評価がほぼ同じ（底値）になるため、おおよその広さを選ぶだけで実態に近い試算が出ます。
+          </p>
+        </div>
+      </div>
+
+      <!-- STEP 3. 立地・接道条件 -->
+      <div class="card-surface rounded p-5 space-y-3.5 border-l-3 border-l-slate-600">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+          <div class="flex items-center gap-2">
+            <span class="inline-flex items-center justify-center rounded-xs bg-emerald-700 px-1.5 py-0.5 text-[10px] font-extrabold text-white">STEP 3</span>
+            <span class="text-xs font-extrabold text-slate-900">実家のまわりの環境・道路</span>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-2" id="loc-group">
+          <button type="button" data-loc="urban" class="loc-btn rounded-xs border border-slate-300 bg-white py-2 px-2.5 text-left text-[11px] font-bold text-slate-700 transition-colors">
+            <div>駅ちか・市街地</div>
+            <div class="text-[10px] font-normal opacity-80 mt-0.5">買い手がつきやすい地域</div>
+          </button>
+          <button type="button" data-loc="suburb" class="loc-btn rounded-xs border border-emerald-700 bg-emerald-700 py-2 px-2.5 text-left text-[11px] font-bold text-white transition-colors">
+            <div>一般的な住宅街・郊外</div>
+            <div class="text-[10px] font-normal opacity-90 mt-0.5">車が通れる道（幅4m以上）</div>
+          </button>
+          <button type="button" data-loc="rural" class="loc-btn rounded-xs border border-slate-300 bg-white py-2 px-2.5 text-left text-[11px] font-bold text-slate-700 transition-colors">
+            <div>地方・農村・郊外遠方</div>
+            <div class="text-[10px] font-normal opacity-80 mt-0.5">買い手探しに時間がかかる</div>
+          </button>
+          <button type="button" data-loc="wakeari" class="loc-btn rounded-xs border border-slate-300 bg-white py-2 px-2.5 text-left text-[11px] font-bold text-slate-700 transition-colors">
+            <div>道が狭い・建て替え不可</div>
+            <div class="text-[10px] font-normal opacity-80 mt-0.5">重機が入りにくい・階段道</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 4. 荷物の残り具合・建物の状態 -->
+      <div class="card-surface rounded p-5 space-y-3.5 border-l-3 border-l-amber-600">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+          <div class="flex items-center gap-2">
+            <span class="inline-flex items-center justify-center rounded-xs bg-emerald-700 px-1.5 py-0.5 text-[10px] font-extrabold text-white">STEP 4</span>
+            <span class="text-xs font-extrabold text-slate-900">部屋の中の荷物・建物の傷み具合</span>
+          </div>
+        </div>
+        <div class="grid grid-cols-3 gap-1.5" id="cond-group">
+          <button type="button" data-cond="clean" class="cond-btn rounded-xs border border-slate-300 bg-white py-2 px-2 text-[11px] font-bold text-slate-700 transition-colors">
+            ほぼ片付いている<br /><span class="text-[10px] font-normal opacity-80">建物も良好</span>
+          </button>
+          <button type="button" data-cond="normal" class="cond-btn rounded-xs border border-emerald-700 bg-emerald-700 py-2 px-2 text-[11px] font-bold text-white transition-colors">
+            家具・荷物がそのまま<br /><span class="text-[10px] font-normal opacity-90">一般的な実家</span>
+          </button>
+          <button type="button" data-cond="damaged" class="cond-btn rounded-xs border border-slate-300 bg-white py-2 px-2 text-[11px] font-bold text-slate-700 transition-colors">
+            荷物が多い・傷みあり<br /><span class="text-[10px] font-normal opacity-80">雨漏り・雑草など</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 詳細条件（折りたたみアコーディオン） -->
+      <details class="card-surface rounded p-4 text-xs" id="adv-details">
+        <summary class="cursor-pointer font-extrabold text-slate-700 flex items-center justify-between list-none">
+          <span>査定額や解体見積もりがわかっている場合はこちらで金額調整</span>
+          <span class="text-emerald-700 text-[11px] shrink-0 ml-2">開く ▾</span>
+        </summary>
+        <div class="mt-4 pt-3 border-t border-slate-100 space-y-3">
+          <div class="grid grid-cols-2 gap-3">
+            <label class="block">
+              <span class="font-bold text-slate-700">土地の売却想定額（万円）</span>
+              <input id="man-land" type="number" step="10" min="50" max="30000" class="mt-1 w-full rounded-xs border border-slate-300 px-2.5 py-1.5 tabular-nums" />
+            </label>
+            <label class="block">
+              <span class="font-bold text-slate-700">建物の解体工事費（万円）</span>
+              <input id="man-demo" type="number" step="5" min="0" max="3000" class="mt-1 w-full rounded-xs border border-slate-300 px-2.5 py-1.5 tabular-nums" />
+            </label>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <label class="block">
+              <span class="font-bold text-slate-700">家財の片付け費用（万円）</span>
+              <input id="man-res" type="number" step="5" min="0" max="500" class="mt-1 w-full rounded-xs border border-slate-300 px-2.5 py-1.5 tabular-nums" />
+            </label>
+            <label class="block">
+              <span class="font-bold text-slate-700">年間の維持管理・修繕（万円）</span>
+              <input id="man-maint" type="number" step="1" min="2" max="200" class="mt-1 w-full rounded-xs border border-slate-300 px-2.5 py-1.5 tabular-nums" />
+            </label>
+          </div>
+          <div class="pt-1 flex justify-end">
+            <button type="button" id="reset-auto-btn" class="text-[11px] font-bold text-emerald-700 hover:underline">
+              公的統計の自動計算に戻す ↺
+            </button>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <!-- 右：診断結果・ユーザーメリット・3ルート比較（改行落ち防止設計） -->
+    <div class="lg:col-span-7 min-w-0 space-y-5">
+      <div class="card-surface rounded p-5 sm:p-6">
+        <!-- 最上段：結論カード -->
+        <div id="verdict-hero" class="rounded border border-slate-200 border-l-4 border-l-emerald-700 bg-emerald-50/60 p-4 sm:p-5 mb-5">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
+            <span id="verdict-eyebrow" class="text-[11px] font-bold tracking-wider text-emerald-800 uppercase whitespace-nowrap">
+              10年間の手残り・維持費シミュレーション
+            </span>
+            <span id="premise-mode-badge" class="text-[11px] font-semibold text-slate-500 whitespace-nowrap">公的統計から自動試算</span>
+          </div>
+
+          <div class="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+            <div class="flex flex-wrap items-baseline gap-x-2">
+              <span id="verdict-lead" class="text-xs sm:text-sm font-extrabold text-slate-700 whitespace-nowrap">最も有利なのは</span>
+              <span id="verdict-winner" class="font-display text-lg sm:text-2xl font-extrabold tracking-tight text-emerald-800 whitespace-nowrap">—</span>
+            </div>
+            <div id="verdict-diff-note" class="text-xs font-bold text-slate-700 tabular-nums whitespace-nowrap"></div>
+          </div>
+
+          <!-- 3つのメリット（各項目が1行でスッキリ収まる設計） -->
+          <div class="mt-3 pt-2.5 border-t border-emerald-200/70">
+            <div class="text-[11px] font-extrabold text-emerald-900 mb-1">この方法を選ぶ3つのメリット</div>
+            <ul id="verdict-benefits" class="space-y-1 text-[11.5px] text-slate-700 leading-snug list-disc pl-4"></ul>
+          </div>
+        </div>
+
+        <!-- 3つの選択肢 横並び比較カード -->
+        <div class="flex flex-wrap items-baseline justify-between gap-2 mb-2.5">
+          <h2 class="text-xs font-extrabold tracking-wider text-slate-800">
+            3つの手放し方・維持ルートの収支比較
+          </h2>
+          <span class="text-[11px] text-slate-400">※仲介手数料・解体費・税金すべて差し引き後の手残り目安</span>
+        </div>
+
+        <div class="grid sm:grid-cols-3 gap-3 mb-5">
+          <!-- ① 空き家のまま維持 -->
+          <div id="card-keep" class="rounded border border-slate-200 border-t-3 border-t-rose-600 bg-rose-50/30 p-3.5 flex flex-col justify-between transition-colors min-w-0">
+            <div>
+              <div class="flex items-center justify-between gap-1 whitespace-nowrap">
+                <span class="text-[11px] font-bold text-rose-800">① 空き家維持</span>
+                <span class="px-1.5 py-0.5 rounded-xs bg-rose-100 text-rose-800 text-[10px] font-bold">毎年負担</span>
+              </div>
+              <div id="val-keep" class="mt-2 font-display text-xl font-extrabold text-rose-700 tabular-nums whitespace-nowrap">—</div>
+              <div id="sub-keep" class="mt-0.5 text-[11px] font-semibold text-slate-600 tabular-nums whitespace-nowrap"></div>
+            </div>
+            <div id="note-keep" class="mt-2.5 pt-2 border-t border-slate-200/70 space-y-1 text-[11px] text-slate-500 tabular-nums"></div>
+          </div>
+
+          <!-- ② 先に解体して更地売却 -->
+          <div id="card-sarachi" class="rounded border border-slate-200 border-t-3 border-t-slate-400 bg-white p-3.5 flex flex-col justify-between transition-colors min-w-0">
+            <div>
+              <div class="flex items-center justify-between gap-1 whitespace-nowrap">
+                <span class="text-[11px] font-bold text-slate-700">② 更地で売却</span>
+                <span id="tag-sarachi" class="hidden px-1.5 py-0.5 rounded-xs bg-emerald-700 text-white text-[10px] font-bold">最有利</span>
+              </div>
+              <div id="val-sarachi" class="mt-2 font-display text-xl font-extrabold text-slate-900 tabular-nums whitespace-nowrap">—</div>
+              <div id="sub-sarachi" class="mt-0.5 text-[11px] font-semibold text-amber-900 tabular-nums whitespace-nowrap"></div>
+            </div>
+            <div id="note-sarachi" class="mt-2.5 pt-2 border-t border-slate-100 space-y-1 text-[11px] text-slate-500 tabular-nums"></div>
+          </div>
+
+          <!-- ③ 解体せずそのまま売却・買取 -->
+          <div id="card-as-is" class="rounded border border-emerald-300 border-t-3 border-t-emerald-700 bg-white p-3.5 flex flex-col justify-between transition-colors shadow-2xs min-w-0">
+            <div>
+              <div class="flex items-center justify-between gap-1 whitespace-nowrap">
+                <span id="title-as-is" class="text-[11px] font-bold text-emerald-800">③ 壊さず売却</span>
+                <span id="tag-as-is" class="hidden px-1.5 py-0.5 rounded-xs bg-emerald-700 text-white text-[10px] font-bold">最有利</span>
+              </div>
+              <div id="val-as-is" class="mt-2 font-display text-xl font-extrabold text-emerald-800 tabular-nums whitespace-nowrap">—</div>
+              <div id="sub-as-is" class="mt-0.5 text-[11px] font-semibold text-emerald-800 tabular-nums whitespace-nowrap"></div>
+            </div>
+            <div id="note-as-is" class="mt-2.5 pt-2 border-t border-slate-100 space-y-1 text-[11px] text-slate-500 tabular-nums"></div>
+          </div>
+        </div>
+
+        <!-- ③「壊さず手放す」場合の2つの方法（仲介 vs 専門買取）の比較 -->
+        <div class="rounded-xs bg-slate-50 border border-slate-200 px-3.5 py-3 mb-5">
+          <div class="text-[11px] font-bold text-slate-700 mb-2">
+            ③「建物を壊さず手放す」場合の2ルート内訳（仲介で買主を探す vs 専門会社へ直接買取）
+          </div>
+          <div class="grid sm:grid-cols-2 gap-2.5 text-xs tabular-nums">
+            <div class="rounded-xs border border-slate-200 bg-white px-3 py-2.5">
+              <div class="flex items-center justify-between gap-2 whitespace-nowrap">
+                <span class="font-bold text-slate-700">A. 古家付き仲介売却</span>
+                <strong id="res-furuya-broker" class="text-sm font-extrabold text-slate-900">—</strong>
+              </div>
+              <div class="mt-1 text-[10.5px] text-slate-500 whitespace-nowrap overflow-hidden text-ellipsis">
+                買主解体でも3,000万円控除可（3〜6ヶ月目安）
+              </div>
+            </div>
+            <div class="rounded-xs border border-slate-200 bg-white px-3 py-2.5">
+              <div class="flex items-center justify-between gap-2 whitespace-nowrap">
+                <span class="font-bold text-emerald-900">B. 片付け不要・専門買取</span>
+                <strong id="res-direct-kaitori" class="text-sm font-extrabold text-emerald-800">—</strong>
+              </div>
+              <div class="mt-1 text-[10.5px] text-slate-500 whitespace-nowrap overflow-hidden text-ellipsis">
+                仲介手数料0円・荷物そのまま最短数週間で完了
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 詳しい金額内訳テーブル（全行1行完結） -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-xs border-collapse whitespace-nowrap">
+            <thead>
+              <tr class="border-b border-slate-200 text-slate-500 text-left">
+                <th class="py-2 pr-2 font-bold">収支・費用の項目</th>
+                <th class="py-2 px-2 font-bold text-right">① 空き家維持</th>
+                <th class="py-2 px-2 font-bold text-right">② 更地で売却</th>
+                <th class="py-2 pl-2 font-bold text-right">③ 壊さず売却/買取</th>
+              </tr>
+            </thead>
+            <tbody id="disp-tbody" class="divide-y divide-slate-100 tabular-nums"></tbody>
+          </table>
+        </div>
+
+        <!-- 自動計算の前提サマリー -->
+        <div id="auto-premise-box" class="mt-5 rounded-xs bg-white border border-slate-200 px-3.5 py-2.5 text-[11px] text-slate-600 leading-relaxed tabular-nums"></div>
+
+        <!-- ワンポイントアドバイス -->
+        <div id="disp-insight" class="mt-3 rounded-xs bg-slate-50 border border-slate-200 p-4 text-xs text-slate-700 leading-relaxed space-y-1.5"></div>
+      </div>
+
+      <AffiliateCta
+        slotType="sell"
+        title="まずは「建物を壊さず・片付けない状態」でいくらになるか査定を比べてみる"
+        description="先に解体工事を発注してしまうと、万一売れ残ったときに固定資産税の軽減が外れてしまいます。まずは現状のまま「仲介での売却額」と「片付け不要の買取額」を無料で確認してから判断するのが一番安心です。"
+        fallbackHref="/tools/akiya-tax/"
+        fallbackLabel="空き家の固定資産税・相続登記の試算も見る →"
+      />
+    </div>
+  </div>
+
+  <script
+    is:inline
+    define:vars={{
+      presetsData: quickPresets,
+      casesData: houseCases,
+      prefsData: prefectures,
+      taxRulesData: taxRules,
+    }}
+  >
+    const allCases = [...presetsData, ...casesData];
+    const byCase = Object.fromEntries(allCases.map((c) => [c.slug, c]));
+    const byPref = Object.fromEntries(prefsData.map((p) => [p.slug, p]));
+
+    const state = {
+      spanYears: 10,
+      ageGroup: "mid35", // old45 | mid35 | new25
+      loc: "suburb", // urban | suburb | rural | wakeari
+      cond: "normal", // clean | normal | damaged
+      overrides: {
+        land: false,
+        demo: false,
+        res: false,
+        maint: false,
+      },
+    };
+
+    const elPref = document.getElementById("disp-pref");
+    const elCase = document.getElementById("disp-case");
+    const elManLand = document.getElementById("man-land");
+    const elManDemo = document.getElementById("man-demo");
+    const elManRes = document.getElementById("man-res");
+    const elManMaint = document.getElementById("man-maint");
+
+    function ageToGroup(years) {
+      if (years >= 45) return "old45";
+      if (years < 30) return "new25";
+      return "mid35";
+    }
+
+    function syncAgeButtonsUI() {
+      document.querySelectorAll(".age-btn").forEach((btn) => {
+        const on = btn.getAttribute("data-age") === state.ageGroup;
+        btn.className =
+          "age-btn rounded-xs border py-2 px-2 text-center text-[11px] font-bold transition-colors " +
+          (on ? "border-emerald-700 bg-emerald-700 text-white" : "border-slate-300 bg-white text-slate-600 hover:bg-slate-50");
+      });
+    }
+
+    function syncPresetButtonsUI() {
+      const currentSlug = elCase.value;
+      document.querySelectorAll(".preset-btn").forEach((btn) => {
+        const on = btn.getAttribute("data-preset-slug") === currentSlug;
+        btn.className =
+          "preset-btn rounded-xs border py-2 px-2.5 text-left transition-colors " +
+          (on ? "border-emerald-700 bg-emerald-700 text-white" : "border-slate-300 bg-white text-slate-700 hover:bg-slate-50");
+      });
+    }
+
+    // URLパラメータ連動 (?pref=tokyo&case=wood-30tsubo-age40)
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("pref") && byPref[params.get("pref")]) {
+      elPref.value = params.get("pref");
+    }
+    if (params.get("case") && byCase[params.get("case")]) {
+      elCase.value = params.get("case");
+      state.ageGroup = ageToGroup(byCase[params.get("case")].building_age_years || 38);
+      syncAgeButtonsUI();
+      syncPresetButtonsUI();
+    }
+
+    function yen(n) {
+      return `${Math.round(n).toLocaleString("ja-JP")}円`;
+    }
+
+    function signedYen(n) {
+      const r = Math.round(n);
+      if (r > 0) return `+${r.toLocaleString("ja-JP")}円`;
+      if (r < 0) return `▲${Math.abs(r).toLocaleString("ja-JP")}円`;
+      return "±0円";
+    }
+
+    function signedMan(n) {
+      const man = Math.round(n / 10000);
+      if (man > 0) return `+${man.toLocaleString("ja-JP")}万円`;
+      if (man < 0) return `▲${Math.abs(man).toLocaleString("ja-JP")}万円`;
+      return "±0万円";
+    }
+
+    function plainMan(n) {
+      return `${Math.round(Math.abs(n) / 10000).toLocaleString("ja-JP")}万円`;
+    }
+
+    function calcBrokerFee(priceYen) {
+      if (priceYen <= 0) return 0;
+      const r = taxRulesData.sale_and_kaitori_rules;
+      if (priceYen <= r.low_price_threshold_yen) {
+        return Math.min(r.low_price_brokerage_max_yen, Math.round(priceYen * 0.15));
+      }
+      return Math.round((priceYen * r.brokerage_fee_rate + r.brokerage_fee_fixed_yen) * 1.1);
+    }
+
+    function getEffectiveAgeYears(c) {
+      if (state.ageGroup === "old45") return Math.max(46, c.building_age_years || 46);
+      if (state.ageGroup === "new25") return 24;
+      return 38;
+    }
+
+    function computeAutoDefaults() {
+      const pref = byPref[elPref.value];
+      const c = byCase[elCase.value];
+      const effAge = getEffectiveAgeYears(c);
+      const hasAsbestos = effAge >= 25 && (c.has_asbestos_risk !== false);
+
+      const locFactor =
+        state.loc === "urban" ? 1.25 : state.loc === "rural" ? 0.42 : state.loc === "wakeari" ? 0.48 : 0.92;
+      const caseFactor = c.market_demand_factor || 1.0;
+
+      if (c.slug === "old-mansion-70sqm-age42") {
+        const mansionMan = Math.max(
+          250,
+          Math.round((1280 * Math.pow(pref.land_price_man_per_tsubo / 24.5, 0.55) * (state.loc === "urban" ? 1.2 : state.loc === "rural" ? 0.65 : 1.0)) / 10) * 10,
+        );
+        const resMan = state.cond === "clean" ? 8 : state.cond === "damaged" ? 45 : 22;
+        return { landMan: mansionMan, demoMan: 0, resMan, baseMaintMan: 36 };
+      }
+
+      const landMan = Math.max(
+        50,
+        Math.round((c.land_tsubo * pref.land_price_man_per_tsubo * locFactor * caseFactor) / 10) * 10,
+      );
+
+      let unitMan = pref.wood_man_per_tsubo;
+      if (c.structure === "rc") unitMan = pref.rc_man_per_tsubo;
+      else if (c.structure === "steel") unitMan = pref.steel_man_per_tsubo;
+      if (c.slug.includes("hiraya")) unitMan *= 1.12;
+
+      const roadMult = state.loc === "wakeari" || c.road_condition === "narrow" ? 1.24 : c.road_condition === "slope" ? 1.28 : 1.0;
+      const bodyMan = c.floor_tsubo * unitMan * roadMult;
+      const extMan = c.floor_tsubo >= 45 ? 32 : 22;
+      const asbMan = hasAsbestos ? 24 : 0;
+      const demoMan = Math.round((bodyMan + extMan + asbMan) / 5) * 5;
+
+      const resMan = state.cond === "clean" ? 8 : state.cond === "damaged" ? 58 : 28;
+      const ageMaintAdd = effAge >= 45 ? 3 : effAge < 30 ? -3 : 0;
+      const baseMaintMan = Math.max(8, Math.round((21.7 + (c.annual_extra_maint_yen || 0) / 10000) + (state.cond === "damaged" ? 6 : 0) + ageMaintAdd));
+
+      return { landMan, demoMan, resMan, baseMaintMan };
+    }
+
+    function syncAutoFields(forceAll = false) {
+      const auto = computeAutoDefaults();
+      if (forceAll || !state.overrides.land) elManLand.value = String(auto.landMan);
+      if (forceAll || !state.overrides.demo) elManDemo.value = String(auto.demoMan);
+      if (forceAll || !state.overrides.res) elManRes.value = String(auto.resMan);
+      if (forceAll || !state.overrides.maint) elManMaint.value = String(auto.baseMaintMan);
+    }
+
+    function recalc() {
+      const pref = byPref[elPref.value];
+      const c = byCase[elCase.value];
+      const years = state.spanYears;
+      const effAge = getEffectiveAgeYears(c);
+
+      const landMarketYen = Math.max(0, Number(elManLand.value) || 0) * 10000;
+      const demoBodyAndExtYen = Math.max(0, Number(elManDemo.value) || 0) * 10000;
+      const resYen = Math.max(0, Number(elManRes.value) || 0) * 10000;
+      const maintAnnualYen = Math.max(0, Number(elManMaint.value) || 0) * 10000;
+      const totalDemoWithResYen = demoBodyAndExtYen + resYen;
+
+      // 固定資産税・都市計画税計算
+      const landSqm = c.land_tsubo * 3.305785;
+      const landAssessed = Math.round(landMarketYen * 0.7);
+      const smallRatio = Math.min(1.0, 200.0 / Math.max(1.0, landSqm));
+      const genRatio = Math.max(0.0, 1.0 - smallRatio);
+
+      const normalLandTax = Math.round(
+        landAssessed * (smallRatio * (1 / 6) + genRatio * (1 / 3)) * 0.014 +
+          landAssessed * (smallRatio * (1 / 3) + genRatio * (2 / 3)) * 0.003,
+      );
+      const heavyLandTax = Math.round(landAssessed * 0.7 * 0.017);
+
+      const bldgBaseMan = c.structure === "rc" ? 45 : c.structure === "steel" ? 36 : 28;
+      const dep = effAge >= 40 ? 0.14 : effAge < 30 ? 0.26 : 0.18;
+      const bldgAssessed = Math.round(c.floor_tsubo * bldgBaseMan * 10000 * dep);
+      const bldgTax = Math.round(bldgAssessed * 0.017);
+
+      const normalTaxAnnual = normalLandTax + bldgTax;
+      const heavyTaxAnnual = heavyLandTax + bldgTax;
+      const sarachiTaxAnnual = heavyLandTax;
+
+      // ① 空き家維持時の累積負担
+      let keepTaxTotal = 0;
+      let heavyYearsCount = 0;
+      for (let y = 1; y <= years; y++) {
+        const isHeavy = (state.cond === "damaged" && y >= 2) || (state.cond === "normal" && effAge >= 45 && y >= 4) || (state.cond === "normal" && y >= 5);
+        if (isHeavy) {
+          keepTaxTotal += heavyTaxAnnual;
+          heavyYearsCount++;
+        } else {
+          keepTaxTotal += normalTaxAnnual;
+        }
+      }
+      const keepMaintTotal = maintAnnualYen * years;
+      const keepTotalOutflow = keepTaxTotal + keepMaintTotal;
+      const keepNet = -keepTotalOutflow;
+
+      // ② 解体して更地仲介売却
+      let sarachiGross = landMarketYen;
+      if (state.loc === "wakeari" || c.slug === "non-rebuildable-wood-25tsubo") {
+        sarachiGross = Math.round(landMarketYen * 0.38);
+      } else if (c.slug === "leased-land-shakuchi-28tsubo") {
+        sarachiGross = 0;
+      }
+      const sarachiBroker = calcBrokerFee(sarachiGross);
+      const waitYears = state.loc === "rural" ? 2 : 1;
+      const sarachiWaitTax = sarachiTaxAnnual * waitYears;
+      const sarachiNet = sarachiGross - totalDemoWithResYen - sarachiBroker - sarachiWaitTax;
+
+      // ③ 解体せず売却（A: 古家付き仲介 / B: 残置物込み専門買取）
+      let furuyaGross = Math.max(0, Math.round(landMarketYen * 0.96 - demoBodyAndExtYen * 0.82));
+      if (effAge < 30 && state.cond !== "damaged" && state.loc !== "wakeari") {
+        furuyaGross = Math.round(landMarketYen * 1.05 + 1800000);
+      }
+      const furuyaBroker = calcBrokerFee(furuyaGross);
+      const furuyaNet = furuyaGross - furuyaBroker - resYen - normalTaxAnnual;
+
+      let kaitoriNet = Math.round(landMarketYen * 0.72 - demoBodyAndExtYen * 0.42);
+      if (state.loc === "wakeari" || state.loc === "rural" || state.cond === "damaged" || c.category === "wakeari") {
+        kaitoriNet = Math.max(Math.round(landMarketYen * 0.54), 600000);
+      } else {
+        kaitoriNet = Math.max(Math.round(landMarketYen * 0.45), 500000);
+      }
+
+      const useKaitoriAsMain =
+        state.loc === "wakeari" || state.loc === "rural" || state.cond === "damaged" || kaitoriNet >= furuyaNet;
+      const asIsNet = Math.max(furuyaNet, kaitoriNet);
+      const asIsShortTitle = useKaitoriAsMain ? "③ そのまま買取" : "③ 壊さず売却";
+      const asIsFullLabel = useKaitoriAsMain ? "壊さず専門買取" : "壊さず古家付き売却";
+
+      // UI更新
+      const isManual = Object.values(state.overrides).some(Boolean);
+      document.getElementById("premise-mode-badge").textContent = isManual ? "手動調整を反映中" : `${pref.name}の公的統計から自動試算`;
+      document.getElementById("verdict-eyebrow").textContent = `${years}年間の手残り・維持費シミュレーション`;
+
+      // カード① 空き家維持（2行の左右揃えリストで改行落ちゼロ）
+      document.getElementById("val-keep").textContent = signedMan(keepNet);
+      document.getElementById("sub-keep").textContent = `年平均 ▲${plainMan(keepTotalOutflow / years)}/年`;
+      document.getElementById("note-keep").innerHTML =
+        `<div class="flex justify-between whitespace-nowrap"><span>固定資産税計</span><span class="font-semibold text-slate-700">${plainMan(keepTaxTotal)}</span></div>` +
+        `<div class="flex justify-between whitespace-nowrap"><span>維持・修繕計</span><span class="font-semibold text-slate-700">${plainMan(keepMaintTotal)}</span></div>`;
+
+      // カード② 解体して更地売却
+      const sarachiCostTotal = totalDemoWithResYen + sarachiBroker + sarachiWaitTax;
+      document.getElementById("val-sarachi").textContent = signedMan(sarachiNet);
+      document.getElementById("sub-sarachi").textContent = `先行手出し 約${plainMan(totalDemoWithResYen)}`;
+      document.getElementById("note-sarachi").innerHTML =
+        `<div class="flex justify-between whitespace-nowrap"><span>土地売却額</span><span class="font-semibold text-slate-700">${plainMan(sarachiGross)}</span></div>` +
+        `<div class="flex justify-between whitespace-nowrap"><span>解体・諸経費</span><span class="font-semibold text-rose-700">▲${plainMan(sarachiCostTotal)}</span></div>`;
+
+      // カード③ 壊さず手放す
+      const asIsGrossDisp = useKaitoriAsMain ? kaitoriNet : furuyaGross;
+      const asIsCostDisp = useKaitoriAsMain ? 0 : furuyaBroker + resYen + normalTaxAnnual;
+      document.getElementById("title-as-is").textContent = asIsShortTitle;
+      document.getElementById("val-as-is").textContent = signedMan(asIsNet);
+      document.getElementById("sub-as-is").textContent = useKaitoriAsMain
+        ? "先行手出し 0円"
+        : `先行片付け 約${plainMan(resYen)}`;
+      document.getElementById("note-as-is").innerHTML =
+        `<div class="flex justify-between whitespace-nowrap"><span>${useKaitoriAsMain ? "直接買取額" : "古家付売却"}</span><span class="font-semibold text-slate-700">${plainMan(asIsGrossDisp)}</span></div>` +
+        `<div class="flex justify-between whitespace-nowrap"><span>解体・諸経費</span><span class="font-semibold text-emerald-800">${asIsCostDisp === 0 ? "0円（不要）" : `▲${plainMan(asIsCostDisp)}`}</span></div>`;
+
+      document.getElementById("res-furuya-broker").textContent = signedMan(furuyaNet);
+      document.getElementById("res-direct-kaitori").textContent = signedMan(kaitoriNet);
+
+      // おすすめ判定
+      const asIsWins = asIsNet >= sarachiNet;
+      const bestNet = Math.max(asIsNet, sarachiNet);
+      const diffVsKeep = bestNet - keepNet;
+      const diffBetweenSale = Math.abs(asIsNet - sarachiNet);
+
+      const cardSarachi = document.getElementById("card-sarachi");
+      const cardAsIs = document.getElementById("card-as-is");
+      const tagSarachi = document.getElementById("tag-sarachi");
+      const tagAsIs = document.getElementById("tag-as-is");
+      const valSarachi = document.getElementById("val-sarachi");
+      const valAsIs = document.getElementById("val-as-is");
+
+      if (asIsWins) {
+        cardAsIs.className = "rounded border border-emerald-300 border-t-3 border-t-emerald-700 bg-white p-3.5 flex flex-col justify-between transition-colors shadow-2xs min-w-0";
+        cardSarachi.className = "rounded border border-slate-200 border-t-3 border-t-slate-300 bg-slate-50/70 p-3.5 flex flex-col justify-between transition-colors min-w-0";
+        valAsIs.className = "mt-2 font-display text-xl font-extrabold text-emerald-800 tabular-nums whitespace-nowrap";
+        valSarachi.className = "mt-2 font-display text-xl font-extrabold text-slate-800 tabular-nums whitespace-nowrap";
+        tagAsIs.classList.remove("hidden");
+        tagSarachi.classList.add("hidden");
+      } else {
+        cardSarachi.className = "rounded border border-emerald-300 border-t-3 border-t-emerald-700 bg-white p-3.5 flex flex-col justify-between transition-colors shadow-2xs min-w-0";
+        cardAsIs.className = "rounded border border-slate-200 border-t-3 border-t-slate-300 bg-slate-50/70 p-3.5 flex flex-col justify-between transition-colors min-w-0";
+        valSarachi.className = "mt-2 font-display text-xl font-extrabold text-emerald-800 tabular-nums whitespace-nowrap";
+        valAsIs.className = "mt-2 font-display text-xl font-extrabold text-slate-800 tabular-nums whitespace-nowrap";
+        tagSarachi.classList.remove("hidden");
+        tagAsIs.classList.add("hidden");
+      }
+
+      document.getElementById("verdict-winner").textContent = asIsWins
+        ? `「${asIsFullLabel}」が +${plainMan(diffBetweenSale)} 有利`
+        : `「解体して更地売却」が +${plainMan(diffBetweenSale)} 有利`;
+      document.getElementById("verdict-diff-note").textContent =
+        `${years}年維持と比べ 合計 +${plainMan(diffVsKeep)} の資産防衛`;
+
+      // 3つのメリット（それぞれ簡潔な1行に収まる長さに最適化）
+      const benefits = asIsWins
+        ? [
+            `<li><strong>先行出費リスクなし：</strong>先に解体・片付け費（約${plainMan(totalDemoWithResYen)}）を自己負担せずに手放せます</li>`,
+            effAge >= 45
+              ? `<li><strong>3,000万円控除対応：</strong>古家付きで売って買主が翌年2月15日までに解体しても特別控除が使えます</li>`
+              : effAge < 30
+                ? `<li><strong>建物の価値をプラス：</strong>築30年未満のためリフォーム向け中古戸建てとして建物ごと評価されます</li>`
+                : `<li><strong>税金の軽減を維持：</strong>引き渡しまで建物があるため住宅用地の軽減（固定資産税1/6）が守られます</li>`,
+            `<li><strong>維持費をストップ：</strong>${years}年間の税金・草刈り・修繕負担（計 約${plainMan(keepTotalOutflow)}）を解消できます</li>`,
+          ]
+        : [
+            `<li><strong>更地需要で高値売却：</strong>解体費（約${plainMan(totalDemoWithResYen)}）を差し引いても更地の方が手残りが最大化します</li>`,
+            `<li><strong>3,000万円特別控除：</strong>要件を満たせば譲渡所得から最大3,000万円が控除され譲渡税を抑えられます</li>`,
+            `<li><strong>維持費を資産へ転換：</strong>${years}年間の維持負担（約${plainMan(keepTotalOutflow)}）を払う前に約${plainMan(bestNet)}を残せます</li>`,
+          ];
+      document.getElementById("verdict-benefits").innerHTML = benefits.join("");
+
+      // 詳細テーブル更新（全セル1行完結）
+      const rows = [
+        ["売却想定額（グロス収入）", "0円", `+${yen(sarachiGross)}`, `+${yen(useKaitoriAsMain ? kaitoriNet : furuyaGross)}`],
+        ["建物解体・外構撤去工事費", "0円", `▲${yen(demoBodyAndExtYen)}`, "0円（買主負担）"],
+        ["家財（残置物）片付け費", "0円", `▲${yen(resYen)}`, useKaitoriAsMain ? "0円（そのまま）" : `▲${yen(resYen)}`],
+        ["仲介手数料（税込）", "0円", `▲${yen(sarachiBroker)}`, useKaitoriAsMain ? "0円（直接買取）" : `▲${yen(furuyaBroker)}`],
+        [
+          `固定資産税（${years}年維持 vs 売却待期）`,
+          `▲${yen(keepTaxTotal)}`,
+          `▲${yen(sarachiWaitTax)}`,
+          useKaitoriAsMain ? "0円（早期決済）" : `▲${yen(normalTaxAnnual)}`,
+        ],
+        [`空き家維持・草刈り・修繕（${years}年分）`, `▲${yen(keepMaintTotal)}`, "0円", "0円"],
+        [
+          `最終手残り収支（${years}年比較）`,
+          signedYen(keepNet),
+          signedYen(sarachiNet),
+          signedYen(asIsNet),
+        ],
+      ];
+
+      document.getElementById("disp-tbody").innerHTML = rows
+        .map(([label, a, b, d], idx) => {
+          const isLast = idx === rows.length - 1;
+          return `<tr class="${isLast ? "bg-slate-50 font-extrabold text-slate-900" : ""}">
+            <td class="py-2.5 pr-2 text-slate-700 ${isLast ? "font-extrabold" : "font-medium"}">${label}</td>
+            <td class="py-2.5 px-2 text-right text-rose-700">${a}</td>
+            <td class="py-2.5 px-2 text-right ${!asIsWins && isLast ? "text-emerald-800" : ""}">${b}</td>
+            <td class="py-2.5 pl-2 text-right ${asIsWins && isLast ? "text-emerald-800" : ""}">${d}</td>
+          </tr>`;
+        })
+        .join("");
+
+      const ageLabel = state.ageGroup === "old45" ? "築45年以上（昭和56年以前）" : state.ageGroup === "new25" ? "築30年未満" : "築30〜44年（標準）";
+      document.getElementById("auto-premise-box").innerHTML =
+        `<strong>試算の前提条件（${isManual ? "手動調整反映中" : "公的データ自動推計"}）：</strong>` +
+        `${pref.name}（木造解体相場 ${pref.wood_man_per_tsubo.toFixed(2)}万円/坪・標準地価 ${pref.land_price_man_per_tsubo.toFixed(1)}万円/坪）／` +
+        `延床${c.floor_tsubo}坪・敷地${c.land_tsubo}坪・${ageLabel}／` +
+        `通常固定資産税 年${yen(normalTaxAnnual)}（軽減解除時 年${yen(heavyTaxAnnual)}）`;
+
+      const warnText =
+        state.loc === "wakeari"
+          ? `<p class="text-rose-800 font-bold">【重要】道が狭い・建て替え不可（再建築不可）の実家についての注意点：先に建物を解体して更地にしてしまうと、新しい家が建てられず土地の価値が大きく下がってしまいます。絶対に先に自費で解体せず、「建物のまま」専門会社へ相談してください。</p>`
+          : sarachiNet < 0
+            ? `<p class="text-amber-900 font-bold">【注意】先に解体すると費用倒れになる可能性があります：この条件では解体工事費（約${plainMan(totalDemoWithResYen)}）が土地の売却額を上回りやすいため、ご自身で解体費を払わず「そのまま買取」または「古家付き売却」を選ぶのが安全です。</p>`
+            : `<p><strong>「先に解体しなくてもいい」理由：</strong>以前は3,000万円特別控除を使うために売主が解体する必要がありましたが、<strong>2024年（令和6年）の税制改正により、古家付きで売って買主が翌年2月15日までに解体した場合でも控除が使える</strong>ようになりました。まずは壊さずに査定を取るのが安心です。</p>`;
+
+      document.getElementById("disp-insight").innerHTML =
+        warnText +
+        `<p><strong>空き家のまま置いておく場合の目安：</strong>この実家を${years}年間維持すると、固定資産税と最低限の維持費（草刈り・水道光熱基本料・保険・修繕）で<strong>合計 約${plainMan(keepTotalOutflow)}（月あたり 約${(keepTotalOutflow / (years * 12) / 10000).toFixed(1)}万円）</strong>の負担になります。ご家族で方針を話し合う際の目安になさってください。</p>`;
+    }
+
+    function setGroupActive(selector, activeEl) {
+      document.querySelectorAll(selector).forEach((b) => {
+        const on = b === activeEl;
+        b.className =
+          b.className
+            .replace(/border-emerald-700|bg-emerald-700|text-white|border-slate-300|bg-white|text-slate-600|text-slate-700/g, "")
+            .trim() + (on ? " border-emerald-700 bg-emerald-700 text-white" : " border-slate-300 bg-white text-slate-700");
+      });
+    }
+
+    document.querySelectorAll(".preset-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const slug = btn.getAttribute("data-preset-slug");
+        if (slug && byCase[slug]) {
+          elCase.value = slug;
+          state.ageGroup = ageToGroup(byCase[slug].building_age_years || 38);
+          syncPresetButtonsUI();
+          syncAgeButtonsUI();
+          state.overrides = { land: false, demo: false, res: false, maint: false };
+          syncAutoFields();
+          recalc();
+        }
+      });
+    });
+
+    document.querySelectorAll(".age-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        state.ageGroup = btn.getAttribute("data-age");
+        syncAgeButtonsUI();
+        state.overrides.demo = false;
+        state.overrides.maint = false;
+        syncAutoFields();
+        recalc();
+      });
+    });
+
+    document.querySelectorAll(".span-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        state.spanYears = Number(btn.getAttribute("data-span"));
+        setGroupActive(".span-btn", btn);
+        recalc();
+      });
+    });
+
+    document.querySelectorAll(".loc-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        state.loc = btn.getAttribute("data-loc");
+        setGroupActive(".loc-btn", btn);
+        state.overrides.land = false;
+        state.overrides.demo = false;
+        syncAutoFields();
+        recalc();
+      });
+    });
+
+    document.querySelectorAll(".cond-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        state.cond = btn.getAttribute("data-cond");
+        setGroupActive(".cond-btn", btn);
+        state.overrides.res = false;
+        state.overrides.maint = false;
+        syncAutoFields();
+        recalc();
+      });
+    });
+
+    elPref.addEventListener("change", () => {
+      state.overrides.land = false;
+      state.overrides.demo = false;
+      syncAutoFields();
+      recalc();
+    });
+
+    elCase.addEventListener("change", () => {
+      const c = byCase[elCase.value];
+      if (c) {
+        state.ageGroup = ageToGroup(c.building_age_years || 38);
+        syncAgeButtonsUI();
+      }
+      syncPresetButtonsUI();
+      state.overrides = { land: false, demo: false, res: false, maint: false };
+      syncAutoFields();
+      recalc();
+    });
+
+    [
+      [elManLand, "land"],
+      [elManDemo, "demo"],
+      [elManRes, "res"],
+      [elManMaint, "maint"],
+    ].forEach(([el, key]) => {
+      el.addEventListener("input", () => {
+        state.overrides[key] = true;
+        recalc();
+      });
+    });
+
+    document.getElementById("reset-auto-btn").addEventListener("click", () => {
+      state.overrides = { land: false, demo: false, res: false, maint: false };
+      syncAutoFields(true);
+      recalc();
+    });
+
+    syncAutoFields(true);
+    recalc();
+  </script>
+</BaseLayout>

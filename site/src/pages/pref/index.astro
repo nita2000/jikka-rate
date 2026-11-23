@@ -1,0 +1,166 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import AffiliateCta from "../../components/AffiliateCta.astro";
+import prefectures from "../../data/prefectures.json";
+import latest from "../../data/latest.json";
+import { formatManYen, formatYen } from "../../lib/formatters";
+
+const sortedByAkiya = [...prefectures].sort((a, b) => a.akiya_rank - b.akiya_rank);
+const regions = ["北海道", "東北", "関東", "中部", "近畿", "中国", "四国", "九州・沖縄"];
+---
+
+<BaseLayout
+  title="全国47都道府県別 空き家率・木造解体坪単価・実家処分相場一覧"
+  description={`全国47都道府県の総空き家率・放置空き家率・木造/鉄骨/RC解体工事坪単価・住宅地地価・葬祭費給付金を一覧比較（${latest.date}基準）。`}
+  canonicalPath="/pref/"
+>
+  <nav class="text-xs text-slate-500 mb-4 flex items-center gap-1.5">
+    <a href="/" class="hover:text-emerald-700">トップ</a>
+    <span>/</span>
+    <span class="text-slate-800 font-semibold">47都道府県別 相場一覧</span>
+  </nav>
+
+  <div class="page-header-clean rounded p-5 sm:p-6 mb-5">
+    <div class="eyebrow-label mb-1">都道府県別データ</div>
+    <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900">
+      全国47都道府県別 空き家率・解体坪単価・実家相場一覧
+    </h1>
+    <p class="mt-1.5 text-xs sm:text-sm text-slate-600">
+      総務省「住宅・土地統計調査」および国土交通省・自治体公表データに基づく都道府県別の空き家率、構造別解体工事単価、30坪標準実家の解体総額・固定資産税目安を掲載しています。
+    </p>
+  </div>
+
+  <!-- 地方即時絞り込みタブ -->
+  <div class="flex flex-wrap gap-1.5 mb-5" id="pref-filter-group">
+    <button
+      type="button"
+      data-reg="all"
+      class="pref-reg-btn rounded-xs border border-emerald-700 bg-emerald-700 text-white px-3 py-1.5 text-xs font-bold transition-colors"
+    >
+      すべて
+    </button>
+    {
+      regions.map((reg) => (
+        <button
+          type="button"
+          data-reg={reg}
+          class="pref-reg-btn rounded-xs border border-slate-300 bg-white text-slate-700 hover:border-emerald-700 px-3 py-1.5 text-xs font-bold transition-colors"
+        >
+          {reg}
+        </button>
+      ))
+    }
+  </div>
+
+  <!-- 地方別クイックリンク -->
+  <div class="space-y-5 mb-10" id="pref-sections">
+    {
+      regions.map((region) => {
+        const list = prefectures.filter((p) => p.region === region);
+        return (
+          <section data-reg-section={region} class="card-surface rounded p-4 sm:p-5">
+            <h2 class="text-sm font-extrabold text-emerald-800 mb-3 border-b border-slate-100 pb-2">
+              {region}エリア
+            </h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5">
+              {list.map((p) => (
+                <a href={`/pref/${p.slug}/`} class="card-interactive rounded p-3 block text-xs">
+                  <div class="flex items-center justify-between">
+                    <span class="font-extrabold text-slate-900">{p.name}</span>
+                    <span class="text-[10px] font-bold text-rose-700 bg-rose-50 px-1.5 py-0.5 rounded-xs tabular-nums">
+                      空き家{p.akiya_rate_pct.toFixed(1)}%
+                    </span>
+                  </div>
+                  <div class="mt-1.5 flex items-center justify-between text-[11px] text-slate-500 tabular-nums">
+                    <span>木造 {p.wood_man_per_tsubo.toFixed(2)}万/坪</span>
+                    <span class="font-bold text-emerald-700">詳細 →</span>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </section>
+        );
+      })
+    }
+  </div>
+
+  <!-- 全47都道府県 比較テーブル -->
+  <section class="card-surface rounded p-5 mb-8">
+    <h2 class="text-base font-extrabold text-slate-900 mb-3">
+      全国47都道府県 空き家率・解体単価・葬祭費一覧表（空き家率順）
+    </h2>
+    <div class="overflow-x-auto">
+      <table class="w-full text-xs border-collapse tabular-nums whitespace-nowrap">
+        <thead>
+          <tr class="border-b border-slate-200 text-slate-500 text-left">
+            <th class="py-2 px-2 font-bold">順位</th>
+            <th class="py-2 px-2 font-bold">都道府県</th>
+            <th class="py-2 px-2 font-bold text-right">総空き家率</th>
+            <th class="py-2 px-2 font-bold text-right">放置空き家率</th>
+            <th class="py-2 px-2 font-bold text-right">木造解体/坪</th>
+            <th class="py-2 px-2 font-bold text-right">30坪解体目安</th>
+            <th class="py-2 px-2 font-bold text-right">軽減解除後税額</th>
+            <th class="py-2 px-2 font-bold text-right">葬祭費目安</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100" id="pref-tbody">
+          {
+            sortedByAkiya.map((p) => (
+              <tr data-reg-row={p.region} class="hover:bg-slate-50">
+                <td class="py-2 px-2 font-bold text-slate-500">{p.akiya_rank}位</td>
+                <td class="py-2 px-2 font-extrabold text-slate-900">
+                  <a href={`/pref/${p.slug}/`} class="hover:text-emerald-700 hover:underline">
+                    {p.name}
+                  </a>
+                </td>
+                <td class="py-2 px-2 text-right font-bold text-rose-700">{p.akiya_rate_pct.toFixed(1)}%</td>
+                <td class="py-2 px-2 text-right text-slate-600">{p.other_akiya_rate_pct.toFixed(1)}%</td>
+                <td class="py-2 px-2 text-right font-bold text-emerald-700">{p.wood_man_per_tsubo.toFixed(2)}万円</td>
+                <td class="py-2 px-2 text-right">約{formatManYen(p.std_30tsubo_demolition_yen)}</td>
+                <td class="py-2 px-2 text-right">{formatYen(p.std_heavy_tax_annual_yen)}/年</td>
+                <td class="py-2 px-2 text-right">{formatYen(p.funeral_grant_yen)}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <AffiliateCta
+    slotType="kaitai"
+    title="都道府県別の地価と解体単価を反映して、実家の手残りを試算する"
+    description="県平均の坪単価や住宅地価をもとに、先に解体して売る場合と壊さずそのまま手放す場合の手残り差を計算できます。"
+    fallbackHref="/tools/disposal-simulator/"
+    fallbackLabel="都道府県別の実家処分損益を試算する →"
+  />
+
+  <script is:inline>
+    const grp = document.getElementById("pref-filter-group");
+    const sections = document.getElementById("pref-sections");
+    const tbody = document.getElementById("pref-tbody");
+    if (grp && sections) {
+      grp.addEventListener("click", (e) => {
+        const btn = e.target.closest("button[data-reg]");
+        if (!btn) return;
+        const reg = btn.getAttribute("data-reg") || "all";
+        grp.querySelectorAll(".pref-reg-btn").forEach((b) => {
+          const on = b === btn;
+          b.className = on
+            ? "pref-reg-btn rounded-xs border border-emerald-700 bg-emerald-700 text-white px-3 py-1.5 text-xs font-bold transition-colors"
+            : "pref-reg-btn rounded-xs border border-slate-300 bg-white text-slate-700 hover:border-emerald-700 px-3 py-1.5 text-xs font-bold transition-colors";
+        });
+        sections.querySelectorAll("section[data-reg-section]").forEach((sec) => {
+          const match = reg === "all" || sec.getAttribute("data-reg-section") === reg;
+          sec.classList.toggle("hidden", !match);
+        });
+        if (tbody) {
+          tbody.querySelectorAll("tr[data-reg-row]").forEach((tr) => {
+            const match = reg === "all" || tr.getAttribute("data-reg-row") === reg;
+            tr.classList.toggle("hidden", !match);
+          });
+        }
+      });
+    }
+  </script>
+</BaseLayout>

@@ -1,0 +1,83 @@
+---
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+
+const guides = [
+  {
+    href: "/guide/sarachi-vs-furuya-breakeven/",
+    label: "実家は「解体して更地売却」と「壊さずそのまま売却」どっちが得？",
+  },
+  {
+    href: "/guide/akiya-6x-tax-2023-reform/",
+    label: "空き家の固定資産税が「最大6倍（実効4.2倍）」に増える仕組みと防ぎ方",
+  },
+  {
+    href: "/guide/sozoku-toki-penalty-3000man/",
+    label: "相続登記の義務化と空き家3,000万円控除「買主解体」の活用法",
+  },
+  {
+    href: "/guide/kaitai-cost-asbestos-2026/",
+    label: "解体工事の坪単価（木造・鉄骨・RC）とアスベスト・残置物費用",
+  },
+  {
+    href: "/guide/hakajimai-cost-15year-payback/",
+    label: "墓じまい費用は何年で元が取れる？遠方の墓維持 vs 樹木葬・永代供養",
+  },
+];
+---
+
+<aside class="lg:col-span-4 min-w-0 space-y-5 lg:sticky lg:top-22">
+  <div class="card-surface rounded p-5 border-t-3 border-t-emerald-700 space-y-3">
+    <div class="text-xs font-extrabold text-emerald-800">関連する計算ツール</div>
+    <div class="space-y-2 text-xs">
+      <a
+        href="/tools/disposal-simulator/"
+        class="block rounded-xs border border-slate-200 bg-slate-50 hover:border-emerald-700 hover:bg-emerald-50/60 p-3 transition-colors"
+      >
+        <div class="font-extrabold text-slate-900">実家の手放し方・手残り試算</div>
+        <div class="text-[11px] text-slate-500 mt-0.5">空き家維持 vs 更地売却 vs 壊さず売却・買取</div>
+      </a>
+      <a
+        href="/tools/akiya-tax/"
+        class="block rounded-xs border border-slate-200 bg-slate-50 hover:border-emerald-700 hover:bg-emerald-50/60 p-3 transition-colors"
+      >
+        <div class="font-extrabold text-slate-900">空き家の固定資産税・相続登記</div>
+        <div class="text-[11px] text-slate-500 mt-0.5">住宅用地の軽減（1/6）解除時の増税額と対策</div>
+      </a>
+      <a
+        href="/tools/hakajimai-simulator/"
+        class="block rounded-xs border border-slate-200 bg-slate-50 hover:border-emerald-700 hover:bg-emerald-50/60 p-3 transition-colors"
+      >
+        <div class="font-extrabold text-slate-900">遠方のお墓維持 vs 墓じまい試算</div>
+        <div class="text-[11px] text-slate-500 mt-0.5">樹木葬・永代供養への移行費用と回収年数</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="card-surface rounded p-5 space-y-3">
+    <div class="text-xs font-extrabold text-slate-900 border-b border-slate-100 pb-2">解説ガイド一覧</div>
+    <ul class="space-y-2 text-xs">
+      {
+        guides.map((g) => {
+          const active = currentPath === g.href;
+          return (
+            <li>
+              <a
+                href={g.href}
+                class:list={[
+                  "block leading-snug py-1 transition-colors",
+                  active ? "font-extrabold text-emerald-800" : "text-slate-600 hover:text-emerald-700",
+                ]}
+              >
+                {active ? "▸ " : ""}{g.label}
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
+</aside>

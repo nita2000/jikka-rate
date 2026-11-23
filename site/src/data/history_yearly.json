@@ -1,0 +1,283 @@
+[
+  {
+    "year": "2026",
+    "count": 11,
+    "avg_wood": 4.78,
+    "min_wood": 4.76,
+    "max_wood": 4.8,
+    "avg_steel": 6.28,
+    "avg_rc": 7.78,
+    "avg_repair_index": 117.0,
+    "series": [
+      {
+        "date": "2026-01-01",
+        "wood_man_per_tsubo": 4.76,
+        "steel_man_per_tsubo": 6.26,
+        "rc_man_per_tsubo": 7.76,
+        "repair_index": 116.0
+      },
+      {
+        "date": "2026-02-01",
+        "wood_man_per_tsubo": 4.77,
+        "steel_man_per_tsubo": 6.27,
+        "rc_man_per_tsubo": 7.77,
+        "repair_index": 116.1
+      },
+      {
+        "date": "2026-03-01",
+        "wood_man_per_tsubo": 4.77,
+        "steel_man_per_tsubo": 6.27,
+        "rc_man_per_tsubo": 7.77,
+        "repair_index": 116.3
+      },
+      {
+        "date": "2026-04-01",
+        "wood_man_per_tsubo": 4.78,
+        "steel_man_per_tsubo": 6.28,
+        "rc_man_per_tsubo": 7.78,
+        "repair_index": 116.8
+      },
+      {
+        "date": "2026-05-01",
+        "wood_man_per_tsubo": 4.78,
+        "steel_man_per_tsubo": 6.28,
+        "rc_man_per_tsubo": 7.78,
+        "repair_index": 117.0
+      },
+      {
+        "date": "2026-06-01",
+        "wood_man_per_tsubo": 4.79,
+        "steel_man_per_tsubo": 6.29,
+        "rc_man_per_tsubo": 7.79,
+        "repair_index": 117.1
+      },
+      {
+        "date": "2026-07-01",
+        "wood_man_per_tsubo": 4.79,
+        "steel_man_per_tsubo": 6.29,
+        "rc_man_per_tsubo": 7.79,
+        "repair_index": 117.3
+      },
+      {
+        "date": "2026-08-01",
+        "wood_man_per_tsubo": 4.79,
+        "steel_man_per_tsubo": 6.29,
+        "rc_man_per_tsubo": 7.79,
+        "repair_index": 117.4
+      },
+      {
+        "date": "2026-09-01",
+        "wood_man_per_tsubo": 4.8,
+        "steel_man_per_tsubo": 6.3,
+        "rc_man_per_tsubo": 7.8,
+        "repair_index": 117.6
+      },
+      {
+        "date": "2026-10-01",
+        "wood_man_per_tsubo": 4.8,
+        "steel_man_per_tsubo": 6.3,
+        "rc_man_per_tsubo": 7.8,
+        "repair_index": 117.7
+      },
+      {
+        "date": "2026-11-01",
+        "wood_man_per_tsubo": 4.8,
+        "steel_man_per_tsubo": 6.3,
+        "rc_man_per_tsubo": 7.8,
+        "repair_index": 117.8
+      }
+    ]
+  },
+  {
+    "year": "2025",
+    "count": 12,
+    "avg_wood": 4.71,
+    "min_wood": 4.64,
+    "max_wood": 4.76,
+    "avg_steel": 6.21,
+    "avg_rc": 7.71,
+    "avg_repair_index": 114.6,
+    "series": [
+      {
+        "date": "2025-01-01",
+        "wood_man_per_tsubo": 4.64,
+        "steel_man_per_tsubo": 6.14,
+        "rc_man_per_tsubo": 7.64,
+        "repair_index": 113.0
+      },
+      {
+        "date": "2025-02-01",
+        "wood_man_per_tsubo": 4.65,
+        "steel_man_per_tsubo": 6.15,
+        "rc_man_per_tsubo": 7.65,
+        "repair_index": 113.2
+      },
+      {
+        "date": "2025-03-01",
+        "wood_man_per_tsubo": 4.66,
+        "steel_man_per_tsubo": 6.16,
+        "rc_man_per_tsubo": 7.66,
+        "repair_index": 113.5
+      },
+      {
+        "date": "2025-04-01",
+        "wood_man_per_tsubo": 4.7,
+        "steel_man_per_tsubo": 6.2,
+        "rc_man_per_tsubo": 7.7,
+        "repair_index": 114.2
+      },
+      {
+        "date": "2025-05-01",
+        "wood_man_per_tsubo": 4.71,
+        "steel_man_per_tsubo": 6.21,
+        "rc_man_per_tsubo": 7.71,
+        "repair_index": 114.4
+      },
+      {
+        "date": "2025-06-01",
+        "wood_man_per_tsubo": 4.72,
+        "steel_man_per_tsubo": 6.22,
+        "rc_man_per_tsubo": 7.72,
+        "repair_index": 114.6
+      },
+      {
+        "date": "2025-07-01",
+        "wood_man_per_tsubo": 4.72,
+        "steel_man_per_tsubo": 6.22,
+        "rc_man_per_tsubo": 7.72,
+        "repair_index": 114.8
+      },
+      {
+        "date": "2025-08-01",
+        "wood_man_per_tsubo": 4.73,
+        "steel_man_per_tsubo": 6.23,
+        "rc_man_per_tsubo": 7.73,
+        "repair_index": 115.0
+      },
+      {
+        "date": "2025-09-01",
+        "wood_man_per_tsubo": 4.74,
+        "steel_man_per_tsubo": 6.24,
+        "rc_man_per_tsubo": 7.74,
+        "repair_index": 115.2
+      },
+      {
+        "date": "2025-10-01",
+        "wood_man_per_tsubo": 4.75,
+        "steel_man_per_tsubo": 6.25,
+        "rc_man_per_tsubo": 7.75,
+        "repair_index": 115.5
+      },
+      {
+        "date": "2025-11-01",
+        "wood_man_per_tsubo": 4.75,
+        "steel_man_per_tsubo": 6.25,
+        "rc_man_per_tsubo": 7.75,
+        "repair_index": 115.6
+      },
+      {
+        "date": "2025-12-01",
+        "wood_man_per_tsubo": 4.76,
+        "steel_man_per_tsubo": 6.26,
+        "rc_man_per_tsubo": 7.76,
+        "repair_index": 115.8
+      }
+    ]
+  },
+  {
+    "year": "2024",
+    "count": 12,
+    "avg_wood": 4.5,
+    "min_wood": 4.3,
+    "max_wood": 4.62,
+    "avg_steel": 6.0,
+    "avg_rc": 7.5,
+    "avg_repair_index": 110.8,
+    "series": [
+      {
+        "date": "2024-01-01",
+        "wood_man_per_tsubo": 4.3,
+        "steel_man_per_tsubo": 5.8,
+        "rc_man_per_tsubo": 7.3,
+        "repair_index": 108.2
+      },
+      {
+        "date": "2024-02-01",
+        "wood_man_per_tsubo": 4.32,
+        "steel_man_per_tsubo": 5.82,
+        "rc_man_per_tsubo": 7.32,
+        "repair_index": 108.5
+      },
+      {
+        "date": "2024-03-01",
+        "wood_man_per_tsubo": 4.35,
+        "steel_man_per_tsubo": 5.85,
+        "rc_man_per_tsubo": 7.35,
+        "repair_index": 108.9
+      },
+      {
+        "date": "2024-04-01",
+        "wood_man_per_tsubo": 4.48,
+        "steel_man_per_tsubo": 5.98,
+        "rc_man_per_tsubo": 7.48,
+        "repair_index": 110.4
+      },
+      {
+        "date": "2024-05-01",
+        "wood_man_per_tsubo": 4.5,
+        "steel_man_per_tsubo": 6.0,
+        "rc_man_per_tsubo": 7.5,
+        "repair_index": 110.7
+      },
+      {
+        "date": "2024-06-01",
+        "wood_man_per_tsubo": 4.52,
+        "steel_man_per_tsubo": 6.02,
+        "rc_man_per_tsubo": 7.52,
+        "repair_index": 111.0
+      },
+      {
+        "date": "2024-07-01",
+        "wood_man_per_tsubo": 4.54,
+        "steel_man_per_tsubo": 6.04,
+        "rc_man_per_tsubo": 7.54,
+        "repair_index": 111.3
+      },
+      {
+        "date": "2024-08-01",
+        "wood_man_per_tsubo": 4.55,
+        "steel_man_per_tsubo": 6.05,
+        "rc_man_per_tsubo": 7.55,
+        "repair_index": 111.5
+      },
+      {
+        "date": "2024-09-01",
+        "wood_man_per_tsubo": 4.57,
+        "steel_man_per_tsubo": 6.07,
+        "rc_man_per_tsubo": 7.57,
+        "repair_index": 111.8
+      },
+      {
+        "date": "2024-10-01",
+        "wood_man_per_tsubo": 4.6,
+        "steel_man_per_tsubo": 6.1,
+        "rc_man_per_tsubo": 7.6,
+        "repair_index": 112.3
+      },
+      {
+        "date": "2024-11-01",
+        "wood_man_per_tsubo": 4.61,
+        "steel_man_per_tsubo": 6.11,
+        "rc_man_per_tsubo": 7.61,
+        "repair_index": 112.5
+      },
+      {
+        "date": "2024-12-01",
+        "wood_man_per_tsubo": 4.62,
+        "steel_man_per_tsubo": 6.12,
+        "rc_man_per_tsubo": 7.62,
+        "repair_index": 112.7
+      }
+    ]
+  }
+]

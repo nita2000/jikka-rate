@@ -1,0 +1,472 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import AffiliateCta from "../../components/AffiliateCta.astro";
+import prefectures from "../../data/prefectures.json";
+import taxRules from "../../data/tax_rules.json";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "空き家の固定資産税（最大6倍・実効4.2倍）＆相続登記シミュレーター",
+  applicationCategory: "FinanceApplication",
+  operatingSystem: "All",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "JPY" },
+};
+---
+
+<BaseLayout
+  title="空き家の固定資産税はいくら上がる？（最大6倍・実効4.2倍）＆相続登記シミュレーター"
+  description="「空き家の固定資産税が最大6倍になる」と言われたときに実際いくら増えるのか、4つの項目を選ぶだけで即計算。2023年12月施行の管理不全空き家制度と、2024年4月からの相続登記義務化に対応し、増税を防ぐ手順もわかりやすく解説します。"
+  canonicalPath="/tools/akiya-tax/"
+  schema={schema}
+>
+  <div class="page-header-clean rounded p-5 sm:p-6 mb-6">
+    <div class="eyebrow-label mb-1">空き家の税金・相続登記 30秒シミュレーター｜住所・個人情報の入力不要</div>
+    <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900">
+      空き家の固定資産税はいくら上がる？住宅用地の軽減（1/6特例）と相続登記の費用シミュレーター
+    </h1>
+    <p class="mt-1.5 text-xs sm:text-sm text-slate-600 leading-relaxed">
+      ニュースでよく聞く「空き家の固定資産税が最大6倍（実際の負担は約4.2倍）に上がる仕組み」や「相続登記（名義変更）の義務化」について、<strong>あなたのご実家だといくら変わるのか・どうすれば負担を防げるのか</strong>を4つの選択だけでわかりやすく試算します。
+    </p>
+  </div>
+
+  <div class="grid gap-6 lg:grid-cols-12 items-start">
+    <!-- 左：4ステップ選択パネル -->
+    <div class="lg:col-span-5 min-w-0 space-y-4">
+      <!-- STEP 1 -->
+      <div class="card-surface rounded p-5 space-y-3.5">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+          <div class="flex items-center gap-2">
+            <span class="inline-flex items-center justify-center rounded-xs bg-emerald-700 px-1.5 py-0.5 text-[10px] font-extrabold text-white">STEP 1</span>
+            <span class="text-xs font-extrabold text-slate-900">実家のある都道府県・エリア</span>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <label class="block text-xs">
+            <span class="font-bold text-slate-700">都道府県（土地評価目安に連動）</span>
+            <select id="at-pref" class="mt-1 w-full rounded-xs border border-slate-300 bg-white px-2.5 py-2 text-xs font-bold text-slate-900">
+              {prefectures.map((p) => (
+                <option value={p.slug} selected={p.slug === "tokyo"}>
+                  {p.name}（平均地価 {p.land_price_man_per_tsubo.toFixed(1)}万/坪）
+                </option>
+              ))}
+            </select>
+          </label>
+          <label class="block text-xs">
+            <span class="font-bold text-slate-700">エリア区分（都市計画税）</span>
+            <select id="at-citytax" class="mt-1 w-full rounded-xs border border-slate-300 bg-white px-2.5 py-2 text-xs font-medium text-slate-800">
+              <option value="yes" selected>市街地・一般的な住宅地（都市計画税あり）</option>
+              <option value="no">郊外・郡部など（固定資産税1.4%のみ）</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="card-surface rounded p-5 space-y-3.5 border-l-3 border-l-emerald-700">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+          <div class="flex items-center gap-2">
+            <span class="inline-flex items-center justify-center rounded-xs bg-emerald-700 px-1.5 py-0.5 text-[10px] font-extrabold text-white">STEP 2</span>
+            <span class="text-xs font-extrabold text-slate-900">敷地と建物の広さ（だいたいでOK）</span>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <label class="block text-xs">
+            <span class="font-bold text-slate-700">土地（敷地）の広さ</span>
+            <select id="at-land-tsubo" class="mt-1 w-full rounded-xs border border-slate-300 bg-white px-2.5 py-2 text-xs font-medium">
+              <option value="30">小さめ 約30坪（約100㎡）</option>
+              <option value="45" selected>標準的 約45坪（約150㎡）</option>
+              <option value="60">ゆとり 約60坪（約200㎡）</option>
+              <option value="90">広め 約90坪（約300㎡）</option>
+              <option value="150">大型敷地 約150坪（約500㎡）</option>
+            </select>
+          </label>
+          <label class="block text-xs">
+            <span class="font-bold text-slate-700">建物のタイプ・築年数</span>
+            <select id="at-bldg" class="mt-1 w-full rounded-xs border border-slate-300 bg-white px-2.5 py-2 text-xs font-medium">
+              <option value="wood_old" selected>木造・築35年以上（一般的）</option>
+              <option value="wood_mid">木造・築20〜35年未満</option>
+              <option value="steel">鉄骨造・ハウスメーカー</option>
+              <option value="rc">鉄筋コンクリート（RC造）</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="card-surface rounded p-5 space-y-3.5 border-l-3 border-l-amber-600">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+          <div class="flex items-center gap-2">
+            <span class="inline-flex items-center justify-center rounded-xs bg-emerald-700 px-1.5 py-0.5 text-[10px] font-extrabold text-white">STEP 3</span>
+            <span class="text-xs font-extrabold text-slate-900">試算したい空き家の状態</span>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-2" id="at-state-group">
+          <button type="button" data-st="kanri_fuzen" class="st-btn rounded-xs border border-emerald-700 bg-emerald-700 py-2 px-2.5 text-left text-[11px] font-bold text-white transition-colors">
+            <div>放置して軽減が外れた場合</div>
+            <div class="text-[10px] font-normal opacity-90 mt-0.5">管理不全空き家の勧告時</div>
+          </button>
+          <button type="button" data-st="sarachi" class="st-btn rounded-xs border border-slate-300 bg-white py-2 px-2.5 text-left text-[11px] font-bold text-slate-700 transition-colors">
+            <div>先に解体して更地にした場合</div>
+            <div class="text-[10px] font-normal opacity-80 mt-0.5">建物税0円＋土地の軽減解除</div>
+          </button>
+          <button type="button" data-st="proper" class="st-btn rounded-xs border border-slate-300 bg-white py-2 px-2.5 text-left text-[11px] font-bold text-slate-700 transition-colors">
+            <div>今のまま適切に管理する場合</div>
+            <div class="text-[10px] font-normal opacity-80 mt-0.5">住宅用地の軽減（1/6）を継続</div>
+          </button>
+          <button type="button" data-st="tokutei" class="st-btn rounded-xs border border-slate-300 bg-white py-2 px-2.5 text-left text-[11px] font-bold text-slate-700 transition-colors">
+            <div>倒壊危険（特定空き家）の場合</div>
+            <div class="text-[10px] font-normal opacity-80 mt-0.5">軽減解除＋行政命令の対象</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 4 -->
+      <div class="card-surface rounded p-5 space-y-3.5 border-l-3 border-l-slate-600">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+          <div class="flex items-center gap-2">
+            <span class="inline-flex items-center justify-center rounded-xs bg-emerald-700 px-1.5 py-0.5 text-[10px] font-extrabold text-white">STEP 4</span>
+            <span class="text-xs font-extrabold text-slate-900">相続登記（名義変更）の状況</span>
+          </div>
+        </div>
+        <select id="at-toki" class="w-full rounded-xs border border-slate-300 bg-white px-2.5 py-2 text-xs font-medium text-slate-800">
+          <option value="unregistered_within3y" selected>これから相続登記をする（3年以内・または2027年3月末の猶予期限内）</option>
+          <option value="unregistered_over3y">相続から3年以上名義変更していない（過料最大10万円の対象リスクを確認）</option>
+          <option value="address_unregistered">名義変更は済んでいるが、引越し後の住所変更をしていない</option>
+          <option value="done">相続登記・現住所への変更ともに完了している</option>
+        </select>
+      </div>
+
+      <!-- 固定資産税評価額の手動調整アコーディオン -->
+      <details class="card-surface rounded p-4 text-xs">
+        <summary class="cursor-pointer font-extrabold text-slate-700 flex items-center justify-between list-none">
+          <span>手元に納税通知書がある場合はこちらから評価額を入力</span>
+          <span class="text-emerald-700 text-[11px] shrink-0 ml-2">開く ▾</span>
+        </summary>
+        <div class="mt-4 pt-3 border-t border-slate-100 space-y-3">
+          <div class="grid grid-cols-2 gap-3">
+            <label class="block">
+              <span class="font-bold text-slate-700">土地の評価額（万円）</span>
+              <input id="at-man-land" type="number" step="10" min="10" max="20000" class="mt-1 w-full rounded-xs border border-slate-300 px-2.5 py-1.5 tabular-nums" />
+            </label>
+            <label class="block">
+              <span class="font-bold text-slate-700">建物の評価額（万円）</span>
+              <input id="at-man-bldg" type="number" step="5" min="0" max="5000" class="mt-1 w-full rounded-xs border border-slate-300 px-2.5 py-1.5 tabular-nums" />
+            </label>
+          </div>
+          <div class="pt-1 flex justify-end">
+            <button type="button" id="at-reset-btn" class="text-[11px] font-bold text-emerald-700 hover:underline">
+              都道府県の標準評価額に戻す ↺
+            </button>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <!-- 右：診断結果・安心の対策ガイド -->
+    <div class="lg:col-span-7 min-w-0 space-y-5">
+      <div class="card-surface rounded p-5 sm:p-6">
+        <!-- 最上段：結論ヒーロー -->
+        <div id="at-hero" class="rounded border border-slate-200 border-l-4 border-l-rose-600 bg-rose-50/50 p-4 sm:p-5 mb-5">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
+            <span class="text-[11px] font-bold tracking-wider text-rose-800 uppercase">固定資産税・相続登記の試算結果</span>
+            <span id="at-status-badge" class="px-2 py-0.5 rounded-xs text-[11px] font-bold bg-rose-100 text-rose-800">住宅用地の軽減が外れた場合</span>
+          </div>
+          <div class="mt-1 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+            <div class="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+              <span id="at-hero-lead" class="text-sm sm:text-base font-extrabold text-slate-800">5年間で増える税金・諸費用の目安：</span>
+              <span id="at-hero-amount" class="font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-rose-700 tabular-nums">—</span>
+            </div>
+            <div id="at-hero-mult" class="text-xs sm:text-sm font-bold text-slate-700 tabular-nums"></div>
+          </div>
+          <div id="at-hero-reassure" class="mt-3 pt-3 border-t border-slate-200/80 text-xs text-slate-700 leading-relaxed"></div>
+        </div>
+
+        <!-- 3枚の主要KPIカード -->
+        <div class="grid sm:grid-cols-3 gap-3 mb-5">
+          <div class="rounded border border-slate-200 bg-slate-50 p-3.5">
+            <div class="text-[11px] font-bold text-slate-600">① 今の年間税額（1/6軽減中）</div>
+            <div id="at-cur-tax" class="mt-1 font-display text-xl font-extrabold text-slate-900 tabular-nums">—</div>
+            <div id="at-cur-sub" class="mt-1 text-[11px] text-slate-500 tabular-nums"></div>
+          </div>
+          <div class="rounded border border-rose-200 bg-rose-50/40 p-3.5">
+            <div class="text-[11px] font-bold text-rose-800">② 軽減が外れた後の年間税額</div>
+            <div id="at-heavy-tax" class="mt-1 font-display text-xl font-extrabold text-rose-700 tabular-nums">—</div>
+            <div id="at-heavy-diff" class="mt-1 text-[11px] text-rose-700 font-bold tabular-nums"></div>
+          </div>
+          <div class="rounded border border-emerald-200 bg-emerald-50/50 p-3.5">
+            <div class="text-[11px] font-bold text-emerald-900">③ 相続登記（名義変更）の費用目安</div>
+            <div id="at-10y-extra" class="mt-1 font-display text-xl font-extrabold text-emerald-800 tabular-nums">—</div>
+            <div id="at-toki-sub" class="mt-1 text-[11px] text-slate-600 tabular-nums"></div>
+          </div>
+        </div>
+
+        <!-- 詳細内訳比較表 -->
+        <div class="overflow-x-auto mb-5">
+          <table class="w-full text-xs border-collapse tabular-nums">
+            <thead>
+              <tr class="border-b border-slate-200 text-slate-500 text-left">
+                <th class="py-2 font-bold">税金・費用の項目</th>
+                <th class="py-2 font-bold text-right">現在（1/6軽減あり）</th>
+                <th class="py-2 font-bold text-right">軽減が外れた場合（実効額）</th>
+                <th class="py-2 font-bold text-right">参考：原則上限（6倍）</th>
+              </tr>
+            </thead>
+            <tbody id="at-tbody" class="divide-y divide-slate-100"></tbody>
+          </table>
+        </div>
+
+        <!-- 解説＆安心対策ボックス -->
+        <div id="at-detail" class="rounded-xs bg-slate-50 border border-slate-200 p-4 text-xs text-slate-700 leading-relaxed space-y-2"></div>
+      </div>
+
+      <AffiliateCta
+        slotType="akiya"
+        title="税金が上がる前・家の傷みが進む前に「今のまま売ったらいくらになるか」を確認する"
+        description="自治体から「管理不全空き家」の勧告を受ける前、また先に解体して更地にする前に売却・買取を進めれば、高い固定資産税も解体費用も払わずに手放すことができます。"
+        fallbackHref="/tools/disposal-simulator/"
+        fallbackLabel="実家を壊さず売った場合の手残り金額を試算する →"
+      />
+    </div>
+  </div>
+
+  <script is:inline define:vars={{ prefsData: prefectures, taxRulesData: taxRules }}>
+    const byPref = Object.fromEntries(prefsData.map((p) => [p.slug, p]));
+
+    const state = {
+      akiyaMode: "kanri_fuzen", // kanri_fuzen | tokutei | sarachi | proper
+      manualLand: false,
+      manualBldg: false,
+    };
+
+    const elPref = document.getElementById("at-pref");
+    const elCityTax = document.getElementById("at-citytax");
+    const elLandTsubo = document.getElementById("at-land-tsubo");
+    const elBldg = document.getElementById("at-bldg");
+    const elToki = document.getElementById("at-toki");
+    const elManLand = document.getElementById("at-man-land");
+    const elManBldg = document.getElementById("at-man-bldg");
+
+    function yen(n) {
+      return `${Math.round(n).toLocaleString("ja-JP")}円`;
+    }
+
+    function approxMan(n) {
+      const m = Math.round(n / 10000);
+      return `約 ${m.toLocaleString("ja-JP")}万円`;
+    }
+
+    function syncDefaults(force = false) {
+      const pref = byPref[elPref.value];
+      const tsubo = Number(elLandTsubo.value);
+      const bType = elBldg.value;
+
+      const landAssessedMan = Math.max(50, Math.round((tsubo * pref.land_price_man_per_tsubo * 0.7) / 10) * 10);
+      let bldgAssessedMan = 120;
+      if (bType === "wood_mid") bldgAssessedMan = 220;
+      else if (bType === "steel") bldgAssessedMan = 280;
+      else if (bType === "rc") bldgAssessedMan = 350;
+
+      if (force || !state.manualLand) elManLand.value = String(landAssessedMan);
+      if (force || !state.manualBldg) elManBldg.value = String(bldgAssessedMan);
+    }
+
+    function recalc() {
+      const hasCityTax = elCityTax.value === "yes";
+      const tsubo = Number(elLandTsubo.value);
+      const landSqm = Math.round(tsubo * 3.305785 * 10) / 10;
+      const landAssessedYen = Math.max(0, Number(elManLand.value) || 0) * 10000;
+      const bldgAssessedYen = Math.max(0, Number(elManBldg.value) || 0) * 10000;
+
+      const fixedRate = 0.014;
+      const cityRate = hasCityTax ? 0.003 : 0.0;
+      const combinedRate = fixedRate + cityRate;
+
+      const smallRatio = Math.min(1.0, 200.0 / Math.max(1.0, landSqm));
+      const genRatio = Math.max(0.0, 1.0 - smallRatio);
+
+      // 1. 特例適用時（通常）
+      const smallLandFixed = Math.round(landAssessedYen * smallRatio * (1 / 6) * fixedRate);
+      const smallLandCity = Math.round(landAssessedYen * smallRatio * (1 / 3) * cityRate);
+      const genLandFixed = Math.round(landAssessedYen * genRatio * (1 / 3) * fixedRate);
+      const genLandCity = Math.round(landAssessedYen * genRatio * (2 / 3) * cityRate);
+
+      const normalLandTax = smallLandFixed + smallLandCity + genLandFixed + genLandCity;
+      const normalBldgTax = Math.round(bldgAssessedYen * combinedRate);
+      const normalTotalTax = normalLandTax + normalBldgTax;
+
+      // 2. 特例解除時（実効：負担調整上限70%）
+      const effLandFixed = Math.round(landAssessedYen * 0.7 * fixedRate);
+      const effLandCity = Math.round(landAssessedYen * 0.7 * cityRate);
+      const effLandTax = effLandFixed + effLandCity;
+      const effBldgTax = state.akiyaMode === "sarachi" ? 0 : normalBldgTax;
+      const effTotalTax = effLandTax + effBldgTax;
+
+      // 3. 本則100%（最大6倍）
+      const prinLandTax = Math.round(landAssessedYen * 1.0 * combinedRate);
+      const prinTotalTax = prinLandTax + effBldgTax;
+
+      const activeTotalTax = state.akiyaMode === "proper" ? normalTotalTax : effTotalTax;
+      const annualExtraTax = Math.max(0, activeTotalTax - normalTotalTax);
+      const landMultEff = (effLandTax / Math.max(1, normalLandTax)).toFixed(1);
+
+      // 相続登記コスト＆過料リスク
+      const tokiMode = elToki.value;
+      const totalAssessed = landAssessedYen + bldgAssessedYen;
+      const licenseTax =
+        landAssessedYen <= 1000000
+          ? Math.round(bldgAssessedYen * 0.004)
+          : Math.round(totalAssessed * 0.004);
+      const scrivenerFee = 75000;
+      const normalTokiCost = licenseTax + scrivenerFee;
+
+      let fineYen = 0;
+      let tokiSummary = "";
+      if (tokiMode === "unregistered_over3y") {
+        fineYen = 100000;
+        tokiSummary = `登録免許税 ${yen(licenseTax)} ＋ 司法書士目安7.5万円（3年超放置時は過料最大10万円の対象）`;
+      } else if (tokiMode === "unregistered_within3y") {
+        fineYen = 0;
+        tokiSummary = `期限内の手続きで過料0円（登録免許税 ${yen(licenseTax)} ＋ 司法書士目安7.5万円）`;
+      } else if (tokiMode === "address_unregistered") {
+        fineYen = 50000;
+        tokiSummary = "住所変更登記（2年以内義務化）：放置時は過料最大5万円の対象（手続き実費は数千円〜）";
+      } else {
+        fineYen = 0;
+        tokiSummary = "相続登記・住所変更ともに完了済み（追加の登記費用・過料とも0円）";
+      }
+
+      const fiveYearExtra = annualExtraTax * 5;
+
+      // UI更新
+      const hero = document.getElementById("at-hero");
+      const badge = document.getElementById("at-status-badge");
+      const heroAmt = document.getElementById("at-hero-amount");
+      const heroMult = document.getElementById("at-hero-mult");
+      const heroReassure = document.getElementById("at-hero-reassure");
+
+      if (state.akiyaMode === "proper") {
+        hero.className = "rounded border border-slate-200 border-l-4 border-l-emerald-700 bg-emerald-50/60 p-4 sm:p-5 mb-5";
+        badge.className = "px-2 py-0.5 rounded-xs text-[11px] font-bold bg-emerald-100 text-emerald-800";
+        badge.textContent = "住宅用地の軽減（1/6）が守られている状態";
+        heroAmt.className = "font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-emerald-800 tabular-nums";
+        heroAmt.textContent = "固定資産税の増額 0円";
+        heroMult.textContent = `現在の年間税額 ${yen(normalTotalTax)} を維持できます`;
+        heroReassure.innerHTML =
+          `<strong>安心ポイント：</strong>建物の管理が保たれている間（または建物を壊さず古家付きのまま売却する間）は、土地の固定資産税が1/6に軽減されたままになります。`;
+      } else {
+        hero.className = "rounded border border-slate-200 border-l-4 border-l-rose-600 bg-rose-50/50 p-4 sm:p-5 mb-5";
+        badge.className = "px-2 py-0.5 rounded-xs text-[11px] font-bold bg-rose-100 text-rose-800";
+        badge.textContent =
+          state.akiyaMode === "kanri_fuzen"
+            ? "管理不全空き家で軽減が外れた場合"
+            : state.akiyaMode === "sarachi"
+              ? "先に解体して更地にした場合"
+              : "特定空き家（勧告・命令）の場合";
+        heroAmt.className = "font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-rose-700 tabular-nums whitespace-nowrap";
+        heroAmt.textContent = `+${yen(fiveYearExtra)}`;
+        heroMult.textContent = `年 +${yen(annualExtraTax)}（土地税額 約${landMultEff}倍）`;
+        heroReassure.innerHTML =
+          state.akiyaMode === "sarachi"
+            ? `<strong>なぜ更地にすると税金が上がるのか：</strong>建物を壊すと「住宅用地の軽減（固定資産税1/6）」が外れるため、建物の税金が0円になっても合計の税金は<strong>年 +${yen(annualExtraTax)}</strong>増えてしまいます。売れる目処が立つ前に先回りして解体しないのが鉄則です。`
+            : `<strong>どうすれば防げる？：</strong>いきなり翌月から税金が上がるわけではありません。自治体から「指導」→「勧告」を受ける前に<strong>最低限の補修・草刈りを行うか、現状のまま売却・買取で手放せば、この増税負担は0円に防げます。</strong>`;
+      }
+
+      document.getElementById("at-cur-tax").textContent = `年 ${yen(normalTotalTax)}`;
+      document.getElementById("at-cur-sub").textContent = `土地 ${yen(normalLandTax)} ＋ 建物 ${yen(normalBldgTax)}`;
+      document.getElementById("at-heavy-tax").textContent = `年 ${yen(activeTotalTax)}`;
+      document.getElementById("at-heavy-diff").textContent =
+        annualExtraTax > 0 ? `現在より +${yen(annualExtraTax)}/年 増額` : "現在と同額（増額なし）";
+
+      document.getElementById("at-10y-extra").textContent =
+        tokiMode === "done" ? "0円（完了済）" : tokiMode === "address_unregistered" ? "実費 数千円〜" : `約 ${Math.round(normalTokiCost / 10000)}万円`;
+      document.getElementById("at-toki-sub").textContent =
+        fineYen > 0 ? `※放置時は過料最大${yen(fineYen)}の対象` : "期限内の手続きで過料リスク0円";
+
+      const rows = [
+        [
+          `土地の固定資産税（税率1.4%・敷地${landSqm}㎡）`,
+          yen(smallLandFixed + genLandFixed),
+          yen(effLandFixed),
+          yen(Math.round(landAssessedYen * fixedRate)),
+        ],
+        [
+          `土地の都市計画税（${hasCityTax ? "税率0.3%" : "対象外 0%"}）`,
+          yen(smallLandCity + genLandCity),
+          yen(effLandCity),
+          yen(Math.round(landAssessedYen * cityRate)),
+        ],
+        [
+          `建物の固定資産税・都市計画税`,
+          yen(normalBldgTax),
+          state.akiyaMode === "sarachi" ? "0円（解体により消滅）" : yen(normalBldgTax),
+          state.akiyaMode === "sarachi" ? "0円（解体により消滅）" : yen(normalBldgTax),
+        ],
+        ["1年間の合計税額", yen(normalTotalTax), yen(effTotalTax), yen(prinTotalTax)],
+        ["5年間の合計税額", yen(normalTotalTax * 5), yen(effTotalTax * 5), yen(prinTotalTax * 5)],
+      ];
+
+      document.getElementById("at-tbody").innerHTML = rows
+        .map(([label, a, b, cVal], i) => {
+          const isBold = i >= 3;
+          return `<tr class="${isBold ? "bg-slate-50 font-extrabold text-slate-900" : ""}">
+            <td class="py-2 text-slate-700">${label}</td>
+            <td class="py-2 text-right">${a}</td>
+            <td class="py-2 text-right ${isBold ? "text-rose-700" : ""}">${b}</td>
+            <td class="py-2 text-right text-slate-500">${cVal}</td>
+          </tr>`;
+        })
+        .join("");
+
+      document.getElementById("at-detail").innerHTML =
+        `<p><strong>なぜ「最大6倍」と言われるのに、実際は「約${landMultEff}倍」なの？</strong><br />` +
+        `家が建っている土地（200㎡以下の部分）は、固定資産税の評価額が<strong>6分の1（約16.7%）</strong>に割り引かれています。この割引が外れると計算上は6倍（100%）に戻りますが、実際には急激な負担増を抑えるルール（商業地などと同じ<strong>評価額の70%を上限とする負担調整措置</strong>）が働くため、固定資産税は約4.2倍、都市計画税と合わせると<strong>実質 約${landMultEff}倍</strong>になります。</p>` +
+        `<p><strong>相続登記（名義変更）のポイント：</strong><br />` +
+        `${tokiSummary}。なお、土地の評価額が100万円以下の場合は2027年3月末まで土地の登録免許税が免税（0円）になる特例もあります。</p>`;
+    }
+
+    document.querySelectorAll(".st-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        state.akiyaMode = btn.getAttribute("data-st");
+        document.querySelectorAll(".st-btn").forEach((b) => {
+          const on = b === btn;
+          b.className =
+            b.className
+              .replace(/border-emerald-700|bg-emerald-700|text-white|border-slate-300|bg-white|text-slate-600|text-slate-700/g, "")
+              .trim() + (on ? " border-emerald-700 bg-emerald-700 text-white" : " border-slate-300 bg-white text-slate-700");
+        });
+        recalc();
+      });
+    });
+
+    [elPref, elLandTsubo, elBldg].forEach((el) => {
+      el.addEventListener("change", () => {
+        state.manualLand = false;
+        state.manualBldg = false;
+        syncDefaults();
+        recalc();
+      });
+    });
+
+    [elCityTax, elToki].forEach((el) => el.addEventListener("change", recalc));
+
+    elManLand.addEventListener("input", () => {
+      state.manualLand = true;
+      recalc();
+    });
+    elManBldg.addEventListener("input", () => {
+      state.manualBldg = true;
+      recalc();
+    });
+
+    document.getElementById("at-reset-btn").addEventListener("click", () => {
+      state.manualLand = false;
+      state.manualBldg = false;
+      syncDefaults(true);
+      recalc();
+    });
+
+    syncDefaults(true);
+    recalc();
+  </script>
+</BaseLayout>

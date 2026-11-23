@@ -1,0 +1,62 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import AffiliateCta from "../../components/AffiliateCta.astro";
+import GuideSidebar from "../../components/GuideSidebar.astro";
+---
+
+<BaseLayout
+  title="実家は「解体して更地売却」と「古家付き・そのまま買取」のどっちが手残りが多いか？"
+  description="実家を売るときに150万〜250万円かけて先に解体すべきか、古家付きのまま売却・買取に出すべきかの損益分岐点と、先に解体してはいけない4つの物件条件を解説します。"
+  canonicalPath="/guide/sarachi-vs-furuya-breakeven/"
+>
+  <nav class="text-xs text-slate-500 mb-4 flex items-center gap-1.5">
+    <a href="/" class="hover:text-emerald-700">トップ</a><span>/</span>
+    <a href="/guide/" class="hover:text-emerald-700">解説ガイド</a><span>/</span>
+    <span class="text-slate-800 font-semibold">更地売却 vs 古家付き・買取の損得</span>
+  </nav>
+
+  <div class="grid gap-8 lg:grid-cols-12 items-start">
+    <article class="lg:col-span-8 min-w-0">
+      <div class="page-header-clean rounded p-5 sm:p-6 mb-6">
+        <div class="eyebrow-label mb-1">解説ガイド｜売却・解体の判断</div>
+        <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900 leading-snug">
+          実家は「解体して更地売却」と「壊さずそのまま売却」どっちが得？
+        </h1>
+        <p class="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
+          「古い家は壊して更地にしないと売れない」と思い込んで先に約200万円の解体工事を発注してしまうのは、実家じまいで最も多い失敗パターンです。
+        </p>
+      </div>
+
+      <div class="card-surface rounded p-5 sm:p-6 space-y-5 text-sm text-slate-700 leading-relaxed">
+        <h2 class="text-lg font-extrabold text-slate-900 border-b border-slate-200 pb-2">1. 先に解体してしまうことの「2つのリスク」</h2>
+        <ul class="list-disc pl-5 space-y-1.5">
+          <li><strong>解体費用（30坪木造で約170〜220万円）が先に持ち出しになる</strong>：売却代金が入る前にまとまった自己資金を支払う必要があります。</li>
+          <li><strong>1月1日をまたいで売れ残ると土地の固定資産税が約3.6〜4.2倍に増える</strong>：建物を壊した時点から住宅用地の軽減（1/6）が外れるため、買い手がすぐつかないと高い更地税を毎年負担することになります。</li>
+        </ul>
+
+        <h2 class="text-lg font-extrabold text-slate-900 border-b border-slate-200 pb-2 pt-2">2. 先に自費で解体してはいけない4つの実家タイプ</h2>
+        <ol class="list-decimal pl-5 space-y-1.5">
+          <li><strong>再建築不可物件（接道2m未満など）</strong>：壊すと新しい家を建てられなくなり、土地の価値が大きく下がります。建物を残したままリフォーム前提の買取・売却に出すのが原則です。</li>
+          <li><strong>市街化調整区域・農地付き実家</strong>：既存建物の建て替え許可要件が厳しく、更地にすると第三者が建築できなくなるケースがあります。</li>
+          <li><strong>地価が坪15万円以下の地方エリアの広い実家（50坪超）</strong>：解体費（250〜350万円）が土地の売却額を上回る「費用倒れ」になりやすいため、建物を壊さず手放す方法が優先です。</li>
+          <li><strong>借地権付き実家</strong>：自費で解体して地主に更地返還すると150万円超の持ち出しになりますが、借地権付き建物のまま買取・譲渡すれば解体費負担を避けられる可能性があります。</li>
+        </ol>
+
+        <h2 class="text-lg font-extrabold text-slate-900 border-b border-slate-200 pb-2 pt-2">3. 手残りを増やすための安全な手順</h2>
+        <p>
+          まずは<strong>建物を壊さず・家財も片付けない状態</strong>で、「①古家付きでの仲介売却」と「②荷物そのままの専門買取」の手残りを<a href="/tools/disposal-simulator/" class="text-emerald-700 font-bold underline">実家の手放し方シミュレーター</a>で比較してから動くのが安心です。
+        </p>
+      </div>
+
+      <AffiliateCta
+        slotType="sell"
+        title="解体工事を頼む前に「壊さず売った場合の手残り金額」を試算する"
+        description="買主が決まってから引き渡し条件として解体するか、買主側で解体してもらえば更地税のリスクを防げます。"
+        fallbackHref="/tools/disposal-simulator/"
+        fallbackLabel="更地売却 vs 壊さず売却の手残り差を計算する →"
+      />
+    </article>
+
+    <GuideSidebar currentPath="/guide/sarachi-vs-furuya-breakeven/" />
+  </div>
+</BaseLayout>

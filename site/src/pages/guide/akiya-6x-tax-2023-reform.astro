@@ -1,0 +1,73 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import AffiliateCta from "../../components/AffiliateCta.astro";
+import GuideSidebar from "../../components/GuideSidebar.astro";
+---
+
+<BaseLayout
+  title="空き家の固定資産税が「最大6倍（実効4.2倍）」に増える仕組みと勧告前の対策"
+  description="2023年12月施行の改正空家等対策特措法で新設された「管理不全空き家」による住宅用地特例（1/6・1/3）解除の仕組み、なぜ実効約4.2倍になるのか、勧告前の売却・買取対策を解説します。"
+  canonicalPath="/guide/akiya-6x-tax-2023-reform/"
+>
+  <nav class="text-xs text-slate-500 mb-4 flex items-center gap-1.5">
+    <a href="/" class="hover:text-emerald-700">トップ</a><span>/</span>
+    <a href="/guide/" class="hover:text-emerald-700">解説ガイド</a><span>/</span>
+    <span class="text-slate-800 font-semibold">空き家の固定資産税が増える仕組み</span>
+  </nav>
+
+  <div class="grid gap-8 lg:grid-cols-12 items-start">
+    <article class="lg:col-span-8 min-w-0">
+      <div class="page-header-clean rounded p-5 sm:p-6 mb-6">
+        <div class="eyebrow-label mb-1">解説ガイド｜空き家の固定資産税</div>
+        <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900 leading-snug">
+          空き家の固定資産税が「最大6倍（実効4.2倍）」に増える仕組みと防ぎ方
+        </h1>
+        <p class="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
+          2023年12月の法改正により、倒壊の危険がある「特定空き家」になる前の段階でも、窓割れ・雨漏り・雑草放置が続いて「管理不全空き家」の勧告を受けると住宅用地の軽減が外れるようになりました。
+        </p>
+      </div>
+
+      <div class="card-surface rounded p-5 sm:p-6 space-y-5 text-sm text-slate-700 leading-relaxed">
+        <h2 class="text-lg font-extrabold text-slate-900 border-b border-slate-200 pb-2">1. なぜ「最大6倍」と「実質約4.2倍」の2つの数字があるのか？</h2>
+        <p>
+          住宅が建っている土地には、固定資産税（標準税率1.4%）と都市計画税（最大0.3%）を減額する<strong>「住宅用地の特例」</strong>が適用されています。
+        </p>
+        <ul class="list-disc pl-5 space-y-1.5">
+          <li><strong>小規模住宅用地（200㎡＝約60坪以下の部分）</strong>：固定資産税の課税標準が評価額の <strong>1/6（約16.7%）</strong>、都市計画税が <strong>1/3（約33.3%）</strong> に軽減</li>
+          <li><strong>一般住宅用地（200㎡を超える部分）</strong>：固定資産税が評価額の <strong>1/3</strong>、都市計画税が <strong>2/3</strong> に軽減</li>
+        </ul>
+        <p>
+          自治体から「管理不全空き家」または「特定空き家」として<strong>勧告</strong>を受けるか、建物を先に解体して更地にすると、この軽減が外れます。計算上は 1/6 から 6/6（100%）に戻るため「最大6倍」と呼ばれますが、実際の固定資産税には商業地等と同じ<strong>負担調整措置（課税標準の上限を評価額の70%とするルール）</strong>が適用されます。
+        </p>
+        <p>
+          そのため、200㎡以下の土地の固定資産税は <strong>70% ÷ (1/6) ＝ 4.2倍</strong>（都市計画税と合算した土地税額全体では<strong>約3.6〜4.2倍</strong>）になります。
+        </p>
+
+        <h2 class="text-lg font-extrabold text-slate-900 border-b border-slate-200 pb-2 pt-2">2. 「管理不全空き家」の対象になりやすい劣化サイン</h2>
+        <ol class="list-decimal pl-5 space-y-1.5">
+          <li>屋根材（瓦・スレート）や外壁の一部が剥がれ、飛散または雨漏りが発生している</li>
+          <li>窓ガラスや雨戸が割れたまま放置され、外部から侵入できる状態になっている</li>
+          <li>敷地内の雑草や庭木が隣地・道路へ越境し、近隣から自治体へ連絡が寄せられている</li>
+        </ol>
+
+        <h2 class="text-lg font-extrabold text-slate-900 border-b border-slate-200 pb-2 pt-2">3. 基準日（毎年1月1日）までに増税を防ぐ方法</h2>
+        <p>
+          固定資産税はその年の<strong>1月1日時点</strong>の状況で決まります。自治体から「指導」が届いた段階で最低限の補修・草刈りを行うか、年末の「勧告」に至る前に古家付き売却または専門買取で手放せば、軽減解除による増税負担は発生しません。
+        </p>
+        <p>
+          ご自身の実家で軽減が外れた場合の増税額は、<a href="/tools/akiya-tax/" class="text-emerald-700 font-bold underline">空き家の固定資産税・相続登記シミュレーター</a>で試算できます。
+        </p>
+      </div>
+
+      <AffiliateCta
+        slotType="akiya"
+        title="修繕費や草刈り代をかけて維持するより、勧告前に手放す選択肢も比較する"
+        description="老朽化した実家を軽減維持のために修繕すると数十万円以上の出費になります。今の状態で売却・買取した場合の手残りと維持費を比較しておきましょう。"
+        fallbackHref="/tools/akiya-tax/"
+        fallbackLabel="自分の実家の固定資産税を試算する →"
+      />
+    </article>
+
+    <GuideSidebar currentPath="/guide/akiya-6x-tax-2023-reform/" />
+  </div>
+</BaseLayout>

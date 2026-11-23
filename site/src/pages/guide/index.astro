@@ -1,0 +1,67 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const guides = [
+  {
+    href: "/guide/sarachi-vs-furuya-breakeven/",
+    badge: "売却・解体の判断",
+    title: "実家は「解体して更地で売る」と「壊さずそのまま売る・買取」どっちが得？",
+    desc: "先に解体してはいけない物件条件（再建築不可・市街化調整区域・地方の広い敷地）と、先行出費のリスクを避けて手残りを増やす手順を解説します。",
+  },
+  {
+    href: "/guide/akiya-6x-tax-2023-reform/",
+    badge: "空き家の固定資産税",
+    title: "空き家の固定資産税が「最大6倍（実際は約4.2倍）」に増える仕組みと防ぎ方",
+    desc: "2023年12月施行で新設された「管理不全空き家」の基準、なぜ6倍ではなく実質約4.2倍になるのか、勧告を受ける前に取るべき対策を解説します。",
+  },
+  {
+    href: "/guide/sozoku-toki-penalty-3000man/",
+    badge: "3,000万円控除・相続登記",
+    title: "相続登記の義務化と空き家3,000万円特別控除「買主解体」の活用法",
+    desc: "2027年3月末に迫る過去相続分の登記猶予期限、住所変更登記の義務化、売主が先に解体しなくても3,000万円控除が使える新ルールを整理しています。",
+  },
+  {
+    href: "/guide/kaitai-cost-asbestos-2026/",
+    badge: "解体費用の内訳",
+    title: "解体工事の坪単価（木造・鉄骨・RC）とアスベスト調査・残置物費用の実態",
+    desc: "着工前に義務化されたアスベスト事前調査と成形板処分費、重機が入らない狭小道路の手壊し割増など、見積もりで差がつくポイントを解説します。",
+  },
+  {
+    href: "/guide/hakajimai-cost-15year-payback/",
+    badge: "墓じまい・永代供養",
+    title: "墓じまい費用（35〜80万円）は何年で元が取れる？遠方の墓維持 vs 樹木葬・永代供養",
+    desc: "年間16万件を超える墓じまい（改葬）の費用内訳、公営霊園と寺院墓地（檀家）の違い、15年間の維持費との損益分岐ラインを比較します。",
+  },
+];
+---
+
+<BaseLayout
+  title="解説ガイド一覧｜実家の手放し方・空き家の固定資産税・解体費用・墓じまい"
+  description="空き家の固定資産税（住宅用地の軽減解除）・相続登記の義務化・空き家3,000万円特別控除・解体坪単価・墓じまいの回収年数など、公的データと最新制度にもとづく解説ガイド一覧。"
+  canonicalPath="/guide/"
+>
+  <div class="page-header-clean rounded p-5 sm:p-6 mb-6">
+    <div class="eyebrow-label mb-1">解説ガイド</div>
+    <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900">
+      実家の手放し方・空き家の税金・解体・墓じまい解説一覧
+    </h1>
+    <p class="mt-1.5 text-xs sm:text-sm text-slate-600">
+      最新の法改正（空家特措法・相続登記の義務化・買主解体による3,000万円特別控除）および公的統計データにもとづいて整理しています。
+    </p>
+  </div>
+
+  <div class="grid gap-4 md:grid-cols-2">
+    {
+      guides.map((g) => (
+        <a href={g.href} class="card-interactive rounded p-5 block">
+          <span class="inline-block px-2 py-0.5 rounded-xs bg-emerald-50 text-emerald-800 text-[10px] font-bold">
+            {g.badge}
+          </span>
+          <h2 class="mt-2 text-base font-extrabold text-slate-900 leading-snug">{g.title}</h2>
+          <p class="mt-1.5 text-xs text-slate-600 leading-relaxed">{g.desc}</p>
+          <div class="mt-3 text-xs font-bold text-emerald-700">解説を読む →</div>
+        </a>
+      ))
+    }
+  </div>
+</BaseLayout>

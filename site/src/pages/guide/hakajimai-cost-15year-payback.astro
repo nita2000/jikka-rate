@@ -1,0 +1,67 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import AffiliateCta from "../../components/AffiliateCta.astro";
+import GuideSidebar from "../../components/GuideSidebar.astro";
+---
+
+<BaseLayout
+  title="墓じまい費用相場（35〜80万円）は何年で元が取れる？遠方の墓維持 vs 樹木葬・永代供養"
+  description="厚生労働省統計で年間16万件を超えた墓じまい（改葬）の費用内訳と、遠方の墓を維持し続ける場合（管理料＋お布施＋帰省費）との15年損益分岐点を解説します。"
+  canonicalPath="/guide/hakajimai-cost-15year-payback/"
+>
+  <nav class="text-xs text-slate-500 mb-4 flex items-center gap-1.5">
+    <a href="/" class="hover:text-emerald-700">トップ</a><span>/</span>
+    <a href="/guide/" class="hover:text-emerald-700">解説ガイド</a><span>/</span>
+    <span class="text-slate-800 font-semibold">墓じまいの費用相場と回収年数</span>
+  </nav>
+
+  <div class="grid gap-8 lg:grid-cols-12 items-start">
+    <article class="lg:col-span-8 min-w-0">
+      <div class="page-header-clean rounded p-5 sm:p-6 mb-6">
+        <div class="eyebrow-label mb-1">解説ガイド｜墓じまい・永代供養</div>
+        <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900 leading-snug">
+          墓じまい費用は何年で元が取れる？遠方の墓維持 vs 樹木葬・永代供養
+        </h1>
+        <p class="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
+          実家を整理すると同時に課題になるのが「地元に残るお墓」です。墓じまいにかかる初期費用と、遠方のお墓を維持し続ける15年間のコストを比較します。
+        </p>
+      </div>
+
+      <div class="card-surface rounded p-5 sm:p-6 space-y-5 text-sm text-slate-700 leading-relaxed">
+        <h2 class="text-lg font-extrabold text-slate-900 border-b border-slate-200 pb-2">1. 墓じまい（改葬）にかかる費用の3つの内訳</h2>
+        <ul class="list-disc pl-5 space-y-1.5">
+          <li><strong>① 現在の墓石解体・撤去・更地返還工事</strong>：1㎡あたり約10万〜13万円（標準2㎡区画で<strong>約20万〜26万円</strong>、階段上の難所は＋8万円前後）</li>
+          <li><strong>② 閉眼供養（魂抜き）お布施・離檀御礼・行政手続</strong>：閉眼法要お布施3万〜5万円＋寺院檀家の場合は離檀御礼3万〜10万円（公営霊園は離檀料0円）</li>
+          <li><strong>③ 新しい供養先（改葬先）の初期費用</strong>：
+            <ul class="list-disc pl-5 mt-1 space-y-1">
+              <li><strong>合祀型 永代供養墓</strong>：1柱 <strong>約8万〜15万円</strong>（年間管理費 0円）</li>
+              <li><strong>樹木葬・自然葬（人気）</strong>：<strong>約30万〜50万円</strong>（年間管理費 0円が多い）</li>
+              <li><strong>都市型 納骨堂・個別永代供養</strong>：<strong>約50万〜85万円</strong>（年間管理費 1万〜1.5万円）</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h2 class="text-lg font-extrabold text-slate-900 border-b border-slate-200 pb-2 pt-2">2. 遠方のお墓は「約5〜8年」で初期費用の元が取れる</h2>
+        <p>
+          地方の菩提寺にあるお墓を都市部から維持する場合、年間護持会費（1.5万〜2万円）＋法要・お盆のお布施（年平均2万円）＋年1〜2回の新幹線・車での帰省交通費（6万円）で、<strong>毎年約10万円（15年間で約150万円）</strong>がかかります。
+        </p>
+        <p>
+          一方、墓じまいをして自宅近くの樹木葬（総額約70〜80万円）や合祀永代供養墓（総額約45万円）へ移せば、<strong>約4.5年〜8年ほどで初期費用の元が取れ、15年間で65万〜100万円以上の負担軽減</strong>になります。さらに子ども世代へお墓の管理負担を引き継がずに済むのが大きなメリットです。
+        </p>
+        <p>
+          ご自身の帰省距離とお墓の広さでの回収年数は、<a href="/tools/hakajimai-simulator/" class="text-emerald-700 font-bold underline">墓じまい・永代供養シミュレーター</a>で試算できます。
+        </p>
+      </div>
+
+      <AffiliateCta
+        slotType="kuyo"
+        title="お墓の都道府県・帰省距離・新しい供養先を選んで15年収支を試算する"
+        description="各自治体の葬祭費給付金（3万〜7万円）や公営火葬料の目安もあわせて確認できます。"
+        fallbackHref="/tools/hakajimai-simulator/"
+        fallbackLabel="自分の条件で墓じまい回収年数を試算する →"
+      />
+    </article>
+
+    <GuideSidebar currentPath="/guide/hakajimai-cost-15year-payback/" />
+  </div>
+</BaseLayout>

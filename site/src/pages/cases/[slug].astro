@@ -1,0 +1,414 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import AffiliateCta from "../../components/AffiliateCta.astro";
+import propertyCases from "../../data/property_cases.json";
+import comparePairs from "../../data/compare_pairs.json";
+import {
+  formatManYen,
+  formatSignedYen,
+  formatYen,
+  residualLevelLabel,
+  roadConditionLabel,
+  structureLabel,
+} from "../../lib/formatters";
+import type { AffiliateSlot } from "../../lib/affiliates";
+
+export function getStaticPaths() {
+  return propertyCases.map((item) => ({
+    params: { slug: item.slug },
+    props: { item },
+  }));
+}
+
+const { item } = Astro.props;
+const isGrave = item.structure === "grave";
+const isMansion = item.slug === "old-mansion-70sqm-age42";
+const tax = item.calc.tax;
+const demo = item.calc.demolition;
+const maint = item.calc.maintenance;
+const disp = item.calc.disposal;
+const haka = item.calc.hakajimai;
+
+const bestNet = disp.best_sale_net_yen;
+const isSarachiBest = !isMansion && disp.sarachi_net_proceeds_yen === bestNet && disp.sarachi_net_proceeds_yen > disp.furuya_net_proceeds_yen && disp.sarachi_net_proceeds_yen > disp.kaitori_net_proceeds_yen;
+const isKaitoriBest = disp.kaitori_net_proceeds_yen === bestNet && disp.kaitori_net_proceeds_yen >= disp.furuya_net_proceeds_yen;
+const isFuruyaBest = !isSarachiBest && !isKaitoriBest;
+
+const relatedPairs = comparePairs.filter(
+  (p) => p.case_a === item.slug || p.case_b === item.slug,
+);
+const peerCases = propertyCases
+  .filter((c) => c.category === item.category && c.slug !== item.slug)
+  .slice(0, 4);
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: isGrave && haka
+    ? [
+        {
+          "@type": "Question",
+          name: `${item.name}の墓じまい・永代供養の費用はいくらですか？`,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: `2026年の全国平均基準で、${item.short_name}（${item.spec_note}）を墓じまいして樹木葬へ改葬する場合の初期総額目安は${formatYen(haka.initial_total_yen)}（墓石撤去${formatYen(haka.stone_removal_yen)}＋閉眼お布施・離檀${formatYen(haka.ceremony_and_ridan_yen)}＋樹木葬初期費${formatYen(haka.next_kuyo_initial_yen)}）です。`,
+          },
+        },
+        {
+          "@type": "Question",
+          name: `${item.short_name}を墓じまいすると何年で元が取れますか？`,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: `年間維持・帰省負担（${formatYen(haka.annual_keep_cost_yen)}/年）と比較すると、約${haka.payback_years}年で初期費用を回収でき、15年間で合計${formatYen(haka.saving_15y_yen)}の負担軽減となります。`,
+          },
+        },
+      ]
+    : [
+        {
+          "@type": "Question",
+          name: `${item.name}の解体工事費用と年間維持費はいくらですか？`,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: `2026年の全国基準で、${item.short_name}（${item.spec_note}）の解体・片付け総額目安は${formatYen(demo.total_demolition_yen)}、空き家として保有する場合の年間維持費は通常時${formatYen(maint.annual_keep_normal)}（住宅用地の軽減が外れた場合は年間${formatYen(maint.annual_keep_heavy)}）です。`,
+          },
+        },
+        {
+          "@type": "Question",
+          name: `${item.short_name}は解体して更地売却とそのまま売却・買取のどちらが得ですか？`,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: `試算上、最も有利なのは「${disp.best_strategy_label}（最終手残り目安 ${formatSignedYen(disp.best_sale_net_yen)}）」です。`,
+          },
+        },
+      ],
+};
+---
+
+<BaseLayout
+  title={`${item.name}の解体費用・空き家維持費・売却手残り相場`}
+  description={`${item.name}（${item.spec_note}）の最新費用を試算。${isGrave && haka ? `墓じまい総額${formatYen(haka.initial_total_yen)}・回収期間約${haka.payback_years}年・15年負担軽減${formatYen(haka.saving_15y_yen)}。` : `解体・片付け総額${formatYen(demo.total_demolition_yen)}・年間維持費${formatYen(maint.annual_keep_normal)}・3つの売却ルート手残りを掲載。`}`}
+  canonicalPath={`/cases/${item.slug}/`}
+  schema={schema}
+>
+  <nav class="text-xs text-slate-500 mb-4 flex items-center gap-1.5">
+    <a href="/" class="hover:text-emerald-700">トップ</a>
+    <span>/</span>
+    <a href="/cases/" class="hover:text-emerald-700">タイプ別相場</a>
+    <span>/</span>
+    <span class="text-slate-800 font-semibold">{item.short_name}</span>
+  </nav>
+
+  <div class="page-header-clean rounded p-5 sm:p-6 mb-6">
+    <div class="flex flex-wrap items-center gap-2 mb-1.5">
+      <span class="px-2 py-0.5 rounded-xs bg-emerald-50 text-emerald-800 text-[11px] font-bold">{item.category_label}</span>
+      <span class="text-xs text-slate-500">{item.spec_note}</span>
+    </div>
+    <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900">{item.name}</h1>
+    <p class="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">{item.summary}</p>
+  </div>
+
+  <!-- 主要KPI 4枚 -->
+  {
+    isGrave && haka ? (
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-8">
+        <div class="card-surface rounded p-4 border-t-2 border-t-emerald-700">
+          <div class="text-[11px] font-bold text-slate-500">墓じまい＋樹木葬 初期総額</div>
+          <div class="mt-1 text-xl sm:text-2xl font-extrabold text-slate-900 tabular-nums whitespace-nowrap">{formatYen(haka.initial_total_yen)}</div>
+          <div class="mt-0.5 text-[11px] text-slate-500 tabular-nums">葬祭費控除後 {formatYen(haka.net_initial_after_grant_yen)}</div>
+        </div>
+        <div class="card-surface rounded p-4">
+          <div class="text-[11px] font-bold text-slate-500">現在の年間維持＋帰省負担</div>
+          <div class="mt-1 text-xl sm:text-2xl font-extrabold text-rose-700 tabular-nums whitespace-nowrap">▲{formatYen(haka.annual_keep_cost_yen)}</div>
+          <div class="mt-0.5 text-[11px] text-slate-500 tabular-nums">15年維持で ▲{formatManYen(haka.keep_total_15y_yen)}</div>
+        </div>
+        <div class="card-surface rounded p-4">
+          <div class="text-[11px] font-bold text-slate-500">墓じまい回収年数</div>
+          <div class="mt-1 text-xl sm:text-2xl font-extrabold text-emerald-700 tabular-nums whitespace-nowrap">約 {haka.payback_years} 年</div>
+          <div class="mt-0.5 text-[11px] text-slate-500">以降の年間管理費 0円</div>
+        </div>
+        <div class="card-surface rounded p-4">
+          <div class="text-[11px] font-bold text-slate-500">15年間の負担軽減額</div>
+          <div class="mt-1 text-xl sm:text-2xl font-extrabold text-emerald-800 tabular-nums whitespace-nowrap">+{formatYen(haka.saving_15y_yen)}</div>
+          <div class="mt-0.5 text-[11px] text-slate-500">子世代への承継負担も解消</div>
+        </div>
+      </div>
+    ) : (
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-8">
+        <div class="card-surface rounded p-4 border-t-2 border-t-emerald-700">
+          <div class="text-[11px] font-bold text-slate-500">{isMansion ? "家財片付け費用の目安" : "解体・片付け総額目安"}</div>
+          <div class="mt-1 text-xl sm:text-2xl font-extrabold text-slate-900 tabular-nums whitespace-nowrap">{formatYen(demo.total_demolition_yen)}</div>
+          <div class="mt-0.5 text-[11px] text-slate-500 tabular-nums">
+            {isMansion ? "区分マンション（戸別解体なし）" : `本体坪単価 ${demo.unit_price_man_per_tsubo.toFixed(2)}万/坪`}
+          </div>
+        </div>
+        <div class="card-surface rounded p-4">
+          <div class="text-[11px] font-bold text-slate-500">空き家年間維持費（通常時）</div>
+          <div class="mt-1 text-xl sm:text-2xl font-extrabold text-slate-900 tabular-nums whitespace-nowrap">{formatYen(maint.annual_keep_normal)}</div>
+          <div class="mt-0.5 text-[11px] text-slate-500 tabular-nums">月額 約{formatYen(maint.annual_keep_monthly)}</div>
+        </div>
+        <div class="card-surface rounded p-4">
+          <div class="text-[11px] font-bold text-slate-500">軽減解除後の年間負担</div>
+          <div class="mt-1 text-xl sm:text-2xl font-extrabold text-rose-700 tabular-nums whitespace-nowrap">{formatYen(maint.annual_keep_heavy)}</div>
+          <div class="mt-0.5 text-[11px] text-rose-700 font-semibold tabular-nums">土地税額 実効{tax.land_tax_multiplier_effective}倍</div>
+        </div>
+        <div class="card-surface rounded p-4">
+          <div class="text-[11px] font-bold text-slate-500">最適売却時の最終手残り</div>
+          <div class="mt-1 text-xl sm:text-2xl font-extrabold text-emerald-700 tabular-nums whitespace-nowrap">{formatSignedYen(disp.best_sale_net_yen)}</div>
+          <div class="mt-0.5 text-[11px] text-emerald-800 font-bold whitespace-nowrap">{disp.best_strategy_label}</div>
+        </div>
+      </div>
+    )
+  }
+
+  <!-- 内訳テーブル＆諸元カード -->
+  <div class="grid gap-6 lg:grid-cols-12 mb-8">
+    <div class="lg:col-span-7 min-w-0 card-surface rounded p-5">
+      {
+        isGrave && haka ? (
+          <>
+            <h2 class="text-base font-extrabold text-slate-900 mb-3">墓じまい・永代供養の費用内訳（全国標準基準）</h2>
+            <div class="overflow-x-auto">
+              <table class="w-full text-xs border-collapse tabular-nums">
+                <thead>
+                  <tr class="border-b border-slate-200 text-slate-500 text-left">
+                    <th class="py-2 font-bold">内訳項目</th>
+                    <th class="py-2 font-bold text-right">金額目安</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                  <tr>
+                    <td class="py-2 font-medium text-slate-700">墓石解体・撤去・更地返還工事（{item.grave_sqm}㎡）</td>
+                    <td class="py-2 text-right font-bold">{formatYen(haka.stone_removal_yen)}</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 font-medium text-slate-700">閉眼供養（魂抜き）お布施・離檀御礼</td>
+                    <td class="py-2 text-right">{formatYen(haka.ceremony_and_ridan_yen)}</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 font-medium text-slate-700">改葬許可申請・行政手続・証明書発行</td>
+                    <td class="py-2 text-right">{formatYen(haka.admin_permit_yen)}</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 font-medium text-slate-700">新しい供養先：{haka.next_kuyo_label}</td>
+                    <td class="py-2 text-right font-bold">{formatYen(haka.next_kuyo_initial_yen)}</td>
+                  </tr>
+                  <tr class="bg-slate-50 font-extrabold text-slate-900">
+                    <td class="py-2.5 px-1">墓じまい＋永代供養 初期費用合計</td>
+                    <td class="py-2.5 text-right text-emerald-800">{formatYen(haka.initial_total_yen)}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </>
+        ) : (
+          <>
+            <h2 class="text-base font-extrabold text-slate-900 mb-3">解体・片付け費用の内訳と売却ルート別手残り比較</h2>
+            <div class="overflow-x-auto mb-5">
+              <table class="w-full text-xs border-collapse tabular-nums">
+                <thead>
+                  <tr class="border-b border-slate-200 text-slate-500 text-left">
+                    <th class="py-2 font-bold">解体・撤去費用の内訳項目</th>
+                    <th class="py-2 font-bold text-right">金額目安</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                  <tr>
+                    <td class="py-2 font-medium text-slate-700">
+                      {isMansion ? "建物本体解体工事（区分マンションのため不要）" : `建物本体解体工事（${structureLabel(item.structure)} ${item.floor_tsubo}坪）`}
+                    </td>
+                    <td class="py-2 text-right font-bold">{formatYen(demo.building_body_yen)}</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 font-medium text-slate-700">道路・立地条件割増（{roadConditionLabel(item.road_condition)}）</td>
+                    <td class="py-2 text-right">{formatYen(demo.road_surcharge_yen)}</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 font-medium text-slate-700">ブロック塀・庭木・外構撤去・整地</td>
+                    <td class="py-2 text-right">{formatYen(demo.exterior_fence_yen)}</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 font-medium text-slate-700">家財・残置物の片付け（{residualLevelLabel(item.residual_level)}）</td>
+                    <td class="py-2 text-right">{formatYen(demo.residual_items_yen)}</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 font-medium text-slate-700">アスベスト（石綿）事前調査・成形板対策費</td>
+                    <td class="py-2 text-right">{item.has_asbestos_risk ? formatYen(demo.asbestos_yen) : "0円（非含有想定）"}</td>
+                  </tr>
+                  <tr class="bg-slate-50 font-extrabold text-slate-900">
+                    <td class="py-2.5 px-1">解体・残置物処分 総額目安</td>
+                    <td class="py-2.5 text-right text-slate-900">{formatYen(demo.total_demolition_yen)}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3 class="text-xs font-extrabold text-slate-800 mb-2">手放し方3ルートの最終手残り比較（全国標準地価基準）</h3>
+            <div class="grid sm:grid-cols-3 gap-2.5 text-xs tabular-nums">
+              {!isMansion && (
+                <div class={`rounded-xs border p-3 ${isSarachiBest ? "border-emerald-300 bg-emerald-50/50" : "border-slate-200 bg-slate-50"}`}>
+                  <div class="flex items-center justify-between gap-1 whitespace-nowrap">
+                    <span class={`text-[10.5px] ${isSarachiBest ? "text-emerald-800 font-bold" : "text-slate-500"}`}>① 解体して更地売却</span>
+                    {isSarachiBest && <span class="px-1.5 py-0.5 rounded-xs bg-emerald-700 text-white text-[9.5px] font-bold">最有利</span>}
+                  </div>
+                  <div class={`mt-1 text-sm font-extrabold whitespace-nowrap ${isSarachiBest ? "text-emerald-800" : "text-slate-900"}`}>
+                    {formatSignedYen(disp.sarachi_net_proceeds_yen)}
+                  </div>
+                </div>
+              )}
+              <div class={`rounded-xs border p-3 ${isFuruyaBest ? "border-emerald-300 bg-emerald-50/50" : "border-slate-200 bg-slate-50"}`}>
+                <div class="flex items-center justify-between gap-1 whitespace-nowrap">
+                  <span class={`text-[10.5px] ${isFuruyaBest ? "text-emerald-800 font-bold" : "text-slate-500"}`}>
+                    {isMansion ? "① 家財片付け後に仲介売却" : "② 壊さず古家付き売却"}
+                  </span>
+                  {isFuruyaBest && <span class="px-1.5 py-0.5 rounded-xs bg-emerald-700 text-white text-[9.5px] font-bold">最有利</span>}
+                </div>
+                <div class={`mt-1 text-sm font-extrabold whitespace-nowrap ${isFuruyaBest ? "text-emerald-800" : "text-slate-900"}`}>
+                  {formatSignedYen(disp.furuya_net_proceeds_yen)}
+                </div>
+              </div>
+              <div class={`rounded-xs border p-3 ${isKaitoriBest ? "border-emerald-300 bg-emerald-50/50" : "border-slate-200 bg-slate-50"}`}>
+                <div class="flex items-center justify-between gap-1 whitespace-nowrap">
+                  <span class={`text-[10.5px] ${isKaitoriBest ? "text-emerald-800 font-bold" : "text-slate-500"}`}>
+                    {isMansion ? "② 荷物そのまま専門買取" : "③ 壊さず・片付けず買取"}
+                  </span>
+                  {isKaitoriBest && <span class="px-1.5 py-0.5 rounded-xs bg-emerald-700 text-white text-[9.5px] font-bold">最有利</span>}
+                </div>
+                <div class={`mt-1 text-sm font-extrabold whitespace-nowrap ${isKaitoriBest ? "text-emerald-800" : "text-slate-900"}`}>
+                  {formatSignedYen(disp.kaitori_net_proceeds_yen)}
+                </div>
+              </div>
+            </div>
+          </>
+        )
+      }
+    </div>
+
+    <div class="lg:col-span-5 min-w-0 space-y-4">
+      <div class="card-surface rounded p-5">
+        <h2 class="text-sm font-extrabold text-slate-900 mb-3">
+          都道府県別 {isGrave ? "墓じまい総額" : "解体・片付け費用"}の地域差
+        </h2>
+        <div class="space-y-2 text-xs">
+          <div class="flex justify-between">
+            <span class="text-slate-600">最安水準（{item.pref_cost_range.cheapest_pref}）</span>
+            <strong class="text-emerald-700 tabular-nums">{formatYen(item.pref_cost_range.cheapest_cost_yen)}</strong>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-slate-600">最高水準（{item.pref_cost_range.priciest_pref}）</span>
+            <strong class="text-rose-700 tabular-nums">{formatYen(item.pref_cost_range.priciest_cost_yen)}</strong>
+          </div>
+          <div class="flex justify-between pt-2 border-t border-slate-100">
+            <span class="text-slate-600">都道府県間の価格差</span>
+            <strong class="text-slate-900 tabular-nums">{formatYen(item.pref_cost_range.diff_yen)}</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-surface rounded p-5">
+        <h2 class="text-sm font-extrabold text-slate-900 mb-2.5">このタイプの前提条件</h2>
+        <dl class="grid grid-cols-2 gap-y-1.5 text-xs">
+          <dt class="text-slate-500">構造・区分</dt><dd class="font-semibold text-right">{structureLabel(item.structure)}</dd>
+          <dt class="text-slate-500">{isGrave ? "墓地面積" : isMansion ? "専有面積" : "建物延床 / 敷地"}</dt>
+          <dd class="font-semibold text-right tabular-nums">
+            {isGrave ? `${item.grave_sqm}㎡` : isMansion ? "70㎡（約21坪）" : `${item.floor_tsubo}坪 / ${item.land_tsubo}坪（${tax.land_sqm}㎡）`}
+          </dd>
+          <dt class="text-slate-500">{isGrave ? "建立からの目安" : "築年数の目安"}</dt>
+          <dd class="font-semibold text-right tabular-nums">{isGrave ? `約${item.building_age_years}年` : `築${item.building_age_years}年`}</dd>
+          <dt class="text-slate-500">道路・搬出条件</dt><dd class="font-semibold text-right">{item.road_condition === "normal" ? "標準（重機可）" : "狭小・階段割増"}</dd>
+        </dl>
+        <div class="mt-4 pt-3 border-t border-slate-100 flex flex-wrap gap-2">
+          <a
+            href={isGrave ? "/tools/hakajimai-simulator/" : `/tools/disposal-simulator/?case=${item.slug}`}
+            class="flex-1 text-center rounded-xs bg-emerald-700 hover:bg-emerald-800 px-3 py-2 text-xs font-bold text-white transition-colors"
+          >
+            自分の都道府県でこのタイプを試算 →
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10年間キャッシュフロー推移表 -->
+  <section class="card-surface rounded p-5 mb-8">
+    <h2 class="text-base font-extrabold text-slate-900 mb-3">
+      このまま維持し続けた場合の10年間維持費・税金推移
+    </h2>
+    <div class="overflow-x-auto">
+      <table class="w-full text-xs border-collapse tabular-nums">
+        <thead>
+          <tr class="border-b border-slate-200 text-slate-500 text-left">
+            <th class="py-2 font-bold">年次</th>
+            <th class="py-2 font-bold">想定される状態・維持項目</th>
+            <th class="py-2 font-bold text-right">単年の維持負担</th>
+            <th class="py-2 font-bold text-right">累計の維持負担</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100">
+          {
+            item.calc.ten_year_curve.map((row) => (
+              <tr class={row.is_alert_year ? "bg-rose-50/30" : ""}>
+                <td class="py-2 font-bold text-slate-800 whitespace-nowrap">{row.year}年目</td>
+                <td class="py-2 text-slate-600">{row.event_label}</td>
+                <td class="py-2 text-right font-semibold text-rose-700 whitespace-nowrap">▲{formatYen(row.year_cost)}</td>
+                <td class="py-2 text-right font-extrabold text-slate-900 whitespace-nowrap">▲{formatYen(row.cumulative)}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 関連2択比較 -->
+  {
+    relatedPairs.length > 0 && (
+      <section class="mb-8">
+        <h2 class="text-base font-extrabold text-slate-900 mb-3">{item.short_name}に関する2択の損得比較</h2>
+        <div class="grid gap-3 sm:grid-cols-2">
+          {relatedPairs.map((pair) => (
+            <a href={`/compare/${pair.slug}/`} class="card-interactive rounded p-4 block">
+              <div class="font-extrabold text-sm text-slate-900">{pair.title}</div>
+              <p class="mt-1 text-xs text-slate-600">{pair.angle}</p>
+              <div class="mt-2 text-xs font-bold text-emerald-700">結論：{pair.verdict_short} →</div>
+            </a>
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  {
+    peerCases.length > 0 && (
+      <section class="mb-8">
+        <h2 class="text-base font-extrabold text-slate-900 mb-3">近いタイプの相場を比較</h2>
+        <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {peerCases.map((peer) => (
+            <a href={`/cases/${peer.slug}/`} class="card-interactive rounded p-3.5 block text-xs">
+              <div class="font-extrabold text-slate-900">{peer.short_name}</div>
+              <div class="mt-1.5 text-slate-500">{peer.structure === "grave" ? "墓じまい初期総額" : "解体・片付け総額"}</div>
+              <div class="text-base font-extrabold text-emerald-700 tabular-nums">
+                約 {formatManYen(
+                  peer.structure === "grave" && peer.calc.hakajimai
+                    ? peer.calc.hakajimai.initial_total_yen
+                    : peer.calc.demolition.total_demolition_yen,
+                )}
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  <AffiliateCta
+    slotType={(item.recommended_slot as AffiliateSlot) || "sell"}
+    title={`${item.short_name}は「${isGrave ? "新しい供養先の比較" : disp.best_strategy_label}」から検討するのがもっとも安心`}
+    description={
+      isGrave
+        ? "墓石の撤去工事を頼む前に、まず移転先となる樹木葬・永代供養墓の空き状況と総額を比較して受入先を決めることで、手戻りなくスムーズに進められます。"
+        : "解体工事や遺品整理の費用を先払いする前に、まずは今の状態でいくらで売却・買取できるかを把握し、手残りがもっとも多い方法を確認しましょう。"
+    }
+    fallbackHref={isGrave ? "/tools/hakajimai-simulator/" : `/tools/disposal-simulator/?case=${item.slug}`}
+    fallbackLabel={`${item.short_name}を自分の都道府県で試算する →`}
+  />
+</BaseLayout>

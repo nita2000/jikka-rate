@@ -1,0 +1,571 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CostTrendChart from "../components/CostTrendChart.astro";
+import AffiliateCta from "../components/AffiliateCta.astro";
+import siteMeta from "../data/meta.json";
+import latest from "../data/latest.json";
+import prefectures from "../data/prefectures.json";
+import propertyCases from "../data/property_cases.json";
+import comparePairs from "../data/compare_pairs.json";
+import { formatManYen } from "../lib/formatters";
+
+const featuredCaseSlugs = [
+  "wood-30tsubo-age40",
+  "kominka-farm-55tsubo-age60",
+  "non-rebuildable-wood-25tsubo",
+  "heavy-residual-hoarder-32tsubo",
+  "rc-35tsubo-age40",
+  "temple-grave-2sqm-far",
+];
+const featuredCases = featuredCaseSlugs
+  .map((s) => propertyCases.find((c) => c.slug === s))
+  .filter((c): c is (typeof propertyCases)[number] => Boolean(c));
+
+const featuredPairSlugs = [
+  "sarachi-sale-vs-furuya-kaitori-30tsubo",
+  "akiya-keep-5y-vs-immediate-sale-30tsubo",
+  "non-rebuildable-kaitori-vs-sarachi-trap",
+  "akiya-normal-tax-vs-6x-heavy-tax",
+  "seller-demolition-vs-buyer-demolition-3000man",
+  "temple-grave-keep-15y-vs-hakajimai-jumokusou",
+];
+const featuredPairs = featuredPairSlugs
+  .map((s) => comparePairs.find((p) => p.slug === s))
+  .filter((p): p is (typeof comparePairs)[number] => Boolean(p));
+
+const tokyoPref = prefectures.find((p) => p.slug === "tokyo") ?? prefectures[0];
+
+const pageSchema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "実家じまいレート",
+    url: (Astro.site ?? "https://jikkarate.com").toString(),
+    description:
+      "全国47都道府県の解体工事費用・土地相場・空き家の固定資産税・相続登記・墓じまい費用を公的統計にもとづいて試算し、実家を壊して売るか・そのまま手放すかの損益分岐点がわかるサイト。",
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    name: `全国47都道府県 実家解体相場・空き家維持費＆墓じまい損益データベース（${siteMeta.date_from}〜${siteMeta.date_to}）`,
+    description:
+      "総務省・国土交通省・厚生労働省の公的統計と2026年最新空き家税制・相続登記基準をもとに集計した解体工事単価および損益分岐データセット。",
+    temporalCoverage: `${siteMeta.date_from}/${siteMeta.date_to}`,
+    creator: { "@type": "Organization", name: "実家じまいレート" },
+  },
+];
+---
+
+<BaseLayout
+  title="実家の手放し方・空き家の固定資産税・解体費用・墓じまいの公的相場＆手残り試算"
+  description={`実家を先に解体して売るか、壊さずそのまま売却・買取するか、遠方のお墓をどうするかを30秒で試算。全国47都道府県の解体相場（木造平均${latest.national.wood_man_per_tsubo.toFixed(2)}万円/坪）・3,000万円控除・空き家の固定資産税・相続登記に対応。`}
+  canonicalPath="/"
+  schema={pageSchema}
+>
+  <!-- エディトリアル・ヒーロー -->
+  <section slot="hero" class="hero-editorial py-10 sm:py-12">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-7 min-w-0 space-y-4">
+          <div class="flex flex-wrap items-center gap-2 text-[11px] font-bold text-emerald-700 tracking-wider">
+            <span class="inline-block w-0.5 h-3.5 bg-emerald-700"></span>
+            <span>実家とお墓の公的相場＆損益ガイド</span>
+            <span class="text-slate-300">/</span>
+            <span class="text-slate-500 font-medium">3,000万円控除・相続登記・2026年最新単価対応</span>
+          </div>
+
+          <h1 class="text-2xl sm:text-4xl lg:text-[36px] font-extrabold tracking-tight leading-[1.26] text-slate-900">
+            親の実家と遠方のお墓、<br />
+            <span class="text-emerald-700">「壊さず手放す・解体・維持」</span>の<br class="hidden sm:inline" />
+            一番損をしない選び方が30秒でわかる。
+          </h1>
+
+          <p class="text-sm sm:text-[15px] text-slate-600 leading-relaxed max-w-xl">
+            「先に200万円払って解体しないと売れないの？」「空き家のまま置くと固定資産税はいくら上がる？」—— <strong>住所や個人情報の入力なし</strong>で、全国47都道府県の公的データから<strong>手元に残る金額と一番ラクな進め方</strong>を試算・比較できます。
+          </p>
+
+          <!-- 3つの安心メリット（洗練されたシンプルなSVGチェックアイコン） -->
+          <div class="flex flex-wrap gap-2 pt-0.5 text-xs font-bold text-slate-700">
+            <span class="inline-flex items-center gap-1.5 rounded-xs bg-white border border-slate-200 px-2.5 py-1">
+              <svg class="h-3.5 w-3.5 text-emerald-700 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+              個人情報・営業電話なし
+            </span>
+            <span class="inline-flex items-center gap-1.5 rounded-xs bg-white border border-slate-200 px-2.5 py-1">
+              <svg class="h-3.5 w-3.5 text-emerald-700 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+              だいたいの広さ・築年数でOK
+            </span>
+            <span class="inline-flex items-center gap-1.5 rounded-xs bg-white border border-slate-200 px-2.5 py-1">
+              <svg class="h-3.5 w-3.5 text-emerald-700 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+              買主解体3,000万円控除対応
+            </span>
+          </div>
+
+          <div class="flex flex-wrap gap-3 pt-1">
+            <a
+              href="/tools/disposal-simulator/"
+              class="inline-flex items-center gap-2 rounded-xs bg-emerald-700 hover:bg-emerald-800 text-white px-5 py-3 text-sm font-bold transition-colors shadow-2xs"
+            >
+              実家の手残り金額を30秒で試算する
+              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </a>
+            <a
+              href="/tools/akiya-tax/"
+              class="inline-flex items-center gap-2 rounded-xs bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 px-4 py-3 text-sm font-bold transition-colors"
+            >
+              空き家の固定資産税・登記を試算
+            </a>
+          </div>
+        </div>
+
+        <!-- ヒーロー右側：都道府県クイックボード -->
+        <div class="lg:col-span-5 min-w-0">
+          <div class="card-surface rounded border-t-3 border-t-emerald-700 p-5 sm:p-6">
+            <div class="flex items-center justify-between gap-2 mb-2.5">
+              <label for="hero-pref-select" class="text-[11px] font-bold tracking-wider text-emerald-700">
+                実家・お墓のある都道府県を選択
+              </label>
+              <span class="text-[11px] text-slate-500 tabular-nums">基準日：{latest.date}</span>
+            </div>
+            <select
+              id="hero-pref-select"
+              class="w-full rounded-xs border border-slate-300 bg-white px-3.5 py-2.5 text-sm font-bold text-slate-900 focus:border-emerald-700 focus:outline-none"
+            >
+              {
+                prefectures.map((p) => (
+                  <option value={p.slug} selected={p.slug === "tokyo"}>
+                    {p.name}（木造解体目安 {p.wood_man_per_tsubo.toFixed(1)}万円/坪）
+                  </option>
+                ))
+              }
+            </select>
+
+            <div class="mt-4 grid grid-cols-3 gap-2.5 pt-4 border-t border-slate-100">
+              <div>
+                <div class="text-[11px] text-slate-500 whitespace-nowrap">30坪の解体総額目安</div>
+                <div class="mt-1 font-display tabular-nums whitespace-nowrap">
+                  <span class="text-xs text-slate-500 mr-0.5">約</span>
+                  <span id="hq-demo30" class="text-xl font-extrabold text-slate-900">{Math.round(tokyoPref.std_30tsubo_demolition_yen / 10000)}</span>
+                  <span class="text-[11px] text-slate-500 ml-0.5">万円</span>
+                </div>
+              </div>
+              <div>
+                <div class="text-[11px] text-slate-500 whitespace-nowrap">木造解体坪単価</div>
+                <div class="mt-1 font-display tabular-nums whitespace-nowrap">
+                  <span id="hq-wood" class="text-xl font-extrabold text-emerald-700">{tokyoPref.wood_man_per_tsubo.toFixed(2)}</span>
+                  <span class="text-[11px] text-slate-500 ml-0.5">万円</span>
+                </div>
+              </div>
+              <div>
+                <div class="text-[11px] text-slate-500 whitespace-nowrap">県内 総空き家率</div>
+                <div class="mt-1 font-display tabular-nums whitespace-nowrap">
+                  <span id="hq-akiya" class="text-xl font-extrabold text-slate-800">{tokyoPref.akiya_rate_pct.toFixed(1)}</span>
+                  <span class="text-[11px] text-slate-500 ml-0.5">%</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-600 flex items-center justify-between">
+              <span>住宅用地の軽減（1/6）解除時の固定資産税目安：</span>
+              <strong id="hq-heavy-tax" class="text-rose-700 tabular-nums">年 約{Math.round(tokyoPref.std_heavy_tax_annual_yen / 10000)}万円</strong>
+            </div>
+
+            <div class="mt-3.5 pt-3 border-t border-slate-100 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5">
+              <a
+                id="hq-sim-link"
+                href="/tools/disposal-simulator/?pref=tokyo"
+                class="inline-flex items-center justify-center rounded-xs bg-emerald-700 hover:bg-emerald-800 text-white px-4 py-2 text-xs font-bold transition-colors"
+              >
+                この県の実家で手残り金額を試算 →
+              </a>
+              <a id="hq-link" href="/pref/tokyo/" class="text-center text-xs font-bold text-emerald-700 hover:underline py-1 whitespace-nowrap">
+                県別相場を見る →
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3つのお悩み別シミュレーター導線 -->
+  <section class="mb-12">
+    <div class="flex flex-wrap items-end justify-between gap-2 mb-5">
+      <div>
+        <div class="eyebrow-label">お悩み別の30秒シミュレーター</div>
+        <h2 class="mt-0.5 text-xl sm:text-2xl font-extrabold text-slate-900">いま気になっている項目を4つ選ぶだけで試算できます</h2>
+      </div>
+      <p class="text-xs text-slate-500">※正確な坪数や査定額がわからなくても、だいたいの目安で試算できます</p>
+    </div>
+
+    <div class="grid gap-4 md:grid-cols-3">
+      <a href="/tools/disposal-simulator/" class="card-interactive rounded p-5 border-t-3 border-t-emerald-700 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between text-[11px] font-bold text-emerald-700">
+            <span class="inline-flex items-center gap-1.5">
+              <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 10.5L12 3l9 7.5V20a1 1 0 01-1 1h-5.5v-5.5h-5V21H4a1 1 0 01-1-1v-9.5z" />
+              </svg>
+              実家の手放し方
+            </span>
+            <span class="px-1.5 py-0.5 rounded-xs bg-emerald-50 text-emerald-800">3択手残り比較</span>
+          </div>
+          <h3 class="mt-2.5 text-base font-extrabold text-slate-900 leading-snug">
+            実家を「壊して売る」「そのまま売る・買取」「空き家で維持」手残り試算
+          </h3>
+          <p class="mt-1.5 text-xs text-slate-600 leading-relaxed">
+            先に150万〜250万円払って解体するべきか、壊さず古家付き売却や片付け不要の買取にするべきか、最終的な手残り金額を即比較します。
+          </p>
+        </div>
+        <div class="mt-4 pt-3 border-t border-slate-100 text-xs font-bold text-emerald-700">
+          実家の手残り金額を計算する →
+        </div>
+      </a>
+
+      <a href="/tools/akiya-tax/" class="card-interactive rounded p-5 border-t-3 border-t-amber-600 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between text-[11px] font-bold text-amber-800">
+            <span class="inline-flex items-center gap-1.5">
+              <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              空き家の税金・名義変更
+            </span>
+            <span class="px-1.5 py-0.5 rounded-xs bg-amber-50 text-amber-900">固定資産税・相続登記</span>
+          </div>
+          <h3 class="mt-2.5 text-base font-extrabold text-slate-900 leading-snug">
+            空き家の固定資産税はいくら上がる？（最大6倍・実効4.2倍）＆相続登記試算
+          </h3>
+          <p class="mt-1.5 text-xs text-slate-600 leading-relaxed">
+            住宅用地の軽減（1/6特例）が外れると年いくらの増税になるのか、相続登記（名義変更）の費用と増税を防ぐ手順をわかりやすく算出します。
+          </p>
+        </div>
+        <div class="mt-4 pt-3 border-t border-slate-100 text-xs font-bold text-amber-800">
+          空き家の税金と対策を確認する →
+        </div>
+      </a>
+
+      <a href="/tools/hakajimai-simulator/" class="card-interactive rounded p-5 border-t-3 border-t-slate-700 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between text-[11px] font-bold text-slate-700">
+            <span class="inline-flex items-center gap-1.5">
+              <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              遠方のお墓・永代供養
+            </span>
+            <span class="px-1.5 py-0.5 rounded-xs bg-slate-100 text-slate-700">回収年数ライン</span>
+          </div>
+          <h3 class="mt-2.5 text-base font-extrabold text-slate-900 leading-snug">
+            遠方のお墓を維持 vs 墓じまい（永代供養・樹木葬）15年費用＆回収年数試算
+          </h3>
+          <p class="mt-1.5 text-xs text-slate-600 leading-relaxed">
+            毎年のお墓参り交通費・管理料・お布施と、墓石を撤去して樹木葬や永代供養へ移す費用を比べ、何年目に元が取れるかを試算します。
+          </p>
+        </div>
+        <div class="mt-4 pt-3 border-t border-slate-100 text-xs font-bold text-slate-700">
+          墓じまいの費用と回収年数を試算 →
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- 実家・お墓のタイプ別相場データベース -->
+  <section class="mb-12">
+    <div class="flex flex-wrap items-end justify-between gap-2 mb-5">
+      <div>
+        <div class="eyebrow-label">うちの条件に近い実家・お墓から探す</div>
+        <h2 class="mt-0.5 text-xl sm:text-2xl font-extrabold text-slate-900">実家・空き家・お墓のタイプ別 解体費用＆維持費の目安</h2>
+      </div>
+      <div class="flex items-center gap-4 text-[11px]">
+        <span class="hidden sm:inline-flex items-center gap-1 text-slate-500"><span class="h-2 w-2 rounded-xs bg-emerald-700"></span>本体工事</span>
+        <span class="hidden sm:inline-flex items-center gap-1 text-slate-500"><span class="h-2 w-2 rounded-xs bg-amber-500"></span>片付け・外構</span>
+        <span class="hidden sm:inline-flex items-center gap-1 text-slate-500"><span class="h-2 w-2 rounded-xs bg-slate-400"></span>調査・諸費用</span>
+        <a href="/cases/" class="text-xs font-bold text-emerald-700 hover:underline">タイプ別の一覧を見る →</a>
+      </div>
+    </div>
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        featuredCases.map((c) => {
+          const isGrave = c.structure === "grave";
+          const demo = c.calc.demolition;
+          const haka = c.calc.hakajimai;
+          const totalCost = isGrave && haka ? haka.initial_total_yen : Math.max(1, demo.total_demolition_yen);
+          const keepCost = isGrave && haka ? haka.keep_total_15y_yen : c.calc.maintenance.keep_10y_heavy;
+          const pctBody = isGrave && haka
+            ? Math.round((haka.stone_removal_yen / totalCost) * 100)
+            : Math.round((demo.building_body_yen / totalCost) * 100);
+          const pctSub = isGrave && haka
+            ? Math.round((haka.ceremony_and_ridan_yen / totalCost) * 100)
+            : Math.round(((demo.residual_items_yen + demo.exterior_fence_yen) / totalCost) * 100);
+          const pctExtra = Math.max(0, 100 - pctBody - pctSub);
+          return (
+            <a href={`/cases/${c.slug}/`} class="card-interactive rounded p-4 sm:p-5 block">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-[11px] font-bold text-emerald-700">{c.category_label}</span>
+                <span class="text-[11px] text-slate-400 tabular-nums">{isGrave ? `墓地 ${c.grave_sqm}㎡` : `延床${c.floor_tsubo}坪 / 敷地${c.land_tsubo}坪`}</span>
+              </div>
+              <h3 class="mt-1 text-base font-extrabold text-slate-900">{c.short_name}</h3>
+
+              <!-- 3色ミニ構成比バー -->
+              <div class="mt-3 flex h-1.5 w-full overflow-hidden rounded-xs bg-slate-100">
+                <div class="bg-emerald-700" style={`width:${pctBody}%`}></div>
+                <div class="bg-amber-500" style={`width:${pctSub}%`}></div>
+                <div class="bg-slate-400" style={`width:${pctExtra}%`}></div>
+              </div>
+
+              <div class="mt-3 grid grid-cols-2 gap-2.5 rounded-xs bg-slate-50 p-3 text-xs">
+                <div>
+                  <div class="text-[10px] text-slate-500">{isGrave ? "墓じまい＋樹木葬目安" : "解体・片付け総額目安"}</div>
+                  <div class="mt-0.5 font-extrabold text-slate-900 tabular-nums">約 {formatManYen(totalCost)}</div>
+                </div>
+                <div>
+                  <div class="text-[10px] text-slate-500">{isGrave ? "15年間の維持費累計" : "10年間の維持費・税累計"}</div>
+                  <div class="mt-0.5 font-extrabold text-rose-700 tabular-nums">
+                    約 {formatManYen(keepCost)}
+                  </div>
+                </div>
+              </div>
+              <div class="mt-3 flex items-center justify-between text-[11px] text-slate-500">
+                <span class="truncate mr-2">推奨：{isGrave && haka ? `約${haka.payback_years}年で元が取れる` : c.calc.disposal.best_strategy_label}</span>
+                <span class="font-bold text-emerald-700 shrink-0">詳細 →</span>
+              </div>
+            </a>
+          );
+        })
+      }
+    </div>
+  </section>
+
+  <!-- よくある2択の損益分岐比較 -->
+  <section class="mb-12">
+    <div class="flex flex-wrap items-end justify-between gap-2 mb-5">
+      <div>
+        <div class="eyebrow-label">迷いやすい2択を数字で比較</div>
+        <h2 class="mt-0.5 text-xl sm:text-2xl font-extrabold text-slate-900">「解体して売る vs そのまま売る」など、どっちが得かの比較</h2>
+      </div>
+      <a href="/compare/" class="text-xs font-bold text-emerald-700 hover:underline shrink-0">比較一覧を見る →</a>
+    </div>
+    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      {
+        featuredPairs.map((pair) => {
+          const valA = Math.abs(pair.metrics_a.net_cash_10y_yen);
+          const valB = Math.abs(pair.metrics_b.net_cash_10y_yen);
+          const maxVal = Math.max(valA, valB, 1);
+          const pctA = Math.max(8, Math.round((valA / maxVal) * 100));
+          const pctB = Math.max(8, Math.round((valB / maxVal) * 100));
+          return (
+            <a href={`/compare/${pair.slug}/`} class="card-interactive rounded p-4 sm:p-5 block">
+              <div class="text-[10px] font-bold text-emerald-700 mb-0.5">{pair.category_label}</div>
+              <h3 class="text-sm font-extrabold text-slate-900 leading-snug">{pair.title}</h3>
+              <p class="mt-1 text-xs text-slate-500 line-clamp-2">{pair.angle}</p>
+
+              <div class="mt-3 space-y-1.5 text-[11px] tabular-nums">
+                <div>
+                  <div class="flex justify-between mb-0.5 gap-2">
+                    <span class="font-semibold text-slate-700 truncate">{pair.option_a_label}</span>
+                    <span class="font-bold text-slate-900 shrink-0">
+                      {pair.metrics_a.net_cash_10y_yen >= 0 ? `手残り 約+${formatManYen(pair.metrics_a.net_cash_10y_yen)}` : `負担 約▲${formatManYen(Math.abs(pair.metrics_a.net_cash_10y_yen))}`}
+                    </span>
+                  </div>
+                  <div class="h-1.5 bg-slate-100 rounded-xs overflow-hidden">
+                    <div class={`h-full ${pair.winner_side === "A" ? "bg-emerald-700" : "bg-slate-400"}`} style={`width:${pctA}%`}></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between mb-0.5 gap-2">
+                    <span class="font-semibold text-slate-700 truncate">{pair.option_b_label}</span>
+                    <span class="font-bold text-slate-900 shrink-0">
+                      {pair.metrics_b.net_cash_10y_yen >= 0 ? `手残り 約+${formatManYen(pair.metrics_b.net_cash_10y_yen)}` : `負担 約▲${formatManYen(Math.abs(pair.metrics_b.net_cash_10y_yen))}`}
+                    </span>
+                  </div>
+                  <div class="h-1.5 bg-slate-100 rounded-xs overflow-hidden">
+                    <div class={`h-full ${pair.winner_side === "B" ? "bg-emerald-700" : "bg-slate-400"}`} style={`width:${pctB}%`}></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-3.5 pt-2.5 border-t border-slate-100 flex items-center justify-between text-xs">
+                <span class="font-bold text-emerald-700 tabular-nums truncate mr-2">
+                  結論：{pair.verdict_short}
+                </span>
+                <span class="text-slate-400 shrink-0">比較表 →</span>
+              </div>
+            </a>
+          );
+        })
+      }
+    </div>
+  </section>
+
+  <!-- 全国解体単価の推移と都道府県データ -->
+  <section class="mb-12">
+    <div class="flex flex-wrap items-end justify-between gap-2 mb-5">
+      <div>
+        <div class="eyebrow-label">公的統計から見る全国の解体費用・空き家動向</div>
+        <h2 class="mt-0.5 text-xl sm:text-2xl font-extrabold text-slate-900">解体工事費の推移と都道府県別の相場データ</h2>
+      </div>
+      <a href="/pref/" class="text-xs font-bold text-emerald-700 hover:underline">全国47都道府県の一覧を見る →</a>
+    </div>
+
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+      <div class="card-surface rounded p-4">
+        <div class="text-[11px] font-bold text-slate-500">全国平均 木造解体単価</div>
+        <div class="mt-1 text-2xl font-extrabold text-slate-900 tabular-nums whitespace-nowrap">
+          {latest.national.wood_man_per_tsubo.toFixed(2)}<span class="text-xs font-semibold text-slate-500 ml-0.5">万円/坪</span>
+        </div>
+        <div class="mt-1 text-[11px] text-slate-500 tabular-nums">
+          30坪総額目安：約190〜220万円
+        </div>
+      </div>
+      <div class="card-surface rounded p-4">
+        <div class="text-[11px] font-bold text-slate-500">買主解体でも使える特別控除</div>
+        <div class="mt-1 text-xl sm:text-2xl font-extrabold text-emerald-800 tabular-nums whitespace-nowrap">
+          最大 3,000<span class="text-xs font-semibold text-slate-600 ml-0.5">万円控除</span>
+        </div>
+        <div class="mt-1 text-[11px] text-slate-500">
+          2024年改正で古家付き売却に対応
+        </div>
+      </div>
+      <div class="card-surface rounded p-4">
+        <div class="text-[11px] font-bold text-slate-500">住宅用地の軽減が外れた場合</div>
+        <div class="mt-1 text-xl sm:text-2xl font-extrabold text-amber-800 tabular-nums whitespace-nowrap">
+          実質 約4.2倍<span class="text-xs font-normal text-slate-500">（最大6倍）</span>
+        </div>
+        <div class="mt-1 text-[11px] text-slate-500">
+          勧告前の売却・管理で回避可能
+        </div>
+      </div>
+      <div class="card-surface rounded p-4">
+        <div class="text-[11px] font-bold text-slate-500">年間の墓じまい（改葬）件数</div>
+        <div class="mt-1 text-2xl font-extrabold text-slate-900 tabular-nums whitespace-nowrap">
+          {latest.national.annual_kaisou_cases.toLocaleString("ja-JP")}<span class="text-xs font-semibold text-slate-500 ml-0.5">件/年</span>
+        </div>
+        <div class="mt-1 text-[11px] text-emerald-700 font-semibold truncate">
+          管理不要の樹木葬・永代供養へ移行
+        </div>
+      </div>
+    </div>
+
+    <div class="grid gap-6 lg:grid-cols-12">
+      <div class="lg:col-span-8 min-w-0">
+        <CostTrendChart
+          series={latest.national_series}
+          title="全国平均 構造別の解体工事坪単価の推移（2024年〜2026年）"
+          subtitle="人件費や廃材処分費の上昇により、解体費用は年々緩やかに上がっています"
+        />
+      </div>
+
+      <div class="lg:col-span-4 min-w-0 grid gap-4">
+        <div class="card-surface rounded p-4 sm:p-5">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="text-xs font-extrabold text-slate-800">空き家率が高い都道府県 TOP5</h3>
+            <a href="/pref/" class="text-[11px] font-bold text-slate-500 hover:text-emerald-700">都道府県一覧 →</a>
+          </div>
+          <ol class="space-y-2 text-xs">
+            {
+              latest.highest_akiya_5.map((p, i) => (
+                <li class="flex items-center justify-between border-b border-slate-100 pb-1.5 last:border-b-0 last:pb-0">
+                  <a href={`/pref/${p.slug}/`} class="hover:text-emerald-700 font-bold text-slate-800 flex items-center gap-2">
+                    <span class="inline-flex h-4 w-4 items-center justify-center rounded-xs bg-amber-50 text-[10px] font-extrabold text-amber-900 tabular-nums">{i + 1}</span>
+                    {p.name}
+                  </a>
+                  <span class="font-extrabold text-slate-800 tabular-nums">{p.akiya_rate_pct.toFixed(1)}% <span class="text-[10px] font-normal text-slate-500">（放置{p.other_akiya_rate_pct.toFixed(1)}%）</span></span>
+                </li>
+              ))
+            }
+          </ol>
+        </div>
+
+        <div class="card-surface rounded p-4 sm:p-5">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="text-xs font-extrabold text-emerald-800">木造の解体費用が抑えやすい県 TOP5</h3>
+            <span class="text-[11px] text-slate-400">30坪総額目安</span>
+          </div>
+          <ol class="space-y-2 text-xs">
+            {
+              latest.cheapest_kaitai_5.map((p, i) => (
+                <li class="flex items-center justify-between border-b border-slate-100 pb-1.5 last:border-b-0 last:pb-0">
+                  <a href={`/pref/${p.slug}/`} class="hover:text-emerald-700 font-bold text-slate-800 flex items-center gap-2">
+                    <span class="inline-flex h-4 w-4 items-center justify-center rounded-xs bg-emerald-50 text-[10px] font-extrabold text-emerald-800 tabular-nums">{i + 1}</span>
+                    {p.name}
+                  </a>
+                  <span class="font-extrabold text-emerald-700 tabular-nums">{p.wood_man_per_tsubo.toFixed(2)}万 <span class="text-[10px] font-normal text-slate-500">（約{formatManYen(p.std_30tsubo_demolition_yen)}）</span></span>
+                </li>
+              ))
+            }
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 失敗しない実家じまい・制度ガイド -->
+  <section class="mb-8">
+    <div class="flex flex-wrap items-end justify-between gap-2 mb-5">
+      <div>
+        <div class="eyebrow-label">知っておくと安心な制度と手順</div>
+        <h2 class="mt-0.5 text-xl sm:text-2xl font-extrabold text-slate-900">失敗しない実家じまい・空き家税制・墓じまいガイド</h2>
+      </div>
+      <a href="/guide/" class="text-xs font-bold text-emerald-700 hover:underline">記事一覧 →</a>
+    </div>
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 text-xs">
+      <a href="/guide/sarachi-vs-furuya-breakeven/" class="card-interactive rounded p-4 sm:p-5 block">
+        <span class="text-[10px] font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-xs">損益分岐ガイド</span>
+        <h3 class="mt-2.5 font-extrabold text-slate-900 text-sm leading-snug">実家は「解体して更地で売る」と「壊さずそのまま売る」どっちが得？</h3>
+        <p class="mt-1.5 text-slate-600 leading-relaxed">先に解体費用を払ってはいけない実家の特徴と、手元に残るお金を最大化する安全な手順を解説します。</p>
+      </a>
+      <a href="/guide/akiya-6x-tax-2023-reform/" class="card-interactive rounded p-4 sm:p-5 block">
+        <span class="text-[10px] font-bold text-amber-800 bg-amber-50 px-2 py-0.5 rounded-xs">空き家の固定資産税</span>
+        <h3 class="mt-2.5 font-extrabold text-slate-900 text-sm leading-snug">空き家の固定資産税が「最大6倍（実際は約4.2倍）」になる仕組みと防ぎ方</h3>
+        <p class="mt-1.5 text-slate-600 leading-relaxed">どうなると住宅用地の軽減（1/6特例）が外れるのか？自治体のスケジュールと増税を防ぐ対策を整理。</p>
+      </a>
+      <a href="/guide/sozoku-toki-penalty-3000man/" class="card-interactive rounded p-4 sm:p-5 block">
+        <span class="text-[10px] font-bold text-slate-700 bg-slate-100 px-2 py-0.5 rounded-xs">3,000万円控除・相続登記</span>
+        <h3 class="mt-2.5 font-extrabold text-slate-900 text-sm leading-snug">売主が解体しなくても「空き家3,000万円特別控除」が使える新ルールと相続登記</h3>
+        <p class="mt-1.5 text-slate-600 leading-relaxed">買主側で解体しても控除が適用できる2024年改正のポイントと、相続登記の猶予期限（2027年3月末）を解説。</p>
+      </a>
+    </div>
+  </section>
+
+  <AffiliateCta
+    slotType="sell"
+    title="実家を解体する前・維持費がかさむ前に「いまの状態のままいくらで売れるか」を知っておく"
+    description="先に150万〜250万円かけて解体してしまうと、売れ残った場合に固定資産税の軽減が外れてしまいます。まずは建物を壊さず・荷物も片付けない状態で「通常の仲介査定」と「そのまま買取」の両方を比較するのが一番安心です。"
+    fallbackHref="/tools/disposal-simulator/"
+    fallbackLabel="実家の手残り金額を30秒で試算する →"
+  />
+
+  <script is:inline define:vars={{ prefsData: prefectures }}>
+    const byPref = Object.fromEntries(prefsData.map((p) => [p.slug, p]));
+    const sel = document.getElementById("hero-pref-select");
+    const elWood = document.getElementById("hq-wood");
+    const elAkiya = document.getElementById("hq-akiya");
+    const elDemo30 = document.getElementById("hq-demo30");
+    const elHeavyTax = document.getElementById("hq-heavy-tax");
+    const elLink = document.getElementById("hq-link");
+    const elSimLink = document.getElementById("hq-sim-link");
+
+    if (sel) {
+      sel.addEventListener("change", () => {
+        const p = byPref[sel.value];
+        if (!p) return;
+        elWood.textContent = p.wood_man_per_tsubo.toFixed(2);
+        elAkiya.textContent = p.akiya_rate_pct.toFixed(1);
+        elDemo30.textContent = String(Math.round(p.std_30tsubo_demolition_yen / 10000));
+        elHeavyTax.textContent = `年 約${Math.round(p.std_heavy_tax_annual_yen / 10000).toLocaleString("ja-JP")}万円`;
+        elLink.setAttribute("href", `/pref/${p.slug}/`);
+        if (elSimLink) {
+          elSimLink.setAttribute("href", `/tools/disposal-simulator/?pref=${p.slug}`);
+        }
+      });
+    }
+  </script>
+</BaseLayout>

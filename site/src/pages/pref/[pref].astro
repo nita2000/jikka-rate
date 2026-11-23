@@ -1,0 +1,203 @@
+---
+import fs from "node:fs";
+import path from "node:path";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CostTrendChart from "../../components/CostTrendChart.astro";
+import AffiliateCta from "../../components/AffiliateCta.astro";
+import prefectures from "../../data/prefectures.json";
+import { formatDiffMan, formatManYen, formatSignedYen, formatYen, structureLabel } from "../../lib/formatters";
+
+export function getStaticPaths() {
+  const detailDir = path.resolve(process.cwd(), "src/data/pref_detail");
+  return prefectures.map((pref) => {
+    const raw = fs.readFileSync(path.join(detailDir, `${pref.slug}.json`), "utf-8");
+    const detail = JSON.parse(raw);
+    return {
+      params: { pref: pref.slug },
+      props: { pref, detail },
+    };
+  });
+}
+
+const { pref, detail } = Astro.props;
+---
+
+<BaseLayout
+  title={`${pref.name}の空き家率・解体工事坪単価・実家処分＆墓じまい相場`}
+  description={`${pref.name}の総空き家率${pref.akiya_rate_pct.toFixed(1)}%（全国${pref.akiya_rank}位）・木造解体${pref.wood_man_per_tsubo.toFixed(2)}万円/坪・鉄骨${pref.steel_man_per_tsubo.toFixed(2)}万円/坪・RC${pref.rc_man_per_tsubo.toFixed(2)}万円/坪の推移と、県内での実家処分・固定資産税・墓じまい損益データを掲載。`}
+  canonicalPath={`/pref/${pref.slug}/`}
+>
+  <nav class="text-xs text-slate-500 mb-4 flex items-center gap-1.5">
+    <a href="/" class="hover:text-emerald-700">トップ</a>
+    <span>/</span>
+    <a href="/pref/" class="hover:text-emerald-700">47都道府県別</a>
+    <span>/</span>
+    <span class="text-slate-800 font-semibold">{pref.name}</span>
+  </nav>
+
+  <div class="page-header-clean rounded p-5 sm:p-6 mb-6">
+    <div class="flex flex-wrap items-center gap-2 mb-1">
+      <span class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 text-[11px] font-bold">{pref.region}エリア</span>
+      <span class="text-xs text-slate-500 tabular-nums">
+        空き家率 全国{pref.akiya_rank}位 ／ 解体安い順 全国{pref.kaitai_cheap_rank}位（{pref.latest_date}基準）
+      </span>
+    </div>
+    <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900">
+      {pref.name}の空き家率・解体工事坪単価・実家じまい相場
+    </h1>
+    <p class="mt-1.5 text-xs sm:text-sm text-slate-600">
+      {pref.name}（代表都市：{pref.capital_city}）の解体工事単価・住宅地地価・放置空き家率と、最新税制（住宅用地の軽減解除・相続登記義務化）を反映した試算データです。
+    </p>
+  </div>
+
+  <!-- 主要KPI 4枚 -->
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+    <div class="card-surface rounded p-4 border-t-2 border-t-emerald-700">
+      <div class="text-[11px] font-bold text-slate-500">{pref.name} 木造解体坪単価</div>
+      <div class="mt-1 text-2xl font-extrabold text-slate-900 tabular-nums">
+        {pref.wood_man_per_tsubo.toFixed(2)}<span class="text-xs ml-0.5 text-slate-500">万円/坪</span>
+      </div>
+      <div class="mt-1 flex flex-wrap items-center justify-between gap-1 text-[11px] tabular-nums">
+        <span class={`font-semibold ${pref.diff_national_wood > 0 ? "text-rose-700" : pref.diff_national_wood < 0 ? "text-emerald-700" : "text-slate-500"}`}>
+          全国差 {formatDiffMan(pref.diff_national_wood, "万")}
+        </span>
+        <span class="text-slate-400">30坪総額 {formatManYen(pref.std_30tsubo_demolition_yen)}</span>
+      </div>
+    </div>
+
+    <div class="card-surface rounded p-4 border-t-2 border-t-rose-600">
+      <div class="text-[11px] font-bold text-slate-500">{pref.name} 総空き家率</div>
+      <div class="mt-1 text-2xl font-extrabold text-rose-700 tabular-nums">
+        {pref.akiya_rate_pct.toFixed(1)}<span class="text-xs ml-0.5 text-slate-500">%（全国{pref.akiya_rank}位）</span>
+      </div>
+      <div class="mt-1 text-[11px] text-slate-500 tabular-nums">
+        うち放置型空き家率 {pref.other_akiya_rate_pct.toFixed(1)}%
+      </div>
+    </div>
+
+    <div class="card-surface rounded p-4 border-t-2 border-t-amber-500">
+      <div class="text-[11px] font-bold text-slate-500">特例解除時の固定資産税（45坪）</div>
+      <div class="mt-1 text-2xl font-extrabold text-slate-900 tabular-nums">
+        {formatYen(pref.std_heavy_tax_annual_yen)}<span class="text-xs ml-0.5 text-slate-500">/年</span>
+      </div>
+      <div class="mt-1 text-[11px] text-rose-700 font-semibold tabular-nums">
+        通常時 {formatYen(pref.std_normal_tax_annual_yen)}/年 から急増
+      </div>
+    </div>
+
+    <div class="card-surface rounded p-4 border-t-2 border-t-slate-600">
+      <div class="text-[11px] font-bold text-slate-500">葬祭費給付金・公営火葬料</div>
+      <div class="mt-1 text-2xl font-extrabold text-emerald-800 tabular-nums whitespace-nowrap">
+        {formatYen(pref.funeral_grant_yen)}
+      </div>
+      <div class="mt-1 text-[11px] text-slate-500 tabular-nums">
+        {pref.capital_city}火葬料：{pref.cremation_fee_yen === 0 ? "0円（無料）" : formatYen(pref.cremation_fee_yen)}
+      </div>
+    </div>
+  </div>
+
+  <!-- 推移グラフ -->
+  <div class="mb-8">
+    <CostTrendChart
+      series={detail.series}
+      title={`${pref.name} 構造別解体工事坪単価の推移（2024年〜${pref.latest_date}）`}
+      subtitle={`木造 ${pref.wood_man_per_tsubo.toFixed(2)}万円/坪 ／ 鉄骨造 ${pref.steel_man_per_tsubo.toFixed(2)}万円/坪 ／ RC造 ${pref.rc_man_per_tsubo.toFixed(2)}万円/坪`}
+    />
+  </div>
+
+  <!-- 県内代表4ケースの試算比較 -->
+  <section class="card-surface rounded p-5 mb-8">
+    <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+      <div>
+        <h2 class="text-base font-extrabold text-slate-900">{pref.name}での代表タイプ別 解体処分費・維持費・売却手残り目安</h2>
+        <p class="text-xs text-slate-500 mt-0.5">
+          県内の標準住宅地地価（約{pref.land_price_man_per_tsubo.toFixed(1)}万円/坪）と解体単価を適用した試算値です。
+        </p>
+      </div>
+      <a
+        href={`/tools/disposal-simulator/?pref=${pref.slug}`}
+        class="rounded-xs bg-emerald-700 hover:bg-emerald-800 text-white px-3.5 py-2 text-xs font-bold transition-colors"
+      >
+        {pref.name}の条件で詳しく試算 →
+      </a>
+    </div>
+    <div class="overflow-x-auto">
+      <table class="w-full text-xs border-collapse tabular-nums">
+        <thead>
+          <tr class="border-b border-slate-200 text-slate-500 text-left">
+            <th class="py-2 font-bold">代表ケース</th>
+            <th class="py-2 font-bold">区分</th>
+            <th class="py-2 font-bold text-right">解体 / 墓じまい総額</th>
+            <th class="py-2 font-bold text-right">放置時の年間負担</th>
+            <th class="py-2 font-bold text-right">最適処分時の手残り目安</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100">
+          {
+            pref.sample_cases.map((sc: any) => {
+              const isGrave = sc.structure === "grave";
+              return (
+                <tr>
+                  <td class="py-2.5 font-extrabold text-slate-900">
+                    <a href={`/cases/${sc.slug}/`} class="hover:text-emerald-700 hover:underline">
+                      {sc.short_name}
+                    </a>
+                  </td>
+                  <td class="py-2.5 text-slate-600">{structureLabel(sc.structure)}</td>
+                  <td class="py-2.5 text-right font-bold">
+                    {formatYen(isGrave ? sc.hakajimai_initial_yen : sc.demolition_total_yen)}
+                  </td>
+                  <td class="py-2.5 text-right text-rose-700">
+                    ▲{formatYen(sc.annual_keep_normal_yen)}/年
+                  </td>
+                  <td class="py-2.5 text-right font-extrabold text-emerald-800">
+                    {isGrave ? "永代供養で以降0円" : `${formatSignedYen(sc.best_sale_net_yen)}（${sc.best_strategy_label}）`}
+                  </td>
+                </tr>
+              );
+            })
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 年別平均アーカイブ -->
+  <section class="card-surface rounded p-5 mb-8">
+    <h2 class="text-base font-extrabold text-slate-900 mb-3">{pref.name} 年別平均解体単価・修繕指数アーカイブ</h2>
+    <div class="overflow-x-auto">
+      <table class="w-full text-xs border-collapse tabular-nums">
+        <thead>
+          <tr class="border-b border-slate-200 text-slate-500 text-left">
+            <th class="py-2 font-bold">年</th>
+            <th class="py-2 font-bold text-right">木造解体平均</th>
+            <th class="py-2 font-bold text-right">鉄骨造解体平均</th>
+            <th class="py-2 font-bold text-right">RC造解体平均</th>
+            <th class="py-2 font-bold text-right">維持修繕単価指数</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100">
+          {
+            detail.yearly_stats.map((y: any) => (
+              <tr>
+                <td class="py-2 font-bold text-slate-800">{y.year}年</td>
+                <td class="py-2 text-right font-bold text-emerald-700">{y.avg_wood.toFixed(2)}万円/坪</td>
+                <td class="py-2 text-right">{y.avg_steel.toFixed(2)}万円/坪</td>
+                <td class="py-2 text-right">{y.avg_rc.toFixed(2)}万円/坪</td>
+                <td class="py-2 text-right text-slate-600">{y.avg_repair_index.toFixed(1)}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <AffiliateCta
+    slotType="sell"
+    title={`${pref.name}の実家は「解体前」に古家付き査定と専門買取を比較するのが鉄則`}
+    description={`${pref.name}で30坪の木造実家を解体すると約${formatManYen(pref.std_30tsubo_demolition_yen)}が先行発生します。先に解体せず、まずは現状のまま売却・買取相場を確認してください。`}
+    fallbackHref={`/tools/disposal-simulator/?pref=${pref.slug}`}
+    fallbackLabel={`${pref.name}の単価で10年損益を試算 →`}
+  />
+</BaseLayout>

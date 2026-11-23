@@ -1,0 +1,350 @@
+{
+  "code": "41",
+  "slug": "saga",
+  "name": "佐賀県",
+  "region": "九州・沖縄",
+  "capital_city": "佐賀市",
+  "latest_date": "2026-11-01",
+  "akiya_rate_pct": 15.8,
+  "other_akiya_rate_pct": 9.3,
+  "land_price_man_per_tsubo": 12.5,
+  "wood_man_per_tsubo": 4.5,
+  "steel_man_per_tsubo": 5.97,
+  "rc_man_per_tsubo": 7.42,
+  "repair_index": 116.5,
+  "diff_prev_wood": -0.03,
+  "diff_national_wood": -0.3,
+  "min_wood_recent": 3.98,
+  "max_wood_recent": 4.53,
+  "cremation_fee_yen": 10000,
+  "funeral_grant_yen": 50000,
+  "grave_removal_factor": 0.94,
+  "std_30tsubo_demolition_yen": 2090000,
+  "std_45tsubo_land_market_yen": 5625000,
+  "std_normal_tax_annual_yen": 31689,
+  "std_heavy_tax_annual_yen": 65420,
+  "std_annual_keep_yen": 248689,
+  "sample_cases": [
+    {
+      "slug": "wood-30tsubo-age40",
+      "short_name": "木造30坪（築40年）",
+      "category_label": "標準木造戸建て",
+      "structure": "wood",
+      "demolition_total_yen": 2090000,
+      "annual_keep_normal_yen": 248689,
+      "annual_keep_heavy_yen": 282420,
+      "best_sale_net_yen": 3158144,
+      "best_strategy_label": "解体して更地で仲介売却",
+      "hakajimai_initial_yen": 0
+    },
+    {
+      "slug": "kominka-farm-55tsubo-age60",
+      "short_name": "農家住宅55坪（母屋＋納屋）",
+      "category_label": "地方大型・古民家・農家",
+      "structure": "wood",
+      "demolition_total_yen": 3614000,
+      "annual_keep_normal_yen": 352359,
+      "annual_keep_heavy_yen": 397252,
+      "best_sale_net_yen": 5667032,
+      "best_strategy_label": "解体して更地で仲介売却",
+      "hakajimai_initial_yen": 0
+    },
+    {
+      "slug": "non-rebuildable-wood-25tsubo",
+      "short_name": "再建築不可25坪（築48年）",
+      "category_label": "訳あり・再建築不可・残置物",
+      "structure": "wood",
+      "demolition_total_yen": 2112500,
+      "annual_keep_normal_yen": 246670,
+      "annual_keep_heavy_yen": 257464,
+      "best_sale_net_yen": 936000,
+      "best_strategy_label": "壊さず・片付けず専門買取",
+      "hakajimai_initial_yen": 0
+    },
+    {
+      "slug": "temple-grave-2sqm-far",
+      "short_name": "遠方寺院墓2㎡（檀家）",
+      "category_label": "墓じまい・改葬・永代供養",
+      "structure": "grave",
+      "demolition_total_yen": 0,
+      "annual_keep_normal_yen": 98000,
+      "annual_keep_heavy_yen": 98000,
+      "best_sale_net_yen": 500000,
+      "best_strategy_label": "壊さず・片付けず専門買取",
+      "hakajimai_initial_yen": 706200
+    }
+  ],
+  "series": [
+    {
+      "date": "2024-01-01",
+      "wood_man_per_tsubo": 3.98,
+      "steel_man_per_tsubo": 5.45,
+      "rc_man_per_tsubo": 6.9,
+      "repair_index": 106.8
+    },
+    {
+      "date": "2024-02-01",
+      "wood_man_per_tsubo": 4.02,
+      "steel_man_per_tsubo": 5.49,
+      "rc_man_per_tsubo": 6.95,
+      "repair_index": 107.2
+    },
+    {
+      "date": "2024-03-01",
+      "wood_man_per_tsubo": 4.06,
+      "steel_man_per_tsubo": 5.53,
+      "rc_man_per_tsubo": 6.99,
+      "repair_index": 107.6
+    },
+    {
+      "date": "2024-04-01",
+      "wood_man_per_tsubo": 4.2,
+      "steel_man_per_tsubo": 5.67,
+      "rc_man_per_tsubo": 7.13,
+      "repair_index": 109.1
+    },
+    {
+      "date": "2024-05-01",
+      "wood_man_per_tsubo": 4.23,
+      "steel_man_per_tsubo": 5.7,
+      "rc_man_per_tsubo": 7.16,
+      "repair_index": 109.5
+    },
+    {
+      "date": "2024-06-01",
+      "wood_man_per_tsubo": 4.25,
+      "steel_man_per_tsubo": 5.72,
+      "rc_man_per_tsubo": 7.18,
+      "repair_index": 109.8
+    },
+    {
+      "date": "2024-07-01",
+      "wood_man_per_tsubo": 4.27,
+      "steel_man_per_tsubo": 5.74,
+      "rc_man_per_tsubo": 7.2,
+      "repair_index": 110.1
+    },
+    {
+      "date": "2024-08-01",
+      "wood_man_per_tsubo": 4.27,
+      "steel_man_per_tsubo": 5.74,
+      "rc_man_per_tsubo": 7.2,
+      "repair_index": 110.2
+    },
+    {
+      "date": "2024-09-01",
+      "wood_man_per_tsubo": 4.27,
+      "steel_man_per_tsubo": 5.74,
+      "rc_man_per_tsubo": 7.2,
+      "repair_index": 110.5
+    },
+    {
+      "date": "2024-10-01",
+      "wood_man_per_tsubo": 4.29,
+      "steel_man_per_tsubo": 5.76,
+      "rc_man_per_tsubo": 7.21,
+      "repair_index": 110.9
+    },
+    {
+      "date": "2024-11-01",
+      "wood_man_per_tsubo": 4.29,
+      "steel_man_per_tsubo": 5.76,
+      "rc_man_per_tsubo": 7.21,
+      "repair_index": 111.1
+    },
+    {
+      "date": "2024-12-01",
+      "wood_man_per_tsubo": 4.29,
+      "steel_man_per_tsubo": 5.76,
+      "rc_man_per_tsubo": 7.21,
+      "repair_index": 111.2
+    },
+    {
+      "date": "2025-01-01",
+      "wood_man_per_tsubo": 4.31,
+      "steel_man_per_tsubo": 5.78,
+      "rc_man_per_tsubo": 7.23,
+      "repair_index": 111.5
+    },
+    {
+      "date": "2025-02-01",
+      "wood_man_per_tsubo": 4.32,
+      "steel_man_per_tsubo": 5.79,
+      "rc_man_per_tsubo": 7.24,
+      "repair_index": 111.7
+    },
+    {
+      "date": "2025-03-01",
+      "wood_man_per_tsubo": 4.34,
+      "steel_man_per_tsubo": 5.81,
+      "rc_man_per_tsubo": 7.26,
+      "repair_index": 112.1
+    },
+    {
+      "date": "2025-04-01",
+      "wood_man_per_tsubo": 4.4,
+      "steel_man_per_tsubo": 5.87,
+      "rc_man_per_tsubo": 7.33,
+      "repair_index": 112.9
+    },
+    {
+      "date": "2025-05-01",
+      "wood_man_per_tsubo": 4.42,
+      "steel_man_per_tsubo": 5.89,
+      "rc_man_per_tsubo": 7.35,
+      "repair_index": 113.1
+    },
+    {
+      "date": "2025-06-01",
+      "wood_man_per_tsubo": 4.44,
+      "steel_man_per_tsubo": 5.91,
+      "rc_man_per_tsubo": 7.37,
+      "repair_index": 113.3
+    },
+    {
+      "date": "2025-07-01",
+      "wood_man_per_tsubo": 4.45,
+      "steel_man_per_tsubo": 5.92,
+      "rc_man_per_tsubo": 7.38,
+      "repair_index": 113.6
+    },
+    {
+      "date": "2025-08-01",
+      "wood_man_per_tsubo": 4.46,
+      "steel_man_per_tsubo": 5.93,
+      "rc_man_per_tsubo": 7.39,
+      "repair_index": 113.8
+    },
+    {
+      "date": "2025-09-01",
+      "wood_man_per_tsubo": 4.47,
+      "steel_man_per_tsubo": 5.94,
+      "rc_man_per_tsubo": 7.4,
+      "repair_index": 114.0
+    },
+    {
+      "date": "2025-10-01",
+      "wood_man_per_tsubo": 4.47,
+      "steel_man_per_tsubo": 5.94,
+      "rc_man_per_tsubo": 7.4,
+      "repair_index": 114.2
+    },
+    {
+      "date": "2025-11-01",
+      "wood_man_per_tsubo": 4.45,
+      "steel_man_per_tsubo": 5.92,
+      "rc_man_per_tsubo": 7.38,
+      "repair_index": 114.2
+    },
+    {
+      "date": "2025-12-01",
+      "wood_man_per_tsubo": 4.45,
+      "steel_man_per_tsubo": 5.92,
+      "rc_man_per_tsubo": 7.37,
+      "repair_index": 114.4
+    },
+    {
+      "date": "2026-01-01",
+      "wood_man_per_tsubo": 4.44,
+      "steel_man_per_tsubo": 5.91,
+      "rc_man_per_tsubo": 7.36,
+      "repair_index": 114.6
+    },
+    {
+      "date": "2026-02-01",
+      "wood_man_per_tsubo": 4.44,
+      "steel_man_per_tsubo": 5.91,
+      "rc_man_per_tsubo": 7.36,
+      "repair_index": 114.6
+    },
+    {
+      "date": "2026-03-01",
+      "wood_man_per_tsubo": 4.44,
+      "steel_man_per_tsubo": 5.91,
+      "rc_man_per_tsubo": 7.36,
+      "repair_index": 114.8
+    },
+    {
+      "date": "2026-04-01",
+      "wood_man_per_tsubo": 4.46,
+      "steel_man_per_tsubo": 5.93,
+      "rc_man_per_tsubo": 7.38,
+      "repair_index": 115.4
+    },
+    {
+      "date": "2026-05-01",
+      "wood_man_per_tsubo": 4.46,
+      "steel_man_per_tsubo": 5.93,
+      "rc_man_per_tsubo": 7.38,
+      "repair_index": 115.6
+    },
+    {
+      "date": "2026-06-01",
+      "wood_man_per_tsubo": 4.49,
+      "steel_man_per_tsubo": 5.96,
+      "rc_man_per_tsubo": 7.42,
+      "repair_index": 115.8
+    },
+    {
+      "date": "2026-07-01",
+      "wood_man_per_tsubo": 4.5,
+      "steel_man_per_tsubo": 5.97,
+      "rc_man_per_tsubo": 7.43,
+      "repair_index": 116.0
+    },
+    {
+      "date": "2026-08-01",
+      "wood_man_per_tsubo": 4.51,
+      "steel_man_per_tsubo": 5.98,
+      "rc_man_per_tsubo": 7.44,
+      "repair_index": 116.1
+    },
+    {
+      "date": "2026-09-01",
+      "wood_man_per_tsubo": 4.53,
+      "steel_man_per_tsubo": 6.0,
+      "rc_man_per_tsubo": 7.46,
+      "repair_index": 116.4
+    },
+    {
+      "date": "2026-10-01",
+      "wood_man_per_tsubo": 4.53,
+      "steel_man_per_tsubo": 6.0,
+      "rc_man_per_tsubo": 7.46,
+      "repair_index": 116.5
+    },
+    {
+      "date": "2026-11-01",
+      "wood_man_per_tsubo": 4.5,
+      "steel_man_per_tsubo": 5.97,
+      "rc_man_per_tsubo": 7.42,
+      "repair_index": 116.5
+    }
+  ],
+  "yearly_stats": [
+    {
+      "year": "2024",
+      "count": 12,
+      "avg_wood": 4.2,
+      "avg_steel": 5.67,
+      "avg_rc": 7.13,
+      "avg_repair_index": 109.5
+    },
+    {
+      "year": "2025",
+      "count": 12,
+      "avg_wood": 4.42,
+      "avg_steel": 5.89,
+      "avg_rc": 7.34,
+      "avg_repair_index": 113.2
+    },
+    {
+      "year": "2026",
+      "count": 11,
+      "avg_wood": 4.48,
+      "avg_steel": 5.95,
+      "avg_rc": 7.41,
+      "avg_repair_index": 115.7
+    }
+  ]
+}

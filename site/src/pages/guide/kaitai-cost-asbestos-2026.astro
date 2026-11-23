@@ -1,0 +1,63 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import AffiliateCta from "../../components/AffiliateCta.astro";
+import GuideSidebar from "../../components/GuideSidebar.astro";
+---
+
+<BaseLayout
+  title="解体工事の坪単価（木造・鉄骨・RC）とアスベスト調査・残置物費用の内訳"
+  description="構造別の解体工事坪単価（木造4.8万円・鉄骨6.3万円・RC7.8万円/坪）と、アスベスト事前調査義務化・家財残置物・狭小道路割増によって見積額がいくら変わるかを解説します。"
+  canonicalPath="/guide/kaitai-cost-asbestos-2026/"
+>
+  <nav class="text-xs text-slate-500 mb-4 flex items-center gap-1.5">
+    <a href="/" class="hover:text-emerald-700">トップ</a><span>/</span>
+    <a href="/guide/" class="hover:text-emerald-700">解説ガイド</a><span>/</span>
+    <span class="text-slate-800 font-semibold">解体工事の坪単価とアスベスト費用</span>
+  </nav>
+
+  <div class="grid gap-8 lg:grid-cols-12 items-start">
+    <article class="lg:col-span-8 min-w-0">
+      <div class="page-header-clean rounded p-5 sm:p-6 mb-6">
+        <div class="eyebrow-label mb-1">解説ガイド｜解体費用の内訳</div>
+        <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900 leading-snug">
+          解体工事の坪単価とアスベスト事前調査・残置物費用の実態
+        </h1>
+        <p class="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
+          「坪4万円×30坪＝120万円で壊せると思っていたら、見積書が210万円だった」という差がなぜ起きるのか、解体費用の内訳をデータで整理します。
+        </p>
+      </div>
+
+      <div class="card-surface rounded p-5 sm:p-6 space-y-5 text-sm text-slate-700 leading-relaxed">
+        <h2 class="text-lg font-extrabold text-slate-900 border-b border-slate-200 pb-2">1. 建物本体の構造別 解体坪単価（全国平均基準）</h2>
+        <ul class="list-disc pl-5 space-y-1.5">
+          <li><strong>木造（W造）</strong>：全国平均 <strong>約4.80万円/坪</strong>（30坪本体で約144万円）</li>
+          <li><strong>鉄骨造（S造）</strong>：全国平均 <strong>約6.30万円/坪</strong>（30坪本体で約189万円）</li>
+          <li><strong>鉄筋コンクリート造（RC造）</strong>：全国平均 <strong>約7.80万円/坪</strong>（30坪本体で約234万円）</li>
+        </ul>
+
+        <h2 class="text-lg font-extrabold text-slate-900 border-b border-slate-200 pb-2 pt-2">2. 本体工事以外に加算される「4つの付帯費用」</h2>
+        <ol class="list-decimal pl-5 space-y-1.5">
+          <li><strong>外構・ブロック塀・庭木・浄化槽の撤去（＋20万〜40万円）</strong>：道路沿いのブロック塀や庭石・樹木の根起こし費用です。</li>
+          <li><strong>家財（残置物）の分別・処分費（＋15万〜60万円）</strong>：一般廃棄物と産業廃棄物の混載が禁止されているため、タンスや家電が残っていると別料金になります。</li>
+          <li><strong>アスベスト（石綿）有資格者事前調査＆成形板対策費（＋15万〜35万円）</strong>：2023年10月から着工前の有資格者調査と電子報告が義務化されました。2006年以前のスレート屋根やサイディング外壁にはレベル3石綿含有成形板が多く、手ばらし撤去費用が加算されます。</li>
+          <li><strong>狭小道路・重機進入不可の手壊し割増（＋20〜30%増）</strong>：前面道路が狭く重機やダンプが入らない場合、作業日数が増えるため30万〜60万円高くなります。</li>
+        </ol>
+
+        <h2 class="text-lg font-extrabold text-slate-900 border-b border-slate-200 pb-2 pt-2">3. 解体出費を抑える2つのポイント</h2>
+        <p>
+          ①そもそも売主が解体する必要があるか<a href="/tools/disposal-simulator/" class="text-emerald-700 font-bold underline">実家の手放し方シミュレーター</a>で「古家付き売却・買取」と比較すること、②解体する場合は不動産会社の下請け任せにせず解体専門会社の明細見積もりを比較することが有効です。
+        </p>
+      </div>
+
+      <AffiliateCta
+        slotType="kaitai"
+        title="アスベスト対策あり木造30坪の詳しい費用内訳と売却比較を見る"
+        description="本体工事費・外構撤去・残置物・アスベスト調査費用の合計目安と、壊さず売却した場合の手残り差を確認できます。"
+        fallbackHref="/cases/asbestos-slate-roof-30tsubo/"
+        fallbackLabel="アスベスト対策あり木造30坪の内訳を見る →"
+      />
+    </article>
+
+    <GuideSidebar currentPath="/guide/kaitai-cost-asbestos-2026/" />
+  </div>
+</BaseLayout>

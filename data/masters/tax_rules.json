@@ -1,0 +1,101 @@
+{
+  "effective_date": "2026-11-01",
+  "fiscal_year": 2026,
+  "reform_notes": [
+    "2023年10月1日：建築物解体時の有資格者によるアスベスト（石綿）事前調査が完全義務化",
+    "2023年12月13日：改正空家等対策特措法施行（「管理不全空家等」新設・勧告で住宅用地特例1/6を解除）",
+    "2024年1月1日：空き家の譲渡所得3,000万円特別控除が拡充（譲渡後翌年2月15日までの買主側による解体・耐震改修も対象化、相続人3人以上は各2,000万円上限）",
+    "2024年4月1日：相続登記の申請義務化（取得を知った日から3年以内・正当な理由なき未登記は10万円以下の過料、過去相続分は2027年3月31日期限）",
+    "2026年4月1日：不動産所有者の住所・氏名変更登記の義務化（変更日から2年以内・5万円以下の過料）"
+  ],
+  "property_tax_rules": {
+    "fixed_asset_tax_rate": 0.014,
+    "city_planning_tax_rate": 0.003,
+    "market_to_assessed_land_ratio": 0.70,
+    "small_residential_limit_sqm": 200.0,
+    "small_residential_fixed_factor": 0.1666667,
+    "small_residential_city_factor": 0.3333333,
+    "general_residential_fixed_factor": 0.3333333,
+    "general_residential_city_factor": 0.6666667,
+    "non_residential_burden_cap_factor": 0.70,
+    "building_assessed_base_man_per_tsubo": {
+      "wood": 28.0,
+      "steel": 36.0,
+      "rc": 45.0
+    },
+    "building_age_depreciation": {
+      "age_20": 0.32,
+      "age_30": 0.22,
+      "age_40_plus": 0.20
+    }
+  },
+  "inheritance_penalty_rules": {
+    "sozoku_toki_deadline_years": 3,
+    "sozoku_toki_past_grace_deadline": "2027-03-31",
+    "sozoku_toki_fine_max_yen": 100000,
+    "address_change_toki_fine_max_yen": 50000,
+    "judicial_scrivener_fee_avg_yen": 75000,
+    "registration_license_tax_rate": 0.004,
+    "small_land_exemption_assessed_max_yen": 1000000
+  },
+  "special_deduction_3000man": {
+    "standard_deduction_yen": 30000000,
+    "three_or_more_heirs_deduction_yen": 20000000,
+    "long_term_capital_gains_tax_rate": 0.20315,
+    "built_before_date": "1981-05-31",
+    "buyer_demolition_deadline_note": "譲渡年の翌年2月15日までに買主が除却（解体）または耐震改修工事を完了した場合も適用可能"
+  },
+  "demolition_base_rules": {
+    "steel_spread_man_per_tsubo": 1.5,
+    "rc_spread_man_per_tsubo": 3.0,
+    "narrow_road_multiplier": 1.22,
+    "slope_land_multiplier": 1.28,
+    "exterior_fence_tree_base_yen": 220000,
+    "asbestos_level3_survey_and_removal_yen": 240000,
+    "residual_items_cost_yen": {
+      "minimal": 80000,
+      "normal": 280000,
+      "heavy": 580000
+    }
+  },
+  "akiya_maintenance_rules": {
+    "annual_utility_base_yen": 36000,
+    "annual_insurance_fire_yen": 28000,
+    "annual_cleaning_yard_yen": 48000,
+    "annual_travel_inspection_yen": 40000,
+    "annual_aging_repair_reserve_yen": 65000,
+    "vacant_Service_agency_annual_yen": 72000
+  },
+  "sale_and_kaitori_rules": {
+    "brokerage_fee_rate": 0.03,
+    "brokerage_fee_fixed_yen": 60000,
+    "consumption_tax_rate": 0.10,
+    "low_price_brokerage_max_yen": 330000,
+    "low_price_threshold_yen": 8000000,
+    "kaitori_land_discount_factor": 0.72,
+    "kaitori_demolition_deduction_factor": 0.75
+  },
+  "hakajimai_base_rules": {
+    "stone_removal_yen_per_sqm": 115000,
+    "closing_ceremony_ofuse_yen": 45000,
+    "ridan_fee_standard_yen": 50000,
+    "admin_permit_fee_yen": 15000,
+    "next_kuyo_options": {
+      "goshi": {
+        "label": "合祀型 永代供養墓（追加管理費0円）",
+        "initial_cost_yen": 120000,
+        "annual_fee_yen": 0
+      },
+      "jumokusou": {
+        "label": "樹木葬・自然葬（ペア・家族区画）",
+        "initial_cost_yen": 380000,
+        "annual_fee_yen": 0
+      },
+      "nokotsudo": {
+        "label": "都市部 納骨堂・個別永代供養",
+        "initial_cost_yen": 650000,
+        "annual_fee_yen": 12000
+      }
+    }
+  }
+}

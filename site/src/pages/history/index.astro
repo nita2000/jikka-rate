@@ -1,0 +1,66 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CostTrendChart from "../../components/CostTrendChart.astro";
+import historyYearly from "../../data/history_yearly.json";
+import latest from "../../data/latest.json";
+---
+
+<BaseLayout
+  title="年別 解体工事坪単価・維持修繕指数の推移データ（2024年〜2026年）"
+  description="2024年〜2026年の全国木造・鉄骨・RC解体工事坪単価および維持修繕単価指数の年別推移データ。"
+  canonicalPath="/history/"
+>
+  <nav class="text-xs text-slate-500 mb-4 flex items-center gap-1.5">
+    <a href="/" class="hover:text-emerald-700">トップ</a>
+    <span>/</span>
+    <span class="text-slate-800 font-semibold">年別推移データ</span>
+  </nav>
+
+  <div class="page-header-clean rounded p-5 sm:p-6 mb-6">
+    <div class="eyebrow-label mb-1">年別推移データ</div>
+    <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900">
+      年別 解体工事坪単価・維持修繕指数の推移
+    </h1>
+    <p class="mt-1.5 text-xs sm:text-sm text-slate-600">
+      2023年10月のアスベスト事前調査義務化、2024年4月の建設業時間外労働規制・相続登記義務化以降の解体工事単価と維持修繕コストの推移を年別に記録しています。
+    </p>
+  </div>
+
+  <div class="mb-8">
+    <CostTrendChart
+      series={latest.national_series}
+      title="全国平均 構造別解体工事坪単価の通期推移（2024年〜2026年）"
+    />
+  </div>
+
+  <div class="grid gap-4 sm:grid-cols-3 mb-8">
+    {
+      historyYearly.map((y) => (
+        <a href={`/history/${y.year}/`} class="card-interactive rounded p-5 block">
+          <div class="flex items-center justify-between">
+            <span class="text-lg font-extrabold text-slate-900">{y.year}年</span>
+            <span class="text-xs font-bold text-emerald-700">月次データを見る →</span>
+          </div>
+          <dl class="mt-3 space-y-1.5 text-xs tabular-nums">
+            <div class="flex justify-between">
+              <dt class="text-slate-500">木造解体平均</dt>
+              <dd class="font-extrabold text-emerald-700">{y.avg_wood.toFixed(2)}万円/坪</dd>
+            </div>
+            <div class="flex justify-between">
+              <dt class="text-slate-500">鉄骨造解体平均</dt>
+              <dd class="font-semibold text-slate-800">{y.avg_steel.toFixed(2)}万円/坪</dd>
+            </div>
+            <div class="flex justify-between">
+              <dt class="text-slate-500">RC造解体平均</dt>
+              <dd class="font-semibold text-slate-800">{y.avg_rc.toFixed(2)}万円/坪</dd>
+            </div>
+            <div class="flex justify-between pt-1 border-t border-slate-100">
+              <dt class="text-slate-500">維持修繕単価指数</dt>
+              <dd class="font-semibold text-slate-700">{y.avg_repair_index.toFixed(1)}</dd>
+            </div>
+          </dl>
+        </a>
+      ))
+    }
+  </div>
+</BaseLayout>

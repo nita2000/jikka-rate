@@ -1,0 +1,54 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import taxRules from "../data/tax_rules.json";
+---
+
+<BaseLayout
+  title="サイトについて・算出ロジック・公的統計出典"
+  description="実家じまいレート（jikkarate.com）の公的統計出典、改正空家特措法・固定資産税の住宅用地特例解除・相続登記の義務化・解体工事単価・墓じまい費用の算出基準および免責事項。"
+  canonicalPath="/about/"
+  showPrNotice={false}
+>
+  <nav class="text-xs text-slate-500 mb-4 flex items-center gap-1.5">
+    <a href="/" class="hover:text-emerald-700">トップ</a>
+    <span>/</span>
+    <span class="text-slate-800 font-semibold">サイトについて・公的出典</span>
+  </nav>
+
+  <div class="max-w-4xl space-y-6">
+    <div class="page-header-clean rounded p-5 sm:p-6">
+      <div class="eyebrow-label mb-1">サイトについて</div>
+      <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900">算出基準・公的データの出典</h1>
+      <p class="mt-1.5 text-xs sm:text-sm text-slate-600">
+        実家じまいレート（jikkarate.com）は、総務省・国土交通省・厚生労働省の公的統計と不動産・相続税制にもとづき、実家の売却・空き家維持費・解体工事・墓じまいの損益分岐点を試算・比較できるサイトです。
+      </p>
+    </div>
+
+    <div class="card-surface rounded p-5 sm:p-6 space-y-4 text-sm text-slate-700 leading-relaxed">
+      <h2 class="text-base font-extrabold text-slate-900 border-b border-slate-200 pb-2">1. 公的統計および一次データ出典</h2>
+      <ul class="list-disc pl-5 space-y-1.5 text-xs sm:text-sm">
+        <li>都道府県別空き家率・放置空き家統計：総務省統計局「住宅・土地統計調査（e-Stat）」</li>
+        <li>工事・修繕・火葬料金推移：総務省統計局「小売物価統計調査（e-Stat）」および各自治体公表の公営斎場・国民健康保険葬祭費基準</li>
+        <li>住宅地地価・建築物除却基準：国土交通省「都道府県地価調査」および建築物除却・石綿対策関連公表資料</li>
+        <li>墓じまい（改葬）統計：厚生労働省「衛生行政報告例（埋葬及び火葬の死体・死胎数並びに改葬数）」</li>
+      </ul>
+
+      <h2 class="text-base font-extrabold text-slate-900 border-b border-slate-200 pb-2 pt-2">2. 適用している法改正・税制ルール</h2>
+      <ul class="list-disc pl-5 space-y-1 text-xs sm:text-sm">
+        {taxRules.reform_notes.map((n) => (
+          <li>{n}</li>
+        ))}
+      </ul>
+
+      <h2 class="text-base font-extrabold text-slate-900 border-b border-slate-200 pb-2 pt-2">3. 固定資産税「実効4.2倍（原則上限6倍）」の算出基準</h2>
+      <p class="text-xs sm:text-sm">
+        200㎡以下の小規模住宅用地は固定資産税の課税標準が評価額の1/6（都市計画税は1/3）に軽減されています。「管理不全空き家」「特定空き家」の勧告または建物解体による特例解除時は、本則上は6倍（100%）となりますが、実務上の固定資産税では非住宅用地（商業地等）の負担調整措置（評価額の70%を課税標準の上限とする措置）が適用されるため、固定資産税単体で4.2倍（70%÷16.67%）、都市計画税合算で約3.6〜4.2倍の実効税額と本則税額の双方を明示しています。
+      </p>
+
+      <h2 class="text-base font-extrabold text-slate-900 border-b border-slate-200 pb-2 pt-2">4. 計算前提と免責事項</h2>
+      <p class="text-xs sm:text-sm">
+        当サイトに掲載する解体工事費用・売却手残り・固定資産税・墓じまい費用は、公的基準および標準的な物件条件をもとにした概算シミュレーションです。実際の売却価格や工事費用は、立地・前面道路幅員・高低差・地中埋設物・残置物量・寺院や霊園の規約により変動します。最終的な売却・解体・登記・改葬の判断はご自身の責任にて各専門事業者・自治体・税理士・司法書士へご確認ください。
+      </p>
+    </div>
+  </div>
+</BaseLayout>

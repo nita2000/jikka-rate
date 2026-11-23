@@ -1,0 +1,12 @@
+{
+  "site_name": "実家じまいレート",
+  "site_domain": "jikkarate.com",
+  "date_from": "2024-01-01",
+  "date_to": "2026-11-01",
+  "total_points": 35,
+  "total_cases": 40,
+  "total_compare_pairs": 24,
+  "tax_effective_date": "2026-11-01",
+  "source_mode_label": "総務省 e-Stat・国土交通省・厚生労働省 公表統計（2026年11月最新基準・自動更新対応）",
+  "source_credit": "総務省「住宅・土地統計調査」「小売物価統計調査（e-Stat）」・国土交通省「都道府県地価調査」・厚生労働省「衛生行政報告例（改葬統計）」"
+}

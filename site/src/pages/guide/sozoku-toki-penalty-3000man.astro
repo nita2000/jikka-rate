@@ -1,0 +1,61 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import AffiliateCta from "../../components/AffiliateCta.astro";
+import GuideSidebar from "../../components/GuideSidebar.astro";
+---
+
+<BaseLayout
+  title="相続登記の義務化（10万円過料）と空き家3,000万円特別控除「買主解体要件」の活用法"
+  description="2024年4月施行の相続登記義務化（2027年3月末の過去相続分猶予期限）、2026年4月施行の住所変更登記義務化、および2024年改正で使いやすくなった「買主側解体による空き家3,000万円特別控除」を解説します。"
+  canonicalPath="/guide/sozoku-toki-penalty-3000man/"
+>
+  <nav class="text-xs text-slate-500 mb-4 flex items-center gap-1.5">
+    <a href="/" class="hover:text-emerald-700">トップ</a><span>/</span>
+    <a href="/guide/" class="hover:text-emerald-700">解説ガイド</a><span>/</span>
+    <span class="text-slate-800 font-semibold">相続登記と3,000万円特別控除</span>
+  </nav>
+
+  <div class="grid gap-8 lg:grid-cols-12 items-start">
+    <article class="lg:col-span-8 min-w-0">
+      <div class="page-header-clean rounded p-5 sm:p-6 mb-6">
+        <div class="eyebrow-label mb-1">解説ガイド｜3,000万円控除・相続登記</div>
+        <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900 leading-snug">
+          相続登記の義務化と空き家3,000万円特別控除「買主解体」の活用法
+        </h1>
+        <p class="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
+          2024年〜2026年にかけて不動産相続と空き家売却のルールが大きく変わりました。期限切れによる過料や税金の優遇漏れを防ぐための重要ポイントを整理します。
+        </p>
+      </div>
+
+      <div class="card-surface rounded p-5 sm:p-6 space-y-5 text-sm text-slate-700 leading-relaxed">
+        <h2 class="text-lg font-extrabold text-slate-900 border-b border-slate-200 pb-2">1. 相続登記の義務化と「2027年3月末」の猶予期限</h2>
+        <ul class="list-disc pl-5 space-y-1.5">
+          <li><strong>基本ルール</strong>：相続により不動産の取得を知った日から<strong>3年以内</strong>に相続登記（名義変更）を申請することが義務化されました（正当な理由なく放置すると<strong>10万円以下の過料</strong>）。</li>
+          <li><strong>過去の相続分も対象</strong>：2024年4月より前に発生していた未登記の相続実家も対象であり、<strong>2027年（令和9年）3月31日</strong>が猶予期限となります。</li>
+          <li><strong>2026年4月からの住所・氏名変更登記義務化</strong>：引越しや婚姻等で登記簿上の住所・氏名が変わった場合も、変更日から2年以内の登記が義務化（<strong>5万円以下の過料</strong>）されました。</li>
+        </ul>
+
+        <h2 class="text-lg font-extrabold text-slate-900 border-b border-slate-200 pb-2 pt-2">2. 空き家3,000万円特別控除が「買主側の解体」でも適用可能に</h2>
+        <p>
+          昭和56年（1981年）5月31日以前に建築された親の実家を相続して売却する場合、譲渡益から最大3,000万円（相続人が3人以上の場合は各2,000万円）を控除でき、<strong>譲渡所得税（約20.315%）を最大約600万円軽減できる特例</strong>があります。
+        </p>
+        <p>
+          従来は「売主（相続人）が売却前に自分で解体して更地にする（または耐震リフォームする）」必要がありましたが、<strong>2024年1月1日以降の譲渡からは「古家付きのまま売却し、買主（購入者や買取会社）が譲渡年の翌年2月15日までに解体または耐震改修工事を行った場合」も対象</strong>に広がりました。
+        </p>
+        <p>
+          ただし、この特例には<strong>「相続開始から3年を経過する日の属する年の12月31日までに売却すること」</strong>という期限があるため、相続後3年以内に売却を完了させることが大切です。
+        </p>
+      </div>
+
+      <AffiliateCta
+        slotType="sell"
+        title="売主が先に解体する場合と、買主解体で3,000万円控除を使う場合の手残りを比較する"
+        description="買主解体特例を活用すれば、売主が先に200万円前後の解体費を持ち出すリスクをゼロにできます。"
+        fallbackHref="/compare/seller-demolition-vs-buyer-demolition-3000man/"
+        fallbackLabel="売主解体 vs 買主解体の比較データを見る →"
+      />
+    </article>
+
+    <GuideSidebar currentPath="/guide/sozoku-toki-penalty-3000man/" />
+  </div>
+</BaseLayout>

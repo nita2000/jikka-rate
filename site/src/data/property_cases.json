@@ -1,0 +1,6162 @@
+[
+  {
+    "slug": "wood-25tsubo-age35",
+    "name": "木造2階建 25坪・築35年のコンパクト実家",
+    "short_name": "木造25坪（築35年）",
+    "category": "wood_standard",
+    "category_label": "標準木造戸建て",
+    "spec_note": "敷地35坪（115㎡）・延床25坪・前面道路4m以上",
+    "structure": "wood",
+    "floor_tsubo": 25,
+    "land_tsubo": 35,
+    "grave_sqm": 0,
+    "building_age_years": 35,
+    "road_condition": "normal",
+    "residual_level": "minimal",
+    "has_asbestos_risk": false,
+    "market_demand_factor": 1.05,
+    "annual_extra_maint_yen": 0,
+    "recommended_slot": "sell",
+    "summary": "昭和末期〜平成初期に建てられた3LDK〜4DKの標準的なコンパクト戸建て。敷地が200㎡以下のため小規模住宅用地特例（固定資産税1/6）がフル適用されている一方、放置して特例解除されると土地税額が一気に約4.2倍へ跳ね上がる典型パターン。",
+    "calc": {
+      "tax": {
+        "land_sqm": 115.7,
+        "land_market_yen": 9003750,
+        "land_assessed_yen": 6302625,
+        "bldg_assessed_yen": 1001000,
+        "normal_land_tax_annual": 21009,
+        "normal_bldg_tax_annual": 17017,
+        "normal_total_tax_annual": 38026,
+        "heavy_effective_land_tax_annual": 75001,
+        "heavy_effective_total_tax_annual": 92018,
+        "heavy_principle_total_tax_annual": 124162,
+        "sarachi_total_tax_annual": 75001,
+        "extra_tax_annual_effective": 53992,
+        "extra_tax_5y_effective": 269960,
+        "extra_tax_10y_effective": 539920,
+        "land_tax_multiplier_effective": 3.57,
+        "land_tax_multiplier_principle": 5.1
+      },
+      "demolition": {
+        "unit_price_man_per_tsubo": 4.8,
+        "building_body_yen": 1200000,
+        "road_surcharge_yen": 0,
+        "exterior_fence_yen": 220000,
+        "residual_items_yen": 80000,
+        "asbestos_yen": 0,
+        "total_demolition_yen": 1500000
+      },
+      "maintenance": {
+        "base_maint_annual": 217000,
+        "annual_keep_normal": 255026,
+        "annual_keep_monthly": 21252,
+        "annual_keep_heavy": 309018,
+        "keep_5y_normal": 1275130,
+        "keep_10y_normal": 2550260,
+        "keep_10y_heavy": 2982196
+      },
+      "disposal": {
+        "land_market_yen": 9003750,
+        "sarachi_gross_sale_yen": 9003750,
+        "sarachi_broker_fee_yen": 363124,
+        "sarachi_net_proceeds_yen": 7065625,
+        "furuya_gross_sale_yen": 7413600,
+        "furuya_broker_fee_yen": 330000,
+        "furuya_net_proceeds_yen": 7003600,
+        "kaitori_net_proceeds_yen": 3781575,
+        "best_sale_net_yen": 7065625,
+        "best_strategy_label": "解体して更地で仲介売却",
+        "net_benefit_vs_10y_keep_yen": 10047821
+      },
+      "hakajimai": null,
+      "ten_year_curve": [
+        {
+          "year": 1,
+          "year_cost": 255026,
+          "cumulative": 255026,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 2,
+          "year_cost": 255026,
+          "cumulative": 510052,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 3,
+          "year_cost": 309018,
+          "cumulative": 819070,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 4,
+          "year_cost": 489018,
+          "cumulative": 1308088,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 5,
+          "year_cost": 309018,
+          "cumulative": 1617106,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 6,
+          "year_cost": 309018,
+          "cumulative": 1926124,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 7,
+          "year_cost": 309018,
+          "cumulative": 2235142,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 8,
+          "year_cost": 489018,
+          "cumulative": 2724160,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 9,
+          "year_cost": 309018,
+          "cumulative": 3033178,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 10,
+          "year_cost": 309018,
+          "cumulative": 3342196,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        }
+      ]
+    },
+    "pref_cost_range": {
+      "cheapest_pref": "秋田県",
+      "cheapest_cost_yen": 1400000,
+      "priciest_pref": "東京都",
+      "priciest_cost_yen": 1700000,
+      "diff_yen": 300000
+    }
+  },
+  {
+    "slug": "wood-30tsubo-age40",
+    "name": "木造2階建 30坪・築40年の標準的な実家",
+    "short_name": "木造30坪（築40年）",
+    "category": "wood_standard",
+    "category_label": "標準木造戸建て",
+    "spec_note": "敷地45坪（150㎡）・延床30坪・家財標準・旧耐震〜新耐震移行期",
+    "structure": "wood",
+    "floor_tsubo": 30,
+    "land_tsubo": 45,
+    "grave_sqm": 0,
+    "building_age_years": 40,
+    "road_condition": "normal",
+    "residual_level": "normal",
+    "has_asbestos_risk": true,
+    "market_demand_factor": 1.0,
+    "annual_extra_maint_yen": 0,
+    "recommended_slot": "sell",
+    "summary": "全国で最も相談件数が多い「延床30坪・敷地45坪・築40年」の標準実家モデル。建物評価額はほぼ底値だが、解体すると150万〜200万円前後の初期費用がかかるため、古家付き仲介か買主解体特例（3,000万円控除）を使った売却が損益分岐の鍵となる。",
+    "calc": {
+      "tax": {
+        "land_sqm": 148.8,
+        "land_market_yen": 11025000,
+        "land_assessed_yen": 7717500,
+        "bldg_assessed_yen": 1092000,
+        "normal_land_tax_annual": 25725,
+        "normal_bldg_tax_annual": 18564,
+        "normal_total_tax_annual": 44289,
+        "heavy_effective_land_tax_annual": 91838,
+        "heavy_effective_total_tax_annual": 110402,
+        "heavy_principle_total_tax_annual": 149762,
+        "sarachi_total_tax_annual": 91838,
+        "extra_tax_annual_effective": 66113,
+        "extra_tax_5y_effective": 330565,
+        "extra_tax_10y_effective": 661130,
+        "land_tax_multiplier_effective": 3.57,
+        "land_tax_multiplier_principle": 5.1
+      },
+      "demolition": {
+        "unit_price_man_per_tsubo": 4.8,
+        "building_body_yen": 1440000,
+        "road_surcharge_yen": 0,
+        "exterior_fence_yen": 220000,
+        "residual_items_yen": 280000,
+        "asbestos_yen": 240000,
+        "total_demolition_yen": 2180000
+      },
+      "maintenance": {
+        "base_maint_annual": 217000,
+        "annual_keep_normal": 261289,
+        "annual_keep_monthly": 21774,
+        "annual_keep_heavy": 327402,
+        "keep_5y_normal": 1306445,
+        "keep_10y_normal": 2612890,
+        "keep_10y_heavy": 3141794
+      },
+      "disposal": {
+        "land_market_yen": 11025000,
+        "sarachi_gross_sale_yen": 11025000,
+        "sarachi_broker_fee_yen": 429825,
+        "sarachi_net_proceeds_yen": 8323337,
+        "furuya_gross_sale_yen": 8796400,
+        "furuya_broker_fee_yen": 356281,
+        "furuya_net_proceeds_yen": 8160119,
+        "kaitori_net_proceeds_yen": 4630500,
+        "best_sale_net_yen": 8323337,
+        "best_strategy_label": "解体して更地で仲介売却",
+        "net_benefit_vs_10y_keep_yen": 11465131
+      },
+      "hakajimai": null,
+      "ten_year_curve": [
+        {
+          "year": 1,
+          "year_cost": 261289,
+          "cumulative": 261289,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 2,
+          "year_cost": 261289,
+          "cumulative": 522578,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 3,
+          "year_cost": 327402,
+          "cumulative": 849980,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 4,
+          "year_cost": 507402,
+          "cumulative": 1357382,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 5,
+          "year_cost": 327402,
+          "cumulative": 1684784,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 6,
+          "year_cost": 327402,
+          "cumulative": 2012186,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 7,
+          "year_cost": 327402,
+          "cumulative": 2339588,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 8,
+          "year_cost": 507402,
+          "cumulative": 2846990,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 9,
+          "year_cost": 327402,
+          "cumulative": 3174392,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 10,
+          "year_cost": 327402,
+          "cumulative": 3501794,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        }
+      ]
+    },
+    "pref_cost_range": {
+      "cheapest_pref": "秋田県",
+      "cheapest_cost_yen": 2060000,
+      "priciest_pref": "東京都",
+      "priciest_cost_yen": 2420000,
+      "diff_yen": 360000
+    }
+  },
+  {
+    "slug": "wood-35tsubo-age30",
+    "name": "木造2階建 35坪・築30年の平成初期戸建て",
+    "short_name": "木造35坪（築30年）",
+    "category": "wood_standard",
+    "category_label": "標準木造戸建て",
+    "spec_note": "敷地50坪（165㎡）・延床35坪・新耐震基準",
+    "structure": "wood",
+    "floor_tsubo": 35,
+    "land_tsubo": 50,
+    "grave_sqm": 0,
+    "building_age_years": 30,
+    "road_condition": "normal",
+    "residual_level": "minimal",
+    "has_asbestos_risk": false,
+    "market_demand_factor": 1.12,
+    "annual_extra_maint_yen": 0,
+    "recommended_slot": "sell",
+    "summary": "1990年代建築の新耐震基準を満たす4LDK戸建て。雨漏りや白アリ被害が出る前に売却すれば、解体せず「中古戸建て（リフォーム素材）」として実需層へそのまま仲介売却できる可能性が高い。",
+    "calc": {
+      "tax": {
+        "land_sqm": 165.3,
+        "land_market_yen": 13720000,
+        "land_assessed_yen": 9604000,
+        "bldg_assessed_yen": 2156000,
+        "normal_land_tax_annual": 32013,
+        "normal_bldg_tax_annual": 36652,
+        "normal_total_tax_annual": 68665,
+        "heavy_effective_land_tax_annual": 114288,
+        "heavy_effective_total_tax_annual": 150940,
+        "heavy_principle_total_tax_annual": 199920,
+        "sarachi_total_tax_annual": 114288,
+        "extra_tax_annual_effective": 82275,
+        "extra_tax_5y_effective": 411375,
+        "extra_tax_10y_effective": 822750,
+        "land_tax_multiplier_effective": 3.57,
+        "land_tax_multiplier_principle": 5.1
+      },
+      "demolition": {
+        "unit_price_man_per_tsubo": 4.8,
+        "building_body_yen": 1680000,
+        "road_surcharge_yen": 0,
+        "exterior_fence_yen": 220000,
+        "residual_items_yen": 80000,
+        "asbestos_yen": 0,
+        "total_demolition_yen": 1980000
+      },
+      "maintenance": {
+        "base_maint_annual": 217000,
+        "annual_keep_normal": 285665,
+        "annual_keep_monthly": 23805,
+        "annual_keep_heavy": 367940,
+        "keep_5y_normal": 1428325,
+        "keep_10y_normal": 2856650,
+        "keep_10y_heavy": 3514850
+      },
+      "disposal": {
+        "land_market_yen": 13720000,
+        "sarachi_gross_sale_yen": 13720000,
+        "sarachi_broker_fee_yen": 518760,
+        "sarachi_net_proceeds_yen": 11106952,
+        "furuya_gross_sale_yen": 16206000,
+        "furuya_broker_fee_yen": 600798,
+        "furuya_net_proceeds_yen": 15525202,
+        "kaitori_net_proceeds_yen": 5762400,
+        "best_sale_net_yen": 15525202,
+        "best_strategy_label": "壊さず古家付きで仲介売却",
+        "net_benefit_vs_10y_keep_yen": 19040052
+      },
+      "hakajimai": null,
+      "ten_year_curve": [
+        {
+          "year": 1,
+          "year_cost": 285665,
+          "cumulative": 285665,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 2,
+          "year_cost": 285665,
+          "cumulative": 571330,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 3,
+          "year_cost": 367940,
+          "cumulative": 939270,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 4,
+          "year_cost": 547940,
+          "cumulative": 1487210,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 5,
+          "year_cost": 367940,
+          "cumulative": 1855150,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 6,
+          "year_cost": 367940,
+          "cumulative": 2223090,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 7,
+          "year_cost": 367940,
+          "cumulative": 2591030,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 8,
+          "year_cost": 547940,
+          "cumulative": 3138970,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 9,
+          "year_cost": 367940,
+          "cumulative": 3506910,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 10,
+          "year_cost": 367940,
+          "cumulative": 3874850,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        }
+      ]
+    },
+    "pref_cost_range": {
+      "cheapest_pref": "秋田県",
+      "cheapest_cost_yen": 1840000,
+      "priciest_pref": "東京都",
+      "priciest_cost_yen": 2260000,
+      "diff_yen": 420000
+    }
+  },
+  {
+    "slug": "wood-35tsubo-age45",
+    "name": "木造2階建 35坪・築45年の旧耐震実家",
+    "short_name": "木造35坪（築45年・旧耐震）",
+    "category": "wood_standard",
+    "category_label": "標準木造戸建て",
+    "spec_note": "敷地55坪（182㎡）・延床35坪・1981年5月以前建築（旧耐震）",
+    "structure": "wood",
+    "floor_tsubo": 35,
+    "land_tsubo": 55,
+    "grave_sqm": 0,
+    "building_age_years": 45,
+    "road_condition": "normal",
+    "residual_level": "normal",
+    "has_asbestos_risk": true,
+    "market_demand_factor": 0.92,
+    "annual_extra_maint_yen": 15000,
+    "recommended_slot": "sell",
+    "summary": "昭和56年（1981年）5月以前の旧耐震基準で建てられた実家。空き家譲渡所得の3,000万円特別控除の対象要件を満たす一方、放置すると外壁崩落や瓦ズレで管理不全空き家に指定されやすい。",
+    "calc": {
+      "tax": {
+        "land_sqm": 181.8,
+        "land_market_yen": 12397000,
+        "land_assessed_yen": 8677900,
+        "bldg_assessed_yen": 1274000,
+        "normal_land_tax_annual": 28926,
+        "normal_bldg_tax_annual": 21658,
+        "normal_total_tax_annual": 50584,
+        "heavy_effective_land_tax_annual": 103267,
+        "heavy_effective_total_tax_annual": 124925,
+        "heavy_principle_total_tax_annual": 169182,
+        "sarachi_total_tax_annual": 103267,
+        "extra_tax_annual_effective": 74341,
+        "extra_tax_5y_effective": 371705,
+        "extra_tax_10y_effective": 743410,
+        "land_tax_multiplier_effective": 3.57,
+        "land_tax_multiplier_principle": 5.1
+      },
+      "demolition": {
+        "unit_price_man_per_tsubo": 4.8,
+        "building_body_yen": 1680000,
+        "road_surcharge_yen": 0,
+        "exterior_fence_yen": 220000,
+        "residual_items_yen": 280000,
+        "asbestos_yen": 240000,
+        "total_demolition_yen": 2420000
+      },
+      "maintenance": {
+        "base_maint_annual": 232000,
+        "annual_keep_normal": 282584,
+        "annual_keep_monthly": 23549,
+        "annual_keep_heavy": 356925,
+        "keep_5y_normal": 1412920,
+        "keep_10y_normal": 2825840,
+        "keep_10y_heavy": 3420568
+      },
+      "disposal": {
+        "land_market_yen": 12397000,
+        "sarachi_gross_sale_yen": 12397000,
+        "sarachi_broker_fee_yen": 475101,
+        "sarachi_net_proceeds_yen": 9398632,
+        "furuya_gross_sale_yen": 9916720,
+        "furuya_broker_fee_yen": 393252,
+        "furuya_net_proceeds_yen": 9243468,
+        "kaitori_net_proceeds_yen": 5206740,
+        "best_sale_net_yen": 9398632,
+        "best_strategy_label": "解体して更地で仲介売却",
+        "net_benefit_vs_10y_keep_yen": 12819200
+      },
+      "hakajimai": null,
+      "ten_year_curve": [
+        {
+          "year": 1,
+          "year_cost": 282584,
+          "cumulative": 282584,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 2,
+          "year_cost": 282584,
+          "cumulative": 565168,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 3,
+          "year_cost": 356925,
+          "cumulative": 922093,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 4,
+          "year_cost": 536925,
+          "cumulative": 1459018,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 5,
+          "year_cost": 356925,
+          "cumulative": 1815943,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 6,
+          "year_cost": 356925,
+          "cumulative": 2172868,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 7,
+          "year_cost": 356925,
+          "cumulative": 2529793,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 8,
+          "year_cost": 536925,
+          "cumulative": 3066718,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 9,
+          "year_cost": 356925,
+          "cumulative": 3423643,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 10,
+          "year_cost": 356925,
+          "cumulative": 3780568,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        }
+      ]
+    },
+    "pref_cost_range": {
+      "cheapest_pref": "秋田県",
+      "cheapest_cost_yen": 2280000,
+      "priciest_pref": "東京都",
+      "priciest_cost_yen": 2700000,
+      "diff_yen": 420000
+    }
+  },
+  {
+    "slug": "wood-40tsubo-age40",
+    "name": "木造2階建 40坪・築40年のゆとり戸建て",
+    "short_name": "木造40坪（築40年）",
+    "category": "wood_standard",
+    "category_label": "標準木造戸建て",
+    "spec_note": "敷地60坪（198㎡）・延床40坪・庭木およびブロック塀あり",
+    "structure": "wood",
+    "floor_tsubo": 40,
+    "land_tsubo": 60,
+    "grave_sqm": 0,
+    "building_age_years": 40,
+    "road_condition": "normal",
+    "residual_level": "normal",
+    "has_asbestos_risk": true,
+    "market_demand_factor": 0.95,
+    "annual_extra_maint_yen": 20000,
+    "recommended_slot": "kaitai",
+    "summary": "地方都市や郊外分譲地に多い敷地60坪・延床40坪クラス。庭木の手入れやブロック塀の撤去費用が加算されるため、解体見積もりの業者間価格差が50万円以上開きやすい代表格。",
+    "calc": {
+      "tax": {
+        "land_sqm": 198.3,
+        "land_market_yen": 13965000,
+        "land_assessed_yen": 9775500,
+        "bldg_assessed_yen": 1456000,
+        "normal_land_tax_annual": 32585,
+        "normal_bldg_tax_annual": 24752,
+        "normal_total_tax_annual": 57337,
+        "heavy_effective_land_tax_annual": 116328,
+        "heavy_effective_total_tax_annual": 141080,
+        "heavy_principle_total_tax_annual": 190936,
+        "sarachi_total_tax_annual": 116328,
+        "extra_tax_annual_effective": 83743,
+        "extra_tax_5y_effective": 418715,
+        "extra_tax_10y_effective": 837430,
+        "land_tax_multiplier_effective": 3.57,
+        "land_tax_multiplier_principle": 5.1
+      },
+      "demolition": {
+        "unit_price_man_per_tsubo": 4.8,
+        "building_body_yen": 1920000,
+        "road_surcharge_yen": 0,
+        "exterior_fence_yen": 220000,
+        "residual_items_yen": 280000,
+        "asbestos_yen": 240000,
+        "total_demolition_yen": 2660000
+      },
+      "maintenance": {
+        "base_maint_annual": 237000,
+        "annual_keep_normal": 294337,
+        "annual_keep_monthly": 24528,
+        "annual_keep_heavy": 378080,
+        "keep_5y_normal": 1471685,
+        "keep_10y_normal": 2943370,
+        "keep_10y_heavy": 3613314
+      },
+      "disposal": {
+        "land_market_yen": 13965000,
+        "sarachi_gross_sale_yen": 13965000,
+        "sarachi_broker_fee_yen": 526845,
+        "sarachi_net_proceeds_yen": 10661827,
+        "furuya_gross_sale_yen": 11225200,
+        "furuya_broker_fee_yen": 436432,
+        "furuya_net_proceeds_yen": 10508768,
+        "kaitori_net_proceeds_yen": 5865300,
+        "best_sale_net_yen": 10661827,
+        "best_strategy_label": "解体して更地で仲介売却",
+        "net_benefit_vs_10y_keep_yen": 14275141
+      },
+      "hakajimai": null,
+      "ten_year_curve": [
+        {
+          "year": 1,
+          "year_cost": 294337,
+          "cumulative": 294337,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 2,
+          "year_cost": 294337,
+          "cumulative": 588674,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 3,
+          "year_cost": 378080,
+          "cumulative": 966754,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 4,
+          "year_cost": 558080,
+          "cumulative": 1524834,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 5,
+          "year_cost": 378080,
+          "cumulative": 1902914,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 6,
+          "year_cost": 378080,
+          "cumulative": 2280994,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 7,
+          "year_cost": 378080,
+          "cumulative": 2659074,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 8,
+          "year_cost": 558080,
+          "cumulative": 3217154,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 9,
+          "year_cost": 378080,
+          "cumulative": 3595234,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 10,
+          "year_cost": 378080,
+          "cumulative": 3973314,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        }
+      ]
+    },
+    "pref_cost_range": {
+      "cheapest_pref": "秋田県",
+      "cheapest_cost_yen": 2500000,
+      "priciest_pref": "東京都",
+      "priciest_cost_yen": 2980000,
+      "diff_yen": 480000
+    }
+  },
+  {
+    "slug": "hiraya-24tsubo-age45",
+    "name": "木造平屋 24坪・築45年の地方実家",
+    "short_name": "木造平屋24坪（築45年）",
+    "category": "wood_standard",
+    "category_label": "標準木造戸建て",
+    "spec_note": "敷地65坪（215㎡）・平屋24坪・瓦屋根面積広め",
+    "structure": "wood",
+    "floor_tsubo": 24,
+    "land_tsubo": 65,
+    "grave_sqm": 0,
+    "building_age_years": 45,
+    "road_condition": "normal",
+    "residual_level": "normal",
+    "has_asbestos_risk": true,
+    "market_demand_factor": 0.9,
+    "annual_extra_maint_yen": 15000,
+    "recommended_slot": "sell",
+    "summary": "平屋は2階建てに比べて同じ坪数でも基礎と屋根の面積が約1.5〜1.8倍広いため、坪単価ベースでは解体費用がやや割高になる一方、近年は平屋リノベーション需要から古家付きでの買取・仲介ニーズも根強い。",
+    "calc": {
+      "tax": {
+        "land_sqm": 214.9,
+        "land_market_yen": 14332500,
+        "land_assessed_yen": 10032750,
+        "bldg_assessed_yen": 873600,
+        "normal_land_tax_annual": 35761,
+        "normal_bldg_tax_annual": 14851,
+        "normal_total_tax_annual": 50612,
+        "heavy_effective_land_tax_annual": 119390,
+        "heavy_effective_total_tax_annual": 134241,
+        "heavy_principle_total_tax_annual": 185408,
+        "sarachi_total_tax_annual": 119390,
+        "extra_tax_annual_effective": 83629,
+        "extra_tax_5y_effective": 418145,
+        "extra_tax_10y_effective": 836290,
+        "land_tax_multiplier_effective": 3.34,
+        "land_tax_multiplier_principle": 4.77
+      },
+      "demolition": {
+        "unit_price_man_per_tsubo": 5.38,
+        "building_body_yen": 1291200,
+        "road_surcharge_yen": 0,
+        "exterior_fence_yen": 220000,
+        "residual_items_yen": 280000,
+        "asbestos_yen": 240000,
+        "total_demolition_yen": 2031200
+      },
+      "maintenance": {
+        "base_maint_annual": 232000,
+        "annual_keep_normal": 282612,
+        "annual_keep_monthly": 23551,
+        "annual_keep_heavy": 366241,
+        "keep_5y_normal": 1413060,
+        "keep_10y_normal": 2826120,
+        "keep_10y_heavy": 3495152
+      },
+      "disposal": {
+        "land_market_yen": 14332500,
+        "sarachi_gross_sale_yen": 14332500,
+        "sarachi_broker_fee_yen": 538972,
+        "sarachi_net_proceeds_yen": 11642938,
+        "furuya_gross_sale_yen": 12093616,
+        "furuya_broker_fee_yen": 465089,
+        "furuya_net_proceeds_yen": 11348527,
+        "kaitori_net_proceeds_yen": 6019650,
+        "best_sale_net_yen": 11642938,
+        "best_strategy_label": "解体して更地で仲介売却",
+        "net_benefit_vs_10y_keep_yen": 15138090
+      },
+      "hakajimai": null,
+      "ten_year_curve": [
+        {
+          "year": 1,
+          "year_cost": 282612,
+          "cumulative": 282612,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 2,
+          "year_cost": 282612,
+          "cumulative": 565224,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 3,
+          "year_cost": 366241,
+          "cumulative": 931465,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 4,
+          "year_cost": 546241,
+          "cumulative": 1477706,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 5,
+          "year_cost": 366241,
+          "cumulative": 1843947,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 6,
+          "year_cost": 366241,
+          "cumulative": 2210188,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 7,
+          "year_cost": 366241,
+          "cumulative": 2576429,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 8,
+          "year_cost": 546241,
+          "cumulative": 3122670,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 9,
+          "year_cost": 366241,
+          "cumulative": 3488911,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 10,
+          "year_cost": 366241,
+          "cumulative": 3855152,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        }
+      ]
+    },
+    "pref_cost_range": {
+      "cheapest_pref": "秋田県",
+      "cheapest_cost_yen": 1923200,
+      "priciest_pref": "東京都",
+      "priciest_cost_yen": 2244800,
+      "diff_yen": 321600
+    }
+  },
+  {
+    "slug": "nisetai-50tsubo-age35",
+    "name": "木造2階建 50坪・築35年の二世帯住宅",
+    "short_name": "二世帯50坪（築35年）",
+    "category": "wood_standard",
+    "category_label": "標準木造戸建て",
+    "spec_note": "敷地75坪（248㎡）・延床50坪・キッチン風呂2系統",
+    "structure": "wood",
+    "floor_tsubo": 50,
+    "land_tsubo": 75,
+    "grave_sqm": 0,
+    "building_age_years": 35,
+    "road_condition": "normal",
+    "residual_level": "heavy",
+    "has_asbestos_risk": false,
+    "market_demand_factor": 0.88,
+    "annual_extra_maint_yen": 25000,
+    "recommended_slot": "sell",
+    "summary": "水回り設備が2世帯分あり、家財道具（残置物）も通常の1.5〜2倍残りやすい大型二世帯実家。中古のままでは買い手が限られるため、敷地を2区画に分割できる立地かによって土地売却額が大きく変わる。",
+    "calc": {
+      "tax": {
+        "land_sqm": 247.9,
+        "land_market_yen": 16170000,
+        "land_assessed_yen": 11319000,
+        "bldg_assessed_yen": 2002000,
+        "normal_land_tax_annual": 45020,
+        "normal_bldg_tax_annual": 34034,
+        "normal_total_tax_annual": 79054,
+        "heavy_effective_land_tax_annual": 134696,
+        "heavy_effective_total_tax_annual": 168730,
+        "heavy_principle_total_tax_annual": 226457,
+        "sarachi_total_tax_annual": 134696,
+        "extra_tax_annual_effective": 89676,
+        "extra_tax_5y_effective": 448380,
+        "extra_tax_10y_effective": 896760,
+        "land_tax_multiplier_effective": 2.99,
+        "land_tax_multiplier_principle": 4.27
+      },
+      "demolition": {
+        "unit_price_man_per_tsubo": 4.8,
+        "building_body_yen": 2400000,
+        "road_surcharge_yen": 0,
+        "exterior_fence_yen": 319000,
+        "residual_items_yen": 580000,
+        "asbestos_yen": 0,
+        "total_demolition_yen": 3299000
+      },
+      "maintenance": {
+        "base_maint_annual": 242000,
+        "annual_keep_normal": 321054,
+        "annual_keep_monthly": 26754,
+        "annual_keep_heavy": 410730,
+        "keep_5y_normal": 1605270,
+        "keep_10y_normal": 3210540,
+        "keep_10y_heavy": 3927948
+      },
+      "disposal": {
+        "land_market_yen": 16170000,
+        "sarachi_gross_sale_yen": 16170000,
+        "sarachi_broker_fee_yen": 599610,
+        "sarachi_net_proceeds_yen": 12136694,
+        "furuya_gross_sale_yen": 12818020,
+        "furuya_broker_fee_yen": 488995,
+        "furuya_net_proceeds_yen": 11749025,
+        "kaitori_net_proceeds_yen": 6791400,
+        "best_sale_net_yen": 12136694,
+        "best_strategy_label": "解体して更地で仲介売却",
+        "net_benefit_vs_10y_keep_yen": 16064642
+      },
+      "hakajimai": null,
+      "ten_year_curve": [
+        {
+          "year": 1,
+          "year_cost": 321054,
+          "cumulative": 321054,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 2,
+          "year_cost": 321054,
+          "cumulative": 642108,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 3,
+          "year_cost": 410730,
+          "cumulative": 1052838,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 4,
+          "year_cost": 590730,
+          "cumulative": 1643568,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 5,
+          "year_cost": 410730,
+          "cumulative": 2054298,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 6,
+          "year_cost": 410730,
+          "cumulative": 2465028,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 7,
+          "year_cost": 410730,
+          "cumulative": 2875758,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 8,
+          "year_cost": 590730,
+          "cumulative": 3466488,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 9,
+          "year_cost": 410730,
+          "cumulative": 3877218,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 10,
+          "year_cost": 410730,
+          "cumulative": 4287948,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        }
+      ]
+    },
+    "pref_cost_range": {
+      "cheapest_pref": "秋田県",
+      "cheapest_cost_yen": 3099000,
+      "priciest_pref": "東京都",
+      "priciest_cost_yen": 3699000,
+      "diff_yen": 600000
+    }
+  },
+  {
+    "slug": "suburban-newtown-32tsubo-age38",
+    "name": "郊外ニュータウン 木造32坪・築38年",
+    "short_name": "郊外団地32坪（築38年）",
+    "category": "wood_standard",
+    "category_label": "標準木造戸建て",
+    "spec_note": "敷地50坪（165㎡）・延床32坪・昭和後期開発の郊外住宅団地",
+    "structure": "wood",
+    "floor_tsubo": 32,
+    "land_tsubo": 50,
+    "grave_sqm": 0,
+    "building_age_years": 38,
+    "road_condition": "normal",
+    "residual_level": "normal",
+    "has_asbestos_risk": true,
+    "market_demand_factor": 0.94,
+    "annual_extra_maint_yen": 0,
+    "recommended_slot": "sell",
+    "summary": "昭和50〜60年代に一斉開発された郊外ニュータウンの実家。同世代の空き家が周囲で急増して供給過多になりやすいため、近隣の売り出し物件が増える前に早期査定へ動くかで手取り額に数百万円の差がつく。",
+    "calc": {
+      "tax": {
+        "land_sqm": 165.3,
+        "land_market_yen": 11515000,
+        "land_assessed_yen": 8060500,
+        "bldg_assessed_yen": 1281280,
+        "normal_land_tax_annual": 26868,
+        "normal_bldg_tax_annual": 21782,
+        "normal_total_tax_annual": 48650,
+        "heavy_effective_land_tax_annual": 95920,
+        "heavy_effective_total_tax_annual": 117702,
+        "heavy_principle_total_tax_annual": 158810,
+        "sarachi_total_tax_annual": 95920,
+        "extra_tax_annual_effective": 69052,
+        "extra_tax_5y_effective": 345260,
+        "extra_tax_10y_effective": 690520,
+        "land_tax_multiplier_effective": 3.57,
+        "land_tax_multiplier_principle": 5.1
+      },
+      "demolition": {
+        "unit_price_man_per_tsubo": 4.8,
+        "building_body_yen": 1536000,
+        "road_surcharge_yen": 0,
+        "exterior_fence_yen": 220000,
+        "residual_items_yen": 280000,
+        "asbestos_yen": 240000,
+        "total_demolition_yen": 2276000
+      },
+      "maintenance": {
+        "base_maint_annual": 217000,
+        "annual_keep_normal": 265650,
+        "annual_keep_monthly": 22138,
+        "annual_keep_heavy": 334702,
+        "keep_5y_normal": 1328250,
+        "keep_10y_normal": 2656500,
+        "keep_10y_heavy": 3208916
+      },
+      "disposal": {
+        "land_market_yen": 11515000,
+        "sarachi_gross_sale_yen": 11515000,
+        "sarachi_broker_fee_yen": 445995,
+        "sarachi_net_proceeds_yen": 8697085,
+        "furuya_gross_sale_yen": 9188080,
+        "furuya_broker_fee_yen": 369207,
+        "furuya_net_proceeds_yen": 8538873,
+        "kaitori_net_proceeds_yen": 4836300,
+        "best_sale_net_yen": 8697085,
+        "best_strategy_label": "解体して更地で仲介売却",
+        "net_benefit_vs_10y_keep_yen": 11906001
+      },
+      "hakajimai": null,
+      "ten_year_curve": [
+        {
+          "year": 1,
+          "year_cost": 265650,
+          "cumulative": 265650,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 2,
+          "year_cost": 265650,
+          "cumulative": 531300,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 3,
+          "year_cost": 334702,
+          "cumulative": 866002,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 4,
+          "year_cost": 514702,
+          "cumulative": 1380704,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 5,
+          "year_cost": 334702,
+          "cumulative": 1715406,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 6,
+          "year_cost": 334702,
+          "cumulative": 2050108,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 7,
+          "year_cost": 334702,
+          "cumulative": 2384810,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 8,
+          "year_cost": 514702,
+          "cumulative": 2899512,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 9,
+          "year_cost": 334702,
+          "cumulative": 3234214,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 10,
+          "year_cost": 334702,
+          "cumulative": 3568916,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        }
+      ]
+    },
+    "pref_cost_range": {
+      "cheapest_pref": "秋田県",
+      "cheapest_cost_yen": 2148000,
+      "priciest_pref": "東京都",
+      "priciest_cost_yen": 2532000,
+      "diff_yen": 384000
+    }
+  },
+  {
+    "slug": "kominka-farm-55tsubo-age60",
+    "name": "地方農家住宅 55坪・築60年（母屋＋土蔵・納屋）",
+    "short_name": "農家住宅55坪（母屋＋納屋）",
+    "category": "large_rural",
+    "category_label": "地方大型・古民家・農家",
+    "spec_note": "敷地150坪（495㎡）・延床55坪（納屋含）・残置物多め",
+    "structure": "wood",
+    "floor_tsubo": 55,
+    "land_tsubo": 150,
+    "grave_sqm": 0,
+    "building_age_years": 60,
+    "road_condition": "normal",
+    "residual_level": "heavy",
+    "has_asbestos_risk": true,
+    "market_demand_factor": 0.52,
+    "annual_extra_maint_yen": 65000,
+    "recommended_slot": "kaitai",
+    "summary": "広い母屋に加えて納屋・農機具倉庫・広い庭がある地方の伝統的な農家実家。先行して全解体すると300万円超の出費になり地価で回収できないケースが多いため、解体前に訳あり・古民家買取と解体費用の双方を見積もるのが鉄則。",
+    "calc": {
+      "tax": {
+        "land_sqm": 495.9,
+        "land_market_yen": 19110000,
+        "land_assessed_yen": 13377000,
+        "bldg_assessed_yen": 2002000,
+        "normal_land_tax_annual": 71197,
+        "normal_bldg_tax_annual": 34034,
+        "normal_total_tax_annual": 105231,
+        "heavy_effective_land_tax_annual": 159186,
+        "heavy_effective_total_tax_annual": 193220,
+        "heavy_principle_total_tax_annual": 261443,
+        "sarachi_total_tax_annual": 159186,
+        "extra_tax_annual_effective": 87989,
+        "extra_tax_5y_effective": 439945,
+        "extra_tax_10y_effective": 879890,
+        "land_tax_multiplier_effective": 2.24,
+        "land_tax_multiplier_principle": 3.19
+      },
+      "demolition": {
+        "unit_price_man_per_tsubo": 4.8,
+        "building_body_yen": 2640000,
+        "road_surcharge_yen": 0,
+        "exterior_fence_yen": 319000,
+        "residual_items_yen": 580000,
+        "asbestos_yen": 240000,
+        "total_demolition_yen": 3779000
+      },
+      "maintenance": {
+        "base_maint_annual": 282000,
+        "annual_keep_normal": 387231,
+        "annual_keep_monthly": 32269,
+        "annual_keep_heavy": 475220,
+        "keep_5y_normal": 1936155,
+        "keep_10y_normal": 3872310,
+        "keep_10y_heavy": 4576222
+      },
+      "disposal": {
+        "land_market_yen": 19110000,
+        "sarachi_gross_sale_yen": 19110000,
+        "sarachi_broker_fee_yen": 696630,
+        "sarachi_net_proceeds_yen": 14475184,
+        "furuya_gross_sale_yen": 15246820,
+        "furuya_broker_fee_yen": 569145,
+        "furuya_net_proceeds_yen": 14097675,
+        "kaitori_net_proceeds_yen": 8026200,
+        "best_sale_net_yen": 14475184,
+        "best_strategy_label": "解体して更地で仲介売却",
+        "net_benefit_vs_10y_keep_yen": 19051406
+      },
+      "hakajimai": null,
+      "ten_year_curve": [
+        {
+          "year": 1,
+          "year_cost": 387231,
+          "cumulative": 387231,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 2,
+          "year_cost": 387231,
+          "cumulative": 774462,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 3,
+          "year_cost": 475220,
+          "cumulative": 1249682,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 4,
+          "year_cost": 655220,
+          "cumulative": 1904902,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 5,
+          "year_cost": 475220,
+          "cumulative": 2380122,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 6,
+          "year_cost": 475220,
+          "cumulative": 2855342,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 7,
+          "year_cost": 475220,
+          "cumulative": 3330562,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 8,
+          "year_cost": 655220,
+          "cumulative": 3985782,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 9,
+          "year_cost": 475220,
+          "cumulative": 4461002,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 10,
+          "year_cost": 475220,
+          "cumulative": 4936222,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        }
+      ]
+    },
+    "pref_cost_range": {
+      "cheapest_pref": "秋田県",
+      "cheapest_cost_yen": 3559000,
+      "priciest_pref": "東京都",
+      "priciest_cost_yen": 4219000,
+      "diff_yen": 660000
+    }
+  },
+  {
+    "slug": "kominka-70tsubo-age75",
+    "name": "伝統古民家 70坪・築75年（太梁・日本瓦・広大敷地）",
+    "short_name": "大型古民家70坪（築75年）",
+    "category": "large_rural",
+    "category_label": "地方大型・古民家・農家",
+    "spec_note": "敷地200坪（660㎡）・延床70坪・庭石・井戸あり",
+    "structure": "wood",
+    "floor_tsubo": 70,
+    "land_tsubo": 200,
+    "grave_sqm": 0,
+    "building_age_years": 75,
+    "road_condition": "normal",
+    "residual_level": "heavy",
+    "has_asbestos_risk": false,
+    "market_demand_factor": 0.45,
+    "annual_extra_maint_yen": 85000,
+    "recommended_slot": "akiya",
+    "summary": "延床70坪・敷地200坪の超大型古民家。200㎡を超える土地部分は住宅用地特例の軽減率が1/6ではなく1/3になるほか、草刈りや屋根維持費だけで年20万円超が流出するため、古民家再生・専門買取への早期打診が最優先。",
+    "calc": {
+      "tax": {
+        "land_sqm": 661.2,
+        "land_market_yen": 22050000,
+        "land_assessed_yen": 15435000,
+        "bldg_assessed_yen": 2548000,
+        "normal_land_tax_annual": 87337,
+        "normal_bldg_tax_annual": 43316,
+        "normal_total_tax_annual": 130653,
+        "heavy_effective_land_tax_annual": 183676,
+        "heavy_effective_total_tax_annual": 226992,
+        "heavy_principle_total_tax_annual": 305711,
+        "sarachi_total_tax_annual": 183676,
+        "extra_tax_annual_effective": 96339,
+        "extra_tax_5y_effective": 481695,
+        "extra_tax_10y_effective": 963390,
+        "land_tax_multiplier_effective": 2.1,
+        "land_tax_multiplier_principle": 3.0
+      },
+      "demolition": {
+        "unit_price_man_per_tsubo": 4.8,
+        "building_body_yen": 3360000,
+        "road_surcharge_yen": 0,
+        "exterior_fence_yen": 319000,
+        "residual_items_yen": 580000,
+        "asbestos_yen": 0,
+        "total_demolition_yen": 4259000
+      },
+      "maintenance": {
+        "base_maint_annual": 302000,
+        "annual_keep_normal": 432653,
+        "annual_keep_monthly": 36054,
+        "annual_keep_heavy": 528992,
+        "keep_5y_normal": 2163265,
+        "keep_10y_normal": 4326530,
+        "keep_10y_heavy": 5097242
+      },
+      "disposal": {
+        "land_market_yen": 22050000,
+        "sarachi_gross_sale_yen": 22050000,
+        "sarachi_broker_fee_yen": 793650,
+        "sarachi_net_proceeds_yen": 16813674,
+        "furuya_gross_sale_yen": 17675620,
+        "furuya_broker_fee_yen": 649295,
+        "furuya_net_proceeds_yen": 16446325,
+        "kaitori_net_proceeds_yen": 9261000,
+        "best_sale_net_yen": 16813674,
+        "best_strategy_label": "解体して更地で仲介売却",
+        "net_benefit_vs_10y_keep_yen": 21910916
+      },
+      "hakajimai": null,
+      "ten_year_curve": [
+        {
+          "year": 1,
+          "year_cost": 432653,
+          "cumulative": 432653,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 2,
+          "year_cost": 432653,
+          "cumulative": 865306,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 3,
+          "year_cost": 528992,
+          "cumulative": 1394298,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 4,
+          "year_cost": 708992,
+          "cumulative": 2103290,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 5,
+          "year_cost": 528992,
+          "cumulative": 2632282,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 6,
+          "year_cost": 528992,
+          "cumulative": 3161274,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 7,
+          "year_cost": 528992,
+          "cumulative": 3690266,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 8,
+          "year_cost": 708992,
+          "cumulative": 4399258,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 9,
+          "year_cost": 528992,
+          "cumulative": 4928250,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 10,
+          "year_cost": 528992,
+          "cumulative": 5457242,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        }
+      ]
+    },
+    "pref_cost_range": {
+      "cheapest_pref": "秋田県",
+      "cheapest_cost_yen": 3979000,
+      "priciest_pref": "東京都",
+      "priciest_cost_yen": 4819000,
+      "diff_yen": 840000
+    }
+  },
+  {
+    "slug": "snow-country-wood-45tsubo",
+    "name": "豪雪地帯 木造45坪・築42年（高床・雪下ろし必須）",
+    "short_name": "豪雪地帯45坪（雪下ろし有）",
+    "category": "large_rural",
+    "category_label": "地方大型・古民家・農家",
+    "spec_note": "敷地80坪（264㎡）・延床45坪・冬季雪下ろし外注必須",
+    "structure": "wood",
+    "floor_tsubo": 45,
+    "land_tsubo": 80,
+    "grave_sqm": 0,
+    "building_age_years": 42,
+    "road_condition": "normal",
+    "residual_level": "normal",
+    "has_asbestos_risk": true,
+    "market_demand_factor": 0.62,
+    "annual_extra_maint_yen": 120000,
+    "recommended_slot": "akiya",
+    "summary": "東北・北陸・北海道などの豪雪地帯にある実家。空き家にすると毎冬の雪下ろし・排雪委託だけで年間10〜15万円が確実に消え、1冬放置すると倒壊して特定空き家・損害賠償リスクに直結するため、5年放置の赤字幅が全国最大級となる。",
+    "calc": {
+      "tax": {
+        "land_sqm": 264.5,
+        "land_market_yen": 12152000,
+        "land_assessed_yen": 8506400,
+        "bldg_assessed_yen": 1638000,
+        "normal_land_tax_annual": 35269,
+        "normal_bldg_tax_annual": 27846,
+        "normal_total_tax_annual": 63115,
+        "heavy_effective_land_tax_annual": 101226,
+        "heavy_effective_total_tax_annual": 129072,
+        "heavy_principle_total_tax_annual": 172455,
+        "sarachi_total_tax_annual": 101226,
+        "extra_tax_annual_effective": 65957,
+        "extra_tax_5y_effective": 329785,
+        "extra_tax_10y_effective": 659570,
+        "land_tax_multiplier_effective": 2.87,
+        "land_tax_multiplier_principle": 4.1
+      },
+      "demolition": {
+        "unit_price_man_per_tsubo": 4.8,
+        "building_body_yen": 2160000,
+        "road_surcharge_yen": 0,
+        "exterior_fence_yen": 319000,
+        "residual_items_yen": 280000,
+        "asbestos_yen": 240000,
+        "total_demolition_yen": 2999000
+      },
+      "maintenance": {
+        "base_maint_annual": 337000,
+        "annual_keep_normal": 400115,
+        "annual_keep_monthly": 33343,
+        "annual_keep_heavy": 466072,
+        "keep_5y_normal": 2000575,
+        "keep_10y_normal": 4001150,
+        "keep_10y_heavy": 4528806
+      },
+      "disposal": {
+        "land_market_yen": 12152000,
+        "sarachi_gross_sale_yen": 12152000,
+        "sarachi_broker_fee_yen": 467016,
+        "sarachi_net_proceeds_yen": 8584758,
+        "furuya_gross_sale_yen": 9206740,
+        "furuya_broker_fee_yen": 369822,
+        "furuya_net_proceeds_yen": 8556918,
+        "kaitori_net_proceeds_yen": 5103840,
+        "best_sale_net_yen": 8584758,
+        "best_strategy_label": "解体して更地で仲介売却",
+        "net_benefit_vs_10y_keep_yen": 13113564
+      },
+      "hakajimai": null,
+      "ten_year_curve": [
+        {
+          "year": 1,
+          "year_cost": 400115,
+          "cumulative": 400115,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 2,
+          "year_cost": 400115,
+          "cumulative": 800230,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 3,
+          "year_cost": 466072,
+          "cumulative": 1266302,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 4,
+          "year_cost": 646072,
+          "cumulative": 1912374,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 5,
+          "year_cost": 466072,
+          "cumulative": 2378446,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 6,
+          "year_cost": 466072,
+          "cumulative": 2844518,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 7,
+          "year_cost": 466072,
+          "cumulative": 3310590,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 8,
+          "year_cost": 646072,
+          "cumulative": 3956662,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 9,
+          "year_cost": 466072,
+          "cumulative": 4422734,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 10,
+          "year_cost": 466072,
+          "cumulative": 4888806,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        }
+      ]
+    },
+    "pref_cost_range": {
+      "cheapest_pref": "秋田県",
+      "cheapest_cost_yen": 2819000,
+      "priciest_pref": "東京都",
+      "priciest_cost_yen": 3359000,
+      "diff_yen": 540000
+    }
+  },
+  {
+    "slug": "rural-farmland-attached-42tsubo",
+    "name": "農地（畑・田）付き地方実家 42坪・築48年",
+    "short_name": "農地付き実家42坪",
+    "category": "large_rural",
+    "category_label": "地方大型・古民家・農家",
+    "spec_note": "宅地90坪＋隣接農地・延床42坪・農地法許可課題あり",
+    "structure": "wood",
+    "floor_tsubo": 42,
+    "land_tsubo": 90,
+    "grave_sqm": 0,
+    "building_age_years": 48,
+    "road_condition": "normal",
+    "residual_level": "heavy",
+    "has_asbestos_risk": true,
+    "market_demand_factor": 0.48,
+    "annual_extra_maint_yen": 55000,
+    "recommended_slot": "akiya",
+    "summary": "宅地と隣接する畑・田んぼをセットで相続したケース。農地法3条・5条の制限により一般の不動産仲介では断られやすいため、農地転用や宅地切り離しに精通した空き家専門買取業者への相談が不可欠。",
+    "calc": {
+      "tax": {
+        "land_sqm": 297.5,
+        "land_market_yen": 10584000,
+        "land_assessed_yen": 7408800,
+        "bldg_assessed_yen": 1528800,
+        "normal_land_tax_annual": 32790,
+        "normal_bldg_tax_annual": 25990,
+        "normal_total_tax_annual": 58780,
+        "heavy_effective_land_tax_annual": 88165,
+        "heavy_effective_total_tax_annual": 114155,
+        "heavy_principle_total_tax_annual": 151940,
+        "sarachi_total_tax_annual": 88165,
+        "extra_tax_annual_effective": 55375,
+        "extra_tax_5y_effective": 276875,
+        "extra_tax_10y_effective": 553750,
+        "land_tax_multiplier_effective": 2.69,
+        "land_tax_multiplier_principle": 3.84
+      },
+      "demolition": {
+        "unit_price_man_per_tsubo": 4.8,
+        "building_body_yen": 2016000,
+        "road_surcharge_yen": 0,
+        "exterior_fence_yen": 220000,
+        "residual_items_yen": 580000,
+        "asbestos_yen": 240000,
+        "total_demolition_yen": 3056000
+      },
+      "maintenance": {
+        "base_maint_annual": 272000,
+        "annual_keep_normal": 330780,
+        "annual_keep_monthly": 27565,
+        "annual_keep_heavy": 386155,
+        "keep_5y_normal": 1653900,
+        "keep_10y_normal": 3307800,
+        "keep_10y_heavy": 3750800
+      },
+      "disposal": {
+        "land_market_yen": 10584000,
+        "sarachi_gross_sale_yen": 10584000,
+        "sarachi_broker_fee_yen": 415272,
+        "sarachi_net_proceeds_yen": 7024563,
+        "furuya_gross_sale_yen": 7654720,
+        "furuya_broker_fee_yen": 330000,
+        "furuya_net_proceeds_yen": 6744720,
+        "kaitori_net_proceeds_yen": 4445280,
+        "best_sale_net_yen": 7024563,
+        "best_strategy_label": "解体して更地で仲介売却",
+        "net_benefit_vs_10y_keep_yen": 10775363
+      },
+      "hakajimai": null,
+      "ten_year_curve": [
+        {
+          "year": 1,
+          "year_cost": 330780,
+          "cumulative": 330780,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 2,
+          "year_cost": 330780,
+          "cumulative": 661560,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 3,
+          "year_cost": 386155,
+          "cumulative": 1047715,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 4,
+          "year_cost": 566155,
+          "cumulative": 1613870,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 5,
+          "year_cost": 386155,
+          "cumulative": 2000025,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 6,
+          "year_cost": 386155,
+          "cumulative": 2386180,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 7,
+          "year_cost": 386155,
+          "cumulative": 2772335,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 8,
+          "year_cost": 566155,
+          "cumulative": 3338490,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 9,
+          "year_cost": 386155,
+          "cumulative": 3724645,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 10,
+          "year_cost": 386155,
+          "cumulative": 4110800,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        }
+      ]
+    },
+    "pref_cost_range": {
+      "cheapest_pref": "秋田県",
+      "cheapest_cost_yen": 2888000,
+      "priciest_pref": "東京都",
+      "priciest_cost_yen": 3392000,
+      "diff_yen": 504000
+    }
+  },
+  {
+    "slug": "urban-control-area-38tsubo",
+    "name": "市街化調整区域の木造実家 38坪・築40年",
+    "short_name": "市街化調整区域38坪",
+    "category": "large_rural",
+    "category_label": "地方大型・古民家・農家",
+    "spec_note": "敷地85坪（280㎡）・延床38坪・再建築要件制限あり",
+    "structure": "wood",
+    "floor_tsubo": 38,
+    "land_tsubo": 85,
+    "grave_sqm": 0,
+    "building_age_years": 40,
+    "road_condition": "normal",
+    "residual_level": "normal",
+    "has_asbestos_risk": true,
+    "market_demand_factor": 0.55,
+    "annual_extra_maint_yen": 30000,
+    "recommended_slot": "akiya",
+    "summary": "市街化調整区域にある実家は、不用意に建物を先に解体して更地にすると「第三者が再建築できなくなる」致命的リスクがある。必ず建物を残した状態で専門買取・仲介査定を受けるべき代表ケース。",
+    "calc": {
+      "tax": {
+        "land_sqm": 281.0,
+        "land_market_yen": 11453750,
+        "land_assessed_yen": 8017625,
+        "bldg_assessed_yen": 1383200,
+        "normal_land_tax_annual": 34429,
+        "normal_bldg_tax_annual": 23514,
+        "normal_total_tax_annual": 57943,
+        "heavy_effective_land_tax_annual": 95410,
+        "heavy_effective_total_tax_annual": 118924,
+        "heavy_principle_total_tax_annual": 159814,
+        "sarachi_total_tax_annual": 95410,
+        "extra_tax_annual_effective": 60981,
+        "extra_tax_5y_effective": 304905,
+        "extra_tax_10y_effective": 609810,
+        "land_tax_multiplier_effective": 2.77,
+        "land_tax_multiplier_principle": 3.96
+      },
+      "demolition": {
+        "unit_price_man_per_tsubo": 4.8,
+        "building_body_yen": 1824000,
+        "road_surcharge_yen": 0,
+        "exterior_fence_yen": 220000,
+        "residual_items_yen": 280000,
+        "asbestos_yen": 240000,
+        "total_demolition_yen": 2564000
+      },
+      "maintenance": {
+        "base_maint_annual": 247000,
+        "annual_keep_normal": 304943,
+        "annual_keep_monthly": 25412,
+        "annual_keep_heavy": 365924,
+        "keep_5y_normal": 1524715,
+        "keep_10y_normal": 3049430,
+        "keep_10y_heavy": 3537278
+      },
+      "disposal": {
+        "land_market_yen": 11453750,
+        "sarachi_gross_sale_yen": 11453750,
+        "sarachi_broker_fee_yen": 443974,
+        "sarachi_net_proceeds_yen": 8350366,
+        "furuya_gross_sale_yen": 8893120,
+        "furuya_broker_fee_yen": 359473,
+        "furuya_net_proceeds_yen": 8253647,
+        "kaitori_net_proceeds_yen": 4810575,
+        "best_sale_net_yen": 8350366,
+        "best_strategy_label": "解体して更地で仲介売却",
+        "net_benefit_vs_10y_keep_yen": 11887644
+      },
+      "hakajimai": null,
+      "ten_year_curve": [
+        {
+          "year": 1,
+          "year_cost": 304943,
+          "cumulative": 304943,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 2,
+          "year_cost": 304943,
+          "cumulative": 609886,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 3,
+          "year_cost": 365924,
+          "cumulative": 975810,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 4,
+          "year_cost": 545924,
+          "cumulative": 1521734,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 5,
+          "year_cost": 365924,
+          "cumulative": 1887658,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 6,
+          "year_cost": 365924,
+          "cumulative": 2253582,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 7,
+          "year_cost": 365924,
+          "cumulative": 2619506,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 8,
+          "year_cost": 545924,
+          "cumulative": 3165430,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 9,
+          "year_cost": 365924,
+          "cumulative": 3531354,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 10,
+          "year_cost": 365924,
+          "cumulative": 3897278,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        }
+      ]
+    },
+    "pref_cost_range": {
+      "cheapest_pref": "秋田県",
+      "cheapest_cost_yen": 2412000,
+      "priciest_pref": "東京都",
+      "priciest_cost_yen": 2868000,
+      "diff_yen": 456000
+    }
+  },
+  {
+    "slug": "villa-resort-akiya-28tsubo",
+    "name": "地方別荘・リゾート空き家 28坪・築35年",
+    "short_name": "別荘空き家28坪（管理費有）",
+    "category": "large_rural",
+    "category_label": "地方大型・古民家・農家",
+    "spec_note": "敷地100坪（330㎡）・延床28坪・別荘地管理費および傾斜地",
+    "structure": "wood",
+    "floor_tsubo": 28,
+    "land_tsubo": 100,
+    "grave_sqm": 0,
+    "building_age_years": 35,
+    "road_condition": "slope",
+    "residual_level": "normal",
+    "has_asbestos_risk": false,
+    "market_demand_factor": 0.35,
+    "annual_extra_maint_yen": 96000,
+    "recommended_slot": "akiya",
+    "summary": "親が購入した別荘・リゾート地の戸建て。固定資産税に加えて別荘地管理費（年6〜15万円）が永続的に発生し、傾斜地のため解体費用も約1.3倍かかることから、1年でも早く手放すほど累積赤字を止められる。",
+    "calc": {
+      "tax": {
+        "land_sqm": 330.6,
+        "land_market_yen": 8575000,
+        "land_assessed_yen": 6002500,
+        "bldg_assessed_yen": 1121120,
+        "normal_land_tax_annual": 27912,
+        "normal_bldg_tax_annual": 19059,
+        "normal_total_tax_annual": 46971,
+        "heavy_effective_land_tax_annual": 71430,
+        "heavy_effective_total_tax_annual": 90489,
+        "heavy_principle_total_tax_annual": 121102,
+        "sarachi_total_tax_annual": 71430,
+        "extra_tax_annual_effective": 43518,
+        "extra_tax_5y_effective": 217590,
+        "extra_tax_10y_effective": 435180,
+        "land_tax_multiplier_effective": 2.56,
+        "land_tax_multiplier_principle": 3.66
+      },
+      "demolition": {
+        "unit_price_man_per_tsubo": 4.8,
+        "building_body_yen": 1344000,
+        "road_surcharge_yen": 376320,
+        "exterior_fence_yen": 220000,
+        "residual_items_yen": 280000,
+        "asbestos_yen": 0,
+        "total_demolition_yen": 2220320
+      },
+      "maintenance": {
+        "base_maint_annual": 313000,
+        "annual_keep_normal": 359971,
+        "annual_keep_monthly": 29998,
+        "annual_keep_heavy": 403489,
+        "keep_5y_normal": 1799855,
+        "keep_10y_normal": 3599710,
+        "keep_10y_heavy": 3947854
+      },
+      "disposal": {
+        "land_market_yen": 8575000,
+        "sarachi_gross_sale_yen": 8575000,
+        "sarachi_broker_fee_yen": 348975,
+        "sarachi_net_proceeds_yen": 5934275,
+        "furuya_gross_sale_yen": 6411338,
+        "furuya_broker_fee_yen": 330000,
+        "furuya_net_proceeds_yen": 5801338,
+        "kaitori_net_proceeds_yen": 3601500,
+        "best_sale_net_yen": 5934275,
+        "best_strategy_label": "解体して更地で仲介売却",
+        "net_benefit_vs_10y_keep_yen": 9882129
+      },
+      "hakajimai": null,
+      "ten_year_curve": [
+        {
+          "year": 1,
+          "year_cost": 359971,
+          "cumulative": 359971,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 2,
+          "year_cost": 359971,
+          "cumulative": 719942,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 3,
+          "year_cost": 403489,
+          "cumulative": 1123431,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 4,
+          "year_cost": 583489,
+          "cumulative": 1706920,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 5,
+          "year_cost": 403489,
+          "cumulative": 2110409,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 6,
+          "year_cost": 403489,
+          "cumulative": 2513898,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 7,
+          "year_cost": 403489,
+          "cumulative": 2917387,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 8,
+          "year_cost": 583489,
+          "cumulative": 3500876,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 9,
+          "year_cost": 403489,
+          "cumulative": 3904365,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 10,
+          "year_cost": 403489,
+          "cumulative": 4307854,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        }
+      ]
+    },
+    "pref_cost_range": {
+      "cheapest_pref": "秋田県",
+      "cheapest_cost_yen": 2076960,
+      "priciest_pref": "東京都",
+      "priciest_cost_yen": 2507040,
+      "diff_yen": 430080
+    }
+  },
+  {
+    "slug": "light-steel-32tsubo-age35",
+    "name": "軽量鉄骨造（ハウスメーカー）32坪・築35年",
+    "short_name": "軽量鉄骨32坪（築35年）",
+    "category": "steel_rc",
+    "category_label": "鉄骨・RC・店舗併用",
+    "spec_note": "敷地50坪（165㎡）・軽量鉄骨2階建32坪・大手メーカー施工",
+    "structure": "steel",
+    "floor_tsubo": 32,
+    "land_tsubo": 50,
+    "grave_sqm": 0,
+    "building_age_years": 35,
+    "road_condition": "normal",
+    "residual_level": "minimal",
+    "has_asbestos_risk": true,
+    "market_demand_factor": 1.08,
+    "annual_extra_maint_yen": 10000,
+    "recommended_slot": "sell",
+    "summary": "大手ハウスメーカー施工の軽量鉄骨造実家。木造より解体費用が坪あたり約1.2〜1.5万円高くなる一方、構造躯体がしっかりしているため、解体せず中古住宅（既存住宅売買瑕疵保険対応）として売却すると手残りが最大化しやすい。",
+    "calc": {
+      "tax": {
+        "land_sqm": 165.3,
+        "land_market_yen": 13230000,
+        "land_assessed_yen": 9261000,
+        "bldg_assessed_yen": 2534400,
+        "normal_land_tax_annual": 30870,
+        "normal_bldg_tax_annual": 43085,
+        "normal_total_tax_annual": 73955,
+        "heavy_effective_land_tax_annual": 110206,
+        "heavy_effective_total_tax_annual": 153291,
+        "heavy_principle_total_tax_annual": 200522,
+        "sarachi_total_tax_annual": 110206,
+        "extra_tax_annual_effective": 79336,
+        "extra_tax_5y_effective": 396680,
+        "extra_tax_10y_effective": 793360,
+        "land_tax_multiplier_effective": 3.57,
+        "land_tax_multiplier_principle": 5.1
+      },
+      "demolition": {
+        "unit_price_man_per_tsubo": 6.3,
+        "building_body_yen": 2016000,
+        "road_surcharge_yen": 0,
+        "exterior_fence_yen": 220000,
+        "residual_items_yen": 80000,
+        "asbestos_yen": 240000,
+        "total_demolition_yen": 2556000
+      },
+      "maintenance": {
+        "base_maint_annual": 227000,
+        "annual_keep_normal": 300955,
+        "annual_keep_monthly": 25080,
+        "annual_keep_heavy": 380291,
+        "keep_5y_normal": 1504775,
+        "keep_10y_normal": 3009550,
+        "keep_10y_heavy": 3644238
+      },
+      "disposal": {
+        "land_market_yen": 13230000,
+        "sarachi_gross_sale_yen": 13230000,
+        "sarachi_broker_fee_yen": 502590,
+        "sarachi_net_proceeds_yen": 10061204,
+        "furuya_gross_sale_yen": 10604880,
+        "furuya_broker_fee_yen": 415961,
+        "furuya_net_proceeds_yen": 10108919,
+        "kaitori_net_proceeds_yen": 5556600,
+        "best_sale_net_yen": 10108919,
+        "best_strategy_label": "壊さず古家付きで仲介売却",
+        "net_benefit_vs_10y_keep_yen": 13753157
+      },
+      "hakajimai": null,
+      "ten_year_curve": [
+        {
+          "year": 1,
+          "year_cost": 300955,
+          "cumulative": 300955,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 2,
+          "year_cost": 300955,
+          "cumulative": 601910,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 3,
+          "year_cost": 380291,
+          "cumulative": 982201,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 4,
+          "year_cost": 560291,
+          "cumulative": 1542492,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 5,
+          "year_cost": 380291,
+          "cumulative": 1922783,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 6,
+          "year_cost": 380291,
+          "cumulative": 2303074,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 7,
+          "year_cost": 380291,
+          "cumulative": 2683365,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 8,
+          "year_cost": 560291,
+          "cumulative": 3243656,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 9,
+          "year_cost": 380291,
+          "cumulative": 3623947,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 10,
+          "year_cost": 380291,
+          "cumulative": 4004238,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        }
+      ]
+    },
+    "pref_cost_range": {
+      "cheapest_pref": "秋田県",
+      "cheapest_cost_yen": 2415200,
+      "priciest_pref": "東京都",
+      "priciest_cost_yen": 2837600,
+      "diff_yen": 422400
+    }
+  },
+  {
+    "slug": "heavy-steel-40tsubo-age38",
+    "name": "重量鉄骨造2階建 40坪・築38年",
+    "short_name": "重量鉄骨40坪（築38年）",
+    "category": "steel_rc",
+    "category_label": "鉄骨・RC・店舗併用",
+    "spec_note": "敷地55坪（182㎡）・重量鉄骨40坪・強固基礎あり",
+    "structure": "steel",
+    "floor_tsubo": 40,
+    "land_tsubo": 55,
+    "grave_sqm": 0,
+    "building_age_years": 38,
+    "road_condition": "normal",
+    "residual_level": "normal",
+    "has_asbestos_risk": true,
+    "market_demand_factor": 0.96,
+    "annual_extra_maint_yen": 15000,
+    "recommended_slot": "kaitai",
+    "summary": "重量鉄骨造は家屋の固定資産税評価額が木造より下がりにくく、解体時も重機・ガス溶断・地中梁撤去で総額250万〜320万円規模になる。複数解体業者の相見積もりと古家付き売却の両面比較が必須。",
+    "calc": {
+      "tax": {
+        "land_sqm": 181.8,
+        "land_market_yen": 12936000,
+        "land_assessed_yen": 9055200,
+        "bldg_assessed_yen": 3168000,
+        "normal_land_tax_annual": 30184,
+        "normal_bldg_tax_annual": 53856,
+        "normal_total_tax_annual": 84040,
+        "heavy_effective_land_tax_annual": 107757,
+        "heavy_effective_total_tax_annual": 161613,
+        "heavy_principle_total_tax_annual": 207794,
+        "sarachi_total_tax_annual": 107757,
+        "extra_tax_annual_effective": 77573,
+        "extra_tax_5y_effective": 387865,
+        "extra_tax_10y_effective": 775730,
+        "land_tax_multiplier_effective": 3.57,
+        "land_tax_multiplier_principle": 5.1
+      },
+      "demolition": {
+        "unit_price_man_per_tsubo": 6.3,
+        "building_body_yen": 2520000,
+        "road_surcharge_yen": 0,
+        "exterior_fence_yen": 220000,
+        "residual_items_yen": 280000,
+        "asbestos_yen": 240000,
+        "total_demolition_yen": 3260000
+      },
+      "maintenance": {
+        "base_maint_annual": 232000,
+        "annual_keep_normal": 316040,
+        "annual_keep_monthly": 26337,
+        "annual_keep_heavy": 393613,
+        "keep_5y_normal": 1580200,
+        "keep_10y_normal": 3160400,
+        "keep_10y_heavy": 3780984
+      },
+      "disposal": {
+        "land_market_yen": 12936000,
+        "sarachi_gross_sale_yen": 12936000,
+        "sarachi_broker_fee_yen": 492888,
+        "sarachi_net_proceeds_yen": 9075355,
+        "furuya_gross_sale_yen": 9745360,
+        "furuya_broker_fee_yen": 387597,
+        "furuya_net_proceeds_yen": 9077763,
+        "kaitori_net_proceeds_yen": 5433120,
+        "best_sale_net_yen": 9077763,
+        "best_strategy_label": "壊さず古家付きで仲介売却",
+        "net_benefit_vs_10y_keep_yen": 12858747
+      },
+      "hakajimai": null,
+      "ten_year_curve": [
+        {
+          "year": 1,
+          "year_cost": 316040,
+          "cumulative": 316040,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 2,
+          "year_cost": 316040,
+          "cumulative": 632080,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 3,
+          "year_cost": 393613,
+          "cumulative": 1025693,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 4,
+          "year_cost": 573613,
+          "cumulative": 1599306,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 5,
+          "year_cost": 393613,
+          "cumulative": 1992919,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 6,
+          "year_cost": 393613,
+          "cumulative": 2386532,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 7,
+          "year_cost": 393613,
+          "cumulative": 2780145,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 8,
+          "year_cost": 573613,
+          "cumulative": 3353758,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 9,
+          "year_cost": 393613,
+          "cumulative": 3747371,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 10,
+          "year_cost": 393613,
+          "cumulative": 4140984,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        }
+      ]
+    },
+    "pref_cost_range": {
+      "cheapest_pref": "秋田県",
+      "cheapest_cost_yen": 3084000,
+      "priciest_pref": "東京都",
+      "priciest_cost_yen": 3612000,
+      "diff_yen": 528000
+    }
+  },
+  {
+    "slug": "rc-35tsubo-age40",
+    "name": "鉄筋コンクリート造（RC造）35坪・築40年",
+    "short_name": "RC造35坪（築40年）",
+    "category": "steel_rc",
+    "category_label": "鉄骨・RC・店舗併用",
+    "spec_note": "敷地50坪（165㎡）・RC造2階建35坪・杭基礎および防水劣化",
+    "structure": "rc",
+    "floor_tsubo": 35,
+    "land_tsubo": 50,
+    "grave_sqm": 0,
+    "building_age_years": 40,
+    "road_condition": "normal",
+    "residual_level": "normal",
+    "has_asbestos_risk": true,
+    "market_demand_factor": 0.92,
+    "annual_extra_maint_yen": 30000,
+    "recommended_slot": "kaitai",
+    "summary": "RC造は法定耐用年数（47年）が長いため築40年でも家屋の固定資産税が年5〜9万円残りやすく、解体坪単価も木造の約1.6倍（35坪で280万〜350万円超）に達する。解体相見積もりによるコスト圧縮効果が最も大きい。",
+    "calc": {
+      "tax": {
+        "land_sqm": 165.3,
+        "land_market_yen": 11270000,
+        "land_assessed_yen": 7889000,
+        "bldg_assessed_yen": 3150000,
+        "normal_land_tax_annual": 26297,
+        "normal_bldg_tax_annual": 53550,
+        "normal_total_tax_annual": 79847,
+        "heavy_effective_land_tax_annual": 93879,
+        "heavy_effective_total_tax_annual": 147429,
+        "heavy_principle_total_tax_annual": 187663,
+        "sarachi_total_tax_annual": 93879,
+        "extra_tax_annual_effective": 67582,
+        "extra_tax_5y_effective": 337910,
+        "extra_tax_10y_effective": 675820,
+        "land_tax_multiplier_effective": 3.57,
+        "land_tax_multiplier_principle": 5.1
+      },
+      "demolition": {
+        "unit_price_man_per_tsubo": 7.8,
+        "building_body_yen": 2730000,
+        "road_surcharge_yen": 0,
+        "exterior_fence_yen": 220000,
+        "residual_items_yen": 280000,
+        "asbestos_yen": 240000,
+        "total_demolition_yen": 3470000
+      },
+      "maintenance": {
+        "base_maint_annual": 247000,
+        "annual_keep_normal": 326847,
+        "annual_keep_monthly": 27237,
+        "annual_keep_heavy": 394429,
+        "keep_5y_normal": 1634235,
+        "keep_10y_normal": 3268470,
+        "keep_10y_heavy": 3809126
+      },
+      "disposal": {
+        "land_market_yen": 11270000,
+        "sarachi_gross_sale_yen": 11270000,
+        "sarachi_broker_fee_yen": 437910,
+        "sarachi_net_proceeds_yen": 7268211,
+        "furuya_gross_sale_yen": 7973800,
+        "furuya_broker_fee_yen": 330000,
+        "furuya_net_proceeds_yen": 7363800,
+        "kaitori_net_proceeds_yen": 4733400,
+        "best_sale_net_yen": 7363800,
+        "best_strategy_label": "壊さず古家付きで仲介売却",
+        "net_benefit_vs_10y_keep_yen": 11172926
+      },
+      "hakajimai": null,
+      "ten_year_curve": [
+        {
+          "year": 1,
+          "year_cost": 326847,
+          "cumulative": 326847,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 2,
+          "year_cost": 326847,
+          "cumulative": 653694,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 3,
+          "year_cost": 394429,
+          "cumulative": 1048123,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 4,
+          "year_cost": 574429,
+          "cumulative": 1622552,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 5,
+          "year_cost": 394429,
+          "cumulative": 2016981,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 6,
+          "year_cost": 394429,
+          "cumulative": 2411410,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 7,
+          "year_cost": 394429,
+          "cumulative": 2805839,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 8,
+          "year_cost": 574429,
+          "cumulative": 3380268,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 9,
+          "year_cost": 394429,
+          "cumulative": 3774697,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 10,
+          "year_cost": 394429,
+          "cumulative": 4169126,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        }
+      ]
+    },
+    "pref_cost_range": {
+      "cheapest_pref": "秋田県",
+      "cheapest_cost_yen": 3295000,
+      "priciest_pref": "東京都",
+      "priciest_cost_yen": 3820000,
+      "diff_yen": 525000
+    }
+  },
+  {
+    "slug": "shop-residence-steel-45tsubo",
+    "name": "店舗併用住宅（1階店舗・2階住居）鉄骨45坪・築42年",
+    "short_name": "店舗併用鉄骨45坪",
+    "category": "steel_rc",
+    "category_label": "鉄骨・RC・店舗併用",
+    "spec_note": "敷地45坪（150㎡）・鉄骨45坪・業務用設備および看板残存",
+    "structure": "steel",
+    "floor_tsubo": 45,
+    "land_tsubo": 45,
+    "grave_sqm": 0,
+    "building_age_years": 42,
+    "road_condition": "normal",
+    "residual_level": "heavy",
+    "has_asbestos_risk": true,
+    "market_demand_factor": 1.02,
+    "annual_extra_maint_yen": 20000,
+    "recommended_slot": "kaitai",
+    "summary": "親が自営業・商店を営んでいた店舗併用実家。居住用部分の割合によって住宅用地特例や3,000万円特別控除の適用範囲が変わるほか、業務用什器・看板の撤去費用がかさむため専門査定が有効。",
+    "calc": {
+      "tax": {
+        "land_sqm": 148.8,
+        "land_market_yen": 11245500,
+        "land_assessed_yen": 7871850,
+        "bldg_assessed_yen": 3240000,
+        "normal_land_tax_annual": 26240,
+        "normal_bldg_tax_annual": 55080,
+        "normal_total_tax_annual": 81320,
+        "heavy_effective_land_tax_annual": 93675,
+        "heavy_effective_total_tax_annual": 148755,
+        "heavy_principle_total_tax_annual": 188901,
+        "sarachi_total_tax_annual": 93675,
+        "extra_tax_annual_effective": 67435,
+        "extra_tax_5y_effective": 337175,
+        "extra_tax_10y_effective": 674350,
+        "land_tax_multiplier_effective": 3.57,
+        "land_tax_multiplier_principle": 5.1
+      },
+      "demolition": {
+        "unit_price_man_per_tsubo": 6.3,
+        "building_body_yen": 2835000,
+        "road_surcharge_yen": 0,
+        "exterior_fence_yen": 319000,
+        "residual_items_yen": 580000,
+        "asbestos_yen": 240000,
+        "total_demolition_yen": 3974000
+      },
+      "maintenance": {
+        "base_maint_annual": 237000,
+        "annual_keep_normal": 318320,
+        "annual_keep_monthly": 26527,
+        "annual_keep_heavy": 385755,
+        "keep_5y_normal": 1591600,
+        "keep_10y_normal": 3183200,
+        "keep_10y_heavy": 3722680
+      },
+      "disposal": {
+        "land_market_yen": 11245500,
+        "sarachi_gross_sale_yen": 11245500,
+        "sarachi_broker_fee_yen": 437102,
+        "sarachi_net_proceeds_yen": 6740723,
+        "furuya_gross_sale_yen": 7537000,
+        "furuya_broker_fee_yen": 330000,
+        "furuya_net_proceeds_yen": 6627000,
+        "kaitori_net_proceeds_yen": 4723110,
+        "best_sale_net_yen": 6740723,
+        "best_strategy_label": "解体して更地で仲介売却",
+        "net_benefit_vs_10y_keep_yen": 10463403
+      },
+      "hakajimai": null,
+      "ten_year_curve": [
+        {
+          "year": 1,
+          "year_cost": 318320,
+          "cumulative": 318320,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 2,
+          "year_cost": 318320,
+          "cumulative": 636640,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 3,
+          "year_cost": 385755,
+          "cumulative": 1022395,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 4,
+          "year_cost": 565755,
+          "cumulative": 1588150,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 5,
+          "year_cost": 385755,
+          "cumulative": 1973905,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 6,
+          "year_cost": 385755,
+          "cumulative": 2359660,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 7,
+          "year_cost": 385755,
+          "cumulative": 2745415,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 8,
+          "year_cost": 565755,
+          "cumulative": 3311170,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 9,
+          "year_cost": 385755,
+          "cumulative": 3696925,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 10,
+          "year_cost": 385755,
+          "cumulative": 4082680,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        }
+      ]
+    },
+    "pref_cost_range": {
+      "cheapest_pref": "秋田県",
+      "cheapest_cost_yen": 3776000,
+      "priciest_pref": "東京都",
+      "priciest_cost_yen": 4370000,
+      "diff_yen": 594000
+    }
+  },
+  {
+    "slug": "steel-warehouse-attached-35tsubo",
+    "name": "鉄骨倉庫・車庫付き木造実家 35坪・築40年",
+    "short_name": "鉄骨倉庫付き実家35坪",
+    "category": "steel_rc",
+    "category_label": "鉄骨・RC・店舗併用",
+    "spec_note": "敷地70坪（231㎡）・木造母屋25坪＋鉄骨倉庫10坪",
+    "structure": "steel",
+    "floor_tsubo": 35,
+    "land_tsubo": 70,
+    "grave_sqm": 0,
+    "building_age_years": 40,
+    "road_condition": "normal",
+    "residual_level": "heavy",
+    "has_asbestos_risk": true,
+    "market_demand_factor": 0.86,
+    "annual_extra_maint_yen": 15000,
+    "recommended_slot": "kaitai",
+    "summary": "母屋以外に鉄骨造のガレージや作業倉庫がある実家。倉庫のスレート屋根にレベル3アスベストが含まれているケースが多く、未登記の付属建物があると売却時に表題・滅失登記の整理が必要になる。",
+    "calc": {
+      "tax": {
+        "land_sqm": 231.4,
+        "land_market_yen": 14749000,
+        "land_assessed_yen": 10324300,
+        "bldg_assessed_yen": 2520000,
+        "normal_land_tax_annual": 39084,
+        "normal_bldg_tax_annual": 42840,
+        "normal_total_tax_annual": 81924,
+        "heavy_effective_land_tax_annual": 122859,
+        "heavy_effective_total_tax_annual": 165699,
+        "heavy_principle_total_tax_annual": 218353,
+        "sarachi_total_tax_annual": 122859,
+        "extra_tax_annual_effective": 83775,
+        "extra_tax_5y_effective": 418875,
+        "extra_tax_10y_effective": 837750,
+        "land_tax_multiplier_effective": 3.14,
+        "land_tax_multiplier_principle": 4.49
+      },
+      "demolition": {
+        "unit_price_man_per_tsubo": 6.3,
+        "building_body_yen": 2205000,
+        "road_surcharge_yen": 0,
+        "exterior_fence_yen": 220000,
+        "residual_items_yen": 580000,
+        "asbestos_yen": 240000,
+        "total_demolition_yen": 3245000
+      },
+      "maintenance": {
+        "base_maint_annual": 232000,
+        "annual_keep_normal": 313924,
+        "annual_keep_monthly": 26160,
+        "annual_keep_heavy": 397699,
+        "keep_5y_normal": 1569620,
+        "keep_10y_normal": 3139240,
+        "keep_10y_heavy": 3809440
+      },
+      "disposal": {
+        "land_market_yen": 14749000,
+        "sarachi_gross_sale_yen": 14749000,
+        "sarachi_broker_fee_yen": 552717,
+        "sarachi_net_proceeds_yen": 10828424,
+        "furuya_gross_sale_yen": 11498140,
+        "furuya_broker_fee_yen": 445439,
+        "furuya_net_proceeds_yen": 10472701,
+        "kaitori_net_proceeds_yen": 6194580,
+        "best_sale_net_yen": 10828424,
+        "best_strategy_label": "解体して更地で仲介売却",
+        "net_benefit_vs_10y_keep_yen": 14637864
+      },
+      "hakajimai": null,
+      "ten_year_curve": [
+        {
+          "year": 1,
+          "year_cost": 313924,
+          "cumulative": 313924,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 2,
+          "year_cost": 313924,
+          "cumulative": 627848,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 3,
+          "year_cost": 397699,
+          "cumulative": 1025547,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 4,
+          "year_cost": 577699,
+          "cumulative": 1603246,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 5,
+          "year_cost": 397699,
+          "cumulative": 2000945,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 6,
+          "year_cost": 397699,
+          "cumulative": 2398644,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 7,
+          "year_cost": 397699,
+          "cumulative": 2796343,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 8,
+          "year_cost": 577699,
+          "cumulative": 3374042,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 9,
+          "year_cost": 397699,
+          "cumulative": 3771741,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 10,
+          "year_cost": 397699,
+          "cumulative": 4169440,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        }
+      ]
+    },
+    "pref_cost_range": {
+      "cheapest_pref": "秋田県",
+      "cheapest_cost_yen": 3091000,
+      "priciest_pref": "東京都",
+      "priciest_cost_yen": 3553000,
+      "diff_yen": 462000
+    }
+  },
+  {
+    "slug": "old-mansion-70sqm-age42",
+    "name": "地方・郊外の旧耐震分譲マンション 70㎡・築42年",
+    "short_name": "築42年分譲マンション70㎡",
+    "category": "steel_rc",
+    "category_label": "鉄骨・RC・店舗併用",
+    "spec_note": "専有70㎡（約21坪）・管理費および修繕積立金月2.8万円",
+    "structure": "rc",
+    "floor_tsubo": 21,
+    "land_tsubo": 12,
+    "grave_sqm": 0,
+    "building_age_years": 42,
+    "road_condition": "normal",
+    "residual_level": "normal",
+    "has_asbestos_risk": false,
+    "market_demand_factor": 1.15,
+    "annual_extra_maint_yen": 336000,
+    "recommended_slot": "sell",
+    "summary": "戸建てと違い解体費用は不要だが、誰も住んでいなくても管理費・修繕積立金（月2.5〜3.5万円＝年35万円前後）＋固定資産税が毎月確実に引き落とされる。3年放置するだけで120万円以上が消えるため即売却が絶対原則。",
+    "calc": {
+      "tax": {
+        "land_sqm": 39.7,
+        "land_market_yen": 3381000,
+        "land_assessed_yen": 2366700,
+        "bldg_assessed_yen": 1890000,
+        "normal_land_tax_annual": 7889,
+        "normal_bldg_tax_annual": 32130,
+        "normal_total_tax_annual": 40019,
+        "heavy_effective_land_tax_annual": 28164,
+        "heavy_effective_total_tax_annual": 60294,
+        "heavy_principle_total_tax_annual": 72364,
+        "sarachi_total_tax_annual": 28164,
+        "extra_tax_annual_effective": 20275,
+        "extra_tax_5y_effective": 101375,
+        "extra_tax_10y_effective": 202750,
+        "land_tax_multiplier_effective": 3.57,
+        "land_tax_multiplier_principle": 5.1
+      },
+      "demolition": {
+        "unit_price_man_per_tsubo": 0.0,
+        "building_body_yen": 0,
+        "road_surcharge_yen": 0,
+        "exterior_fence_yen": 0,
+        "residual_items_yen": 220000,
+        "asbestos_yen": 0,
+        "total_demolition_yen": 220000
+      },
+      "maintenance": {
+        "base_maint_annual": 360000,
+        "annual_keep_normal": 400019,
+        "annual_keep_monthly": 33335,
+        "annual_keep_heavy": 420294,
+        "keep_5y_normal": 2000095,
+        "keep_10y_normal": 4000190,
+        "keep_10y_heavy": 4162390
+      },
+      "disposal": {
+        "land_market_yen": 12800000,
+        "sarachi_gross_sale_yen": 12800000,
+        "sarachi_broker_fee_yen": 488400,
+        "sarachi_net_proceeds_yen": 12063436,
+        "furuya_gross_sale_yen": 12107600,
+        "furuya_broker_fee_yen": 465551,
+        "furuya_net_proceeds_yen": 11422049,
+        "kaitori_net_proceeds_yen": 5376000,
+        "best_sale_net_yen": 12063436,
+        "best_strategy_label": "解体して更地で仲介売却",
+        "net_benefit_vs_10y_keep_yen": 16225826
+      },
+      "hakajimai": null,
+      "ten_year_curve": [
+        {
+          "year": 1,
+          "year_cost": 400019,
+          "cumulative": 400019,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 2,
+          "year_cost": 400019,
+          "cumulative": 800038,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 3,
+          "year_cost": 420294,
+          "cumulative": 1220332,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 4,
+          "year_cost": 600294,
+          "cumulative": 1820626,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 5,
+          "year_cost": 420294,
+          "cumulative": 2240920,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 6,
+          "year_cost": 420294,
+          "cumulative": 2661214,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 7,
+          "year_cost": 420294,
+          "cumulative": 3081508,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 8,
+          "year_cost": 600294,
+          "cumulative": 3681802,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 9,
+          "year_cost": 420294,
+          "cumulative": 4102096,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 10,
+          "year_cost": 420294,
+          "cumulative": 4522390,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        }
+      ]
+    },
+    "pref_cost_range": {
+      "cheapest_pref": "秋田県",
+      "cheapest_cost_yen": 220000,
+      "priciest_pref": "東京都",
+      "priciest_cost_yen": 220000,
+      "diff_yen": 0
+    }
+  },
+  {
+    "slug": "non-rebuildable-wood-25tsubo",
+    "name": "再建築不可（接道2m未満）木造25坪・築48年",
+    "short_name": "再建築不可25坪（築48年）",
+    "category": "wakeari",
+    "category_label": "訳あり・再建築不可・残置物",
+    "spec_note": "敷地30坪（100㎡）・延床25坪・建築基準法上の接道義務未達",
+    "structure": "wood",
+    "floor_tsubo": 25,
+    "land_tsubo": 30,
+    "grave_sqm": 0,
+    "building_age_years": 48,
+    "road_condition": "narrow",
+    "residual_level": "normal",
+    "has_asbestos_risk": true,
+    "market_demand_factor": 0.48,
+    "annual_extra_maint_yen": 10000,
+    "recommended_slot": "akiya",
+    "summary": "絶対に先に解体してはいけない代表例。再建築不可物件を解体して更地にすると二度と家を建てられず土地価値が暴落し、固定資産税だけが約4.2倍に増える。建物を残したまま訳あり物件専門の買取業者へ売却するのが唯一の正解。",
+    "calc": {
+      "tax": {
+        "land_sqm": 99.2,
+        "land_market_yen": 3528000,
+        "land_assessed_yen": 2469600,
+        "bldg_assessed_yen": 910000,
+        "normal_land_tax_annual": 8232,
+        "normal_bldg_tax_annual": 15470,
+        "normal_total_tax_annual": 23702,
+        "heavy_effective_land_tax_annual": 29388,
+        "heavy_effective_total_tax_annual": 44858,
+        "heavy_principle_total_tax_annual": 57453,
+        "sarachi_total_tax_annual": 29388,
+        "extra_tax_annual_effective": 21156,
+        "extra_tax_5y_effective": 105780,
+        "extra_tax_10y_effective": 211560,
+        "land_tax_multiplier_effective": 3.57,
+        "land_tax_multiplier_principle": 5.1
+      },
+      "demolition": {
+        "unit_price_man_per_tsubo": 4.8,
+        "building_body_yen": 1200000,
+        "road_surcharge_yen": 264000,
+        "exterior_fence_yen": 220000,
+        "residual_items_yen": 280000,
+        "asbestos_yen": 240000,
+        "total_demolition_yen": 2204000
+      },
+      "maintenance": {
+        "base_maint_annual": 227000,
+        "annual_keep_normal": 250702,
+        "annual_keep_monthly": 20892,
+        "annual_keep_heavy": 271858,
+        "keep_5y_normal": 1253510,
+        "keep_10y_normal": 2507020,
+        "keep_10y_heavy": 2676268
+      },
+      "disposal": {
+        "land_market_yen": 3528000,
+        "sarachi_gross_sale_yen": 1340640,
+        "sarachi_broker_fee_yen": 201096,
+        "sarachi_net_proceeds_yen": -1093844,
+        "furuya_gross_sale_yen": 1579600,
+        "furuya_broker_fee_yen": 236940,
+        "furuya_net_proceeds_yen": 1062660,
+        "kaitori_net_proceeds_yen": 1834560,
+        "best_sale_net_yen": 1834560,
+        "best_strategy_label": "壊さず・片付けず専門買取",
+        "net_benefit_vs_10y_keep_yen": 4510828
+      },
+      "hakajimai": null,
+      "ten_year_curve": [
+        {
+          "year": 1,
+          "year_cost": 250702,
+          "cumulative": 250702,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 2,
+          "year_cost": 250702,
+          "cumulative": 501404,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 3,
+          "year_cost": 271858,
+          "cumulative": 773262,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 4,
+          "year_cost": 451858,
+          "cumulative": 1225120,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 5,
+          "year_cost": 271858,
+          "cumulative": 1496978,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 6,
+          "year_cost": 271858,
+          "cumulative": 1768836,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 7,
+          "year_cost": 271858,
+          "cumulative": 2040694,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 8,
+          "year_cost": 451858,
+          "cumulative": 2492552,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 9,
+          "year_cost": 271858,
+          "cumulative": 2764410,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 10,
+          "year_cost": 271858,
+          "cumulative": 3036268,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        }
+      ]
+    },
+    "pref_cost_range": {
+      "cheapest_pref": "秋田県",
+      "cheapest_cost_yen": 2082000,
+      "priciest_pref": "東京都",
+      "priciest_cost_yen": 2448000,
+      "diff_yen": 366000
+    }
+  },
+  {
+    "slug": "narrow-road-hand-demolition-28tsubo",
+    "name": "前面道路が狭く重機が入らない木造28坪・築45年",
+    "short_name": "重機不可・狭小道28坪",
+    "category": "wakeari",
+    "category_label": "訳あり・再建築不可・残置物",
+    "spec_note": "敷地35坪（115㎡）・延床28坪・手壊し解体および小運搬割増",
+    "structure": "wood",
+    "floor_tsubo": 28,
+    "land_tsubo": 35,
+    "grave_sqm": 0,
+    "building_age_years": 45,
+    "road_condition": "narrow",
+    "residual_level": "normal",
+    "has_asbestos_risk": true,
+    "market_demand_factor": 0.65,
+    "annual_extra_maint_yen": 10000,
+    "recommended_slot": "akiya",
+    "summary": "道幅2m前後や階段奥で大型重機・ダンプが進入できない立地。手壊し解体と廃材の小運搬で解体費用が通常の1.2〜1.5倍に膨らむため、自己負担で解体するより現状有姿の専門買取を選んだ方が手残りが多くなる。",
+    "calc": {
+      "tax": {
+        "land_sqm": 115.7,
+        "land_market_yen": 5573750,
+        "land_assessed_yen": 3901625,
+        "bldg_assessed_yen": 1019200,
+        "normal_land_tax_annual": 13005,
+        "normal_bldg_tax_annual": 17326,
+        "normal_total_tax_annual": 30331,
+        "heavy_effective_land_tax_annual": 46429,
+        "heavy_effective_total_tax_annual": 63755,
+        "heavy_principle_total_tax_annual": 83654,
+        "sarachi_total_tax_annual": 46429,
+        "extra_tax_annual_effective": 33424,
+        "extra_tax_5y_effective": 167120,
+        "extra_tax_10y_effective": 334240,
+        "land_tax_multiplier_effective": 3.57,
+        "land_tax_multiplier_principle": 5.1
+      },
+      "demolition": {
+        "unit_price_man_per_tsubo": 4.8,
+        "building_body_yen": 1344000,
+        "road_surcharge_yen": 295680,
+        "exterior_fence_yen": 220000,
+        "residual_items_yen": 280000,
+        "asbestos_yen": 240000,
+        "total_demolition_yen": 2379680
+      },
+      "maintenance": {
+        "base_maint_annual": 227000,
+        "annual_keep_normal": 257331,
+        "annual_keep_monthly": 21444,
+        "annual_keep_heavy": 290755,
+        "keep_5y_normal": 1286655,
+        "keep_10y_normal": 2573310,
+        "keep_10y_heavy": 2840702
+      },
+      "disposal": {
+        "land_market_yen": 5573750,
+        "sarachi_gross_sale_yen": 5573750,
+        "sarachi_broker_fee_yen": 330000,
+        "sarachi_net_proceeds_yen": 2817641,
+        "furuya_gross_sale_yen": 3399462,
+        "furuya_broker_fee_yen": 330000,
+        "furuya_net_proceeds_yen": 2789462,
+        "kaitori_net_proceeds_yen": 2898350,
+        "best_sale_net_yen": 2898350,
+        "best_strategy_label": "壊さず・片付けず専門買取",
+        "net_benefit_vs_10y_keep_yen": 5739052
+      },
+      "hakajimai": null,
+      "ten_year_curve": [
+        {
+          "year": 1,
+          "year_cost": 257331,
+          "cumulative": 257331,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 2,
+          "year_cost": 257331,
+          "cumulative": 514662,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 3,
+          "year_cost": 290755,
+          "cumulative": 805417,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 4,
+          "year_cost": 470755,
+          "cumulative": 1276172,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 5,
+          "year_cost": 290755,
+          "cumulative": 1566927,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 6,
+          "year_cost": 290755,
+          "cumulative": 1857682,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 7,
+          "year_cost": 290755,
+          "cumulative": 2148437,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 8,
+          "year_cost": 470755,
+          "cumulative": 2619192,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 9,
+          "year_cost": 290755,
+          "cumulative": 2909947,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 10,
+          "year_cost": 290755,
+          "cumulative": 3200702,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        }
+      ]
+    },
+    "pref_cost_range": {
+      "cheapest_pref": "秋田県",
+      "cheapest_cost_yen": 2243040,
+      "priciest_pref": "東京都",
+      "priciest_cost_yen": 2652960,
+      "diff_yen": 409920
+    }
+  },
+  {
+    "slug": "heavy-residual-hoarder-32tsubo",
+    "name": "残置物大量（家財・遺品そのまま）木造32坪・築42年",
+    "short_name": "残置物大量32坪（家財満杯）",
+    "category": "wakeari",
+    "category_label": "訳あり・再建築不可・残置物",
+    "spec_note": "敷地45坪（150㎡）・延床32坪・全室に家財および生活用品残存",
+    "structure": "wood",
+    "floor_tsubo": 32,
+    "land_tsubo": 45,
+    "grave_sqm": 0,
+    "building_age_years": 42,
+    "road_condition": "normal",
+    "residual_level": "heavy",
+    "has_asbestos_risk": true,
+    "market_demand_factor": 0.85,
+    "annual_extra_maint_yen": 15000,
+    "recommended_slot": "akiya",
+    "summary": "遠方で片付けに通えず、タンス・家電・布団・衣類が全室に残っている実家。遺品整理業者に単独発注すると40〜80万円かかるが、「残置物そのままOK」の空き家専門買取または解体一括発注を使えば費用と労力を大幅に圧縮できる。",
+    "calc": {
+      "tax": {
+        "land_sqm": 148.8,
+        "land_market_yen": 9371250,
+        "land_assessed_yen": 6559875,
+        "bldg_assessed_yen": 1164800,
+        "normal_land_tax_annual": 21866,
+        "normal_bldg_tax_annual": 19802,
+        "normal_total_tax_annual": 41668,
+        "heavy_effective_land_tax_annual": 78063,
+        "heavy_effective_total_tax_annual": 97865,
+        "heavy_principle_total_tax_annual": 131320,
+        "sarachi_total_tax_annual": 78063,
+        "extra_tax_annual_effective": 56197,
+        "extra_tax_5y_effective": 280985,
+        "extra_tax_10y_effective": 561970,
+        "land_tax_multiplier_effective": 3.57,
+        "land_tax_multiplier_principle": 5.1
+      },
+      "demolition": {
+        "unit_price_man_per_tsubo": 4.8,
+        "building_body_yen": 1536000,
+        "road_surcharge_yen": 0,
+        "exterior_fence_yen": 220000,
+        "residual_items_yen": 580000,
+        "asbestos_yen": 240000,
+        "total_demolition_yen": 2576000
+      },
+      "maintenance": {
+        "base_maint_annual": 232000,
+        "annual_keep_normal": 273668,
+        "annual_keep_monthly": 22806,
+        "annual_keep_heavy": 329865,
+        "keep_5y_normal": 1368340,
+        "keep_10y_normal": 2736680,
+        "keep_10y_heavy": 3186256
+      },
+      "disposal": {
+        "land_market_yen": 9371250,
+        "sarachi_gross_sale_yen": 9371250,
+        "sarachi_broker_fee_yen": 375251,
+        "sarachi_net_proceeds_yen": 6341936,
+        "furuya_gross_sale_yen": 6884080,
+        "furuya_broker_fee_yen": 330000,
+        "furuya_net_proceeds_yen": 5974080,
+        "kaitori_net_proceeds_yen": 4873050,
+        "best_sale_net_yen": 6341936,
+        "best_strategy_label": "解体して更地で仲介売却",
+        "net_benefit_vs_10y_keep_yen": 9528192
+      },
+      "hakajimai": null,
+      "ten_year_curve": [
+        {
+          "year": 1,
+          "year_cost": 273668,
+          "cumulative": 273668,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 2,
+          "year_cost": 273668,
+          "cumulative": 547336,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 3,
+          "year_cost": 329865,
+          "cumulative": 877201,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 4,
+          "year_cost": 509865,
+          "cumulative": 1387066,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 5,
+          "year_cost": 329865,
+          "cumulative": 1716931,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 6,
+          "year_cost": 329865,
+          "cumulative": 2046796,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 7,
+          "year_cost": 329865,
+          "cumulative": 2376661,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 8,
+          "year_cost": 509865,
+          "cumulative": 2886526,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 9,
+          "year_cost": 329865,
+          "cumulative": 3216391,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 10,
+          "year_cost": 329865,
+          "cumulative": 3546256,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        }
+      ]
+    },
+    "pref_cost_range": {
+      "cheapest_pref": "秋田県",
+      "cheapest_cost_yen": 2448000,
+      "priciest_pref": "東京都",
+      "priciest_cost_yen": 2832000,
+      "diff_yen": 384000
+    }
+  },
+  {
+    "slug": "asbestos-slate-roof-30tsubo",
+    "name": "アスベスト含有疑い（スレート屋根・外壁）木造30坪・築40年",
+    "short_name": "アスベスト対策有30坪",
+    "category": "wakeari",
+    "category_label": "訳あり・再建築不可・残置物",
+    "spec_note": "敷地45坪（150㎡）・延床30坪・レベル3成形板事前調査および手ばらし",
+    "structure": "wood",
+    "floor_tsubo": 30,
+    "land_tsubo": 45,
+    "grave_sqm": 0,
+    "building_age_years": 40,
+    "road_condition": "normal",
+    "residual_level": "normal",
+    "has_asbestos_risk": true,
+    "market_demand_factor": 0.95,
+    "annual_extra_maint_yen": 10000,
+    "recommended_slot": "kaitai",
+    "summary": "2006年以前に建てられた化粧スレート屋根・窯業系サイディング外壁の実家。2023年10月からの有資格者事前調査義務化により、レベル3石綿含有成形板の湿潤化・手ばらし処分費（15〜35万円）を見積書で適正比較することが重要。",
+    "calc": {
+      "tax": {
+        "land_sqm": 148.8,
+        "land_market_yen": 10473750,
+        "land_assessed_yen": 7331625,
+        "bldg_assessed_yen": 1092000,
+        "normal_land_tax_annual": 24439,
+        "normal_bldg_tax_annual": 18564,
+        "normal_total_tax_annual": 43003,
+        "heavy_effective_land_tax_annual": 87246,
+        "heavy_effective_total_tax_annual": 105810,
+        "heavy_principle_total_tax_annual": 143202,
+        "sarachi_total_tax_annual": 87246,
+        "extra_tax_annual_effective": 62807,
+        "extra_tax_5y_effective": 314035,
+        "extra_tax_10y_effective": 628070,
+        "land_tax_multiplier_effective": 3.57,
+        "land_tax_multiplier_principle": 5.1
+      },
+      "demolition": {
+        "unit_price_man_per_tsubo": 4.8,
+        "building_body_yen": 1440000,
+        "road_surcharge_yen": 0,
+        "exterior_fence_yen": 220000,
+        "residual_items_yen": 280000,
+        "asbestos_yen": 240000,
+        "total_demolition_yen": 2180000
+      },
+      "maintenance": {
+        "base_maint_annual": 227000,
+        "annual_keep_normal": 270003,
+        "annual_keep_monthly": 22500,
+        "annual_keep_heavy": 332810,
+        "keep_5y_normal": 1350015,
+        "keep_10y_normal": 2700030,
+        "keep_10y_heavy": 3202486
+      },
+      "disposal": {
+        "land_market_yen": 10473750,
+        "sarachi_gross_sale_yen": 10473750,
+        "sarachi_broker_fee_yen": 411634,
+        "sarachi_net_proceeds_yen": 7794870,
+        "furuya_gross_sale_yen": 8267200,
+        "furuya_broker_fee_yen": 338818,
+        "furuya_net_proceeds_yen": 7648382,
+        "kaitori_net_proceeds_yen": 5446350,
+        "best_sale_net_yen": 7794870,
+        "best_strategy_label": "解体して更地で仲介売却",
+        "net_benefit_vs_10y_keep_yen": 10997356
+      },
+      "hakajimai": null,
+      "ten_year_curve": [
+        {
+          "year": 1,
+          "year_cost": 270003,
+          "cumulative": 270003,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 2,
+          "year_cost": 270003,
+          "cumulative": 540006,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 3,
+          "year_cost": 332810,
+          "cumulative": 872816,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 4,
+          "year_cost": 512810,
+          "cumulative": 1385626,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 5,
+          "year_cost": 332810,
+          "cumulative": 1718436,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 6,
+          "year_cost": 332810,
+          "cumulative": 2051246,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 7,
+          "year_cost": 332810,
+          "cumulative": 2384056,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 8,
+          "year_cost": 512810,
+          "cumulative": 2896866,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 9,
+          "year_cost": 332810,
+          "cumulative": 3229676,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 10,
+          "year_cost": 332810,
+          "cumulative": 3562486,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        }
+      ]
+    },
+    "pref_cost_range": {
+      "cheapest_pref": "秋田県",
+      "cheapest_cost_yen": 2060000,
+      "priciest_pref": "東京都",
+      "priciest_cost_yen": 2420000,
+      "diff_yen": 360000
+    }
+  },
+  {
+    "slug": "leased-land-shakuchi-28tsubo",
+    "name": "借地権付き実家（底地は地主所有）木造28坪・築44年",
+    "short_name": "借地権付き実家28坪",
+    "category": "wakeari",
+    "category_label": "訳あり・再建築不可・残置物",
+    "spec_note": "借地40坪（132㎡）・延床28坪・毎月地代負担および建替承諾料課題",
+    "structure": "wood",
+    "floor_tsubo": 28,
+    "land_tsubo": 40,
+    "grave_sqm": 0,
+    "building_age_years": 44,
+    "road_condition": "normal",
+    "residual_level": "normal",
+    "has_asbestos_risk": true,
+    "market_demand_factor": 0.5,
+    "annual_extra_maint_yen": 144000,
+    "recommended_slot": "akiya",
+    "summary": "土地を地主から借りている借地上の実家。放置すると毎月の地代（年12〜24万円）を払い続けるうえ、契約満了時に「自費で解体して更地返還（150万円超の持ち出し）」を求められる前に、地主交渉に強い専門買取で借地権ごと売却すべきケース。",
+    "calc": {
+      "tax": {
+        "land_sqm": 132.2,
+        "land_market_yen": 4900000,
+        "land_assessed_yen": 3430000,
+        "bldg_assessed_yen": 1019200,
+        "normal_land_tax_annual": 11433,
+        "normal_bldg_tax_annual": 17326,
+        "normal_total_tax_annual": 28759,
+        "heavy_effective_land_tax_annual": 40817,
+        "heavy_effective_total_tax_annual": 58143,
+        "heavy_principle_total_tax_annual": 75636,
+        "sarachi_total_tax_annual": 40817,
+        "extra_tax_annual_effective": 29384,
+        "extra_tax_5y_effective": 146920,
+        "extra_tax_10y_effective": 293840,
+        "land_tax_multiplier_effective": 3.57,
+        "land_tax_multiplier_principle": 5.1
+      },
+      "demolition": {
+        "unit_price_man_per_tsubo": 4.8,
+        "building_body_yen": 1344000,
+        "road_surcharge_yen": 0,
+        "exterior_fence_yen": 220000,
+        "residual_items_yen": 280000,
+        "asbestos_yen": 240000,
+        "total_demolition_yen": 2084000
+      },
+      "maintenance": {
+        "base_maint_annual": 361000,
+        "annual_keep_normal": 389759,
+        "annual_keep_monthly": 32480,
+        "annual_keep_heavy": 419143,
+        "keep_5y_normal": 1948795,
+        "keep_10y_normal": 3897590,
+        "keep_10y_heavy": 4132662
+      },
+      "disposal": {
+        "land_market_yen": 4900000,
+        "sarachi_gross_sale_yen": 0,
+        "sarachi_broker_fee_yen": 0,
+        "sarachi_net_proceeds_yen": -2124817,
+        "furuya_gross_sale_yen": 2995120,
+        "furuya_broker_fee_yen": 330000,
+        "furuya_net_proceeds_yen": 2385120,
+        "kaitori_net_proceeds_yen": 2548000,
+        "best_sale_net_yen": 2548000,
+        "best_strategy_label": "壊さず・片付けず専門買取",
+        "net_benefit_vs_10y_keep_yen": 6680662
+      },
+      "hakajimai": null,
+      "ten_year_curve": [
+        {
+          "year": 1,
+          "year_cost": 389759,
+          "cumulative": 389759,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 2,
+          "year_cost": 389759,
+          "cumulative": 779518,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 3,
+          "year_cost": 419143,
+          "cumulative": 1198661,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 4,
+          "year_cost": 599143,
+          "cumulative": 1797804,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 5,
+          "year_cost": 419143,
+          "cumulative": 2216947,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 6,
+          "year_cost": 419143,
+          "cumulative": 2636090,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 7,
+          "year_cost": 419143,
+          "cumulative": 3055233,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 8,
+          "year_cost": 599143,
+          "cumulative": 3654376,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 9,
+          "year_cost": 419143,
+          "cumulative": 4073519,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 10,
+          "year_cost": 419143,
+          "cumulative": 4492662,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        }
+      ]
+    },
+    "pref_cost_range": {
+      "cheapest_pref": "秋田県",
+      "cheapest_cost_yen": 1972000,
+      "priciest_pref": "東京都",
+      "priciest_cost_yen": 2308000,
+      "diff_yen": 336000
+    }
+  },
+  {
+    "slug": "slope-retaining-wall-30tsubo",
+    "name": "傾斜地・古い擁壁（石積み・ブロック）上の木造30坪・築43年",
+    "short_name": "傾斜地・古擁壁30坪",
+    "category": "wakeari",
+    "category_label": "訳あり・再建築不可・残置物",
+    "spec_note": "敷地50坪（165㎡）・延床30坪・高台階段および擁壁やり直し懸念",
+    "structure": "wood",
+    "floor_tsubo": 30,
+    "land_tsubo": 50,
+    "grave_sqm": 0,
+    "building_age_years": 43,
+    "road_condition": "slope",
+    "residual_level": "normal",
+    "has_asbestos_risk": true,
+    "market_demand_factor": 0.58,
+    "annual_extra_maint_yen": 20000,
+    "recommended_slot": "akiya",
+    "summary": "高台やひな壇造成地で古い石積み・空積み擁壁の上にある実家。一般買主からは擁壁再築造費（300万〜600万円）を嫌気されて仲介が長期化しやすいため、現況のままリスクを引き受けてくれる専門買取との相性が非常に高い。",
+    "calc": {
+      "tax": {
+        "land_sqm": 165.3,
+        "land_market_yen": 7105000,
+        "land_assessed_yen": 4973500,
+        "bldg_assessed_yen": 1092000,
+        "normal_land_tax_annual": 16578,
+        "normal_bldg_tax_annual": 18564,
+        "normal_total_tax_annual": 35142,
+        "heavy_effective_land_tax_annual": 59185,
+        "heavy_effective_total_tax_annual": 77749,
+        "heavy_principle_total_tax_annual": 103114,
+        "sarachi_total_tax_annual": 59185,
+        "extra_tax_annual_effective": 42607,
+        "extra_tax_5y_effective": 213035,
+        "extra_tax_10y_effective": 426070,
+        "land_tax_multiplier_effective": 3.57,
+        "land_tax_multiplier_principle": 5.1
+      },
+      "demolition": {
+        "unit_price_man_per_tsubo": 4.8,
+        "building_body_yen": 1440000,
+        "road_surcharge_yen": 403200,
+        "exterior_fence_yen": 220000,
+        "residual_items_yen": 280000,
+        "asbestos_yen": 240000,
+        "total_demolition_yen": 2583200
+      },
+      "maintenance": {
+        "base_maint_annual": 237000,
+        "annual_keep_normal": 272142,
+        "annual_keep_monthly": 22678,
+        "annual_keep_heavy": 314749,
+        "keep_5y_normal": 1360710,
+        "keep_10y_normal": 2721420,
+        "keep_10y_heavy": 3062276
+      },
+      "disposal": {
+        "land_market_yen": 7105000,
+        "sarachi_gross_sale_yen": 7105000,
+        "sarachi_broker_fee_yen": 330000,
+        "sarachi_net_proceeds_yen": 4132615,
+        "furuya_gross_sale_yen": 4702576,
+        "furuya_broker_fee_yen": 330000,
+        "furuya_net_proceeds_yen": 4092576,
+        "kaitori_net_proceeds_yen": 3694600,
+        "best_sale_net_yen": 4132615,
+        "best_strategy_label": "解体して更地で仲介売却",
+        "net_benefit_vs_10y_keep_yen": 7194891
+      },
+      "hakajimai": null,
+      "ten_year_curve": [
+        {
+          "year": 1,
+          "year_cost": 272142,
+          "cumulative": 272142,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 2,
+          "year_cost": 272142,
+          "cumulative": 544284,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 3,
+          "year_cost": 314749,
+          "cumulative": 859033,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 4,
+          "year_cost": 494749,
+          "cumulative": 1353782,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 5,
+          "year_cost": 314749,
+          "cumulative": 1668531,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 6,
+          "year_cost": 314749,
+          "cumulative": 1983280,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 7,
+          "year_cost": 314749,
+          "cumulative": 2298029,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 8,
+          "year_cost": 494749,
+          "cumulative": 2792778,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 9,
+          "year_cost": 314749,
+          "cumulative": 3107527,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 10,
+          "year_cost": 314749,
+          "cumulative": 3422276,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        }
+      ]
+    },
+    "pref_cost_range": {
+      "cheapest_pref": "秋田県",
+      "cheapest_cost_yen": 2429600,
+      "priciest_pref": "東京都",
+      "priciest_cost_yen": 2890400,
+      "diff_yen": 460800
+    }
+  },
+  {
+    "slug": "shared-inheritance-undivided-32tsubo",
+    "name": "兄弟・親族との共有名義（持分・未分割）木造32坪・築40年",
+    "short_name": "共有名義・持分実家32坪",
+    "category": "wakeari",
+    "category_label": "訳あり・再建築不可・残置物",
+    "spec_note": "敷地45坪（150㎡）・延床32坪・相続人複数で意見不一致または持分売却",
+    "structure": "wood",
+    "floor_tsubo": 32,
+    "land_tsubo": 45,
+    "grave_sqm": 0,
+    "building_age_years": 40,
+    "road_condition": "normal",
+    "residual_level": "normal",
+    "has_asbestos_risk": true,
+    "market_demand_factor": 0.72,
+    "annual_extra_maint_yen": 10000,
+    "recommended_slot": "akiya",
+    "summary": "親族間で「売るか残すか」「解体費を誰が出すか」で揉めて放置されている実家。次の代で相続人がネズミ算式に増えると処分不能になり、自身の共有持分のみでも買い取れる訳あり専門業者で早期離脱する選択肢がある。",
+    "calc": {
+      "tax": {
+        "land_sqm": 148.8,
+        "land_market_yen": 7938000,
+        "land_assessed_yen": 5556600,
+        "bldg_assessed_yen": 1164800,
+        "normal_land_tax_annual": 18522,
+        "normal_bldg_tax_annual": 19802,
+        "normal_total_tax_annual": 38324,
+        "heavy_effective_land_tax_annual": 66124,
+        "heavy_effective_total_tax_annual": 85926,
+        "heavy_principle_total_tax_annual": 114264,
+        "sarachi_total_tax_annual": 66124,
+        "extra_tax_annual_effective": 47602,
+        "extra_tax_5y_effective": 238010,
+        "extra_tax_10y_effective": 476020,
+        "land_tax_multiplier_effective": 3.57,
+        "land_tax_multiplier_principle": 5.1
+      },
+      "demolition": {
+        "unit_price_man_per_tsubo": 4.8,
+        "building_body_yen": 1536000,
+        "road_surcharge_yen": 0,
+        "exterior_fence_yen": 220000,
+        "residual_items_yen": 280000,
+        "asbestos_yen": 240000,
+        "total_demolition_yen": 2276000
+      },
+      "maintenance": {
+        "base_maint_annual": 227000,
+        "annual_keep_normal": 265324,
+        "annual_keep_monthly": 22110,
+        "annual_keep_heavy": 312926,
+        "keep_5y_normal": 1326620,
+        "keep_10y_normal": 2653240,
+        "keep_10y_heavy": 3034056
+      },
+      "disposal": {
+        "land_market_yen": 7938000,
+        "sarachi_gross_sale_yen": 7938000,
+        "sarachi_broker_fee_yen": 330000,
+        "sarachi_net_proceeds_yen": 5265876,
+        "furuya_gross_sale_yen": 5754160,
+        "furuya_broker_fee_yen": 330000,
+        "furuya_net_proceeds_yen": 5144160,
+        "kaitori_net_proceeds_yen": 4127760,
+        "best_sale_net_yen": 5265876,
+        "best_strategy_label": "解体して更地で仲介売却",
+        "net_benefit_vs_10y_keep_yen": 8299932
+      },
+      "hakajimai": null,
+      "ten_year_curve": [
+        {
+          "year": 1,
+          "year_cost": 265324,
+          "cumulative": 265324,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 2,
+          "year_cost": 265324,
+          "cumulative": 530648,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 3,
+          "year_cost": 312926,
+          "cumulative": 843574,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 4,
+          "year_cost": 492926,
+          "cumulative": 1336500,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 5,
+          "year_cost": 312926,
+          "cumulative": 1649426,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 6,
+          "year_cost": 312926,
+          "cumulative": 1962352,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 7,
+          "year_cost": 312926,
+          "cumulative": 2275278,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 8,
+          "year_cost": 492926,
+          "cumulative": 2768204,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 9,
+          "year_cost": 312926,
+          "cumulative": 3081130,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 10,
+          "year_cost": 312926,
+          "cumulative": 3394056,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        }
+      ]
+    },
+    "pref_cost_range": {
+      "cheapest_pref": "秋田県",
+      "cheapest_cost_yen": 2148000,
+      "priciest_pref": "東京都",
+      "priciest_cost_yen": 2532000,
+      "diff_yen": 384000
+    }
+  },
+  {
+    "slug": "nagaya-rowhouse-22tsubo-age50",
+    "name": "連棟式住宅（長屋・テラスハウス）22坪・築50年",
+    "short_name": "連棟長屋22坪（切り離し有）",
+    "category": "wakeari",
+    "category_label": "訳あり・再建築不可・残置物",
+    "spec_note": "敷地24坪（80㎡）・延床22坪・隣家と壁および屋根共有",
+    "structure": "wood",
+    "floor_tsubo": 22,
+    "land_tsubo": 24,
+    "grave_sqm": 0,
+    "building_age_years": 50,
+    "road_condition": "narrow",
+    "residual_level": "normal",
+    "has_asbestos_risk": true,
+    "market_demand_factor": 0.54,
+    "annual_extra_maint_yen": 10000,
+    "recommended_slot": "akiya",
+    "summary": "隣家と柱や壁がつながっている連棟式（長屋）の実家。単独解体には隣家の同意と切り離し外壁補修工事（50〜100万円追加）が必要になるため、自力で解体せず連棟物件の再生に慣れた専門買取へ現状売却するのが安全。",
+    "calc": {
+      "tax": {
+        "land_sqm": 79.3,
+        "land_market_yen": 3175200,
+        "land_assessed_yen": 2222640,
+        "bldg_assessed_yen": 800800,
+        "normal_land_tax_annual": 7409,
+        "normal_bldg_tax_annual": 13614,
+        "normal_total_tax_annual": 21023,
+        "heavy_effective_land_tax_annual": 26449,
+        "heavy_effective_total_tax_annual": 40063,
+        "heavy_principle_total_tax_annual": 51399,
+        "sarachi_total_tax_annual": 26449,
+        "extra_tax_annual_effective": 19040,
+        "extra_tax_5y_effective": 95200,
+        "extra_tax_10y_effective": 190400,
+        "land_tax_multiplier_effective": 3.57,
+        "land_tax_multiplier_principle": 5.1
+      },
+      "demolition": {
+        "unit_price_man_per_tsubo": 4.8,
+        "building_body_yen": 1056000,
+        "road_surcharge_yen": 232320,
+        "exterior_fence_yen": 220000,
+        "residual_items_yen": 280000,
+        "asbestos_yen": 240000,
+        "total_demolition_yen": 2028320
+      },
+      "maintenance": {
+        "base_maint_annual": 227000,
+        "annual_keep_normal": 248023,
+        "annual_keep_monthly": 20669,
+        "annual_keep_heavy": 267063,
+        "keep_5y_normal": 1240115,
+        "keep_10y_normal": 2480230,
+        "keep_10y_heavy": 2632550
+      },
+      "disposal": {
+        "land_market_yen": 3175200,
+        "sarachi_gross_sale_yen": 3175200,
+        "sarachi_broker_fee_yen": 330000,
+        "sarachi_net_proceeds_yen": 790431,
+        "furuya_gross_sale_yen": 1384970,
+        "furuya_broker_fee_yen": 207746,
+        "furuya_net_proceeds_yen": 897224,
+        "kaitori_net_proceeds_yen": 1651104,
+        "best_sale_net_yen": 1651104,
+        "best_strategy_label": "壊さず・片付けず専門買取",
+        "net_benefit_vs_10y_keep_yen": 4283654
+      },
+      "hakajimai": null,
+      "ten_year_curve": [
+        {
+          "year": 1,
+          "year_cost": 248023,
+          "cumulative": 248023,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 2,
+          "year_cost": 248023,
+          "cumulative": 496046,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 3,
+          "year_cost": 267063,
+          "cumulative": 763109,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 4,
+          "year_cost": 447063,
+          "cumulative": 1210172,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 5,
+          "year_cost": 267063,
+          "cumulative": 1477235,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 6,
+          "year_cost": 267063,
+          "cumulative": 1744298,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 7,
+          "year_cost": 267063,
+          "cumulative": 2011361,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 8,
+          "year_cost": 447063,
+          "cumulative": 2458424,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 9,
+          "year_cost": 267063,
+          "cumulative": 2725487,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 10,
+          "year_cost": 267063,
+          "cumulative": 2992550,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        }
+      ]
+    },
+    "pref_cost_range": {
+      "cheapest_pref": "秋田県",
+      "cheapest_cost_yen": 1920960,
+      "priciest_pref": "東京都",
+      "priciest_cost_yen": 2243040,
+      "diff_yen": 322080
+    }
+  },
+  {
+    "slug": "termite-rainleak-damaged-30tsubo",
+    "name": "雨漏り・シロアリ腐朽あり（管理不全候補）木造30坪・築46年",
+    "short_name": "雨漏り・老朽30坪（増税注意）",
+    "category": "wakeari",
+    "category_label": "訳あり・再建築不可・残置物",
+    "spec_note": "敷地45坪（150㎡）・延床30坪・屋根軒先破損および雑草繁茂",
+    "structure": "wood",
+    "floor_tsubo": 30,
+    "land_tsubo": 45,
+    "grave_sqm": 0,
+    "building_age_years": 46,
+    "road_condition": "normal",
+    "residual_level": "heavy",
+    "has_asbestos_risk": true,
+    "market_demand_factor": 0.78,
+    "annual_extra_maint_yen": 40000,
+    "recommended_slot": "akiya",
+    "summary": "数年間の放置で雨漏りや軒先の破損が始まった空き家。2023年12月施行の改正法により、倒壊前でも「管理不全空き家」として指導・勧告を受けると翌年から固定資産税が約4.2倍に急増するため、勧告前の即買取・解体判断が急務。",
+    "calc": {
+      "tax": {
+        "land_sqm": 148.8,
+        "land_market_yen": 8599500,
+        "land_assessed_yen": 6019650,
+        "bldg_assessed_yen": 1092000,
+        "normal_land_tax_annual": 20066,
+        "normal_bldg_tax_annual": 18564,
+        "normal_total_tax_annual": 38630,
+        "heavy_effective_land_tax_annual": 71634,
+        "heavy_effective_total_tax_annual": 90198,
+        "heavy_principle_total_tax_annual": 120898,
+        "sarachi_total_tax_annual": 71634,
+        "extra_tax_annual_effective": 51568,
+        "extra_tax_5y_effective": 257840,
+        "extra_tax_10y_effective": 515680,
+        "land_tax_multiplier_effective": 3.57,
+        "land_tax_multiplier_principle": 5.1
+      },
+      "demolition": {
+        "unit_price_man_per_tsubo": 4.8,
+        "building_body_yen": 1440000,
+        "road_surcharge_yen": 0,
+        "exterior_fence_yen": 220000,
+        "residual_items_yen": 580000,
+        "asbestos_yen": 240000,
+        "total_demolition_yen": 2480000
+      },
+      "maintenance": {
+        "base_maint_annual": 257000,
+        "annual_keep_normal": 295630,
+        "annual_keep_monthly": 24636,
+        "annual_keep_heavy": 347198,
+        "keep_5y_normal": 1478150,
+        "keep_10y_normal": 2956300,
+        "keep_10y_heavy": 3368844
+      },
+      "disposal": {
+        "land_market_yen": 8599500,
+        "sarachi_gross_sale_yen": 8599500,
+        "sarachi_broker_fee_yen": 349784,
+        "sarachi_net_proceeds_yen": 5698082,
+        "furuya_gross_sale_yen": 6221920,
+        "furuya_broker_fee_yen": 330000,
+        "furuya_net_proceeds_yen": 5311920,
+        "kaitori_net_proceeds_yen": 4471740,
+        "best_sale_net_yen": 5698082,
+        "best_strategy_label": "解体して更地で仲介売却",
+        "net_benefit_vs_10y_keep_yen": 9066926
+      },
+      "hakajimai": null,
+      "ten_year_curve": [
+        {
+          "year": 1,
+          "year_cost": 295630,
+          "cumulative": 295630,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 2,
+          "year_cost": 295630,
+          "cumulative": 591260,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 3,
+          "year_cost": 347198,
+          "cumulative": 938458,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 4,
+          "year_cost": 527198,
+          "cumulative": 1465656,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 5,
+          "year_cost": 347198,
+          "cumulative": 1812854,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 6,
+          "year_cost": 347198,
+          "cumulative": 2160052,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 7,
+          "year_cost": 347198,
+          "cumulative": 2507250,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 8,
+          "year_cost": 527198,
+          "cumulative": 3034448,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 9,
+          "year_cost": 347198,
+          "cumulative": 3381646,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 10,
+          "year_cost": 347198,
+          "cumulative": 3728844,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        }
+      ]
+    },
+    "pref_cost_range": {
+      "cheapest_pref": "秋田県",
+      "cheapest_cost_yen": 2360000,
+      "priciest_pref": "東京都",
+      "priciest_cost_yen": 2720000,
+      "diff_yen": 360000
+    }
+  },
+  {
+    "slug": "stigmatized-lonely-death-28tsubo",
+    "name": "孤独死・心理的瑕疵ありの木造実家 28坪・築38年",
+    "short_name": "孤独死・事故物件28坪",
+    "category": "wakeari",
+    "category_label": "訳あり・再建築不可・残置物",
+    "spec_note": "敷地40坪（132㎡）・延床28坪・特殊清掃および告知義務あり",
+    "structure": "wood",
+    "floor_tsubo": 28,
+    "land_tsubo": 40,
+    "grave_sqm": 0,
+    "building_age_years": 38,
+    "road_condition": "normal",
+    "residual_level": "heavy",
+    "has_asbestos_risk": false,
+    "market_demand_factor": 0.6,
+    "annual_extra_maint_yen": 15000,
+    "recommended_slot": "akiya",
+    "summary": "親が一人暮らしで亡くなり発見が遅れた実家。一般の仲介では告知義務や近隣の目から買い手がつきにくいが、特殊清掃・遺品整理から直接買取まで一括対応する訳あり物件専門買取なら近所に知られず早期に整理できる。",
+    "calc": {
+      "tax": {
+        "land_sqm": 132.2,
+        "land_market_yen": 5880000,
+        "land_assessed_yen": 4116000,
+        "bldg_assessed_yen": 1121120,
+        "normal_land_tax_annual": 13720,
+        "normal_bldg_tax_annual": 19059,
+        "normal_total_tax_annual": 32779,
+        "heavy_effective_land_tax_annual": 48980,
+        "heavy_effective_total_tax_annual": 68039,
+        "heavy_principle_total_tax_annual": 89031,
+        "sarachi_total_tax_annual": 48980,
+        "extra_tax_annual_effective": 35260,
+        "extra_tax_5y_effective": 176300,
+        "extra_tax_10y_effective": 352600,
+        "land_tax_multiplier_effective": 3.57,
+        "land_tax_multiplier_principle": 5.1
+      },
+      "demolition": {
+        "unit_price_man_per_tsubo": 4.8,
+        "building_body_yen": 1344000,
+        "road_surcharge_yen": 0,
+        "exterior_fence_yen": 220000,
+        "residual_items_yen": 580000,
+        "asbestos_yen": 0,
+        "total_demolition_yen": 2144000
+      },
+      "maintenance": {
+        "base_maint_annual": 232000,
+        "annual_keep_normal": 264779,
+        "annual_keep_monthly": 22065,
+        "annual_keep_heavy": 300039,
+        "keep_5y_normal": 1323895,
+        "keep_10y_normal": 2647790,
+        "keep_10y_heavy": 2929870
+      },
+      "disposal": {
+        "land_market_yen": 5880000,
+        "sarachi_gross_sale_yen": 5880000,
+        "sarachi_broker_fee_yen": 330000,
+        "sarachi_net_proceeds_yen": 3357020,
+        "furuya_gross_sale_yen": 3886720,
+        "furuya_broker_fee_yen": 330000,
+        "furuya_net_proceeds_yen": 2976720,
+        "kaitori_net_proceeds_yen": 3057600,
+        "best_sale_net_yen": 3357020,
+        "best_strategy_label": "解体して更地で仲介売却",
+        "net_benefit_vs_10y_keep_yen": 6286890
+      },
+      "hakajimai": null,
+      "ten_year_curve": [
+        {
+          "year": 1,
+          "year_cost": 264779,
+          "cumulative": 264779,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 2,
+          "year_cost": 264779,
+          "cumulative": 529558,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 3,
+          "year_cost": 300039,
+          "cumulative": 829597,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 4,
+          "year_cost": 480039,
+          "cumulative": 1309636,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 5,
+          "year_cost": 300039,
+          "cumulative": 1609675,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 6,
+          "year_cost": 300039,
+          "cumulative": 1909714,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 7,
+          "year_cost": 300039,
+          "cumulative": 2209753,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 8,
+          "year_cost": 480039,
+          "cumulative": 2689792,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 9,
+          "year_cost": 300039,
+          "cumulative": 2989831,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 10,
+          "year_cost": 300039,
+          "cumulative": 3289870,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        }
+      ]
+    },
+    "pref_cost_range": {
+      "cheapest_pref": "秋田県",
+      "cheapest_cost_yen": 2032000,
+      "priciest_pref": "東京都",
+      "priciest_cost_yen": 2368000,
+      "diff_yen": 336000
+    }
+  },
+  {
+    "slug": "unregistered-extension-34tsubo",
+    "name": "未登記増築・建ぺい率超過ありの木造実家 34坪・築41年",
+    "short_name": "未登記増築あり34坪",
+    "category": "wakeari",
+    "category_label": "訳あり・再建築不可・残置物",
+    "spec_note": "敷地45坪（150㎡）・延床34坪・増築部分未登記で住宅ローン審査難",
+    "structure": "wood",
+    "floor_tsubo": 34,
+    "land_tsubo": 45,
+    "grave_sqm": 0,
+    "building_age_years": 41,
+    "road_condition": "normal",
+    "residual_level": "normal",
+    "has_asbestos_risk": true,
+    "market_demand_factor": 0.74,
+    "annual_extra_maint_yen": 10000,
+    "recommended_slot": "akiya",
+    "summary": "昭和・平成期に確認申請なしでサンルームや子供部屋を増築した実家。一般の買主が住宅ローンを組めないため仲介では売れ残りやすいが、現金決済の専門買取業者または更地渡しならスムーズに売却できる。",
+    "calc": {
+      "tax": {
+        "land_sqm": 148.8,
+        "land_market_yen": 8158500,
+        "land_assessed_yen": 5710950,
+        "bldg_assessed_yen": 1237600,
+        "normal_land_tax_annual": 19037,
+        "normal_bldg_tax_annual": 21039,
+        "normal_total_tax_annual": 40076,
+        "heavy_effective_land_tax_annual": 67960,
+        "heavy_effective_total_tax_annual": 88999,
+        "heavy_principle_total_tax_annual": 118125,
+        "sarachi_total_tax_annual": 67960,
+        "extra_tax_annual_effective": 48923,
+        "extra_tax_5y_effective": 244615,
+        "extra_tax_10y_effective": 489230,
+        "land_tax_multiplier_effective": 3.57,
+        "land_tax_multiplier_principle": 5.1
+      },
+      "demolition": {
+        "unit_price_man_per_tsubo": 4.8,
+        "building_body_yen": 1632000,
+        "road_surcharge_yen": 0,
+        "exterior_fence_yen": 220000,
+        "residual_items_yen": 280000,
+        "asbestos_yen": 240000,
+        "total_demolition_yen": 2372000
+      },
+      "maintenance": {
+        "base_maint_annual": 227000,
+        "annual_keep_normal": 267076,
+        "annual_keep_monthly": 22256,
+        "annual_keep_heavy": 315999,
+        "keep_5y_normal": 1335380,
+        "keep_10y_normal": 2670760,
+        "keep_10y_heavy": 3062144
+      },
+      "disposal": {
+        "land_market_yen": 8158500,
+        "sarachi_gross_sale_yen": 8158500,
+        "sarachi_broker_fee_yen": 335230,
+        "sarachi_net_proceeds_yen": 5383310,
+        "furuya_gross_sale_yen": 5887120,
+        "furuya_broker_fee_yen": 330000,
+        "furuya_net_proceeds_yen": 5277120,
+        "kaitori_net_proceeds_yen": 4242420,
+        "best_sale_net_yen": 5383310,
+        "best_strategy_label": "解体して更地で仲介売却",
+        "net_benefit_vs_10y_keep_yen": 8445454
+      },
+      "hakajimai": null,
+      "ten_year_curve": [
+        {
+          "year": 1,
+          "year_cost": 267076,
+          "cumulative": 267076,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 2,
+          "year_cost": 267076,
+          "cumulative": 534152,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 3,
+          "year_cost": 315999,
+          "cumulative": 850151,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 4,
+          "year_cost": 495999,
+          "cumulative": 1346150,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 5,
+          "year_cost": 315999,
+          "cumulative": 1662149,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 6,
+          "year_cost": 315999,
+          "cumulative": 1978148,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 7,
+          "year_cost": 315999,
+          "cumulative": 2294147,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 8,
+          "year_cost": 495999,
+          "cumulative": 2790146,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 9,
+          "year_cost": 315999,
+          "cumulative": 3106145,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 10,
+          "year_cost": 315999,
+          "cumulative": 3422144,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        }
+      ]
+    },
+    "pref_cost_range": {
+      "cheapest_pref": "秋田県",
+      "cheapest_cost_yen": 2236000,
+      "priciest_pref": "東京都",
+      "priciest_cost_yen": 2644000,
+      "diff_yen": 408000
+    }
+  },
+  {
+    "slug": "fire-damaged-akiya-30tsubo",
+    "name": "ボヤ・半焼被害後の放置空き家 木造30坪・築40年",
+    "short_name": "火災・ボヤ被害空き家30坪",
+    "category": "wakeari",
+    "category_label": "訳あり・再建築不可・残置物",
+    "spec_note": "敷地45坪（150㎡）・延床30坪・炭化廃材処分割増あり",
+    "structure": "wood",
+    "floor_tsubo": 30,
+    "land_tsubo": 45,
+    "grave_sqm": 0,
+    "building_age_years": 40,
+    "road_condition": "normal",
+    "residual_level": "heavy",
+    "has_asbestos_risk": true,
+    "market_demand_factor": 0.68,
+    "annual_extra_maint_yen": 20000,
+    "recommended_slot": "kaitai",
+    "summary": "火災・ボヤ被害を受けた家屋は廃材が一般産廃ではなく特別処理扱いとなり解体単価が上がる。り災証明書による固定資産税減免や火災保険金を活用し、火事現場対応の解体業者を一括見積もりで選ぶのが鉄則。",
+    "calc": {
+      "tax": {
+        "land_sqm": 148.8,
+        "land_market_yen": 7497000,
+        "land_assessed_yen": 5247900,
+        "bldg_assessed_yen": 1092000,
+        "normal_land_tax_annual": 17493,
+        "normal_bldg_tax_annual": 18564,
+        "normal_total_tax_annual": 36057,
+        "heavy_effective_land_tax_annual": 62450,
+        "heavy_effective_total_tax_annual": 81014,
+        "heavy_principle_total_tax_annual": 107778,
+        "sarachi_total_tax_annual": 62450,
+        "extra_tax_annual_effective": 44957,
+        "extra_tax_5y_effective": 224785,
+        "extra_tax_10y_effective": 449570,
+        "land_tax_multiplier_effective": 3.57,
+        "land_tax_multiplier_principle": 5.1
+      },
+      "demolition": {
+        "unit_price_man_per_tsubo": 4.8,
+        "building_body_yen": 1440000,
+        "road_surcharge_yen": 0,
+        "exterior_fence_yen": 220000,
+        "residual_items_yen": 580000,
+        "asbestos_yen": 240000,
+        "total_demolition_yen": 2480000
+      },
+      "maintenance": {
+        "base_maint_annual": 237000,
+        "annual_keep_normal": 273057,
+        "annual_keep_monthly": 22755,
+        "annual_keep_heavy": 318014,
+        "keep_5y_normal": 1365285,
+        "keep_10y_normal": 2730570,
+        "keep_10y_heavy": 3090226
+      },
+      "disposal": {
+        "land_market_yen": 7497000,
+        "sarachi_gross_sale_yen": 7497000,
+        "sarachi_broker_fee_yen": 330000,
+        "sarachi_net_proceeds_yen": 4624550,
+        "furuya_gross_sale_yen": 5163520,
+        "furuya_broker_fee_yen": 330000,
+        "furuya_net_proceeds_yen": 4253520,
+        "kaitori_net_proceeds_yen": 3898440,
+        "best_sale_net_yen": 4624550,
+        "best_strategy_label": "解体して更地で仲介売却",
+        "net_benefit_vs_10y_keep_yen": 7714776
+      },
+      "hakajimai": null,
+      "ten_year_curve": [
+        {
+          "year": 1,
+          "year_cost": 273057,
+          "cumulative": 273057,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 2,
+          "year_cost": 273057,
+          "cumulative": 546114,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 3,
+          "year_cost": 318014,
+          "cumulative": 864128,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 4,
+          "year_cost": 498014,
+          "cumulative": 1362142,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 5,
+          "year_cost": 318014,
+          "cumulative": 1680156,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 6,
+          "year_cost": 318014,
+          "cumulative": 1998170,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 7,
+          "year_cost": 318014,
+          "cumulative": 2316184,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 8,
+          "year_cost": 498014,
+          "cumulative": 2814198,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 9,
+          "year_cost": 318014,
+          "cumulative": 3132212,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 10,
+          "year_cost": 318014,
+          "cumulative": 3450226,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        }
+      ]
+    },
+    "pref_cost_range": {
+      "cheapest_pref": "秋田県",
+      "cheapest_cost_yen": 2360000,
+      "priciest_pref": "東京都",
+      "priciest_cost_yen": 2720000,
+      "diff_yen": 360000
+    }
+  },
+  {
+    "slug": "temple-grave-2sqm-far",
+    "name": "遠方の寺院墓地（檀家・2㎡標準区画・新幹線帰省）",
+    "short_name": "遠方寺院墓2㎡（檀家）",
+    "category": "grave",
+    "category_label": "墓じまい・改葬・永代供養",
+    "spec_note": "墓地2.0㎡・寺院檀家（護持会費＋法要お布施＋年2回遠方帰省）",
+    "structure": "grave",
+    "floor_tsubo": 0,
+    "land_tsubo": 0,
+    "grave_sqm": 2.0,
+    "building_age_years": 45,
+    "road_condition": "normal",
+    "residual_level": "normal",
+    "has_asbestos_risk": false,
+    "market_demand_factor": 1.0,
+    "annual_extra_maint_yen": 98000,
+    "recommended_slot": "kuyo",
+    "summary": "実家から離れた都市部に住み、地方の菩提寺（檀家）のお墓を管理している最も典型的なケース。年間護持会費（1.5〜2万円）・お布施・年2回の帰省交通費を合わせると毎年約10万円がかかり、墓じまいして永代供養へ移すと約5〜7年で元が取れる。",
+    "calc": {
+      "tax": {
+        "land_sqm": 0.0,
+        "land_market_yen": 0,
+        "land_assessed_yen": 0,
+        "bldg_assessed_yen": 0,
+        "normal_land_tax_annual": 0,
+        "normal_bldg_tax_annual": 0,
+        "normal_total_tax_annual": 0,
+        "heavy_effective_land_tax_annual": 0,
+        "heavy_effective_total_tax_annual": 0,
+        "heavy_principle_total_tax_annual": 0,
+        "sarachi_total_tax_annual": 0,
+        "extra_tax_annual_effective": 0,
+        "extra_tax_5y_effective": 0,
+        "extra_tax_10y_effective": 0,
+        "land_tax_multiplier_effective": 1.0,
+        "land_tax_multiplier_principle": 1.0
+      },
+      "demolition": {
+        "unit_price_man_per_tsubo": 0.0,
+        "building_body_yen": 0,
+        "road_surcharge_yen": 0,
+        "exterior_fence_yen": 0,
+        "residual_items_yen": 0,
+        "asbestos_yen": 0,
+        "total_demolition_yen": 0
+      },
+      "maintenance": {
+        "base_maint_annual": 98000,
+        "annual_keep_normal": 98000,
+        "annual_keep_monthly": 8167,
+        "annual_keep_heavy": 98000,
+        "keep_5y_normal": 490000,
+        "keep_10y_normal": 980000,
+        "keep_10y_heavy": 980000
+      },
+      "disposal": {
+        "land_market_yen": 0,
+        "sarachi_gross_sale_yen": 0,
+        "sarachi_broker_fee_yen": 0,
+        "sarachi_net_proceeds_yen": 0,
+        "furuya_gross_sale_yen": 0,
+        "furuya_broker_fee_yen": 0,
+        "furuya_net_proceeds_yen": 0,
+        "kaitori_net_proceeds_yen": 500000,
+        "best_sale_net_yen": 500000,
+        "best_strategy_label": "壊さず・片付けず専門買取",
+        "net_benefit_vs_10y_keep_yen": 1480000
+      },
+      "hakajimai": {
+        "stone_removal_yen": 230000,
+        "ceremony_and_ridan_yen": 95000,
+        "admin_permit_yen": 15000,
+        "next_kuyo_label": "樹木葬・自然葬（ペア・家族区画）",
+        "next_kuyo_initial_yen": 380000,
+        "next_kuyo_annual_yen": 0,
+        "initial_total_yen": 720000,
+        "annual_keep_cost_yen": 98000,
+        "keep_total_15y_yen": 1470000,
+        "hakajimai_total_15y_yen": 720000,
+        "saving_15y_yen": 750000,
+        "payback_years": 7.3,
+        "funeral_grant_yen": 50000,
+        "net_initial_after_grant_yen": 670000
+      },
+      "ten_year_curve": [
+        {
+          "year": 1,
+          "year_cost": 98000,
+          "cumulative": 98000,
+          "is_alert_year": false,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 2,
+          "year_cost": 98000,
+          "cumulative": 196000,
+          "is_alert_year": false,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 3,
+          "year_cost": 133000,
+          "cumulative": 329000,
+          "is_alert_year": true,
+          "event_label": "年忌法要・お布施＋遠方帰省"
+        },
+        {
+          "year": 4,
+          "year_cost": 98000,
+          "cumulative": 427000,
+          "is_alert_year": true,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 5,
+          "year_cost": 98000,
+          "cumulative": 525000,
+          "is_alert_year": true,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 6,
+          "year_cost": 98000,
+          "cumulative": 623000,
+          "is_alert_year": true,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 7,
+          "year_cost": 133000,
+          "cumulative": 756000,
+          "is_alert_year": true,
+          "event_label": "年忌法要・お布施＋遠方帰省"
+        },
+        {
+          "year": 8,
+          "year_cost": 98000,
+          "cumulative": 854000,
+          "is_alert_year": true,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 9,
+          "year_cost": 98000,
+          "cumulative": 952000,
+          "is_alert_year": true,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 10,
+          "year_cost": 133000,
+          "cumulative": 1085000,
+          "is_alert_year": true,
+          "event_label": "年忌法要・お布施＋遠方帰省"
+        }
+      ]
+    },
+    "pref_cost_range": {
+      "cheapest_pref": "秋田県",
+      "cheapest_cost_yen": 701600,
+      "priciest_pref": "東京都",
+      "priciest_cost_yen": 754500,
+      "diff_yen": 52900
+    }
+  },
+  {
+    "slug": "temple-grave-3sqm-large",
+    "name": "地方寺院の先祖代々大型墓（3.5㎡・五輪塔/墓誌付・檀家）",
+    "short_name": "寺院大型墓3.5㎡（先祖代々）",
+    "category": "grave",
+    "category_label": "墓じまい・改葬・永代供養",
+    "spec_note": "墓地3.5㎡・大型外柵および複数遺骨（4〜6柱）改葬",
+    "structure": "grave",
+    "floor_tsubo": 0,
+    "land_tsubo": 0,
+    "grave_sqm": 3.5,
+    "building_age_years": 60,
+    "road_condition": "normal",
+    "residual_level": "heavy",
+    "has_asbestos_risk": false,
+    "market_demand_factor": 1.0,
+    "annual_extra_maint_yen": 125000,
+    "recommended_slot": "kuyo",
+    "summary": "地方の旧家に多い3㎡超の大型墓所。墓石・外柵の撤去量が多く、遺骨も4〜6柱あるため改葬先を「人数課金のない家族樹木葬」または「合祀永代供養墓」にするかで総額が30万〜60万円変わる。",
+    "calc": {
+      "tax": {
+        "land_sqm": 0.0,
+        "land_market_yen": 0,
+        "land_assessed_yen": 0,
+        "bldg_assessed_yen": 0,
+        "normal_land_tax_annual": 0,
+        "normal_bldg_tax_annual": 0,
+        "normal_total_tax_annual": 0,
+        "heavy_effective_land_tax_annual": 0,
+        "heavy_effective_total_tax_annual": 0,
+        "heavy_principle_total_tax_annual": 0,
+        "sarachi_total_tax_annual": 0,
+        "extra_tax_annual_effective": 0,
+        "extra_tax_5y_effective": 0,
+        "extra_tax_10y_effective": 0,
+        "land_tax_multiplier_effective": 1.0,
+        "land_tax_multiplier_principle": 1.0
+      },
+      "demolition": {
+        "unit_price_man_per_tsubo": 0.0,
+        "building_body_yen": 0,
+        "road_surcharge_yen": 0,
+        "exterior_fence_yen": 0,
+        "residual_items_yen": 0,
+        "asbestos_yen": 0,
+        "total_demolition_yen": 0
+      },
+      "maintenance": {
+        "base_maint_annual": 125000,
+        "annual_keep_normal": 125000,
+        "annual_keep_monthly": 10417,
+        "annual_keep_heavy": 125000,
+        "keep_5y_normal": 625000,
+        "keep_10y_normal": 1250000,
+        "keep_10y_heavy": 1250000
+      },
+      "disposal": {
+        "land_market_yen": 0,
+        "sarachi_gross_sale_yen": 0,
+        "sarachi_broker_fee_yen": 0,
+        "sarachi_net_proceeds_yen": 0,
+        "furuya_gross_sale_yen": 0,
+        "furuya_broker_fee_yen": 0,
+        "furuya_net_proceeds_yen": 0,
+        "kaitori_net_proceeds_yen": 500000,
+        "best_sale_net_yen": 500000,
+        "best_strategy_label": "壊さず・片付けず専門買取",
+        "net_benefit_vs_10y_keep_yen": 1750000
+      },
+      "hakajimai": {
+        "stone_removal_yen": 402500,
+        "ceremony_and_ridan_yen": 95000,
+        "admin_permit_yen": 15000,
+        "next_kuyo_label": "樹木葬・自然葬（ペア・家族区画）",
+        "next_kuyo_initial_yen": 380000,
+        "next_kuyo_annual_yen": 0,
+        "initial_total_yen": 892500,
+        "annual_keep_cost_yen": 125000,
+        "keep_total_15y_yen": 1875000,
+        "hakajimai_total_15y_yen": 892500,
+        "saving_15y_yen": 982500,
+        "payback_years": 7.1,
+        "funeral_grant_yen": 50000,
+        "net_initial_after_grant_yen": 842500
+      },
+      "ten_year_curve": [
+        {
+          "year": 1,
+          "year_cost": 125000,
+          "cumulative": 125000,
+          "is_alert_year": false,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 2,
+          "year_cost": 125000,
+          "cumulative": 250000,
+          "is_alert_year": false,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 3,
+          "year_cost": 160000,
+          "cumulative": 410000,
+          "is_alert_year": true,
+          "event_label": "年忌法要・お布施＋遠方帰省"
+        },
+        {
+          "year": 4,
+          "year_cost": 125000,
+          "cumulative": 535000,
+          "is_alert_year": true,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 5,
+          "year_cost": 125000,
+          "cumulative": 660000,
+          "is_alert_year": true,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 6,
+          "year_cost": 125000,
+          "cumulative": 785000,
+          "is_alert_year": true,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 7,
+          "year_cost": 160000,
+          "cumulative": 945000,
+          "is_alert_year": true,
+          "event_label": "年忌法要・お布施＋遠方帰省"
+        },
+        {
+          "year": 8,
+          "year_cost": 125000,
+          "cumulative": 1070000,
+          "is_alert_year": true,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 9,
+          "year_cost": 125000,
+          "cumulative": 1195000,
+          "is_alert_year": true,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 10,
+          "year_cost": 160000,
+          "cumulative": 1355000,
+          "is_alert_year": true,
+          "event_label": "年忌法要・お布施＋遠方帰省"
+        }
+      ]
+    },
+    "pref_cost_range": {
+      "cheapest_pref": "秋田県",
+      "cheapest_cost_yen": 860300,
+      "priciest_pref": "東京都",
+      "priciest_cost_yen": 952875,
+      "diff_yen": 92575
+    }
+  },
+  {
+    "slug": "public-cemetery-1.5sqm-suburb",
+    "name": "公営霊園の一般墓（1.5㎡区画・檀家なし・中距離帰省）",
+    "short_name": "公営霊園1.5㎡（檀家なし）",
+    "category": "grave",
+    "category_label": "墓じまい・改葬・永代供養",
+    "spec_note": "墓地1.5㎡・公営霊園（年間管理料は安いが承継者不在）",
+    "structure": "grave",
+    "floor_tsubo": 0,
+    "land_tsubo": 0,
+    "grave_sqm": 1.5,
+    "building_age_years": 35,
+    "road_condition": "normal",
+    "residual_level": "minimal",
+    "has_asbestos_risk": false,
+    "market_demand_factor": 1.0,
+    "annual_extra_maint_yen": 48000,
+    "recommended_slot": "kuyo",
+    "summary": "自治体運営の公営霊園にある一般墓。寺院のような離檀料はかからず、指定石材店制度もないため墓石撤去費用を最も安く抑えられる（総額30万〜45万円前後で永代供養へ移行可能）。",
+    "calc": {
+      "tax": {
+        "land_sqm": 0.0,
+        "land_market_yen": 0,
+        "land_assessed_yen": 0,
+        "bldg_assessed_yen": 0,
+        "normal_land_tax_annual": 0,
+        "normal_bldg_tax_annual": 0,
+        "normal_total_tax_annual": 0,
+        "heavy_effective_land_tax_annual": 0,
+        "heavy_effective_total_tax_annual": 0,
+        "heavy_principle_total_tax_annual": 0,
+        "sarachi_total_tax_annual": 0,
+        "extra_tax_annual_effective": 0,
+        "extra_tax_5y_effective": 0,
+        "extra_tax_10y_effective": 0,
+        "land_tax_multiplier_effective": 1.0,
+        "land_tax_multiplier_principle": 1.0
+      },
+      "demolition": {
+        "unit_price_man_per_tsubo": 0.0,
+        "building_body_yen": 0,
+        "road_surcharge_yen": 0,
+        "exterior_fence_yen": 0,
+        "residual_items_yen": 0,
+        "asbestos_yen": 0,
+        "total_demolition_yen": 0
+      },
+      "maintenance": {
+        "base_maint_annual": 48000,
+        "annual_keep_normal": 48000,
+        "annual_keep_monthly": 4000,
+        "annual_keep_heavy": 48000,
+        "keep_5y_normal": 240000,
+        "keep_10y_normal": 480000,
+        "keep_10y_heavy": 480000
+      },
+      "disposal": {
+        "land_market_yen": 0,
+        "sarachi_gross_sale_yen": 0,
+        "sarachi_broker_fee_yen": 0,
+        "sarachi_net_proceeds_yen": 0,
+        "furuya_gross_sale_yen": 0,
+        "furuya_broker_fee_yen": 0,
+        "furuya_net_proceeds_yen": 0,
+        "kaitori_net_proceeds_yen": 500000,
+        "best_sale_net_yen": 500000,
+        "best_strategy_label": "壊さず・片付けず専門買取",
+        "net_benefit_vs_10y_keep_yen": 980000
+      },
+      "hakajimai": {
+        "stone_removal_yen": 172500,
+        "ceremony_and_ridan_yen": 45000,
+        "admin_permit_yen": 15000,
+        "next_kuyo_label": "樹木葬・自然葬（ペア・家族区画）",
+        "next_kuyo_initial_yen": 380000,
+        "next_kuyo_annual_yen": 0,
+        "initial_total_yen": 612500,
+        "annual_keep_cost_yen": 48000,
+        "keep_total_15y_yen": 720000,
+        "hakajimai_total_15y_yen": 612500,
+        "saving_15y_yen": 107500,
+        "payback_years": 12.8,
+        "funeral_grant_yen": 50000,
+        "net_initial_after_grant_yen": 562500
+      },
+      "ten_year_curve": [
+        {
+          "year": 1,
+          "year_cost": 48000,
+          "cumulative": 48000,
+          "is_alert_year": false,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 2,
+          "year_cost": 48000,
+          "cumulative": 96000,
+          "is_alert_year": false,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 3,
+          "year_cost": 83000,
+          "cumulative": 179000,
+          "is_alert_year": true,
+          "event_label": "年忌法要・お布施＋遠方帰省"
+        },
+        {
+          "year": 4,
+          "year_cost": 48000,
+          "cumulative": 227000,
+          "is_alert_year": true,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 5,
+          "year_cost": 48000,
+          "cumulative": 275000,
+          "is_alert_year": true,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 6,
+          "year_cost": 48000,
+          "cumulative": 323000,
+          "is_alert_year": true,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 7,
+          "year_cost": 83000,
+          "cumulative": 406000,
+          "is_alert_year": true,
+          "event_label": "年忌法要・お布施＋遠方帰省"
+        },
+        {
+          "year": 8,
+          "year_cost": 48000,
+          "cumulative": 454000,
+          "is_alert_year": true,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 9,
+          "year_cost": 48000,
+          "cumulative": 502000,
+          "is_alert_year": true,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 10,
+          "year_cost": 83000,
+          "cumulative": 585000,
+          "is_alert_year": true,
+          "event_label": "年忌法要・お布施＋遠方帰省"
+        }
+      ]
+    },
+    "pref_cost_range": {
+      "cheapest_pref": "秋田県",
+      "cheapest_cost_yen": 598700,
+      "priciest_pref": "東京都",
+      "priciest_cost_yen": 638375,
+      "diff_yen": 39675
+    }
+  },
+  {
+    "slug": "private-cemetery-2sqm-designated",
+    "name": "民営霊園の一般墓（2㎡区画・指定石材店制度あり）",
+    "short_name": "民営霊園2㎡（指定石材店）",
+    "category": "grave",
+    "category_label": "墓じまい・改葬・永代供養",
+    "spec_note": "墓地2.0㎡・民営霊園（管理料年1.8万円＋帰省費）",
+    "structure": "grave",
+    "floor_tsubo": 0,
+    "land_tsubo": 0,
+    "grave_sqm": 2.0,
+    "building_age_years": 30,
+    "road_condition": "normal",
+    "residual_level": "normal",
+    "has_asbestos_risk": false,
+    "market_demand_factor": 1.0,
+    "annual_extra_maint_yen": 68000,
+    "recommended_slot": "kuyo",
+    "summary": "郊外の大型民営霊園にあるお墓。同じ霊園内に併設されている「永代供養墓・樹木葬」へ園内改葬（引っ越し）すると、手続きと改葬費用が割安になるプランが用意されているケースが多い。",
+    "calc": {
+      "tax": {
+        "land_sqm": 0.0,
+        "land_market_yen": 0,
+        "land_assessed_yen": 0,
+        "bldg_assessed_yen": 0,
+        "normal_land_tax_annual": 0,
+        "normal_bldg_tax_annual": 0,
+        "normal_total_tax_annual": 0,
+        "heavy_effective_land_tax_annual": 0,
+        "heavy_effective_total_tax_annual": 0,
+        "heavy_principle_total_tax_annual": 0,
+        "sarachi_total_tax_annual": 0,
+        "extra_tax_annual_effective": 0,
+        "extra_tax_5y_effective": 0,
+        "extra_tax_10y_effective": 0,
+        "land_tax_multiplier_effective": 1.0,
+        "land_tax_multiplier_principle": 1.0
+      },
+      "demolition": {
+        "unit_price_man_per_tsubo": 0.0,
+        "building_body_yen": 0,
+        "road_surcharge_yen": 0,
+        "exterior_fence_yen": 0,
+        "residual_items_yen": 0,
+        "asbestos_yen": 0,
+        "total_demolition_yen": 0
+      },
+      "maintenance": {
+        "base_maint_annual": 68000,
+        "annual_keep_normal": 68000,
+        "annual_keep_monthly": 5667,
+        "annual_keep_heavy": 68000,
+        "keep_5y_normal": 340000,
+        "keep_10y_normal": 680000,
+        "keep_10y_heavy": 680000
+      },
+      "disposal": {
+        "land_market_yen": 0,
+        "sarachi_gross_sale_yen": 0,
+        "sarachi_broker_fee_yen": 0,
+        "sarachi_net_proceeds_yen": 0,
+        "furuya_gross_sale_yen": 0,
+        "furuya_broker_fee_yen": 0,
+        "furuya_net_proceeds_yen": 0,
+        "kaitori_net_proceeds_yen": 500000,
+        "best_sale_net_yen": 500000,
+        "best_strategy_label": "壊さず・片付けず専門買取",
+        "net_benefit_vs_10y_keep_yen": 1180000
+      },
+      "hakajimai": {
+        "stone_removal_yen": 230000,
+        "ceremony_and_ridan_yen": 45000,
+        "admin_permit_yen": 15000,
+        "next_kuyo_label": "樹木葬・自然葬（ペア・家族区画）",
+        "next_kuyo_initial_yen": 380000,
+        "next_kuyo_annual_yen": 0,
+        "initial_total_yen": 670000,
+        "annual_keep_cost_yen": 68000,
+        "keep_total_15y_yen": 1020000,
+        "hakajimai_total_15y_yen": 670000,
+        "saving_15y_yen": 350000,
+        "payback_years": 9.9,
+        "funeral_grant_yen": 50000,
+        "net_initial_after_grant_yen": 620000
+      },
+      "ten_year_curve": [
+        {
+          "year": 1,
+          "year_cost": 68000,
+          "cumulative": 68000,
+          "is_alert_year": false,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 2,
+          "year_cost": 68000,
+          "cumulative": 136000,
+          "is_alert_year": false,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 3,
+          "year_cost": 103000,
+          "cumulative": 239000,
+          "is_alert_year": true,
+          "event_label": "年忌法要・お布施＋遠方帰省"
+        },
+        {
+          "year": 4,
+          "year_cost": 68000,
+          "cumulative": 307000,
+          "is_alert_year": true,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 5,
+          "year_cost": 68000,
+          "cumulative": 375000,
+          "is_alert_year": true,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 6,
+          "year_cost": 68000,
+          "cumulative": 443000,
+          "is_alert_year": true,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 7,
+          "year_cost": 103000,
+          "cumulative": 546000,
+          "is_alert_year": true,
+          "event_label": "年忌法要・お布施＋遠方帰省"
+        },
+        {
+          "year": 8,
+          "year_cost": 68000,
+          "cumulative": 614000,
+          "is_alert_year": true,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 9,
+          "year_cost": 68000,
+          "cumulative": 682000,
+          "is_alert_year": true,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 10,
+          "year_cost": 103000,
+          "cumulative": 785000,
+          "is_alert_year": true,
+          "event_label": "年忌法要・お布施＋遠方帰省"
+        }
+      ]
+    },
+    "pref_cost_range": {
+      "cheapest_pref": "秋田県",
+      "cheapest_cost_yen": 651600,
+      "priciest_pref": "東京都",
+      "priciest_cost_yen": 704500,
+      "diff_yen": 52900
+    }
+  },
+  {
+    "slug": "mountain-grave-slope-2.5sqm",
+    "name": "山間部・階段上の難所墓地（2.5㎡・重機進入不可）",
+    "short_name": "山間・階段難所墓2.5㎡",
+    "category": "grave",
+    "category_label": "墓じまい・改葬・永代供養",
+    "spec_note": "墓地2.5㎡・急階段および山道（カニクレーン不可・手作業搬出）",
+    "structure": "grave",
+    "floor_tsubo": 0,
+    "land_tsubo": 0,
+    "grave_sqm": 2.5,
+    "building_age_years": 55,
+    "road_condition": "slope",
+    "residual_level": "normal",
+    "has_asbestos_risk": false,
+    "market_demand_factor": 1.0,
+    "annual_extra_maint_yen": 88000,
+    "recommended_slot": "kuyo",
+    "summary": "急な石段や山道の上にある集落墓地・寺院墓地。高齢になるとお墓参り自体が転倒リスクを伴うため墓じまい満足度が最も高い一方、手作業搬出割増（＋8〜15万円）を見込んで複数社から見積もりを取る必要がある。",
+    "calc": {
+      "tax": {
+        "land_sqm": 0.0,
+        "land_market_yen": 0,
+        "land_assessed_yen": 0,
+        "bldg_assessed_yen": 0,
+        "normal_land_tax_annual": 0,
+        "normal_bldg_tax_annual": 0,
+        "normal_total_tax_annual": 0,
+        "heavy_effective_land_tax_annual": 0,
+        "heavy_effective_total_tax_annual": 0,
+        "heavy_principle_total_tax_annual": 0,
+        "sarachi_total_tax_annual": 0,
+        "extra_tax_annual_effective": 0,
+        "extra_tax_5y_effective": 0,
+        "extra_tax_10y_effective": 0,
+        "land_tax_multiplier_effective": 1.0,
+        "land_tax_multiplier_principle": 1.0
+      },
+      "demolition": {
+        "unit_price_man_per_tsubo": 0.0,
+        "building_body_yen": 0,
+        "road_surcharge_yen": 0,
+        "exterior_fence_yen": 0,
+        "residual_items_yen": 0,
+        "asbestos_yen": 0,
+        "total_demolition_yen": 0
+      },
+      "maintenance": {
+        "base_maint_annual": 88000,
+        "annual_keep_normal": 88000,
+        "annual_keep_monthly": 7333,
+        "annual_keep_heavy": 88000,
+        "keep_5y_normal": 440000,
+        "keep_10y_normal": 880000,
+        "keep_10y_heavy": 880000
+      },
+      "disposal": {
+        "land_market_yen": 0,
+        "sarachi_gross_sale_yen": 0,
+        "sarachi_broker_fee_yen": 0,
+        "sarachi_net_proceeds_yen": 0,
+        "furuya_gross_sale_yen": 0,
+        "furuya_broker_fee_yen": 0,
+        "furuya_net_proceeds_yen": 0,
+        "kaitori_net_proceeds_yen": 500000,
+        "best_sale_net_yen": 500000,
+        "best_strategy_label": "壊さず・片付けず専門買取",
+        "net_benefit_vs_10y_keep_yen": 1380000
+      },
+      "hakajimai": {
+        "stone_removal_yen": 368000,
+        "ceremony_and_ridan_yen": 95000,
+        "admin_permit_yen": 15000,
+        "next_kuyo_label": "樹木葬・自然葬（ペア・家族区画）",
+        "next_kuyo_initial_yen": 380000,
+        "next_kuyo_annual_yen": 0,
+        "initial_total_yen": 858000,
+        "annual_keep_cost_yen": 88000,
+        "keep_total_15y_yen": 1320000,
+        "hakajimai_total_15y_yen": 858000,
+        "saving_15y_yen": 462000,
+        "payback_years": 9.8,
+        "funeral_grant_yen": 50000,
+        "net_initial_after_grant_yen": 808000
+      },
+      "ten_year_curve": [
+        {
+          "year": 1,
+          "year_cost": 88000,
+          "cumulative": 88000,
+          "is_alert_year": false,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 2,
+          "year_cost": 88000,
+          "cumulative": 176000,
+          "is_alert_year": false,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 3,
+          "year_cost": 123000,
+          "cumulative": 299000,
+          "is_alert_year": true,
+          "event_label": "年忌法要・お布施＋遠方帰省"
+        },
+        {
+          "year": 4,
+          "year_cost": 88000,
+          "cumulative": 387000,
+          "is_alert_year": true,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 5,
+          "year_cost": 88000,
+          "cumulative": 475000,
+          "is_alert_year": true,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 6,
+          "year_cost": 88000,
+          "cumulative": 563000,
+          "is_alert_year": true,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 7,
+          "year_cost": 123000,
+          "cumulative": 686000,
+          "is_alert_year": true,
+          "event_label": "年忌法要・お布施＋遠方帰省"
+        },
+        {
+          "year": 8,
+          "year_cost": 88000,
+          "cumulative": 774000,
+          "is_alert_year": true,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 9,
+          "year_cost": 88000,
+          "cumulative": 862000,
+          "is_alert_year": true,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 10,
+          "year_cost": 123000,
+          "cumulative": 985000,
+          "is_alert_year": true,
+          "event_label": "年忌法要・お布施＋遠方帰省"
+        }
+      ]
+    },
+    "pref_cost_range": {
+      "cheapest_pref": "秋田県",
+      "cheapest_cost_yen": 828560,
+      "priciest_pref": "東京都",
+      "priciest_cost_yen": 913200,
+      "diff_yen": 84640
+    }
+  },
+  {
+    "slug": "community-kyodo-grave-2sqm",
+    "name": "地方の集落墓地・共同墓地（2㎡・地元管理組合）",
+    "short_name": "地方共同墓地2㎡",
+    "category": "grave",
+    "category_label": "墓じまい・改葬・永代供養",
+    "spec_note": "墓地2.0㎡・集落共同墓地（草刈り賦役・出不足金＋帰省費）",
+    "structure": "grave",
+    "floor_tsubo": 0,
+    "land_tsubo": 0,
+    "grave_sqm": 2.0,
+    "building_age_years": 50,
+    "road_condition": "normal",
+    "residual_level": "minimal",
+    "has_asbestos_risk": false,
+    "market_demand_factor": 1.0,
+    "annual_extra_maint_yen": 76000,
+    "recommended_slot": "kuyo",
+    "summary": "地方自治会や集落の墓地管理委員会が管理している共同墓地。実家じまいで地元を離れる際、一斉草刈りへの参加や「出不足金」の負担が続くため、実家売却と同時に自宅近くの樹木葬・納骨堂へ改葬するのが最も合理的。",
+    "calc": {
+      "tax": {
+        "land_sqm": 0.0,
+        "land_market_yen": 0,
+        "land_assessed_yen": 0,
+        "bldg_assessed_yen": 0,
+        "normal_land_tax_annual": 0,
+        "normal_bldg_tax_annual": 0,
+        "normal_total_tax_annual": 0,
+        "heavy_effective_land_tax_annual": 0,
+        "heavy_effective_total_tax_annual": 0,
+        "heavy_principle_total_tax_annual": 0,
+        "sarachi_total_tax_annual": 0,
+        "extra_tax_annual_effective": 0,
+        "extra_tax_5y_effective": 0,
+        "extra_tax_10y_effective": 0,
+        "land_tax_multiplier_effective": 1.0,
+        "land_tax_multiplier_principle": 1.0
+      },
+      "demolition": {
+        "unit_price_man_per_tsubo": 0.0,
+        "building_body_yen": 0,
+        "road_surcharge_yen": 0,
+        "exterior_fence_yen": 0,
+        "residual_items_yen": 0,
+        "asbestos_yen": 0,
+        "total_demolition_yen": 0
+      },
+      "maintenance": {
+        "base_maint_annual": 76000,
+        "annual_keep_normal": 76000,
+        "annual_keep_monthly": 6333,
+        "annual_keep_heavy": 76000,
+        "keep_5y_normal": 380000,
+        "keep_10y_normal": 760000,
+        "keep_10y_heavy": 760000
+      },
+      "disposal": {
+        "land_market_yen": 0,
+        "sarachi_gross_sale_yen": 0,
+        "sarachi_broker_fee_yen": 0,
+        "sarachi_net_proceeds_yen": 0,
+        "furuya_gross_sale_yen": 0,
+        "furuya_broker_fee_yen": 0,
+        "furuya_net_proceeds_yen": 0,
+        "kaitori_net_proceeds_yen": 500000,
+        "best_sale_net_yen": 500000,
+        "best_strategy_label": "壊さず・片付けず専門買取",
+        "net_benefit_vs_10y_keep_yen": 1260000
+      },
+      "hakajimai": {
+        "stone_removal_yen": 230000,
+        "ceremony_and_ridan_yen": 45000,
+        "admin_permit_yen": 15000,
+        "next_kuyo_label": "樹木葬・自然葬（ペア・家族区画）",
+        "next_kuyo_initial_yen": 380000,
+        "next_kuyo_annual_yen": 0,
+        "initial_total_yen": 670000,
+        "annual_keep_cost_yen": 76000,
+        "keep_total_15y_yen": 1140000,
+        "hakajimai_total_15y_yen": 670000,
+        "saving_15y_yen": 470000,
+        "payback_years": 8.8,
+        "funeral_grant_yen": 50000,
+        "net_initial_after_grant_yen": 620000
+      },
+      "ten_year_curve": [
+        {
+          "year": 1,
+          "year_cost": 76000,
+          "cumulative": 76000,
+          "is_alert_year": false,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 2,
+          "year_cost": 76000,
+          "cumulative": 152000,
+          "is_alert_year": false,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 3,
+          "year_cost": 111000,
+          "cumulative": 263000,
+          "is_alert_year": true,
+          "event_label": "年忌法要・お布施＋遠方帰省"
+        },
+        {
+          "year": 4,
+          "year_cost": 76000,
+          "cumulative": 339000,
+          "is_alert_year": true,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 5,
+          "year_cost": 76000,
+          "cumulative": 415000,
+          "is_alert_year": true,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 6,
+          "year_cost": 76000,
+          "cumulative": 491000,
+          "is_alert_year": true,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 7,
+          "year_cost": 111000,
+          "cumulative": 602000,
+          "is_alert_year": true,
+          "event_label": "年忌法要・お布施＋遠方帰省"
+        },
+        {
+          "year": 8,
+          "year_cost": 76000,
+          "cumulative": 678000,
+          "is_alert_year": true,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 9,
+          "year_cost": 76000,
+          "cumulative": 754000,
+          "is_alert_year": true,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 10,
+          "year_cost": 111000,
+          "cumulative": 865000,
+          "is_alert_year": true,
+          "event_label": "年忌法要・お布施＋遠方帰省"
+        }
+      ]
+    },
+    "pref_cost_range": {
+      "cheapest_pref": "秋田県",
+      "cheapest_cost_yen": 651600,
+      "priciest_pref": "東京都",
+      "priciest_cost_yen": 704500,
+      "diff_yen": 52900
+    }
+  },
+  {
+    "slug": "remote-island-hokkaido-grave-2sqm",
+    "name": "飛行機・フェリー帰省が必要な超遠方墓（2㎡・北海道/九州/離島）",
+    "short_name": "飛行機帰省の超遠方墓2㎡",
+    "category": "grave",
+    "category_label": "墓じまい・改葬・永代供養",
+    "spec_note": "墓地2.0㎡・年1〜2回の航空機および宿泊帰省で年14万円超負担",
+    "structure": "grave",
+    "floor_tsubo": 0,
+    "land_tsubo": 0,
+    "grave_sqm": 2.0,
+    "building_age_years": 45,
+    "road_condition": "normal",
+    "residual_level": "normal",
+    "has_asbestos_risk": false,
+    "market_demand_factor": 1.0,
+    "annual_extra_maint_yen": 148000,
+    "recommended_slot": "kuyo",
+    "summary": "お墓参りのたびに飛行機代・レンタカー代・宿泊費で1回7〜10万円以上かかるケース。墓じまいして現在の居住地近くの樹木葬や納骨堂へ改葬すると、わずか3〜4年で初期費用を完全回収し、15年間で150万円以上の節約になる。",
+    "calc": {
+      "tax": {
+        "land_sqm": 0.0,
+        "land_market_yen": 0,
+        "land_assessed_yen": 0,
+        "bldg_assessed_yen": 0,
+        "normal_land_tax_annual": 0,
+        "normal_bldg_tax_annual": 0,
+        "normal_total_tax_annual": 0,
+        "heavy_effective_land_tax_annual": 0,
+        "heavy_effective_total_tax_annual": 0,
+        "heavy_principle_total_tax_annual": 0,
+        "sarachi_total_tax_annual": 0,
+        "extra_tax_annual_effective": 0,
+        "extra_tax_5y_effective": 0,
+        "extra_tax_10y_effective": 0,
+        "land_tax_multiplier_effective": 1.0,
+        "land_tax_multiplier_principle": 1.0
+      },
+      "demolition": {
+        "unit_price_man_per_tsubo": 0.0,
+        "building_body_yen": 0,
+        "road_surcharge_yen": 0,
+        "exterior_fence_yen": 0,
+        "residual_items_yen": 0,
+        "asbestos_yen": 0,
+        "total_demolition_yen": 0
+      },
+      "maintenance": {
+        "base_maint_annual": 148000,
+        "annual_keep_normal": 148000,
+        "annual_keep_monthly": 12333,
+        "annual_keep_heavy": 148000,
+        "keep_5y_normal": 740000,
+        "keep_10y_normal": 1480000,
+        "keep_10y_heavy": 1480000
+      },
+      "disposal": {
+        "land_market_yen": 0,
+        "sarachi_gross_sale_yen": 0,
+        "sarachi_broker_fee_yen": 0,
+        "sarachi_net_proceeds_yen": 0,
+        "furuya_gross_sale_yen": 0,
+        "furuya_broker_fee_yen": 0,
+        "furuya_net_proceeds_yen": 0,
+        "kaitori_net_proceeds_yen": 500000,
+        "best_sale_net_yen": 500000,
+        "best_strategy_label": "壊さず・片付けず専門買取",
+        "net_benefit_vs_10y_keep_yen": 1980000
+      },
+      "hakajimai": {
+        "stone_removal_yen": 230000,
+        "ceremony_and_ridan_yen": 95000,
+        "admin_permit_yen": 15000,
+        "next_kuyo_label": "樹木葬・自然葬（ペア・家族区画）",
+        "next_kuyo_initial_yen": 380000,
+        "next_kuyo_annual_yen": 0,
+        "initial_total_yen": 720000,
+        "annual_keep_cost_yen": 148000,
+        "keep_total_15y_yen": 2220000,
+        "hakajimai_total_15y_yen": 720000,
+        "saving_15y_yen": 1500000,
+        "payback_years": 4.9,
+        "funeral_grant_yen": 50000,
+        "net_initial_after_grant_yen": 670000
+      },
+      "ten_year_curve": [
+        {
+          "year": 1,
+          "year_cost": 148000,
+          "cumulative": 148000,
+          "is_alert_year": false,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 2,
+          "year_cost": 148000,
+          "cumulative": 296000,
+          "is_alert_year": false,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 3,
+          "year_cost": 183000,
+          "cumulative": 479000,
+          "is_alert_year": true,
+          "event_label": "年忌法要・お布施＋遠方帰省"
+        },
+        {
+          "year": 4,
+          "year_cost": 148000,
+          "cumulative": 627000,
+          "is_alert_year": true,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 5,
+          "year_cost": 148000,
+          "cumulative": 775000,
+          "is_alert_year": true,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 6,
+          "year_cost": 148000,
+          "cumulative": 923000,
+          "is_alert_year": true,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 7,
+          "year_cost": 183000,
+          "cumulative": 1106000,
+          "is_alert_year": true,
+          "event_label": "年忌法要・お布施＋遠方帰省"
+        },
+        {
+          "year": 8,
+          "year_cost": 148000,
+          "cumulative": 1254000,
+          "is_alert_year": true,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 9,
+          "year_cost": 148000,
+          "cumulative": 1402000,
+          "is_alert_year": true,
+          "event_label": "年間管理料・お墓参り帰省"
+        },
+        {
+          "year": 10,
+          "year_cost": 183000,
+          "cumulative": 1585000,
+          "is_alert_year": true,
+          "event_label": "年忌法要・お布施＋遠方帰省"
+        }
+      ]
+    },
+    "pref_cost_range": {
+      "cheapest_pref": "秋田県",
+      "cheapest_cost_yen": 701600,
+      "priciest_pref": "東京都",
+      "priciest_cost_yen": 754500,
+      "diff_yen": 52900
+    }
+  },
+  {
+    "slug": "jikka-and-grave-bundle-30tsubo",
+    "name": "【一括実家じまい】木造実家30坪の処分＋遠方墓2㎡の墓じまいセット",
+    "short_name": "実家30坪＋墓じまい一括",
+    "category": "grave",
+    "category_label": "墓じまい・改葬・永代供養",
+    "spec_note": "敷地45坪・木造30坪の売却/解体＋菩提寺2㎡の永代供養改葬を同時実行",
+    "structure": "wood",
+    "floor_tsubo": 30,
+    "land_tsubo": 45,
+    "grave_sqm": 2.0,
+    "building_age_years": 42,
+    "road_condition": "normal",
+    "residual_level": "normal",
+    "has_asbestos_risk": true,
+    "market_demand_factor": 0.95,
+    "annual_extra_maint_yen": 98000,
+    "recommended_slot": "sell",
+    "summary": "親の逝去や施設入居に伴い「空き家になった実家の売却（または買取）」と「誰も通えなくなる地元のお墓の墓じまい」を同時に完結させるトータル実家じまいモデル。実家の売却代金から墓じまい・永代供養費用（約50〜60万円）を充当することで手出しゼロでの完結が可能。",
+    "calc": {
+      "tax": {
+        "land_sqm": 148.8,
+        "land_market_yen": 10473750,
+        "land_assessed_yen": 7331625,
+        "bldg_assessed_yen": 1092000,
+        "normal_land_tax_annual": 24439,
+        "normal_bldg_tax_annual": 18564,
+        "normal_total_tax_annual": 43003,
+        "heavy_effective_land_tax_annual": 87246,
+        "heavy_effective_total_tax_annual": 105810,
+        "heavy_principle_total_tax_annual": 143202,
+        "sarachi_total_tax_annual": 87246,
+        "extra_tax_annual_effective": 62807,
+        "extra_tax_5y_effective": 314035,
+        "extra_tax_10y_effective": 628070,
+        "land_tax_multiplier_effective": 3.57,
+        "land_tax_multiplier_principle": 5.1
+      },
+      "demolition": {
+        "unit_price_man_per_tsubo": 4.8,
+        "building_body_yen": 1440000,
+        "road_surcharge_yen": 0,
+        "exterior_fence_yen": 220000,
+        "residual_items_yen": 280000,
+        "asbestos_yen": 240000,
+        "total_demolition_yen": 2180000
+      },
+      "maintenance": {
+        "base_maint_annual": 315000,
+        "annual_keep_normal": 358003,
+        "annual_keep_monthly": 29834,
+        "annual_keep_heavy": 420810,
+        "keep_5y_normal": 1790015,
+        "keep_10y_normal": 3580030,
+        "keep_10y_heavy": 4082486
+      },
+      "disposal": {
+        "land_market_yen": 10473750,
+        "sarachi_gross_sale_yen": 10473750,
+        "sarachi_broker_fee_yen": 411634,
+        "sarachi_net_proceeds_yen": 7074870,
+        "furuya_gross_sale_yen": 8267200,
+        "furuya_broker_fee_yen": 338818,
+        "furuya_net_proceeds_yen": 6928382,
+        "kaitori_net_proceeds_yen": 3678975,
+        "best_sale_net_yen": 7074870,
+        "best_strategy_label": "解体して更地で仲介売却",
+        "net_benefit_vs_10y_keep_yen": 11157356
+      },
+      "hakajimai": {
+        "stone_removal_yen": 230000,
+        "ceremony_and_ridan_yen": 95000,
+        "admin_permit_yen": 15000,
+        "next_kuyo_label": "樹木葬・自然葬（ペア・家族区画）",
+        "next_kuyo_initial_yen": 380000,
+        "next_kuyo_annual_yen": 0,
+        "initial_total_yen": 720000,
+        "annual_keep_cost_yen": 98000,
+        "keep_total_15y_yen": 1470000,
+        "hakajimai_total_15y_yen": 720000,
+        "saving_15y_yen": 750000,
+        "payback_years": 7.3,
+        "funeral_grant_yen": 50000,
+        "net_initial_after_grant_yen": 670000
+      },
+      "ten_year_curve": [
+        {
+          "year": 1,
+          "year_cost": 358003,
+          "cumulative": 358003,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 2,
+          "year_cost": 358003,
+          "cumulative": 716006,
+          "is_alert_year": false,
+          "event_label": "通常の空き家維持（住宅用地の軽減1/6適用）"
+        },
+        {
+          "year": 3,
+          "year_cost": 420810,
+          "cumulative": 1136816,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 4,
+          "year_cost": 600810,
+          "cumulative": 1737626,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 5,
+          "year_cost": 420810,
+          "cumulative": 2158436,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 6,
+          "year_cost": 420810,
+          "cumulative": 2579246,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 7,
+          "year_cost": 420810,
+          "cumulative": 3000056,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 8,
+          "year_cost": 600810,
+          "cumulative": 3600866,
+          "is_alert_year": true,
+          "event_label": "固定資産税の軽減解除 ＋ 屋根・外壁の応急修繕"
+        },
+        {
+          "year": 9,
+          "year_cost": 420810,
+          "cumulative": 4021676,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        },
+        {
+          "year": 10,
+          "year_cost": 420810,
+          "cumulative": 4442486,
+          "is_alert_year": true,
+          "event_label": "管理不全空き家の勧告後（住宅用地の軽減解除）"
+        }
+      ]
+    },
+    "pref_cost_range": {
+      "cheapest_pref": "秋田県",
+      "cheapest_cost_yen": 2060000,
+      "priciest_pref": "東京都",
+      "priciest_cost_yen": 2420000,
+      "diff_yen": 360000
+    }
+  }
+]

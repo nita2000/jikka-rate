@@ -1,0 +1,160 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import AffiliateCta from "../../components/AffiliateCta.astro";
+import propertyCases from "../../data/property_cases.json";
+import { formatManYen, formatYen, structureLabel } from "../../lib/formatters";
+
+const categories = [
+  { key: "wood_standard", short: "標準木造戸建て", label: "標準木造戸建て（25〜50坪・平屋・二世帯）" },
+  { key: "large_rural", short: "地方大型・農家・別荘", label: "地方大型・古民家・農家住宅・豪雪・別荘空き家" },
+  { key: "steel_rc", short: "鉄骨・RC・マンション", label: "鉄骨造・RC造・店舗併用・旧耐震マンション" },
+  { key: "wakeari", short: "訳あり空き家", label: "訳あり空き家（再建築不可・残置物・借地権・アスベスト）" },
+  { key: "grave", short: "遠方のお墓・墓じまい", label: "遠方のお墓・墓じまい・実家＋墓一括整理" },
+];
+---
+
+<BaseLayout
+  title="実家・空き家・お墓のタイプ別 解体費用・維持費・買取相場一覧"
+  description="木造30坪築40年、農家住宅55坪、再建築不可、残置物多め、借地権、アスベスト含有屋根、遠方の寺院墓などタイプ別の年間維持費・固定資産税・解体費用・売却手残り目安を一覧比較。"
+  canonicalPath="/cases/"
+>
+  <nav class="text-xs text-slate-500 mb-4 flex items-center gap-1.5">
+    <a href="/" class="hover:text-emerald-700">トップ</a>
+    <span>/</span>
+    <span class="text-slate-800 font-semibold">タイプ別相場一覧</span>
+  </nav>
+
+  <div class="page-header-clean rounded p-5 sm:p-6 mb-5">
+    <div class="eyebrow-label mb-1">タイプ別相場</div>
+    <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900">
+      実家・空き家・お墓のタイプ別 解体費用・維持費・売却相場一覧
+    </h1>
+    <p class="mt-1.5 text-xs sm:text-sm text-slate-600">
+      建物の構造・広さ・道路条件・残置物量・お墓の区画タイプ別に、解体費用の内訳、空き家維持費と固定資産税、もっとも手元に残る手放し方を比較できます。
+    </p>
+  </div>
+
+  <!-- カテゴリ即時絞り込みタブ -->
+  <div class="flex flex-wrap gap-1.5 mb-6" id="cases-filter-group">
+    <button
+      type="button"
+      data-cat="all"
+      class="case-cat-btn rounded-xs border border-emerald-700 bg-emerald-700 text-white px-3 py-1.5 text-xs font-bold transition-colors"
+    >
+      すべて
+    </button>
+    {
+      categories.map((cat) => (
+        <button
+          type="button"
+          data-cat={cat.key}
+          class="case-cat-btn rounded-xs border border-slate-300 bg-white text-slate-700 hover:border-emerald-700 px-3 py-1.5 text-xs font-bold transition-colors"
+        >
+          {cat.short}
+        </button>
+      ))
+    }
+  </div>
+
+  <div class="space-y-8 mb-10" id="cases-sections">
+    {
+      categories.map((cat) => {
+        const list = propertyCases.filter((c) => c.category === cat.key);
+        return (
+          <section data-cat-section={cat.key}>
+            <div class="border-b border-slate-200 pb-2 mb-4">
+              <h2 class="text-base sm:text-lg font-extrabold text-slate-900">{cat.label}</h2>
+            </div>
+            <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {list.map((c) => {
+                const isGrave = c.structure === "grave";
+                const isBundle = c.slug === "jikka-and-grave-bundle-30tsubo";
+                const isMansion = c.slug === "old-mansion-70sqm-age42";
+                const haka = c.calc.hakajimai;
+                const mainCost = isGrave && haka
+                  ? haka.initial_total_yen
+                  : isBundle && haka
+                    ? c.calc.demolition.total_demolition_yen + haka.initial_total_yen
+                    : c.calc.demolition.total_demolition_yen;
+                const costLabel = isGrave
+                  ? "墓じまい＋樹木葬総額"
+                  : isBundle
+                    ? "解体＋墓じまい総額目安"
+                    : isMansion
+                      ? "家財片付け費目安"
+                      : "解体・片付け総額目安";
+                const bestNet = c.calc.disposal.best_sale_net_yen;
+                return (
+                  <a href={`/cases/${c.slug}/`} class="card-interactive rounded p-4 sm:p-5 block">
+                    <div class="flex items-center justify-between gap-2 text-[11px]">
+                      <span class="font-bold text-emerald-700">{isBundle ? "実家＋お墓一括" : structureLabel(c.structure)}</span>
+                      <span class="text-slate-500 tabular-nums">
+                        {isGrave ? `区画 ${c.grave_sqm}㎡` : isMansion ? `専有70㎡（約21坪）` : `延床${c.floor_tsubo}坪 / 敷地${c.land_tsubo}坪`}
+                      </span>
+                    </div>
+                    <h3 class="mt-1 text-base font-extrabold text-slate-900 leading-snug">{c.short_name}</h3>
+                    <p class="mt-1 text-[11px] text-slate-500 line-clamp-1">{c.spec_note}</p>
+
+                    <div class="mt-3 grid grid-cols-2 gap-2 rounded-xs bg-slate-50 p-2.5 text-xs tabular-nums">
+                      <div>
+                        <div class="text-[10px] text-slate-500">{costLabel}</div>
+                        <div class="font-extrabold text-slate-900">約 {formatManYen(mainCost)}</div>
+                      </div>
+                      <div>
+                        <div class="text-[10px] text-slate-500">{isGrave ? "15年間の負担軽減" : "売却・買取の手残り"}</div>
+                        <div class="font-extrabold text-emerald-700">
+                          {isGrave && haka
+                            ? `約 +${formatManYen(haka.saving_15y_yen)}`
+                            : bestNet >= 0
+                              ? `約 +${formatManYen(bestNet)}`
+                              : `約 ▲${formatManYen(Math.abs(bestNet))}`}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="mt-3 flex items-center justify-between text-[11px] text-slate-500">
+                      <span class="truncate mr-2 tabular-nums">
+                        維持負担：年 {formatYen(c.calc.maintenance.annual_keep_normal)}
+                      </span>
+                      <span class="font-bold text-emerald-700 shrink-0">内訳を見る →</span>
+                    </div>
+                  </a>
+                );
+              })}
+            </div>
+          </section>
+        );
+      })
+    }
+  </div>
+
+  <AffiliateCta
+    slotType="akiya"
+    title="再建築不可・残置物多め・古い農家の実家も「解体せず現状のまま」手残りを試算できます"
+    description="解体費の方が高くなりやすい地方実家や道が狭い実家でも、建物を壊さず古家付き売却または片付け不要の専門買取を選ぶことで持ち出し費用を防げます。"
+    fallbackHref="/tools/disposal-simulator/"
+    fallbackLabel="自分の実家条件で手残り金額を試算する →"
+  />
+
+  <script is:inline>
+    const grp = document.getElementById("cases-filter-group");
+    const sections = document.getElementById("cases-sections");
+    if (grp && sections) {
+      grp.addEventListener("click", (e) => {
+        const btn = e.target.closest("button[data-cat]");
+        if (!btn) return;
+        const cat = btn.getAttribute("data-cat") || "all";
+        grp.querySelectorAll(".case-cat-btn").forEach((b) => {
+          const on = b === btn;
+          b.className = on
+            ? "case-cat-btn rounded-xs border border-emerald-700 bg-emerald-700 text-white px-3 py-1.5 text-xs font-bold transition-colors"
+            : "case-cat-btn rounded-xs border border-slate-300 bg-white text-slate-700 hover:border-emerald-700 px-3 py-1.5 text-xs font-bold transition-colors";
+        });
+        sections.querySelectorAll("section[data-cat-section]").forEach((sec) => {
+          const match = cat === "all" || sec.getAttribute("data-cat-section") === cat;
+          sec.classList.toggle("hidden", !match);
+        });
+      });
+    }
+  </script>
+</BaseLayout>

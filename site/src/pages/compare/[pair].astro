@@ -1,0 +1,157 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import AffiliateCta from "../../components/AffiliateCta.astro";
+import comparePairs from "../../data/compare_pairs.json";
+import propertyCases from "../../data/property_cases.json";
+import { formatSignedYen, formatYen } from "../../lib/formatters";
+import type { AffiliateSlot } from "../../lib/affiliates";
+
+export function getStaticPaths() {
+  const bySlug = Object.fromEntries(propertyCases.map((c) => [c.slug, c]));
+  return comparePairs.map((pair) => ({
+    params: { pair: pair.slug },
+    props: {
+      pair,
+      caseA: bySlug[pair.case_a],
+      caseB: bySlug[pair.case_b],
+    },
+  }));
+}
+
+const { pair, caseA, caseB } = Astro.props;
+const ma = pair.metrics_a;
+const mb = pair.metrics_b;
+const isHaka = pair.category === "hakajimai_choice";
+const spanLabel = isHaka ? "15年間" : "10年間";
+const ctaSlot: AffiliateSlot = isHaka
+  ? "kuyo"
+  : pair.strategy_a === "direct_kaitori" || pair.strategy_b === "direct_kaitori"
+    ? "akiya"
+    : pair.category === "structure_demolition"
+      ? "kaitai"
+      : "sell";
+---
+
+<BaseLayout
+  title={`${pair.title}｜どっちが得？公的データで損益分岐を徹底比較`}
+  description={`${pair.title}（${pair.option_a_label} vs ${pair.option_b_label}）の初期費用・5年・${spanLabel}トータル収支を徹底比較。結論：${pair.verdict_short}。`}
+  canonicalPath={`/compare/${pair.slug}/`}
+>
+  <nav class="text-xs text-slate-500 mb-4 flex items-center gap-1.5">
+    <a href="/" class="hover:text-emerald-700">トップ</a>
+    <span>/</span>
+    <a href="/compare/" class="hover:text-emerald-700">2択損益比較</a>
+    <span>/</span>
+    <span class="text-slate-800 font-semibold truncate">{pair.title}</span>
+  </nav>
+
+  <div class="page-header-clean rounded p-5 sm:p-6 mb-6">
+    <div class="text-xs font-bold text-emerald-700 mb-1">{pair.category_label}</div>
+    <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900">{pair.title}</h1>
+    <p class="mt-1.5 text-xs sm:text-sm text-slate-600">{pair.angle}</p>
+  </div>
+
+  <!-- 結論ボックス -->
+  <div class="card-surface rounded p-5 sm:p-6 mb-6 border-l-4 border-l-emerald-700">
+    <h2 class="text-sm font-extrabold text-emerald-800 mb-2">データ結論（2026年最新公的相場・税制基準）</h2>
+    <ul class="space-y-1.5 text-xs sm:text-sm text-slate-700 leading-relaxed">
+      <li>
+        ・<strong>{spanLabel}の最終収支（手残りまたは総負担）</strong>で比較すると、
+        <strong class="text-emerald-800">「{pair.winner_label}」</strong>の方が
+        <strong class="text-emerald-800">{formatYen(pair.diff_10y_yen)} 有利</strong>になります。
+      </li>
+      <li>
+        ・<strong>選択肢A（{pair.option_a_label}）</strong>：{ma.note}
+      </li>
+      <li>
+        ・<strong>選択肢B（{pair.option_b_label}）</strong>：{mb.note}
+      </li>
+      {
+        pair.payback_years && (
+          <li>
+            ・<strong>損益分岐（回収年数）</strong>：初期費用は<strong class="text-emerald-800">約 {pair.payback_years} 年目</strong>で完全に元が取れ、それ以降は毎年維持費の差額分がプラスになります。
+          </li>
+        )
+      }
+    </ul>
+    <p class="mt-3 pt-2.5 border-t border-slate-100 text-[11px] text-slate-500 leading-relaxed">
+      ※上記は全国平均基準での試算です。お住まいの都道府県の地価や解体単価を当てはめた厳密な試算は
+      <a
+        href={isHaka ? "/tools/hakajimai-simulator/" : `/tools/disposal-simulator/?case=${caseA.slug}`}
+        class="font-bold text-emerald-700 hover:underline"
+      >
+        {isHaka ? "墓じまい15年損益シミュレーター" : "実家処分5年・10年損益シミュレーター"}
+      </a>
+      で即座に確認できます。
+    </p>
+  </div>
+
+  <!-- 横並び詳細比較表 -->
+  <div class="card-surface rounded overflow-hidden mb-8">
+    <div class="overflow-x-auto">
+      <table class="w-full text-xs border-collapse tabular-nums">
+        <thead>
+          <tr class="bg-slate-50 border-b border-slate-200 text-slate-700">
+            <th class="py-3 px-4 text-left font-bold">比較項目</th>
+            <th class={`py-3 px-4 text-right font-extrabold ${pair.winner_side === "A" ? "text-emerald-800" : "text-slate-700"}`}>
+              選択肢A：{pair.option_a_label}
+              {pair.winner_side === "A" && <span class="ml-1 px-1.5 py-0.5 rounded-xs bg-emerald-700 text-white text-[10px]">有利</span>}
+            </th>
+            <th class={`py-3 px-4 text-right font-extrabold ${pair.winner_side === "B" ? "text-emerald-800" : "text-slate-700"}`}>
+              選択肢B：{pair.option_b_label}
+              {pair.winner_side === "B" && <span class="ml-1 px-1.5 py-0.5 rounded-xs bg-emerald-700 text-white text-[10px]">有利</span>}
+            </th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100">
+          <tr>
+            <td class="py-2.5 px-4 font-medium text-slate-600">対象モデルケース</td>
+            <td class="py-2.5 px-4 text-right">
+              <a href={`/cases/${caseA.slug}/`} class="font-bold text-slate-800 hover:text-emerald-700 hover:underline">{caseA.short_name}</a>
+            </td>
+            <td class="py-2.5 px-4 text-right">
+              <a href={`/cases/${caseB.slug}/`} class="font-bold text-slate-800 hover:text-emerald-700 hover:underline">{caseB.short_name}</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="py-2.5 px-4 font-medium text-slate-600">スペック前提</td>
+            <td class="py-2.5 px-4 text-right text-slate-500">{caseA.spec_note}</td>
+            <td class="py-2.5 px-4 text-right text-slate-500">{caseB.spec_note}</td>
+          </tr>
+          <tr>
+            <td class="py-2.5 px-4 font-medium text-slate-600">初期手出し費用（解体・片付け・改葬等）</td>
+            <td class="py-2.5 px-4 text-right font-bold">{formatYen(ma.initial_outlay_yen)}</td>
+            <td class="py-2.5 px-4 text-right font-bold">{formatYen(mb.initial_outlay_yen)}</td>
+          </tr>
+          <tr>
+            <td class="py-2.5 px-4 font-medium text-slate-600">年間の継続負担（固定資産税・管理費・帰省費）</td>
+            <td class="py-2.5 px-4 text-right">{formatYen(ma.annual_ongoing_yen)}/年</td>
+            <td class="py-2.5 px-4 text-right">{formatYen(mb.annual_ongoing_yen)}/年</td>
+          </tr>
+          <tr class="bg-slate-50 font-extrabold">
+            <td class="py-3 px-4 text-slate-900">5年時点の純収支（＋手残り / ▲累積負担）</td>
+            <td class="py-3 px-4 text-right">{formatSignedYen(ma.net_cash_5y_yen)}</td>
+            <td class="py-3 px-4 text-right">{formatSignedYen(mb.net_cash_5y_yen)}</td>
+          </tr>
+          <tr class="bg-emerald-50/40 font-extrabold">
+            <td class="py-3 px-4 text-slate-900">{spanLabel}時点の最終純収支（＋手残り / ▲累積負担）</td>
+            <td class={`py-3 px-4 text-right ${pair.winner_side === "A" ? "text-emerald-800 text-sm" : "text-slate-800"}`}>
+              {formatSignedYen(ma.net_cash_10y_yen)}
+            </td>
+            <td class={`py-3 px-4 text-right ${pair.winner_side === "B" ? "text-emerald-800 text-sm" : "text-slate-800"}`}>
+              {formatSignedYen(mb.net_cash_10y_yen)}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <AffiliateCta
+    slotType={ctaSlot}
+    title={`「${pair.winner_label}」を進める前に、実際の査定額・見積額を無料で確認する`}
+    description="地域や物件状態によって売却額・解体費・改葬費は数十万円変動します。複数社の無料査定・見積もりを取って実額を当てはめることで、後悔のない判断ができます。"
+    fallbackHref={isHaka ? "/tools/hakajimai-simulator/" : `/tools/disposal-simulator/?case=${caseA.slug}`}
+    fallbackLabel="シミュレーターに自分の条件を入れて試算する →"
+  />
+</BaseLayout>

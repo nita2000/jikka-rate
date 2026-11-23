@@ -1,0 +1,476 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import AffiliateCta from "../../components/AffiliateCta.astro";
+import prefectures from "../../data/prefectures.json";
+import taxRules from "../../data/tax_rules.json";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "遠方のお墓維持 vs 墓じまい（永代供養・樹木葬）費用＆回収年数シミュレーター",
+  applicationCategory: "FinanceApplication",
+  operatingSystem: "All",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "JPY" },
+};
+---
+
+<BaseLayout
+  title="遠方のお墓を維持 vs 墓じまい（永代供養・樹木葬）費用＆何年で元が取れるか試算"
+  description="4つの項目を選ぶだけで30秒試算。お墓のある都道府県・広さ・帰省距離・新しい供養先（永代供養・樹木葬・納骨堂）から、墓じまいの初期費用と15年間の維持費を比較し、何年目に元が取れるかをわかりやすく算出します。"
+  canonicalPath="/tools/hakajimai-simulator/"
+  schema={schema}
+>
+  <div class="page-header-clean rounded p-5 sm:p-6 mb-6">
+    <div class="eyebrow-label mb-1">墓じまい・永代供養 30秒シミュレーター｜住所・個人情報の入力不要</div>
+    <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900">
+      遠方のお墓をこのまま維持するのと、墓じまいして永代供養・樹木葬にするのは何年で元が取れる？
+    </h1>
+    <p class="mt-1.5 text-xs sm:text-sm text-slate-600 leading-relaxed">
+      「お墓が遠くてお参りや掃除が大変」「子ども世代にお墓の負担を残したくない」という方のために、<strong>4つの項目を選ぶだけ</strong>で墓石の撤去費用から新しい供養先の費用、毎年の帰省交通費・管理料との損益分岐（回収年数）までやさしく試算します。
+    </p>
+  </div>
+
+  <div class="grid gap-6 lg:grid-cols-12 items-start">
+    <!-- 左：4ステップ選択パネル -->
+    <div class="lg:col-span-5 min-w-0 space-y-4">
+      <!-- STEP 1 -->
+      <div class="card-surface rounded p-5 space-y-3.5">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+          <div class="flex items-center gap-2">
+            <span class="inline-flex items-center justify-center rounded-xs bg-emerald-700 px-1.5 py-0.5 text-[10px] font-extrabold text-white">STEP 1</span>
+            <span class="text-xs font-extrabold text-slate-900">現在のお墓がある都道府県</span>
+          </div>
+        </div>
+        <label class="block text-xs">
+          <span class="font-bold text-slate-700">都道府県（墓石撤去相場・葬祭費補助に連動）</span>
+          <select id="hk-pref" class="mt-1 w-full rounded-xs border border-slate-300 bg-white px-2.5 py-2 text-xs font-bold text-slate-900">
+            {prefectures.map((p) => (
+              <option value={p.slug} selected={p.slug === "nagano"}>
+                {p.name}（葬祭費給付目安 {(p.funeral_grant_yen / 10000).toFixed(0)}万円）
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="card-surface rounded p-5 space-y-3.5 border-l-3 border-l-slate-700">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+          <div class="flex items-center gap-2">
+            <span class="inline-flex items-center justify-center rounded-xs bg-emerald-700 px-1.5 py-0.5 text-[10px] font-extrabold text-white">STEP 2</span>
+            <span class="text-xs font-extrabold text-slate-900">現在のお墓の種類・だいたいの広さ</span>
+          </div>
+        </div>
+        <select id="hk-grave-type" class="w-full rounded-xs border border-slate-300 bg-white px-2.5 py-2 text-xs font-medium text-slate-800">
+          <option value="temple_2" selected>お寺の墓地・標準的な広さ（約2㎡／檀家・お布施あり）</option>
+          <option value="temple_35">お寺の墓地・先祖代々の広め区画（約3.5㎡）</option>
+          <option value="public_15">市営・都営などの公営霊園（約1.5㎡／離檀料なし）</option>
+          <option value="private_2">民間の霊園（約2㎡／檀家なし）</option>
+          <option value="mountain_25">山の上・階段が多い場所のお墓（手作業での撤去）</option>
+        </select>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="card-surface rounded p-5 space-y-3.5 border-l-3 border-l-amber-600">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+          <div class="flex items-center gap-2">
+            <span class="inline-flex items-center justify-center rounded-xs bg-emerald-700 px-1.5 py-0.5 text-[10px] font-extrabold text-white">STEP 3</span>
+            <span class="text-xs font-extrabold text-slate-900">お墓参りの距離・毎年の負担</span>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-2" id="hk-dist-group">
+          <button type="button" data-dist="near" class="dist-btn rounded-xs border border-slate-300 bg-white py-2 px-2.5 text-left text-[11px] font-bold text-slate-700 transition-colors">
+            <div>近く・同じ県内</div>
+            <div class="text-[10px] font-normal opacity-80 mt-0.5">管理料・お布施で年3.6万円</div>
+          </button>
+          <button type="button" data-dist="mid" class="dist-btn rounded-xs border border-slate-300 bg-white py-2 px-2.5 text-left text-[11px] font-bold text-slate-700 transition-colors">
+            <div>車・電車で片道1〜2時間</div>
+            <div class="text-[10px] font-normal opacity-80 mt-0.5">年1〜2回お参り込 年6.8万円</div>
+          </button>
+          <button type="button" data-dist="far" class="dist-btn rounded-xs border border-emerald-700 bg-emerald-700 py-2 px-2.5 text-left text-[11px] font-bold text-white transition-colors">
+            <div>遠方（新幹線で帰省）</div>
+            <div class="text-[10px] font-normal opacity-90 mt-0.5">交通費＋管理料で年9.8万円</div>
+          </button>
+          <button type="button" data-dist="flight" class="dist-btn rounded-xs border border-slate-300 bg-white py-2 px-2.5 text-left text-[11px] font-bold text-slate-700 transition-colors">
+            <div>超遠方（飛行機・宿泊）</div>
+            <div class="text-[10px] font-normal opacity-80 mt-0.5">宿泊帰省＋管理で年14.8万円</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 4 -->
+      <div class="card-surface rounded p-5 space-y-3.5 border-l-3 border-l-emerald-700">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+          <div class="flex items-center gap-2">
+            <span class="inline-flex items-center justify-center rounded-xs bg-emerald-700 px-1.5 py-0.5 text-[10px] font-extrabold text-white">STEP 4</span>
+            <span class="text-xs font-extrabold text-slate-900">墓じまい後の新しい供養先</span>
+          </div>
+        </div>
+        <div class="grid grid-cols-3 gap-1.5" id="hk-next-group">
+          <button type="button" data-next="goshi" class="next-btn rounded-xs border border-slate-300 bg-white py-2 px-2 text-[11px] font-bold text-slate-700 transition-colors">
+            合祀の永代供養<br /><span class="text-[10px] font-normal opacity-80">目安12万・管理0円</span>
+          </button>
+          <button type="button" data-next="jumokusou" class="next-btn rounded-xs border border-emerald-700 bg-emerald-700 py-2 px-2 text-[11px] font-bold text-white transition-colors">
+            人気の樹木葬<br /><span class="text-[10px] font-normal opacity-90">目安38万・管理0円</span>
+          </button>
+          <button type="button" data-next="nokotsudo" class="next-btn rounded-xs border border-slate-300 bg-white py-2 px-2 text-[11px] font-bold text-slate-700 transition-colors">
+            屋内の納骨堂<br /><span class="text-[10px] font-normal opacity-80">目安65万・年1.2万</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 詳細手動調整アコーディオン -->
+      <details class="card-surface rounded p-4 text-xs">
+        <summary class="cursor-pointer font-extrabold text-slate-700 flex items-center justify-between list-none">
+          <span>石材店の見積もりや帰省費用を手動で調整する</span>
+          <span class="text-emerald-700 text-[11px] shrink-0 ml-2">開く ▾</span>
+        </summary>
+        <div class="mt-4 pt-3 border-t border-slate-100 space-y-3">
+          <div class="grid grid-cols-2 gap-3">
+            <label class="block">
+              <span class="font-bold text-slate-700">墓石の撤去工事費（万円）</span>
+              <input id="hk-man-stone" type="number" step="2" min="5" max="150" class="mt-1 w-full rounded-xs border border-slate-300 px-2.5 py-1.5 tabular-nums" />
+            </label>
+            <label class="block">
+              <span class="font-bold text-slate-700">閉眼お布施・離檀御礼（万円）</span>
+              <input id="hk-man-ceremony" type="number" step="1" min="0" max="100" class="mt-1 w-full rounded-xs border border-slate-300 px-2.5 py-1.5 tabular-nums" />
+            </label>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <label class="block">
+              <span class="font-bold text-slate-700">新しい供養先の費用（万円）</span>
+              <input id="hk-man-next" type="number" step="5" min="5" max="300" class="mt-1 w-full rounded-xs border border-slate-300 px-2.5 py-1.5 tabular-nums" />
+            </label>
+            <label class="block">
+              <span class="font-bold text-slate-700">今のお墓の年間負担（万円）</span>
+              <input id="hk-man-keep" type="number" step="1" min="1" max="100" class="mt-1 w-full rounded-xs border border-slate-300 px-2.5 py-1.5 tabular-nums" />
+            </label>
+          </div>
+          <div class="pt-1 flex justify-end">
+            <button type="button" id="hk-reset-btn" class="text-[11px] font-bold text-emerald-700 hover:underline">
+              公的統計の自動計算に戻す ↺
+            </button>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <!-- 右：診断結果・15年比較カード（改行落ち防止設計） -->
+    <div class="lg:col-span-7 min-w-0 space-y-5">
+      <div class="card-surface rounded p-5 sm:p-6">
+        <!-- 最上段：結論ヒーロー -->
+        <div id="hk-hero" class="rounded border border-slate-200 border-l-4 border-l-emerald-700 bg-emerald-50/60 p-4 sm:p-5 mb-5">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
+            <span class="text-[11px] font-bold tracking-wider text-emerald-800 uppercase whitespace-nowrap">15年間の維持費 vs 墓じまい 試算結果</span>
+            <span id="hk-payback-badge" class="px-2 py-0.5 rounded-xs bg-emerald-700 text-white text-[11px] font-bold tabular-nums whitespace-nowrap">約—年で元が取れる</span>
+          </div>
+          <div class="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+            <div class="flex flex-wrap items-baseline gap-x-2">
+              <span id="hk-verdict-lead" class="text-xs sm:text-sm font-extrabold text-slate-800 whitespace-nowrap">墓じまいの方が15年間で</span>
+              <span id="hk-verdict-amount" class="font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-emerald-800 tabular-nums whitespace-nowrap">—</span>
+              <span id="hk-verdict-tail" class="text-xs sm:text-sm font-extrabold text-slate-800 whitespace-nowrap">負担減</span>
+            </div>
+            <div id="hk-verdict-initial" class="text-xs font-bold text-slate-600 tabular-nums whitespace-nowrap"></div>
+          </div>
+          <p class="mt-2.5 pt-2.5 border-t border-emerald-200/70 text-[11.5px] text-slate-700 leading-relaxed">
+            <strong>ご家族へのメリット：</strong>費用面の回収だけでなく、遠方へ掃除に通う負担や将来お子さま世代へお墓の管理を引き継ぐ心配を今の代で解消できます。
+          </p>
+        </div>
+
+        <!-- 15年総支出 2大比較カード（見出し＋バッジ・金額・内訳の改行落ちゼロ設計） -->
+        <div class="grid sm:grid-cols-2 gap-3.5 mb-5">
+          <div id="hk-card-keep" class="rounded border border-slate-200 border-t-3 border-t-slate-400 bg-slate-50/70 p-4 flex flex-col justify-between min-w-0">
+            <div>
+              <div class="flex items-center justify-between gap-1.5 whitespace-nowrap">
+                <span class="text-xs font-bold text-slate-700">① 今のお墓を15年維持</span>
+                <span class="px-1.5 py-0.5 rounded-xs bg-slate-200 text-slate-700 text-[10px] font-bold shrink-0">毎年負担</span>
+              </div>
+              <div id="hk-res-keep15" class="mt-2 font-display text-2xl sm:text-[28px] leading-tight font-extrabold text-slate-900 tabular-nums whitespace-nowrap">—</div>
+              <div id="hk-res-keep-annual" class="mt-1 text-[11px] font-bold text-slate-600 tabular-nums whitespace-nowrap"></div>
+              <div class="mt-2.5 h-1.5 w-full rounded-xs bg-slate-200/80 overflow-hidden">
+                <div id="hk-bar-keep" class="h-full bg-slate-500 transition-all duration-200" style="width:100%"></div>
+              </div>
+            </div>
+            <div id="hk-res-keep-note" class="mt-3 pt-2 border-t border-slate-200/70 space-y-1 text-[11px] text-slate-500 tabular-nums"></div>
+          </div>
+
+          <div id="hk-card-done" class="rounded border border-emerald-300 border-t-3 border-t-emerald-700 bg-white p-4 flex flex-col justify-between shadow-2xs min-w-0">
+            <div>
+              <div class="flex items-center justify-between gap-1.5 whitespace-nowrap">
+                <span class="text-xs font-bold text-emerald-800">② 墓じまい＋永代供養</span>
+                <span class="px-1.5 py-0.5 rounded-xs bg-emerald-700 text-white text-[10px] font-bold shrink-0">承継負担ゼロ</span>
+              </div>
+              <div id="hk-res-done15" class="mt-2 font-display text-2xl sm:text-[28px] leading-tight font-extrabold text-emerald-800 tabular-nums whitespace-nowrap">—</div>
+              <div id="hk-res-done-sub" class="mt-1 text-[11px] font-bold text-emerald-800 tabular-nums whitespace-nowrap"></div>
+              <div class="mt-2.5 h-1.5 w-full rounded-xs bg-slate-200/80 overflow-hidden">
+                <div id="hk-bar-done" class="h-full bg-emerald-700 transition-all duration-200" style="width:55%"></div>
+              </div>
+            </div>
+            <div id="hk-res-done-note" class="mt-3 pt-2 border-t border-slate-100 space-y-1 text-[11px] text-slate-500 tabular-nums"></div>
+          </div>
+        </div>
+
+        <!-- 自治体の葬祭費給付金・公営火葬料ステータス帯 -->
+        <div class="rounded-xs bg-slate-50 border border-slate-200 px-3.5 py-3 mb-5">
+          <div class="text-[11px] font-bold text-slate-600 mb-2">
+            参考：選択都道府県の公的葬祭費給付金（国保・後期高齢者医療）＆公営火葬料目安
+          </div>
+          <div class="grid sm:grid-cols-2 gap-2.5 text-xs tabular-nums">
+            <div class="rounded-xs border border-slate-200 bg-white px-3 py-2 flex items-center justify-between gap-2 whitespace-nowrap">
+              <span class="text-slate-600">葬祭費・埋葬料給付目安</span>
+              <strong id="hk-grant-val" class="text-xs sm:text-sm font-extrabold text-emerald-800">—</strong>
+            </div>
+            <div class="rounded-xs border border-slate-200 bg-white px-3 py-2 flex items-center justify-between gap-2 whitespace-nowrap">
+              <span class="text-slate-600">公営火葬料（住民料金）</span>
+              <strong id="hk-cremation-val" class="text-xs sm:text-sm font-extrabold text-slate-900">—</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- 費用内訳テーブル -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-xs border-collapse tabular-nums whitespace-nowrap">
+            <thead>
+              <tr class="border-b border-slate-200 text-slate-500 text-left">
+                <th class="py-2 pr-2 font-bold">費用・15年累計の項目</th>
+                <th class="py-2 px-2 font-bold text-right">① 今のお墓を維持</th>
+                <th class="py-2 px-2 font-bold text-right">② 墓じまい＋永代供養</th>
+                <th class="py-2 pl-2 font-bold text-right">差額</th>
+              </tr>
+            </thead>
+            <tbody id="hk-tbody" class="divide-y divide-slate-100"></tbody>
+          </table>
+        </div>
+
+        <!-- 解説・アドバイス -->
+        <div id="hk-insight" class="mt-4 rounded-xs bg-slate-50 border border-slate-200 p-4 text-xs text-slate-700 leading-relaxed space-y-1.5"></div>
+      </div>
+
+      <AffiliateCta
+        slotType="kuyo"
+        title="まずはご自宅近くの「樹木葬・永代供養墓」の資料を取り寄せて雰囲気と費用を見比べる"
+        description="墓じまいを進める際は、今のお墓を撤去するよりも先に「新しい受け入れ先（樹木葬や永代供養墓）」を決めて受入証明書をもらうのが最初の手順です。人気の霊園は区画が埋まりやすいため、早めにパンフレットで比較しておくと安心です。"
+        fallbackHref="/compare/temple-grave-keep-15y-vs-hakajimai-jumokusou/"
+        fallbackLabel="遠方のお墓維持 vs 樹木葬の詳しい比較データを見る →"
+      />
+    </div>
+  </div>
+
+  <script is:inline define:vars={{ prefsData: prefectures, taxRulesData: taxRules }}>
+    const byPref = Object.fromEntries(prefsData.map((p) => [p.slug, p]));
+
+    const state = {
+      dist: "far", // near | mid | far | flight
+      nextType: "jumokusou", // goshi | jumokusou | nokotsudo
+      overrides: {
+        stone: false,
+        ceremony: false,
+        next: false,
+        keep: false,
+      },
+    };
+
+    const elPref = document.getElementById("hk-pref");
+    const elGraveType = document.getElementById("hk-grave-type");
+    const elManStone = document.getElementById("hk-man-stone");
+    const elManCeremony = document.getElementById("hk-man-ceremony");
+    const elManNext = document.getElementById("hk-man-next");
+    const elManKeep = document.getElementById("hk-man-keep");
+
+    function yen(n) {
+      return `${Math.round(n).toLocaleString("ja-JP")}円`;
+    }
+
+    function plainMan(n) {
+      const m = Math.round(Math.abs(n) / 1000) / 10;
+      return `${Number.isInteger(m) ? m : m.toFixed(1)}万円`;
+    }
+
+    function computeDefaults() {
+      const pref = byPref[elPref.value];
+      const gType = elGraveType.value;
+
+      let sqm = 2.0;
+      let slopeMult = 1.0;
+      let ceremonyMan = 10;
+      if (gType === "temple_35") {
+        sqm = 3.5;
+        ceremonyMan = 14;
+      } else if (gType === "public_15") {
+        sqm = 1.5;
+        ceremonyMan = 4;
+      } else if (gType === "private_2") {
+        sqm = 2.0;
+        ceremonyMan = 5;
+      } else if (gType === "mountain_25") {
+        sqm = 2.5;
+        slopeMult = 1.32;
+        ceremonyMan = 10;
+      }
+
+      const stoneMan = Math.round((sqm * 11.5 * pref.grave_removal_factor * slopeMult) / 2) * 2;
+      const nextMan = state.nextType === "goshi" ? 12 : state.nextType === "nokotsudo" ? 65 : 38;
+      const keepMan =
+        state.dist === "near" ? 3.6 : state.dist === "mid" ? 6.8 : state.dist === "flight" ? 14.8 : 9.8;
+
+      return { stoneMan, ceremonyMan, nextMan, keepMan };
+    }
+
+    function syncFields(force = false) {
+      const d = computeDefaults();
+      if (force || !state.overrides.stone) elManStone.value = String(d.stoneMan);
+      if (force || !state.overrides.ceremony) elManCeremony.value = String(d.ceremonyMan);
+      if (force || !state.overrides.next) elManNext.value = String(d.nextMan);
+      if (force || !state.overrides.keep) elManKeep.value = String(d.keepMan);
+    }
+
+    function recalc() {
+      const pref = byPref[elPref.value];
+      const stoneYen = Math.max(0, Number(elManStone.value) || 0) * 10000;
+      const ceremonyYen = Math.max(0, Number(elManCeremony.value) || 0) * 10000;
+      const nextInitialYen = Math.max(0, Number(elManNext.value) || 0) * 10000;
+      const adminYen = 15000;
+      const keepAnnualYen = Math.max(5000, (Number(elManKeep.value) || 0) * 10000);
+
+      const nextAnnualYen = state.nextType === "nokotsudo" ? 12000 : 0;
+      const initialTotalYen = stoneYen + ceremonyYen + adminYen + nextInitialYen;
+      const keep15y = keepAnnualYen * 15;
+      const done15y = initialTotalYen + nextAnnualYen * 15;
+      const diff15y = keep15y - done15y;
+
+      const annualSaving = Math.max(1000, keepAnnualYen - nextAnnualYen);
+      const paybackYears = (initialTotalYen / annualSaving).toFixed(1);
+
+      document.getElementById("hk-payback-badge").textContent = `約 ${paybackYears} 年で元が取れる`;
+      document.getElementById("hk-verdict-initial").textContent = `墓じまい初期総額 ${yen(initialTotalYen)}`;
+
+      const vLead = document.getElementById("hk-verdict-lead");
+      const vAmt = document.getElementById("hk-verdict-amount");
+      const vTail = document.getElementById("hk-verdict-tail");
+      if (diff15y >= 0) {
+        vLead.textContent = "墓じまいの方が15年間で";
+        vAmt.textContent = yen(diff15y);
+        vAmt.className = "font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-emerald-800 tabular-nums whitespace-nowrap";
+        vTail.textContent = "お得（負担減）";
+      } else {
+        vLead.textContent = "15年単純支出では現状維持が";
+        vAmt.textContent = yen(Math.abs(diff15y));
+        vAmt.className = "font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-amber-900 tabular-nums whitespace-nowrap";
+        vTail.textContent = "安い（承継課題は残る）";
+      }
+
+      const max15 = Math.max(keep15y, done15y, 1);
+      document.getElementById("hk-res-keep15").textContent = yen(keep15y);
+      document.getElementById("hk-res-keep-annual").textContent = `年間 ${plainMan(keepAnnualYen)} × 15年分`;
+      document.getElementById("hk-bar-keep").style.width = `${Math.round((keep15y / max15) * 100)}%`;
+      document.getElementById("hk-res-keep-note").innerHTML =
+        `<div class="flex justify-between whitespace-nowrap"><span>管理料・お布施・帰省</span><span class="font-semibold text-slate-700">${yen(keep15y)}</span></div>` +
+        `<div class="flex justify-between whitespace-nowrap"><span>16年目以降の負担</span><span class="font-semibold text-rose-700">子世代へ継続</span></div>`;
+
+      document.getElementById("hk-res-done15").textContent = yen(done15y);
+      document.getElementById("hk-res-done-sub").textContent =
+        nextAnnualYen > 0
+          ? `初期 ${plainMan(initialTotalYen)} ＋ 管理15年 ${plainMan(nextAnnualYen * 15)}`
+          : `初期 ${plainMan(initialTotalYen)}のみ（以降の管理費 0円）`;
+      document.getElementById("hk-bar-done").style.width = `${Math.round((done15y / max15) * 100)}%`;
+      document.getElementById("hk-res-done-note").innerHTML =
+        `<div class="flex justify-between whitespace-nowrap"><span>墓石撤去＋閉眼・離檀</span><span class="font-semibold text-slate-700">${yen(stoneYen + ceremonyYen + adminYen)}</span></div>` +
+        `<div class="flex justify-between whitespace-nowrap"><span>新しい供養先（初期）</span><span class="font-semibold text-emerald-800">${yen(nextInitialYen)}</span></div>`;
+
+      document.getElementById("hk-grant-val").textContent = `${yen(pref.funeral_grant_yen)}（${pref.name}）`;
+      document.getElementById("hk-cremation-val").textContent =
+        pref.cremation_fee_yen === 0 ? `0円（${pref.capital_city}・住民無料）` : `${yen(pref.cremation_fee_yen)}（${pref.capital_city}）`;
+
+      const rows = [
+        ["墓石の撤去・更地返還工事費", 0, stoneYen],
+        ["閉眼供養のお布施・離檀・行政手続", 0, ceremonyYen + adminYen],
+        ["新しい供養先（永代供養・樹木葬等）初期費", 0, nextInitialYen],
+        ["15年間の墓地管理料・お布施・帰省交通費", keep15y, nextAnnualYen * 15],
+        ["15年間のトータル支出合計", keep15y, done15y],
+      ];
+
+      document.getElementById("hk-tbody").innerHTML = rows
+        .map(([label, a, b], idx) => {
+          const d = b - a;
+          const dText = d > 0 ? `+${yen(d)}` : d < 0 ? `▲${yen(Math.abs(d))}` : "±0円";
+          const isLast = idx === rows.length - 1;
+          const dCls = d < 0 ? "text-emerald-700 font-bold" : d > 0 ? "text-rose-700" : "text-slate-500";
+          return `<tr class="${isLast ? "bg-slate-50 font-extrabold text-slate-900" : ""}">
+            <td class="py-2 pr-2 text-slate-700">${label}</td>
+            <td class="py-2 px-2 text-right">${yen(a)}</td>
+            <td class="py-2 px-2 text-right">${yen(b)}</td>
+            <td class="py-2 pl-2 text-right ${dCls}">${dText}</td>
+          </tr>`;
+        })
+        .join("");
+
+      document.getElementById("hk-insight").innerHTML =
+        `<p><strong>何年で元が取れるかの目安：</strong>現在、毎年のお墓参り帰省や管理料に <strong>${yen(keepAnnualYen)}</strong> かかっている場合、墓じまいをすると<strong>約 ${paybackYears} 年目</strong>で初期費用（${yen(initialTotalYen)}）の元が取れ、それ以降は毎年 <strong>${yen(annualSaving)}</strong> の出費がなくなります。</p>` +
+        `<p><strong>トラブルを防ぐ進め方：</strong>お寺（菩提寺）にお墓がある場合は、先に石材店を呼ぶのではなく、まずご住職へ「遠方で通うのが難しくなり、子ども世代に負担を残せないため」と丁寧に相談するのが円満に進めるコツです。</p>`;
+    }
+
+    function setGroupActive(selector, activeEl) {
+      document.querySelectorAll(selector).forEach((b) => {
+        const on = b === activeEl;
+        b.className =
+          b.className
+            .replace(/border-emerald-700|bg-emerald-700|text-white|border-slate-300|bg-white|text-slate-600|text-slate-700/g, "")
+            .trim() + (on ? " border-emerald-700 bg-emerald-700 text-white" : " border-slate-300 bg-white text-slate-700");
+      });
+    }
+
+    document.querySelectorAll(".dist-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        state.dist = btn.getAttribute("data-dist");
+        setGroupActive(".dist-btn", btn);
+        state.overrides.keep = false;
+        syncFields();
+        recalc();
+      });
+    });
+
+    document.querySelectorAll(".next-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        state.nextType = btn.getAttribute("data-next");
+        setGroupActive(".next-btn", btn);
+        state.overrides.next = false;
+        syncFields();
+        recalc();
+      });
+    });
+
+    elPref.addEventListener("change", () => {
+      state.overrides.stone = false;
+      syncFields();
+      recalc();
+    });
+
+    elGraveType.addEventListener("change", () => {
+      state.overrides.stone = false;
+      state.overrides.ceremony = false;
+      syncFields();
+      recalc();
+    });
+
+    [
+      [elManStone, "stone"],
+      [elManCeremony, "ceremony"],
+      [elManNext, "next"],
+      [elManKeep, "keep"],
+    ].forEach(([el, key]) => {
+      el.addEventListener("input", () => {
+        state.overrides[key] = true;
+        recalc();
+      });
+    });
+
+    document.getElementById("hk-reset-btn").addEventListener("click", () => {
+      state.overrides = { stone: false, ceremony: false, next: false, keep: false };
+      syncFields(true);
+      recalc();
+    });
+
+    syncFields(true);
+    recalc();
+  </script>
+</BaseLayout>

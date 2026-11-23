@@ -1,0 +1,142 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const contactFormUrl = import.meta.env.PUBLIC_CONTACT_FORM_URL?.trim() || "";
+const contactEmail = import.meta.env.PUBLIC_CONTACT_EMAIL?.trim() || "";
+---
+
+<BaseLayout
+  title="プライバシーポリシー・免責事項・運営者情報"
+  description="実家じまいレートのプライバシーポリシー（Googleアナリティクス・Cookie・アフィリエイト広告の利用）、免責事項、著作権、運営者情報およびお問い合わせ窓口について。"
+  canonicalPath="/privacy/"
+  showPrNotice={false}
+>
+  <nav class="text-xs text-slate-500 mb-4 flex items-center gap-1.5">
+    <a href="/" class="hover:text-emerald-700">トップ</a>
+    <span>/</span>
+    <span class="text-slate-800 font-semibold">プライバシーポリシー・運営者情報</span>
+  </nav>
+
+  <div class="max-w-4xl space-y-6">
+    <div class="page-header-clean rounded p-5 sm:p-6">
+      <div class="eyebrow-label mb-1">規約・免責</div>
+      <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900">プライバシーポリシー・免責事項・運営者情報</h1>
+      <p class="mt-1.5 text-xs sm:text-sm text-slate-600">
+        「実家じまいレート」（以下「当サイト」）における利用者情報の取り扱い、広告配信、免責事項、著作権および運営者情報・お問い合わせ窓口を定めています。
+      </p>
+    </div>
+
+    <div class="card-surface rounded p-5 sm:p-7 space-y-7 text-xs sm:text-sm text-slate-700 leading-relaxed">
+      <section class="space-y-2">
+        <h2 class="text-base font-extrabold text-slate-900 border-b border-slate-200 pb-2">
+          1. シミュレーター選択条件の取り扱い
+        </h2>
+        <p>
+          当サイトの各種シミュレーターで選択・入力された都道府県・広さ・築年数等の条件は、すべてご利用の端末（ブラウザ）内でのみ計算処理され、当サイト運営者のサーバーへ個人を特定できる情報として送信・保存されることはありません。
+        </p>
+      </section>
+
+      <section class="space-y-2">
+        <h2 class="text-base font-extrabold text-slate-900 border-b border-slate-200 pb-2">
+          2. 広告配信・アフィリエイトプログラムについて
+        </h2>
+        <p>
+          当サイトは、第三者配信の広告サービスおよびアフィリエイトプログラム（A8.net、afb、バリューコマース、もしもアフィリエイト、Google AdSense 等）に参加し、空き家・訳あり物件買取、不動産売却査定、解体工事見積もり、墓じまい・永代供養等のサービスを紹介する場合があります。
+        </p>
+        <p>
+          これらの広告配信事業者は、利用者の興味に応じた広告表示および成果計測のために Cookie を使用することがあります。また、景品表示法に基づき、プロモーションを含む案内枠には「PR」等の表記を行っています。なお、当サイトの維持費・税金および損益計算ロジックは公表されている公的基準と法定の計算式にもとづいて算出しており、広告掲載の有無によって計算結果が変わることはありません。
+        </p>
+      </section>
+
+      <section class="space-y-2">
+        <h2 class="text-base font-extrabold text-slate-900 border-b border-slate-200 pb-2">
+          3. アクセス解析ツールおよび Cookie の利用について
+        </h2>
+        <p>
+          当サイトでは、利用状況の把握およびコンテンツ改善のために Google のアクセス解析ツール「Google アナリティクス（GA4）」を使用する場合があります。データ収集には Cookie が使用されますが、このデータは匿名で収集されており、個人を特定するものではありません。
+        </p>
+        <p>
+          この機能はブラウザ設定で Cookie を無効にすることで収集を拒否できます。詳細は
+          <a
+            href="https://policies.google.com/technologies/partner-sites?hl=ja"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-emerald-700 font-semibold underline hover:text-emerald-800"
+          >
+            Google のサービスを使用するサイトやアプリから収集した情報の Google による使用
+          </a>
+          をご確認ください。
+        </p>
+      </section>
+
+      <section class="space-y-2">
+        <h2 class="text-base font-extrabold text-slate-900 border-b border-slate-200 pb-2">
+          4. 免責事項
+        </h2>
+        <p>
+          当サイトのコンテンツ・試算ツールは公的データおよび一定の前提条件に基づく概算シミュレーションであり、正確性の維持に努めていますが、法改正・地価変動・建物や敷地状態・個別契約条件による差異や将来の経済効果を保証するものではありません。
+        </p>
+        <p>
+          当サイトのリンクやバナー等から移動した外部サイトで提供される情報・サービス・契約・売買等について、当サイトは一切の責任を負いかねます。最終的な判断はご自身の責任にて各事業者の正式見積もり・約款または自治体・税理士・司法書士等の専門家へご確認ください。
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-base font-extrabold text-slate-900 border-b border-slate-200 pb-2">
+          5. 運営者情報・お問い合わせ
+        </h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-xs sm:text-sm border-collapse">
+            <tbody class="divide-y divide-slate-200 border-y border-slate-200">
+              <tr>
+                <th class="py-2.5 px-3 text-left bg-slate-50 font-bold text-slate-700 w-32 sm:w-36">サイト名</th>
+                <td class="py-2.5 px-3 text-slate-800">実家じまいレート</td>
+              </tr>
+              <tr>
+                <th class="py-2.5 px-3 text-left bg-slate-50 font-bold text-slate-700">運営者</th>
+                <td class="py-2.5 px-3 text-slate-800">実家じまいレート運営事務局</td>
+              </tr>
+              <tr>
+                <th class="py-2.5 px-3 text-left bg-slate-50 font-bold text-slate-700">URL</th>
+                <td class="py-2.5 px-3 text-slate-800">https://jikkarate.com/</td>
+              </tr>
+              <tr>
+                <th class="py-2.5 px-3 text-left bg-slate-50 font-bold text-slate-700">お問い合わせ</th>
+                <td class="py-2.5 px-3 text-slate-800 space-y-1.5">
+                  {
+                    contactFormUrl ? (
+                      <p>
+                        掲載データの誤記や運営に関するお問い合わせは
+                        <a
+                          href={contactFormUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="text-emerald-700 font-bold underline hover:text-emerald-800"
+                        >
+                          お問い合わせフォーム
+                        </a>
+                        よりご連絡ください。
+                      </p>
+                    ) : contactEmail ? (
+                      <p>
+                        掲載データの誤記や運営に関するお問い合わせは
+                        <strong class="text-slate-900 ml-1">{contactEmail}</strong> までご連絡ください。
+                      </p>
+                    ) : (
+                      <p>
+                        掲載データの誤記や運営に関するお問い合わせは、実家じまいレート運営事務局にて受け付けております。
+                      </p>
+                    )
+                  }
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-[11px] text-slate-500">
+          制定日：2026年11月21日 ／ 最終改定日：2026年11月23日
+        </p>
+      </section>
+    </div>
+  </div>
+</BaseLayout>

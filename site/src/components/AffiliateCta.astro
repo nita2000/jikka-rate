@@ -1,0 +1,100 @@
+---
+import { getAffiliate, type AffiliateSlot } from "../lib/affiliates";
+
+interface Props {
+  slotType: AffiliateSlot;
+  title: string;
+  description: string;
+  badge?: string;
+  fallbackHref?: string;
+  fallbackLabel?: string;
+}
+
+const {
+  slotType,
+  title,
+  description,
+  badge = "PR",
+  fallbackHref = "/tools/disposal-simulator/",
+  fallbackLabel = "シミュレーターで手残り金額を試算する →",
+} = Astro.props;
+
+const entry = getAffiliate(slotType);
+const hasExternal = Boolean(entry.url);
+
+const toneMap: Record<AffiliateSlot, { left: string; labelColor: string; btn: string }> = {
+  sell: {
+    left: "border-l-emerald-700",
+    labelColor: "text-emerald-700",
+    btn: "bg-emerald-700 hover:bg-emerald-800 text-white",
+  },
+  akiya: {
+    left: "border-l-amber-700",
+    labelColor: "text-amber-800",
+    btn: "bg-emerald-700 hover:bg-emerald-800 text-white",
+  },
+  kaitai: {
+    left: "border-l-slate-700",
+    labelColor: "text-slate-600",
+    btn: "bg-slate-800 hover:bg-slate-900 text-white",
+  },
+  kuyo: {
+    left: "border-l-emerald-800",
+    labelColor: "text-emerald-800",
+    btn: "bg-emerald-800 hover:bg-emerald-900 text-white",
+  },
+};
+
+const tone = toneMap[slotType];
+---
+
+<aside class={`rounded bg-white border border-slate-200 border-l-3 ${tone.left} p-5 mt-6 mb-2 shadow-2xs`}>
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div class="space-y-1.5">
+      <div class={`text-[11px] font-bold tracking-wide ${tone.labelColor}`}>
+        {hasExternal ? `${badge}｜${entry.providerLabel}` : "関連ツール・詳細比較"}
+      </div>
+      <h3 class="text-base font-extrabold text-slate-900">{title}</h3>
+      <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">{description}</p>
+      {
+        hasExternal && (
+          <p class="text-[11px] text-slate-500">
+            ※実際の売却額・解体工事費・供養費用は立地や道路条件・荷物の量により変わります。複数社の見積もりを比較する際の基準としてご活用ください。
+          </p>
+        )
+      }
+    </div>
+    <div class="shrink-0">
+      {
+        hasExternal ? (
+          <a
+            href={entry.url}
+            target="_blank"
+            rel="nofollow noopener noreferrer sponsored"
+            data-affiliate-slot={slotType}
+            data-affiliate-label={entry.providerLabel}
+            class={`inline-flex items-center justify-center text-center px-4 py-2.5 rounded-xs text-xs sm:text-sm font-bold transition-colors sm:whitespace-nowrap ${tone.btn}`}
+          >
+            {entry.buttonText}
+          </a>
+        ) : (
+          <a
+            href={fallbackHref}
+            class={`inline-flex items-center justify-center text-center px-4 py-2.5 rounded-xs text-xs sm:text-sm font-bold transition-colors sm:whitespace-nowrap ${tone.btn}`}
+          >
+            {fallbackLabel}
+          </a>
+        )
+      }
+      {hasExternal && entry.impPixel && (
+        <img
+          src={entry.impPixel}
+          alt=""
+          width="1"
+          height="1"
+          class="inline-block w-px h-px border-0 align-middle"
+        />
+      )}
+    </div>
+  </div>
+</aside>

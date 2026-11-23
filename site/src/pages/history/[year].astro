@@ -1,0 +1,93 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CostTrendChart from "../../components/CostTrendChart.astro";
+import historyYearly from "../../data/history_yearly.json";
+
+export function getStaticPaths() {
+  return historyYearly.map((item) => ({
+    params: { year: item.year },
+    props: { item },
+  }));
+}
+
+const { item } = Astro.props;
+---
+
+<BaseLayout
+  title={`${item.year}年の解体工事坪単価（木造・鉄骨・RC）推移と修繕指数データ`}
+  description={`${item.year}年の全国木造解体平均${item.avg_wood.toFixed(2)}万円/坪（最安${item.min_wood.toFixed(2)}〜最高${item.max_wood.toFixed(2)}万円/坪）・鉄骨造${item.avg_steel.toFixed(2)}万円/坪・RC造${item.avg_rc.toFixed(2)}万円/坪の月次推移データ。`}
+  canonicalPath={`/history/${item.year}/`}
+>
+  <nav class="text-xs text-slate-500 mb-4 flex items-center gap-1.5">
+    <a href="/" class="hover:text-emerald-700">トップ</a>
+    <span>/</span>
+    <a href="/history/" class="hover:text-emerald-700">年別推移データ</a>
+    <span>/</span>
+    <span class="text-slate-800 font-semibold">{item.year}年</span>
+  </nav>
+
+  <div class="page-header-clean rounded p-5 sm:p-6 mb-6">
+    <div class="eyebrow-label mb-1">年別データ｜{item.year}年</div>
+    <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900">
+      {item.year}年の解体工事坪単価・維持修繕指数データ
+    </h1>
+    <p class="mt-1.5 text-xs sm:text-sm text-slate-600">
+      {item.year}年の構造別解体工事坪単価および維持修繕単価指数の月次記録です。
+    </p>
+  </div>
+
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+    <div class="card-surface rounded p-4 border-t-2 border-t-emerald-700">
+      <div class="text-[11px] font-bold text-slate-500">{item.year}年 木造解体平均</div>
+      <div class="mt-1 text-2xl font-extrabold text-emerald-700 tabular-nums">{item.avg_wood.toFixed(2)}<span class="text-xs ml-0.5 text-slate-500">万円/坪</span></div>
+      <div class="mt-0.5 text-[11px] text-slate-500 tabular-nums">レンジ {item.min_wood.toFixed(2)}〜{item.max_wood.toFixed(2)}万</div>
+    </div>
+    <div class="card-surface rounded p-4">
+      <div class="text-[11px] font-bold text-slate-500">{item.year}年 鉄骨造解体平均</div>
+      <div class="mt-1 text-2xl font-extrabold text-slate-900 tabular-nums">{item.avg_steel.toFixed(2)}<span class="text-xs ml-0.5 text-slate-500">万円/坪</span></div>
+    </div>
+    <div class="card-surface rounded p-4">
+      <div class="text-[11px] font-bold text-slate-500">{item.year}年 RC造解体平均</div>
+      <div class="mt-1 text-2xl font-extrabold text-slate-900 tabular-nums">{item.avg_rc.toFixed(2)}<span class="text-xs ml-0.5 text-slate-500">万円/坪</span></div>
+    </div>
+    <div class="card-surface rounded p-4">
+      <div class="text-[11px] font-bold text-slate-500">{item.year}年 維持修繕単価指数</div>
+      <div class="mt-1 text-2xl font-extrabold text-slate-900 tabular-nums">{item.avg_repair_index.toFixed(1)}</div>
+      <div class="mt-0.5 text-[11px] text-slate-500">2020年基準=100</div>
+    </div>
+  </div>
+
+  <div class="mb-8">
+    <CostTrendChart series={item.series} title={`${item.year}年 構造別解体坪単価の月次推移`} />
+  </div>
+
+  <section class="card-surface rounded p-5">
+    <h2 class="text-base font-extrabold text-slate-900 mb-3">{item.year}年 月次データ一覧</h2>
+    <div class="overflow-x-auto">
+      <table class="w-full text-xs border-collapse tabular-nums">
+        <thead>
+          <tr class="border-b border-slate-200 text-slate-500 text-left">
+            <th class="py-2 font-bold">基準日</th>
+            <th class="py-2 font-bold text-right">木造解体（万円/坪）</th>
+            <th class="py-2 font-bold text-right">鉄骨造解体（万円/坪）</th>
+            <th class="py-2 font-bold text-right">RC造解体（万円/坪）</th>
+            <th class="py-2 font-bold text-right">維持修繕指数</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100">
+          {
+            item.series.map((row) => (
+              <tr>
+                <td class="py-2 font-bold text-slate-800">{row.date}</td>
+                <td class="py-2 text-right font-bold text-emerald-700">{row.wood_man_per_tsubo.toFixed(2)}万円</td>
+                <td class="py-2 text-right">{row.steel_man_per_tsubo.toFixed(2)}万円</td>
+                <td class="py-2 text-right">{row.rc_man_per_tsubo.toFixed(2)}万円</td>
+                <td class="py-2 text-right text-slate-600">{row.repair_index.toFixed(1)}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+</BaseLayout>

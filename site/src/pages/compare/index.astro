@@ -1,0 +1,134 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import AffiliateCta from "../../components/AffiliateCta.astro";
+import comparePairs from "../../data/compare_pairs.json";
+import { formatManYen } from "../../lib/formatters";
+
+const categories = [
+  { key: "disposal_method", short: "売却・解体・買取", label: "売却・解体・専門買取の2択損得比較" },
+  { key: "tax_and_timing", short: "空き家の税金・控除", label: "空き家の固定資産税・3,000万円特別控除・維持時期の比較" },
+  { key: "structure_demolition", short: "構造・道路・アスベスト", label: "構造・道路条件・アスベスト有無別の解体＆売却比較" },
+  { key: "hakajimai_choice", short: "墓じまい・永代供養", label: "遠方の墓15年維持 vs 墓じまい・永代供養・樹木葬の比較" },
+];
+---
+
+<BaseLayout
+  title="どっちが得？実家売却・空き家の税金・解体・墓じまいの2択比較一覧"
+  description="「解体して更地売却 vs 古家付きのまま買取」「適切管理 vs 管理不全空き家の固定資産税増額」「遠方の墓維持 vs 墓じまいして樹木葬」など、実家じまいで迷いやすい2択を公的統計データで比較。"
+  canonicalPath="/compare/"
+>
+  <nav class="text-xs text-slate-500 mb-4 flex items-center gap-1.5">
+    <a href="/" class="hover:text-emerald-700">トップ</a>
+    <span>/</span>
+    <span class="text-slate-800 font-semibold">2択の損得比較一覧</span>
+  </nav>
+
+  <div class="page-header-clean rounded p-5 sm:p-6 mb-5">
+    <div class="eyebrow-label mb-1">よくある2択の損得比較</div>
+    <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900">
+      どっちが得？実家売却・空き家の税金・解体・墓じまいの2択比較一覧
+    </h1>
+    <p class="mt-1.5 text-xs sm:text-sm text-slate-600">
+      「先に解体すべきか、そのまま売るべきか」「空き家で置くと何年で負担が膨らむか」「墓じまいは何年で元が取れるか」をテーマ別に比較できます。
+    </p>
+  </div>
+
+  <!-- カテゴリ即時絞り込みタブ -->
+  <div class="flex flex-wrap gap-1.5 mb-6" id="cmp-filter-group">
+    <button
+      type="button"
+      data-cat="all"
+      class="cmp-cat-btn rounded-xs border border-emerald-700 bg-emerald-700 text-white px-3 py-1.5 text-xs font-bold transition-colors"
+    >
+      すべて
+    </button>
+    {
+      categories.map((cat) => (
+        <button
+          type="button"
+          data-cat={cat.key}
+          class="cmp-cat-btn rounded-xs border border-slate-300 bg-white text-slate-700 hover:border-emerald-700 px-3 py-1.5 text-xs font-bold transition-colors"
+        >
+          {cat.short}
+        </button>
+      ))
+    }
+  </div>
+
+  <div class="space-y-8 mb-10" id="cmp-sections">
+    {
+      categories.map((cat) => {
+        const list = comparePairs.filter((p) => p.category === cat.key);
+        return (
+          <section data-cat-section={cat.key}>
+            <div class="border-b border-slate-200 pb-2 mb-4">
+              <h2 class="text-base sm:text-lg font-extrabold text-slate-900">{cat.label}</h2>
+            </div>
+            <div class="grid gap-4 md:grid-cols-2">
+              {list.map((pair) => (
+                <a href={`/compare/${pair.slug}/`} class="card-interactive rounded p-4 sm:p-5 block">
+                  <h3 class="text-sm sm:text-base font-extrabold text-slate-900 leading-snug">{pair.title}</h3>
+                  <p class="mt-1 text-xs text-slate-500">{pair.angle}</p>
+
+                  <div class="mt-3 grid grid-cols-2 gap-2.5 rounded-xs bg-slate-50 p-3 text-xs tabular-nums">
+                    <div>
+                      <div class="text-[10.5px] text-slate-500 truncate">{pair.option_a_label}</div>
+                      <div class={`mt-0.5 font-extrabold ${pair.winner_side === "A" ? "text-emerald-700" : "text-slate-800"}`}>
+                        {pair.metrics_a.net_cash_10y_yen >= 0
+                          ? `手残り 約+${formatManYen(pair.metrics_a.net_cash_10y_yen)}`
+                          : `累積負担 約▲${formatManYen(Math.abs(pair.metrics_a.net_cash_10y_yen))}`}
+                      </div>
+                    </div>
+                    <div>
+                      <div class="text-[10.5px] text-slate-500 truncate">{pair.option_b_label}</div>
+                      <div class={`mt-0.5 font-extrabold ${pair.winner_side === "B" ? "text-emerald-700" : "text-slate-800"}`}>
+                        {pair.metrics_b.net_cash_10y_yen >= 0
+                          ? `手残り 約+${formatManYen(pair.metrics_b.net_cash_10y_yen)}`
+                          : `累積負担 約▲${formatManYen(Math.abs(pair.metrics_b.net_cash_10y_yen))}`}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="mt-3 flex items-center justify-between text-xs">
+                    <span class="font-bold text-emerald-700 tabular-nums">結論：{pair.verdict_short}</span>
+                    <span class="text-slate-500 font-semibold shrink-0">詳細比較 →</span>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </section>
+        );
+      })
+    }
+  </div>
+
+  <AffiliateCta
+    slotType="sell"
+    title="お住まいの都道府県や実家の広さに合わせた手残り差を計算する"
+    description="土地価格が高い都市部では更地売却が有利なケースがある一方、郊外や地方では解体せずそのまま売却・買取した方が手残りが多くなります。"
+    fallbackHref="/tools/disposal-simulator/"
+    fallbackLabel="自分の実家で3択手残りシミュレーターを使う →"
+  />
+
+  <script is:inline>
+    const grp = document.getElementById("cmp-filter-group");
+    const sections = document.getElementById("cmp-sections");
+    if (grp && sections) {
+      grp.addEventListener("click", (e) => {
+        const btn = e.target.closest("button[data-cat]");
+        if (!btn) return;
+        const cat = btn.getAttribute("data-cat") || "all";
+        grp.querySelectorAll(".cmp-cat-btn").forEach((b) => {
+          const on = b === btn;
+          b.className = on
+            ? "cmp-cat-btn rounded-xs border border-emerald-700 bg-emerald-700 text-white px-3 py-1.5 text-xs font-bold transition-colors"
+            : "cmp-cat-btn rounded-xs border border-slate-300 bg-white text-slate-700 hover:border-emerald-700 px-3 py-1.5 text-xs font-bold transition-colors";
+        });
+        sections.querySelectorAll("section[data-cat-section]").forEach((sec) => {
+          const match = cat === "all" || sec.getAttribute("data-cat-section") === cat;
+          sec.classList.toggle("hidden", !match);
+        });
+      });
+    }
+  </script>
+</BaseLayout>

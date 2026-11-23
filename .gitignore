@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Node / Astro
+site/node_modules/
+site/dist/
+site/.astro/
+
+# Temp / OS
+*.tmp
+.DS_Store
+Thumbs.db
+
+# 公的統計の大容量Excel（抽出済みCSVのみGit管理して肥大化を防止）
+data/raw/official_excel/*.xlsx
+data/raw/official_excel/*.xls
