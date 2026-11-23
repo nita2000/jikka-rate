@@ -199,7 +199,7 @@ const hasHero = Astro.slots.has("hero");
     <footer class="bg-white text-slate-600 mt-6 border-t border-slate-200">
       <div class="mx-auto max-w-6xl px-4 sm:px-6 py-10">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-8 pb-8 border-b border-slate-100">
-          <div class="md:col-span-5 space-y-3">
+          <div class="md:col-span-4 space-y-3">
             <div class="flex items-center gap-2.5">
               <svg class="h-7 w-7 shrink-0" viewBox="0 0 64 64" fill="none" aria-hidden="true">
                 <circle cx="32" cy="32" r="30" fill="#047857"/>
@@ -211,33 +211,33 @@ const hasHero = Astro.slots.has("hero");
               <span class="text-base font-extrabold text-slate-900 tracking-tight">実家と空き家の試算表</span>
             </div>
             <p class="text-xs leading-relaxed text-slate-500">
-              総務省・国土交通省・厚生労働省の公的統計と最新税制（空き家の3,000万円特別控除・固定資産税の住宅用地特例・相続登記義務化）にもとづき、「実家を壊して売るか・そのまま手放すか」「相続手続きの期限」「遠方のお墓をどうするか」を試算・比較できるサイトです。
+              総務省・国土交通省・厚生労働省の公的統計と最新税制にもとづき、実家の売却手残り・空き家の固定資産税・相続期限・墓じまいを試算・比較できるサイトです。
             </p>
             <div class="flex flex-wrap gap-1.5 pt-1 text-[11px]">
               <span class="rounded-xs bg-slate-50 border border-slate-200 px-2 py-0.5 text-slate-600">総務省 住宅・土地統計調査</span>
-              <span class="rounded-xs bg-slate-50 border border-slate-200 px-2 py-0.5 text-slate-600">国交省 地価・除却基準準拠</span>
-              <span class="rounded-xs bg-slate-50 border border-slate-200 px-2 py-0.5 text-slate-600">空き家3,000万円控除・相続登記対応</span>
+              <span class="rounded-xs bg-slate-50 border border-slate-200 px-2 py-0.5 text-slate-600">国交省 地価・除却基準</span>
+              <span class="rounded-xs bg-slate-50 border border-slate-200 px-2 py-0.5 text-slate-600">3,000万円控除・相続登記対応</span>
             </div>
           </div>
 
-          <div class="md:col-span-3">
-            <div class="text-[11px] font-bold tracking-wide text-emerald-700 mb-3">お悩み別の計算ツール</div>
+          <div class="md:col-span-4">
+            <div class="text-[11px] font-bold tracking-wide text-emerald-700 mb-3">試算シミュレーター・比較</div>
             <ul class="space-y-2 text-xs text-slate-600">
-              <li><a href="/tools/disposal-simulator/" class="hover:text-emerald-700 transition-colors">実家の手残り試算（維持 vs 解体 vs そのまま売却）</a></li>
-              <li><a href="/tools/akiya-tax/" class="hover:text-emerald-700 transition-colors">空き家の固定資産税（軽減解除）＆相続登記試算</a></li>
-              <li><a href="/tools/inheritance-deadline/" class="hover:text-emerald-700 transition-colors">相続手続き期限＆空き家3,000万円控除 逆算カレンダー</a></li>
-              <li><a href="/tools/hakajimai-simulator/" class="hover:text-emerald-700 transition-colors">遠方のお墓維持 vs 墓じまい・樹木葬 損益試算</a></li>
-              <li><a href="/cases/" class="hover:text-emerald-700 transition-colors">実家・お墓タイプ別の相場一覧</a></li>
+              <li><a href="/tools/disposal-simulator/" class="hover:text-emerald-700 transition-colors">実家の手残り試算（維持・解体・買取）</a></li>
+              <li><a href="/tools/akiya-tax/" class="hover:text-emerald-700 transition-colors">空き家の固定資産税・相続登記試算</a></li>
+              <li><a href="/tools/inheritance-deadline/" class="hover:text-emerald-700 transition-colors">相続期限・3,000万円控除カレンダー</a></li>
+              <li><a href="/tools/hakajimai-simulator/" class="hover:text-emerald-700 transition-colors">墓じまい・永代供養 15年試算</a></li>
+              <li><a href="/cases/" class="hover:text-emerald-700 transition-colors">実家・お墓のタイプ別相場一覧</a></li>
               <li><a href="/compare/" class="hover:text-emerald-700 transition-colors">よくある2択の損益比較</a></li>
             </ul>
           </div>
 
           <div class="md:col-span-4">
-            <div class="text-[11px] font-bold tracking-wide text-emerald-700 mb-3">都道府県別データ・サイト情報</div>
+            <div class="text-[11px] font-bold tracking-wide text-emerald-700 mb-3">都道府県データ・サイト情報</div>
             <ul class="space-y-2 text-xs text-slate-600">
-              <li><a href="/pref/" class="hover:text-emerald-700 transition-colors">全国47都道府県別 解体費用・土地相場・空き家率</a></li>
-              <li><a href="/history/" class="hover:text-emerald-700 transition-colors">年別 解体工事費・維持費の推移データ</a></li>
-              <li><a href="/guide/" class="hover:text-emerald-700 transition-colors">失敗しない実家・空き家 解説ガイド</a></li>
+              <li><a href="/pref/" class="hover:text-emerald-700 transition-colors">全国47都道府県別の解体・土地相場</a></li>
+              <li><a href="/history/" class="hover:text-emerald-700 transition-colors">年別の解体単価・維持費推移</a></li>
+              <li><a href="/guide/" class="hover:text-emerald-700 transition-colors">実家・空き家の解説ガイド</a></li>
               <li><a href="/about/" class="hover:text-emerald-700 transition-colors">サイトについて・算出基準・公的出典</a></li>
               <li><a href="/privacy/" class="hover:text-emerald-700 transition-colors">プライバシーポリシー・免責・運営者情報</a></li>
             </ul>

@@ -210,7 +210,7 @@ const prefSchema = {
       </p>
       <p class="text-xs text-slate-700 leading-relaxed bg-slate-50 border border-slate-200 rounded-xs p-3">
         {isLowLandPricePref
-          ? `${pref.name}は全国平均と比べて住宅地地価が低めのエリアが多いため、自己資金で解体して更地にする前に「古家付き仲介」または「解体・片付け不要の専門買取」の手残りを比較するのが鉄則です。`
+          ? `${pref.name}は全国平均と比べて住宅地地価が低めのエリアが多いため、自己資金で解体して更地にする前に「古家付き仲介」または「解体・片付け不要の専門買取」の手残りを比較しておくのが安全です。`
           : `${pref.name}でも${pref.capital_city}などの市街地と郊外・山間部では地価が大きく異なります。売れる見込みが立つ前に解体すると翌年から土地の固定資産税が上がるため、まずは壊さずに査定を取るのが安全です。`}
       </p>
     </div>
@@ -281,7 +281,7 @@ const prefSchema = {
 
   <AffiliateCta
     slotType="sell"
-    title={`${pref.name}の実家は「解体前」に古家付き査定と専門買取を比較するのが鉄則`}
+    title={`${pref.name}の実家は解体前に「古家付き査定」と「専門買取」を比較する`}
     description={`${pref.name}で30坪の木造実家を解体すると約${formatManYen(pref.std_30tsubo_demolition_yen)}が先行発生します。先に解体せず、まずは現状のまま売却・買取相場を確認してください。`}
     fallbackHref={`/tools/disposal-simulator/?pref=${pref.slug}`}
     fallbackLabel={`${pref.name}の単価で10年損益を試算 →`}

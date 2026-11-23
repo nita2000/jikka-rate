@@ -21,12 +21,12 @@ const schema = {
   schema={schema}
 >
   <div class="page-header-clean rounded p-5 sm:p-6 mb-6">
-    <div class="eyebrow-label mb-1">墓じまい・永代供養 30秒シミュレーター｜住所・個人情報の入力不要</div>
+    <div class="eyebrow-label mb-1">墓じまい・永代供養試算</div>
     <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900">
       遠方のお墓をこのまま維持するのと、墓じまいして永代供養・樹木葬にするのは何年で元が取れる？
     </h1>
     <p class="mt-1.5 text-xs sm:text-sm text-slate-600 leading-relaxed print-header-desc">
-      「お墓が遠くてお参りや掃除が大変」「子ども世代にお墓の負担を残したくない」という方のために、<strong>4つの項目を選ぶだけ</strong>で墓石の撤去費用から新しい供養先の費用、毎年の帰省交通費・管理料との損益分岐（回収年数）までやさしく試算します。
+      お墓の所在地・広さ・帰省距離・新しい供養先をもとに、墓石の撤去費用から改葬先費用、15年間の帰省交通費・管理料との回収年数まで試算します。
     </p>
   </div>
 
@@ -58,7 +58,7 @@ const schema = {
         <div class="flex items-center justify-between border-b border-slate-100 pb-2">
           <div class="flex items-center gap-2">
             <span class="inline-flex items-center justify-center rounded-xs bg-emerald-700 px-1.5 py-0.5 text-[10px] font-extrabold text-white">STEP 2</span>
-            <span class="text-xs font-extrabold text-slate-900">現在のお墓の種類・だいたいの広さ</span>
+            <span class="text-xs font-extrabold text-slate-900">現在のお墓の種類・広さ</span>
           </div>
         </div>
         <select id="hk-grave-type" class="w-full rounded-xs border border-slate-300 bg-white px-2.5 py-2 text-xs font-medium text-slate-800">
@@ -233,31 +233,31 @@ const schema = {
         </div>
 
         <!-- 自治体の葬祭費給付金・公営火葬料ステータス帯 -->
-        <div class="rounded-xs bg-slate-50 border border-slate-200 px-3.5 py-3 mb-5">
+        <div class="rounded-xs bg-slate-50 border border-slate-200 px-3.5 py-3 mb-5 print-keep-together">
           <div class="text-[11px] font-bold text-slate-600 mb-2">
-            参考：選択都道府県の公的葬祭費給付金（国保・後期高齢者医療）＆公営火葬料目安
+            参考：選択都道府県の公的葬祭費給付金（国保・後期高齢者医療）と公営火葬料目安
           </div>
-          <div class="grid sm:grid-cols-2 gap-2.5 text-xs tabular-nums">
-            <div class="rounded-xs border border-slate-200 bg-white px-3 py-2 flex items-center justify-between gap-2 whitespace-nowrap">
-              <span class="text-slate-600">葬祭費・埋葬料給付目安</span>
-              <strong id="hk-grant-val" class="text-xs sm:text-sm font-extrabold text-emerald-800">—</strong>
+          <div class="grid sm:grid-cols-2 gap-2.5 text-xs tabular-nums print-grid-2">
+            <div class="rounded-xs border border-slate-200 bg-white px-3 py-2.5">
+              <div class="text-[11px] text-slate-500">葬祭費・埋葬料の給付目安</div>
+              <strong id="hk-grant-val" class="mt-0.5 block text-sm font-extrabold text-emerald-800">—</strong>
             </div>
-            <div class="rounded-xs border border-slate-200 bg-white px-3 py-2 flex items-center justify-between gap-2 whitespace-nowrap">
-              <span class="text-slate-600">公営火葬料（住民料金）</span>
-              <strong id="hk-cremation-val" class="text-xs sm:text-sm font-extrabold text-slate-900">—</strong>
+            <div class="rounded-xs border border-slate-200 bg-white px-3 py-2.5">
+              <div class="text-[11px] text-slate-500">公営火葬料（住民料金）</div>
+              <strong id="hk-cremation-val" class="mt-0.5 block text-sm font-extrabold text-slate-900">—</strong>
             </div>
           </div>
         </div>
 
         <!-- 費用内訳テーブル -->
         <div class="overflow-x-auto">
-          <table class="w-full text-xs border-collapse tabular-nums whitespace-nowrap">
+          <table class="w-full text-xs border-collapse tabular-nums">
             <thead>
               <tr class="border-b border-slate-200 text-slate-500 text-left">
                 <th class="py-2 pr-2 font-bold">費用・15年累計の項目</th>
-                <th class="py-2 px-2 font-bold text-right">① 今のお墓を維持</th>
-                <th class="py-2 px-2 font-bold text-right">② 墓じまい＋永代供養</th>
-                <th class="py-2 pl-2 font-bold text-right">差額</th>
+                <th class="py-2 px-2 font-bold text-right whitespace-nowrap">① 現状維持</th>
+                <th class="py-2 px-2 font-bold text-right whitespace-nowrap">② 墓じまい</th>
+                <th class="py-2 pl-2 font-bold text-right whitespace-nowrap">差額</th>
               </tr>
             </thead>
             <tbody id="hk-tbody" class="divide-y divide-slate-100"></tbody>
@@ -404,11 +404,11 @@ const schema = {
         pref.cremation_fee_yen === 0 ? `0円（${pref.capital_city}・住民無料）` : `${yen(pref.cremation_fee_yen)}（${pref.capital_city}）`;
 
       const rows = [
-        ["墓石の撤去・更地返還工事費", 0, stoneYen],
-        ["閉眼供養のお布施・離檀・行政手続", 0, ceremonyYen + adminYen],
-        ["新しい供養先（永代供養・樹木葬等）初期費", 0, nextInitialYen],
-        ["15年間の墓地管理料・お布施・帰省交通費", keep15y, nextAnnualYen * 15],
-        ["15年間のトータル支出合計", keep15y, done15y],
+        ["墓石の撤去・更地返還費", 0, stoneYen],
+        ["閉眼お布施・離檀・行政手続", 0, ceremonyYen + adminYen],
+        ["新しい供養先の初期費用", 0, nextInitialYen],
+        ["15年間の管理料・帰省費", keep15y, nextAnnualYen * 15],
+        ["15年間の支出合計", keep15y, done15y],
       ];
 
       document.getElementById("hk-tbody").innerHTML = rows
@@ -419,9 +419,9 @@ const schema = {
           const dCls = d < 0 ? "text-emerald-700 font-bold" : d > 0 ? "text-rose-700" : "text-slate-500";
           return `<tr class="${isLast ? "bg-slate-50 font-extrabold text-slate-900" : ""}">
             <td class="py-2 pr-2 text-slate-700">${label}</td>
-            <td class="py-2 px-2 text-right">${yen(a)}</td>
-            <td class="py-2 px-2 text-right">${yen(b)}</td>
-            <td class="py-2 pl-2 text-right ${dCls}">${dText}</td>
+            <td class="py-2 px-2 text-right whitespace-nowrap">${yen(a)}</td>
+            <td class="py-2 px-2 text-right whitespace-nowrap">${yen(b)}</td>
+            <td class="py-2 pl-2 text-right whitespace-nowrap ${dCls}">${dText}</td>
           </tr>`;
         })
         .join("");

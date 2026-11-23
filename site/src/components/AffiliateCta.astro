@@ -49,12 +49,12 @@ const tone = toneMap[slotType];
 ---
 
 <aside class={`rounded bg-white border border-slate-200 border-l-3 ${tone.left} p-5 mt-6 mb-2 shadow-2xs`}>
-  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+  <div class="space-y-3">
     <div class="space-y-1.5">
       <div class={`text-[11px] font-bold tracking-wide ${tone.labelColor}`}>
         {hasExternal ? `${badge}｜${entry.providerLabel}` : "関連ツール・詳細比較"}
       </div>
-      <h3 class="text-base font-extrabold text-slate-900">{title}</h3>
+      <h3 class="text-base font-extrabold text-slate-900 leading-snug">{title}</h3>
       <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">{description}</p>
       {
         hasExternal && (
@@ -64,7 +64,7 @@ const tone = toneMap[slotType];
         )
       }
     </div>
-    <div class="shrink-0">
+    <div class="pt-0.5">
       {
         hasExternal ? (
           <a
@@ -73,14 +73,14 @@ const tone = toneMap[slotType];
             rel="nofollow noopener noreferrer sponsored"
             data-affiliate-slot={slotType}
             data-affiliate-label={entry.providerLabel}
-            class={`inline-flex items-center justify-center text-center px-4 py-2.5 rounded-xs text-xs sm:text-sm font-bold transition-colors sm:whitespace-nowrap ${tone.btn}`}
+            class={`inline-flex items-center justify-center text-center px-4 py-2.5 rounded-xs text-xs sm:text-sm font-bold transition-colors ${tone.btn}`}
           >
             {entry.buttonText}
           </a>
         ) : (
           <a
             href={fallbackHref}
-            class={`inline-flex items-center justify-center text-center px-4 py-2.5 rounded-xs text-xs sm:text-sm font-bold transition-colors sm:whitespace-nowrap ${tone.btn}`}
+            class={`inline-flex items-center justify-center text-center px-4 py-2.5 rounded-xs text-xs sm:text-sm font-bold transition-colors ${tone.btn}`}
           >
             {fallbackLabel}
           </a>

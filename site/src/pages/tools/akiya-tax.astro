@@ -21,12 +21,12 @@ const schema = {
   schema={schema}
 >
   <div class="page-header-clean rounded p-5 sm:p-6 mb-6">
-    <div class="eyebrow-label mb-1">空き家の税金・相続登記 30秒シミュレーター｜住所・個人情報の入力不要</div>
+    <div class="eyebrow-label mb-1">空き家の固定資産税・相続登記</div>
     <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900">
       空き家の固定資産税はいくら上がる？住宅用地の軽減（1/6特例）と相続登記の費用シミュレーター
     </h1>
     <p class="mt-1.5 text-xs sm:text-sm text-slate-600 leading-relaxed print-header-desc">
-      ニュースでよく聞く「空き家の固定資産税が最大6倍（実際の負担は約4.2倍）に上がる仕組み」や「相続登記（名義変更）の義務化」について、<strong>あなたのご実家だといくら変わるのか・どうすれば負担を防げるのか</strong>を4つの選択だけでわかりやすく試算します。
+      住宅用地の軽減（固定資産税1/6特例）が外れた場合の増税額（実効約4.2倍・原則上限6倍）と、相続登記の登録免許税・増税を防ぐ手順を試算します。
     </p>
   </div>
 
@@ -82,7 +82,7 @@ const schema = {
         <div class="flex items-center justify-between border-b border-slate-100 pb-2">
           <div class="flex items-center gap-2">
             <span class="inline-flex items-center justify-center rounded-xs bg-emerald-700 px-1.5 py-0.5 text-[10px] font-extrabold text-white">STEP 2</span>
-            <span class="text-xs font-extrabold text-slate-900">敷地と建物の広さ（だいたいでOK）</span>
+            <span class="text-xs font-extrabold text-slate-900">敷地と建物の広さ</span>
           </div>
         </div>
         <div class="grid grid-cols-2 gap-3">
@@ -221,19 +221,19 @@ const schema = {
 
         <!-- 3枚の主要KPIカード -->
         <div class="grid sm:grid-cols-3 gap-3 mb-5 print-grid-3 print-keep-together">
-          <div class="rounded border border-slate-200 bg-slate-50 p-3.5">
-            <div class="text-[11px] font-bold text-slate-600">① 今の年間税額（1/6軽減中）</div>
-            <div id="at-cur-tax" class="mt-1 font-display text-xl font-extrabold text-slate-900 tabular-nums">—</div>
+          <div class="rounded border border-slate-200 bg-slate-50 p-3.5 min-w-0">
+            <div class="text-[11px] font-bold text-slate-600 whitespace-nowrap">① 通常時の年間税額</div>
+            <div id="at-cur-tax" class="mt-1 font-display text-xl font-extrabold text-slate-900 tabular-nums whitespace-nowrap">—</div>
             <div id="at-cur-sub" class="mt-1 text-[11px] text-slate-500 tabular-nums"></div>
           </div>
-          <div class="rounded border border-rose-200 bg-rose-50/40 p-3.5">
-            <div class="text-[11px] font-bold text-rose-800">② 軽減が外れた後の年間税額</div>
-            <div id="at-heavy-tax" class="mt-1 font-display text-xl font-extrabold text-rose-700 tabular-nums">—</div>
+          <div class="rounded border border-rose-200 bg-rose-50/40 p-3.5 min-w-0">
+            <div class="text-[11px] font-bold text-rose-800 whitespace-nowrap">② 軽減解除後の年間税額</div>
+            <div id="at-heavy-tax" class="mt-1 font-display text-xl font-extrabold text-rose-700 tabular-nums whitespace-nowrap">—</div>
             <div id="at-heavy-diff" class="mt-1 text-[11px] text-rose-700 font-bold tabular-nums"></div>
           </div>
-          <div class="rounded border border-emerald-200 bg-emerald-50/50 p-3.5">
-            <div class="text-[11px] font-bold text-emerald-900">③ 相続登記（名義変更）の費用目安</div>
-            <div id="at-10y-extra" class="mt-1 font-display text-xl font-extrabold text-emerald-800 tabular-nums">—</div>
+          <div class="rounded border border-emerald-200 bg-emerald-50/50 p-3.5 min-w-0">
+            <div class="text-[11px] font-bold text-emerald-900 whitespace-nowrap">③ 相続登記の費用目安</div>
+            <div id="at-10y-extra" class="mt-1 font-display text-xl font-extrabold text-emerald-800 tabular-nums whitespace-nowrap">—</div>
             <div id="at-toki-sub" class="mt-1 text-[11px] text-slate-600 tabular-nums"></div>
           </div>
         </div>
@@ -243,10 +243,10 @@ const schema = {
           <table class="w-full text-xs border-collapse tabular-nums">
             <thead>
               <tr class="border-b border-slate-200 text-slate-500 text-left">
-                <th class="py-2 font-bold">税金・費用の項目</th>
-                <th class="py-2 font-bold text-right">現在（1/6軽減あり）</th>
-                <th class="py-2 font-bold text-right">軽減が外れた場合（実効額）</th>
-                <th class="py-2 font-bold text-right">参考：原則上限（6倍）</th>
+                <th class="py-2 pr-2 font-bold">税金・費用の項目</th>
+                <th class="py-2 px-2 font-bold text-right whitespace-nowrap">現在（1/6軽減）</th>
+                <th class="py-2 px-2 font-bold text-right whitespace-nowrap">軽減解除（実効）</th>
+                <th class="py-2 pl-2 font-bold text-right whitespace-nowrap">原則上限（6倍）</th>
               </tr>
             </thead>
             <tbody id="at-tbody" class="divide-y divide-slate-100"></tbody>
@@ -407,7 +407,7 @@ const schema = {
         heroMult.textContent = `年 +${yen(annualExtraTax)}（土地税額 約${landMultEff}倍）`;
         heroReassure.innerHTML =
           state.akiyaMode === "sarachi"
-            ? `<strong>なぜ更地にすると税金が上がるのか：</strong>建物を壊すと「住宅用地の軽減（固定資産税1/6）」が外れるため、建物の税金が0円になっても合計の税金は<strong>年 +${yen(annualExtraTax)}</strong>増えてしまいます。売れる目処が立つ前に先回りして解体しないのが鉄則です。`
+            ? `<strong>なぜ更地にすると税金が上がるのか：</strong>建物を壊すと「住宅用地の軽減（固定資産税1/6）」が外れるため、建物の税金が0円になっても合計の税金は<strong>年 +${yen(annualExtraTax)}</strong>増えてしまいます。売却の目処が立つ前に先回りして解体しないのが安全です。`
             : `<strong>どうすれば防げる？：</strong>いきなり翌月から税金が上がるわけではありません。自治体から「指導」→「勧告」を受ける前に<strong>最低限の補修・草刈りを行うか、現状のまま売却・買取で手放せば、この増税負担は0円に防げます。</strong>`;
       }
 
@@ -424,22 +424,22 @@ const schema = {
 
       const rows = [
         [
-          `土地の固定資産税（税率1.4%・敷地${landSqm}㎡）`,
+          `土地 固定資産税（1.4%・${landSqm}㎡）`,
           yen(smallLandFixed + genLandFixed),
           yen(effLandFixed),
           yen(Math.round(landAssessedYen * fixedRate)),
         ],
         [
-          `土地の都市計画税（${hasCityTax ? "税率0.3%" : "対象外 0%"}）`,
+          `土地 都市計画税（${hasCityTax ? "0.3%" : "対象外"}）`,
           yen(smallLandCity + genLandCity),
           yen(effLandCity),
           yen(Math.round(landAssessedYen * cityRate)),
         ],
         [
-          `建物の固定資産税・都市計画税`,
+          `建物 固定資産・都市計画税`,
           yen(normalBldgTax),
-          state.akiyaMode === "sarachi" ? "0円（解体により消滅）" : yen(normalBldgTax),
-          state.akiyaMode === "sarachi" ? "0円（解体により消滅）" : yen(normalBldgTax),
+          state.akiyaMode === "sarachi" ? "0円（解体）" : yen(normalBldgTax),
+          state.akiyaMode === "sarachi" ? "0円（解体）" : yen(normalBldgTax),
         ],
         ["1年間の合計税額", yen(normalTotalTax), yen(effTotalTax), yen(prinTotalTax)],
         ["5年間の合計税額", yen(normalTotalTax * 5), yen(effTotalTax * 5), yen(prinTotalTax * 5)],
@@ -449,10 +449,10 @@ const schema = {
         .map(([label, a, b, cVal], i) => {
           const isBold = i >= 3;
           return `<tr class="${isBold ? "bg-slate-50 font-extrabold text-slate-900" : ""}">
-            <td class="py-2 text-slate-700">${label}</td>
-            <td class="py-2 text-right">${a}</td>
-            <td class="py-2 text-right ${isBold ? "text-rose-700" : ""}">${b}</td>
-            <td class="py-2 text-right text-slate-500">${cVal}</td>
+            <td class="py-2 pr-2 text-slate-700">${label}</td>
+            <td class="py-2 px-2 text-right whitespace-nowrap">${a}</td>
+            <td class="py-2 px-2 text-right whitespace-nowrap ${isBold ? "text-rose-700" : ""}">${b}</td>
+            <td class="py-2 pl-2 text-right whitespace-nowrap text-slate-500">${cVal}</td>
           </tr>`;
         })
         .join("");

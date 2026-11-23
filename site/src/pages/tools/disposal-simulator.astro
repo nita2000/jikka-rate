@@ -12,7 +12,7 @@ const quickPresets = [
     slug: "_preset_wood_30",
     shortLabel: "標準的な2階建",
     subLabel: "延床30坪・敷地45坪",
-    name: "【標準】木造2階建 30坪・敷地45坪（もっとも一般的）",
+    name: "【標準】木造2階建 30坪・敷地45坪",
     structure: "wood",
     floor_tsubo: 30,
     land_tsubo: 45,
@@ -99,12 +99,12 @@ const schema = {
   schema={schema}
 >
   <div class="page-header-clean rounded p-5 sm:p-6 mb-6">
-    <div class="eyebrow-label mb-1">実家の手放し方・30秒シミュレーター｜住所・個人情報の入力不要</div>
+    <div class="eyebrow-label mb-1">実家の手放し方試算</div>
     <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900">
       実家を「壊して売る」「壊さずそのまま手放す」「空き家で維持」どれが一番手元に残る？
     </h1>
     <p class="mt-1.5 text-xs sm:text-sm text-slate-600 leading-relaxed print-header-desc">
-      「先に150万〜250万円も払って解体しないと売れないの？」「このまま空き家で置いておくと年いくらかかる？」という疑問を、<strong>4つの項目を選ぶだけ</strong>で即試算します。正確な面積や築年数がわからなくても、<strong>だいたいの目安</strong>で安心してお試しいただけます。
+      都道府県別の土地相場・解体工事費・固定資産税・譲渡所得税（3,000万円特別控除）をもとに、先に解体して売る場合と、壊さず売却・買取する場合の手残り金額を比較します。
     </p>
   </div>
 
@@ -146,14 +146,14 @@ const schema = {
         <div class="flex items-center justify-between border-b border-slate-100 pb-2">
           <div class="flex items-center gap-2">
             <span class="inline-flex items-center justify-center rounded-xs bg-emerald-700 px-1.5 py-0.5 text-[10px] font-extrabold text-white">STEP 2</span>
-            <span class="text-xs font-extrabold text-slate-900">実家の広さ・築年数の目安</span>
+            <span class="text-xs font-extrabold text-slate-900">実家の広さ・築年数</span>
           </div>
-          <span class="text-[11px] text-emerald-800 font-bold">だいたいでOK</span>
+          <span class="text-[11px] text-slate-500">概算目安</span>
         </div>
 
         <!-- 2-A: よく選ばれる6つの広さボタン -->
         <div>
-          <div class="text-xs font-bold text-slate-700 mb-1.5">① 建物のタイプ・だいたいの広さ</div>
+          <div class="text-xs font-bold text-slate-700 mb-1.5">① 建物のタイプ・延床面積の目安</div>
           <div class="grid grid-cols-2 gap-2" id="preset-btn-group">
             {quickPresets.map((g, idx) => (
               <button
@@ -202,14 +202,14 @@ const schema = {
               築45年以上<br /><span class="text-[10px] font-normal opacity-85">昭和56年以前</span>
             </button>
             <button type="button" data-age="mid35" class="age-btn rounded-xs border border-emerald-700 bg-emerald-700 py-2 px-2 text-center text-[11px] font-bold text-white transition-colors">
-              築30〜44年<br /><span class="text-[10px] font-normal opacity-90">もっとも一般的</span>
+              築30〜44年<br /><span class="text-[10px] font-normal opacity-90">昭和57年〜平成初期</span>
             </button>
             <button type="button" data-age="new25" class="age-btn rounded-xs border border-slate-300 bg-white py-2 px-2 text-center text-[11px] font-bold text-slate-600 transition-colors">
               築30年未満<br /><span class="text-[10px] font-normal opacity-85">平成中期以降</span>
             </button>
           </div>
           <p class="mt-2 rounded-xs bg-slate-50 border border-slate-200/70 px-2.5 py-2 text-[11px] text-slate-600 leading-relaxed">
-            <strong>正確な広さや築年数がわからなくても大丈夫です。</strong>築30年以上の木造実家は建物の固定資産税評価がほぼ同じ（底値）になるため、おおよその広さを選ぶだけで実態に近い試算が出ます。
+            築30年以上の木造住宅は建物の固定資産税評価が下限水準に近づくため、延床面積と築年数の区分から実態に近い概算を算出しています。
           </p>
         </div>
       </div>
@@ -439,8 +439,8 @@ const schema = {
                 <span class="font-bold text-slate-700">A. 古家付き仲介売却</span>
                 <strong id="res-furuya-broker" class="text-sm font-extrabold text-slate-900">—</strong>
               </div>
-              <div class="mt-1 text-[10.5px] text-slate-500 whitespace-nowrap overflow-hidden text-ellipsis">
-                買主解体でも3,000万円控除可（3〜6ヶ月目安）
+              <div class="mt-1 text-[10.5px] text-slate-500">
+                買主解体も3,000万円控除対象（3〜6か月目安）
               </div>
             </div>
             <div class="rounded-xs border border-slate-200 bg-white px-3 py-2.5">
@@ -448,22 +448,22 @@ const schema = {
                 <span class="font-bold text-emerald-900">B. 片付け不要・専門買取</span>
                 <strong id="res-direct-kaitori" class="text-sm font-extrabold text-emerald-800">—</strong>
               </div>
-              <div class="mt-1 text-[10.5px] text-slate-500 whitespace-nowrap overflow-hidden text-ellipsis">
-                仲介手数料0円・荷物そのまま最短数週間で完了
+              <div class="mt-1 text-[10.5px] text-slate-500">
+                仲介手数料0円・荷物そのまま最短数週間
               </div>
             </div>
           </div>
         </div>
 
-        <!-- 詳しい金額内訳テーブル（全行1行完結） -->
+        <!-- 詳しい金額内訳テーブル -->
         <div class="overflow-x-auto">
-          <table class="w-full text-xs border-collapse whitespace-nowrap">
+          <table class="w-full text-xs border-collapse">
             <thead>
               <tr class="border-b border-slate-200 text-slate-500 text-left">
                 <th class="py-2 pr-2 font-bold">収支・費用の項目</th>
-                <th class="py-2 px-2 font-bold text-right">① 空き家維持</th>
-                <th class="py-2 px-2 font-bold text-right">② 更地で売却</th>
-                <th class="py-2 pl-2 font-bold text-right">③ 壊さず売却/買取</th>
+                <th class="py-2 px-2 font-bold text-right whitespace-nowrap">① 空き家維持</th>
+                <th class="py-2 px-2 font-bold text-right whitespace-nowrap">② 更地売却</th>
+                <th class="py-2 pl-2 font-bold text-right whitespace-nowrap">③ 壊さず手放す</th>
               </tr>
             </thead>
             <tbody id="disp-tbody" class="divide-y divide-slate-100 tabular-nums"></tbody>
@@ -883,27 +883,27 @@ const schema = {
           ];
       document.getElementById("verdict-benefits").innerHTML = benefits.join("");
 
-      // 詳細テーブル更新（全セル1行完結・譲渡所得税を正式反映）
+      // 詳細テーブル更新（PC幅で横スクロールせず収まる簡潔表記）
       const rows = [
-        ["売却想定額（グロス収入）", "0円", `+${yen(sarachiGross)}`, `+${yen(asIsGrossDisp)}`],
-        ["建物解体・外構撤去工事費", "0円", `▲${yen(demoBodyAndExtYen)}`, "0円（買主負担）"],
-        ["家財（残置物）片付け費", "0円", `▲${yen(resYen)}`, useKaitoriAsMain ? "0円（そのまま）" : `▲${yen(resYen)}`],
-        ["仲介手数料（税込）", "0円", `▲${yen(sarachiBroker)}`, useKaitoriAsMain ? "0円（直接買取）" : `▲${yen(furuyaBroker)}`],
+        ["売却想定額（収入）", "0円", `+${yen(sarachiGross)}`, `+${yen(asIsGrossDisp)}`],
+        ["解体・外構撤去費", "0円", isMansion ? "0円" : `▲${yen(demoBodyAndExtYen)}`, "0円"],
+        ["家財片付け費", "0円", `▲${yen(resYen)}`, useKaitoriAsMain ? "0円" : `▲${yen(resYen)}`],
+        ["仲介手数料（税込）", "0円", `▲${yen(sarachiBroker)}`, useKaitoriAsMain ? "0円" : `▲${yen(furuyaBroker)}`],
         [
-          effectiveTaxExempt ? "譲渡所得税（3,000万円控除適用）" : "譲渡所得税（控除なし・20.315%）",
+          effectiveTaxExempt ? "譲渡所得税（控除適用）" : "譲渡所得税（20.315%）",
           "0円",
           sarachiTransferTax > 0 ? `▲${yen(sarachiTransferTax)}` : "0円",
           asIsTransferTax > 0 ? `▲${yen(asIsTransferTax)}` : "0円",
         ],
         [
-          `固定資産税（${years}年維持 vs 売却待期）`,
+          `固定資産税（${years}年 / 待期）`,
           `▲${yen(keepTaxTotal)}`,
           `▲${yen(sarachiWaitTax)}`,
-          useKaitoriAsMain ? "0円（早期決済）" : `▲${yen(normalTaxAnnual)}`,
+          useKaitoriAsMain ? "0円" : `▲${yen(normalTaxAnnual)}`,
         ],
-        [`空き家維持・草刈り・修繕（${years}年分）`, `▲${yen(keepMaintTotal)}`, "0円", "0円"],
+        [`維持・草刈り・修繕（${years}年）`, `▲${yen(keepMaintTotal)}`, "0円", "0円"],
         [
-          `最終手残り収支（${years}年比較）`,
+          `最終手残り収支（${years}年）`,
           signedYen(keepNet),
           signedYen(sarachiNet),
           signedYen(asIsNet),
@@ -915,9 +915,9 @@ const schema = {
           const isLast = idx === rows.length - 1;
           return `<tr class="${isLast ? "bg-slate-50 font-extrabold text-slate-900" : ""}">
             <td class="py-2.5 pr-2 text-slate-700 ${isLast ? "font-extrabold" : "font-medium"}">${label}</td>
-            <td class="py-2.5 px-2 text-right text-rose-700">${a}</td>
-            <td class="py-2.5 px-2 text-right ${!asIsWins && isLast ? "text-emerald-800" : ""}">${b}</td>
-            <td class="py-2.5 pl-2 text-right ${asIsWins && isLast ? "text-emerald-800" : ""}">${d}</td>
+            <td class="py-2.5 px-2 text-right whitespace-nowrap text-rose-700">${a}</td>
+            <td class="py-2.5 px-2 text-right whitespace-nowrap ${!asIsWins && isLast ? "text-emerald-800" : ""}">${b}</td>
+            <td class="py-2.5 pl-2 text-right whitespace-nowrap ${asIsWins && isLast ? "text-emerald-800" : ""}">${d}</td>
           </tr>`;
         })
         .join("");

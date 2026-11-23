@@ -81,30 +81,8 @@ const pageSchema = [
           </h1>
 
           <p class="text-sm sm:text-[15px] text-slate-600 leading-relaxed max-w-xl">
-            「先に200万円払って解体しないと売れないの？」「空き家のまま置くと固定資産税はいくら上がる？」—— <strong>住所や個人情報の入力なし</strong>で、全国47都道府県の公的データから<strong>手元に残る金額と一番ラクな進め方</strong>を試算・比較できます。
+            「先に解体しないと売れないの？」「空き家のまま置くと固定資産税はいくら上がる？」—— 全国47都道府県の公的データと最新税制（3,000万円特別控除・相続登記義務化）をもとに、<strong>手元に残る金額と維持費・税金</strong>を比較できます。
           </p>
-
-          <!-- 3つの安心メリット（洗練されたシンプルなSVGチェックアイコン） -->
-          <div class="flex flex-wrap gap-2 pt-0.5 text-xs font-bold text-slate-700">
-            <span class="inline-flex items-center gap-1.5 rounded-xs bg-white border border-slate-200 px-2.5 py-1">
-              <svg class="h-3.5 w-3.5 text-emerald-700 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-              </svg>
-              個人情報・営業電話なし
-            </span>
-            <span class="inline-flex items-center gap-1.5 rounded-xs bg-white border border-slate-200 px-2.5 py-1">
-              <svg class="h-3.5 w-3.5 text-emerald-700 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-              </svg>
-              だいたいの広さ・築年数でOK
-            </span>
-            <span class="inline-flex items-center gap-1.5 rounded-xs bg-white border border-slate-200 px-2.5 py-1">
-              <svg class="h-3.5 w-3.5 text-emerald-700 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-              </svg>
-              買主解体3,000万円控除対応
-            </span>
-          </div>
 
           <div class="flex flex-wrap gap-3 pt-1">
             <a
@@ -172,9 +150,9 @@ const pageSchema = [
               </div>
             </div>
 
-            <div class="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-600 flex items-center justify-between">
-              <span>住宅用地の軽減（1/6）解除時の固定資産税目安：</span>
-              <strong id="hq-heavy-tax" class="text-rose-700 tabular-nums">年 約{Math.round(tokyoPref.std_heavy_tax_annual_yen / 10000)}万円</strong>
+            <div class="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-600 flex items-center justify-between gap-2">
+              <span class="whitespace-nowrap">軽減（1/6）解除時の固定資産税目安</span>
+              <strong id="hq-heavy-tax" class="text-rose-700 tabular-nums whitespace-nowrap">年 約{Math.round(tokyoPref.std_heavy_tax_annual_yen / 10000)}万円</strong>
             </div>
 
             <div class="mt-3.5 pt-3 border-t border-slate-100 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5">
@@ -197,12 +175,9 @@ const pageSchema = [
 
   <!-- 4つのお悩み別シミュレーター導線 -->
   <section class="mb-10">
-    <div class="flex flex-wrap items-end justify-between gap-2 mb-5">
-      <div>
-        <div class="eyebrow-label">お悩み別の30秒シミュレーター</div>
-        <h2 class="mt-0.5 text-xl sm:text-2xl font-extrabold text-slate-900">いま気になっている項目を選ぶだけで試算できます</h2>
-      </div>
-      <p class="text-xs text-slate-500">※正確な坪数や査定額がわからなくても、だいたいの目安で試算できます</p>
+    <div class="mb-5">
+      <div class="eyebrow-label">試算ツール</div>
+      <h2 class="mt-0.5 text-xl sm:text-2xl font-extrabold text-slate-900">目的別の試算シミュレーター</h2>
     </div>
 
     <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
