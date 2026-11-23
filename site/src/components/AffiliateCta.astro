@@ -70,7 +70,9 @@ const tone = toneMap[slotType];
           <a
             href={entry.url}
             target="_blank"
-            rel="nofollow noopener noreferrer sponsored"
+            rel="nofollow noopener sponsored"
+            referrerpolicy="no-referrer-when-downgrade"
+            attributionsrc
             data-affiliate-slot={slotType}
             data-affiliate-label={entry.providerLabel}
             class={`inline-flex items-center justify-center text-center px-4 py-2.5 rounded-xs text-xs sm:text-sm font-bold transition-colors ${tone.btn}`}
@@ -92,7 +94,9 @@ const tone = toneMap[slotType];
           alt=""
           width="1"
           height="1"
-          class="inline-block w-px h-px border-0 align-middle"
+          style="border:none;"
+          loading="lazy"
+          class="inline-block w-px h-px align-middle"
         />
       )}
     </div>

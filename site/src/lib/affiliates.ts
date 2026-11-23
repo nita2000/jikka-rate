@@ -35,12 +35,12 @@ export const AFFILIATE_LINKS: Record<AffiliateSlot, AffiliateEntry> = {
     providerLabel: "解体工事・空き家撤去一括見積もり（無料）",
     buttonText: "地域の優良解体業者で最安相場を無料比較",
   },
-  /** 4. 墓じまい・永代供養・葬儀資料請求（いいお墓 / よりそうお葬式等） */
+  /** 4. 墓じまい・永代供養・葬儀資料請求（【ミキワ】墓じまい資料請求 等） */
   kuyo: {
-    url: "",
-    impPixel: "",
-    providerLabel: "墓じまい・永代供養・樹木葬（無料資料請求）",
-    buttonText: "近くの樹木葬・永代供養墓と墓じまい費用を比較",
+    url: "//af.moshimo.com/af/c/click?a_id=5918328&p_id=1672&pc_id=3119&pl_id=90825",
+    impPixel: "//i.moshimo.com/af/i/impression?a_id=5918328&p_id=1672&pc_id=3119&pl_id=90825",
+    providerLabel: "墓じまい資料請求（ミキワ）",
+    buttonText: "墓じまいの費用・手順の資料を請求する →",
   },
 };
 
