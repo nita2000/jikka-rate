@@ -50,6 +50,8 @@ const pageSchema = [
     name: `全国47都道府県 実家解体相場・空き家維持費＆墓じまい損益データベース（${siteMeta.date_from}〜${siteMeta.date_to}）`,
     description:
       "総務省・国土交通省・厚生労働省の公的統計と2026年最新空き家税制・相続登記基準をもとに集計した解体工事単価および損益分岐データセット。",
+    url: (Astro.site ?? "https://jikka-shisan.com").toString(),
+    license: "https://jikka-shisan.com/about/",
     temporalCoverage: `${siteMeta.date_from}/${siteMeta.date_to}`,
     creator: { "@type": "Organization", name: "実家と空き家の試算表" },
   },
