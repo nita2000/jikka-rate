@@ -156,7 +156,7 @@ def _read_xlsx_stdlib(excel_path: Path) -> dict[str, list[list[Any]]]:
 
 
 def is_valid_jikka_excel(excel_path: Path) -> bool:
-    """シート名から実家じまいレート用の公的解体・空き家統計Excelかを高速判定する。"""
+    """シート名から実家と空き家の試算表用の公的解体・空き家統計Excelかを高速判定する。"""
     if not excel_path.is_file() or excel_path.suffix.lower() != ".xlsx":
         return False
     try:
@@ -509,7 +509,7 @@ def run_fetch(init_baseline: bool = False, excel_file: Path | None = None) -> Pa
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="実家じまいレート 公的統計取得スクリプト")
+    parser = argparse.ArgumentParser(description="実家と空き家の試算表 公的統計取得スクリプト")
     parser.add_argument("--init-baseline", action="store_true", help="初期ベースラインを再生成して統合")
     parser.add_argument("--excel", type=str, default=None, help="取り込む公的Excelファイルのパス")
     args = parser.parse_args()

@@ -1,6 +1,6 @@
 {
-  "name": "実家じまいレート",
-  "short_name": "実家じまいレート",
+  "name": "実家と空き家の試算表",
+  "short_name": "実家と空き家の試算表",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#f8fafc",

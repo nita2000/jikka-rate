@@ -3,11 +3,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 const contactFormUrl = import.meta.env.PUBLIC_CONTACT_FORM_URL?.trim() || "";
 const contactEmail = import.meta.env.PUBLIC_CONTACT_EMAIL?.trim() || "";
+const siteOriginUrl = (Astro.site ?? "https://jikka-shisan.com/").toString();
 ---
 
 <BaseLayout
   title="プライバシーポリシー・免責事項・運営者情報"
-  description="実家じまいレートのプライバシーポリシー（Googleアナリティクス・Cookie・アフィリエイト広告の利用）、免責事項、著作権、運営者情報およびお問い合わせ窓口について。"
+  description="実家と空き家の試算表のプライバシーポリシー（Googleアナリティクス・Cookie・アフィリエイト広告の利用）、免責事項、著作権、運営者情報およびお問い合わせ窓口について。"
   canonicalPath="/privacy/"
   showPrNotice={false}
 >
@@ -22,7 +23,7 @@ const contactEmail = import.meta.env.PUBLIC_CONTACT_EMAIL?.trim() || "";
       <div class="eyebrow-label mb-1">規約・免責</div>
       <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900">プライバシーポリシー・免責事項・運営者情報</h1>
       <p class="mt-1.5 text-xs sm:text-sm text-slate-600">
-        「実家じまいレート」（以下「当サイト」）における利用者情報の取り扱い、広告配信、免責事項、著作権および運営者情報・お問い合わせ窓口を定めています。
+        「実家と空き家の試算表」（以下「当サイト」）における利用者情報の取り扱い、広告配信、免責事項、著作権および運営者情報・お問い合わせ窓口を定めています。
       </p>
     </div>
 
@@ -90,15 +91,15 @@ const contactEmail = import.meta.env.PUBLIC_CONTACT_EMAIL?.trim() || "";
             <tbody class="divide-y divide-slate-200 border-y border-slate-200">
               <tr>
                 <th class="py-2.5 px-3 text-left bg-slate-50 font-bold text-slate-700 w-32 sm:w-36">サイト名</th>
-                <td class="py-2.5 px-3 text-slate-800">実家じまいレート</td>
+                <td class="py-2.5 px-3 text-slate-800">実家と空き家の試算表</td>
               </tr>
               <tr>
                 <th class="py-2.5 px-3 text-left bg-slate-50 font-bold text-slate-700">運営者</th>
-                <td class="py-2.5 px-3 text-slate-800">実家じまいレート運営事務局</td>
+                <td class="py-2.5 px-3 text-slate-800">実家と空き家の試算表 運営事務局</td>
               </tr>
               <tr>
                 <th class="py-2.5 px-3 text-left bg-slate-50 font-bold text-slate-700">URL</th>
-                <td class="py-2.5 px-3 text-slate-800">https://jikkarate.com/</td>
+                <td class="py-2.5 px-3 text-slate-800">{siteOriginUrl}</td>
               </tr>
               <tr>
                 <th class="py-2.5 px-3 text-left bg-slate-50 font-bold text-slate-700">お問い合わせ</th>
@@ -124,7 +125,7 @@ const contactEmail = import.meta.env.PUBLIC_CONTACT_EMAIL?.trim() || "";
                       </p>
                     ) : (
                       <p>
-                        掲載データの誤記や運営に関するお問い合わせは、実家じまいレート運営事務局にて受け付けております。
+                        掲載データの誤記や運営に関するお問い合わせは、実家と空き家の試算表 運営事務局にて受け付けております。
                       </p>
                     )
                   }

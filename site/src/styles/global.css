@@ -172,3 +172,28 @@ input[type="range"]::-moz-range-thumb {
   box-shadow: 0 1px 4px rgba(37, 97, 66, 0.35);
   cursor: pointer;
 }
+
+/* 親族会議・PDF保存向けの印刷レイアウト */
+@media print {
+  header,
+  footer,
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #1e1c19 !important;
+  }
+
+  main {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+
+  .card-surface,
+  .page-header-clean {
+    box-shadow: none !important;
+    break-inside: avoid;
+  }
+}

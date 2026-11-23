@@ -1,4 +1,4 @@
-"""実家じまいレート データパイプラインおよび2026年最新税制・解体・墓じまい計算エンジンの自動テスト。"""
+"""実家と空き家の試算表 データパイプラインおよび2026年最新税制・解体・墓じまい計算エンジンの自動テスト。"""
 
 from __future__ import annotations
 
@@ -128,6 +128,20 @@ class DatasetOutputTests(unittest.TestCase):
         detail_files = list((data_dir / "pref_detail").glob("*.json"))
         self.assertEqual(len(detail_files), 47)
 
+        # 地方農家住宅55坪は解体費用倒れとなるため専門買取が更地解体より有利になること
+        by_case = {c["slug"]: c for c in cases}
+        kominka_disp = by_case["kominka-farm-55tsubo-age60"]["calc"]["disposal"]
+        self.assertGreater(
+            kominka_disp["kaitori_net_proceeds_yen"],
+            kominka_disp["sarachi_net_proceeds_yen"],
+        )
+
+        # 墓じまい同士の比較では回収年数(payback_years)がNoneになること
+        by_pair = {p["slug"]: p for p in pairs}
+        self.assertIsNone(by_pair["hakajimai-goshi-vs-jumokusou-vs-nokotsudo"]["payback_years"])
+        self.assertIsNone(by_pair["public-cemetery-vs-temple-danka-hakajimai"]["payback_years"])
+        self.assertIsNotNone(by_pair["temple-grave-keep-15y-vs-hakajimai-jumokusou"]["payback_years"])
+
     def test_dist_internal_links_if_built(self) -> None:
         import re
 
@@ -135,7 +149,7 @@ class DatasetOutputTests(unittest.TestCase):
         if not dist_dir.exists():
             return
         html_files = list(dist_dir.rglob("*.html"))
-        self.assertEqual(len(html_files), 130)
+        self.assertEqual(len(html_files), 131)
         for hf in html_files:
             text = hf.read_text(encoding="utf-8")
             for m in re.finditer(r'href="(/[^"#?]*)"', text):

@@ -6,13 +6,14 @@ import prefectures from "../data/prefectures.json";
 import historyYearly from "../data/history_yearly.json";
 
 export const GET: APIRoute = ({ site }) => {
-  const baseUrl = (site ?? new URL("https://jikkarate.com")).toString().replace(/\/$/, "");
+  const baseUrl = (site ?? new URL("https://jikka-shisan.com")).toString().replace(/\/$/, "");
   const lastmod = siteMeta.date_to;
 
   const staticPaths = [
     "/",
     "/tools/disposal-simulator/",
     "/tools/akiya-tax/",
+    "/tools/inheritance-deadline/",
     "/tools/hakajimai-simulator/",
     "/cases/",
     "/compare/",

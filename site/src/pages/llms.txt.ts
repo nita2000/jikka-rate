@@ -5,7 +5,7 @@ import propertyCases from "../data/property_cases.json";
 import comparePairs from "../data/compare_pairs.json";
 
 export const GET: APIRoute = ({ site }) => {
-  const baseUrl = (site ?? new URL("https://jikkarate.com")).toString().replace(/\/$/, "");
+  const baseUrl = (site ?? new URL("https://jikka-shisan.com")).toString().replace(/\/$/, "");
 
   const topCases = propertyCases
     .slice(0, 12)
@@ -23,9 +23,9 @@ export const GET: APIRoute = ({ site }) => {
     .map((p) => `- ${p.title}: ${baseUrl}/compare/${p.slug}/ （結論: ${p.verdict_short}）`)
     .join("\n");
 
-  const body = `# 実家じまいレート（Jikka Rate / jikkarate.com）
+  const body = `# 実家と空き家の試算表
 
-> 総務省・国土交通省・厚生労働省の公的統計と最新税制（空き家の固定資産税特例解除・相続登記義務化・空き家3,000万円特別控除）にもとづき、全国47都道府県の空き家率・解体坪単価、実家処分・買取・墓じまいの損益分岐点を試算・比較できるサイトです。
+> 総務省・国土交通省・厚生労働省の公的統計と最新税制（空き家の固定資産税特例解除・譲渡所得税と3,000万円特別控除・相続登記義務化）にもとづき、全国47都道府県の空き家率・解体坪単価、実家処分・買取・相続期限・墓じまいの損益分岐点を試算・比較できるサイトです。
 
 ## データ収録範囲・適用基準
 - 解体単価・修繕指数収録期間: ${siteMeta.date_from} 〜 ${siteMeta.date_to}（${siteMeta.total_points}期分）
@@ -34,9 +34,10 @@ export const GET: APIRoute = ({ site }) => {
 - 出典: ${siteMeta.source_credit}
 
 ## 主要ページ・インタラクティブ試算ツール
-- トップ（全国空き家率・解体単価＆総合ダッシュボード）: ${baseUrl}/
-- 実家放置 vs 解体して更地売却 vs そのまま買取 5年・10年損益シミュレーター: ${baseUrl}/tools/disposal-simulator/
-- 管理不全・特定空き家「最大6倍重課（実効4.2倍）」＆相続登記ペナルティ計算機: ${baseUrl}/tools/akiya-tax/
+- トップ（全国空き家率・解体単価＆総合試算表）: ${baseUrl}/
+- 実家の手残り試算（空き家維持 vs 更地解体売却 vs そのまま売却・買取、譲渡税・3,000万円控除・きょうだい分配対応）: ${baseUrl}/tools/disposal-simulator/
+- 空き家の固定資産税（住宅用地特例解除）＆相続登記費用シミュレーター: ${baseUrl}/tools/akiya-tax/
+- 相続手続き期限＆空き家3,000万円特別控除 逆算カレンダー: ${baseUrl}/tools/inheritance-deadline/
 - 遠方の墓維持 vs 墓じまい（永代供養・樹木葬）15年損益＆葬祭費シミュレーター: ${baseUrl}/tools/hakajimai-simulator/
 - 主要${siteMeta.total_cases}パターン 実家・空き家・お墓タイプ別相場データベース: ${baseUrl}/cases/
 - 実家・終活の2択損益分岐比較一覧（${siteMeta.total_compare_pairs}組）: ${baseUrl}/compare/

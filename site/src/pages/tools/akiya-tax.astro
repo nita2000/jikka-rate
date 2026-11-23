@@ -32,7 +32,7 @@ const schema = {
 
   <div class="grid gap-6 lg:grid-cols-12 items-start">
     <!-- 左：4ステップ選択パネル -->
-    <div class="lg:col-span-5 min-w-0 space-y-4">
+    <div class="lg:col-span-5 min-w-0 space-y-4 no-print">
       <!-- STEP 1 -->
       <div class="card-surface rounded p-5 space-y-3.5">
         <div class="flex items-center justify-between border-b border-slate-100 pb-2">
@@ -59,6 +59,21 @@ const schema = {
               <option value="no">郊外・郡部など（固定資産税1.4%のみ）</option>
             </select>
           </label>
+        </div>
+
+        <div class="pt-2 border-t border-slate-100">
+          <div class="text-xs font-bold text-slate-700 mb-1.5">県内の立地目安（固定資産税評価額に反映）</div>
+          <div class="grid grid-cols-3 gap-1.5" id="at-loc-group">
+            <button type="button" data-loc="urban" class="at-loc-btn rounded-xs border border-slate-300 bg-white py-1.5 px-2 text-center text-[11px] font-bold text-slate-700 transition-colors">
+              駅ちか・市街地
+            </button>
+            <button type="button" data-loc="suburb" class="at-loc-btn rounded-xs border border-emerald-700 bg-emerald-700 py-1.5 px-2 text-center text-[11px] font-bold text-white transition-colors">
+              一般的な住宅地
+            </button>
+            <button type="button" data-loc="rural" class="at-loc-btn rounded-xs border border-slate-300 bg-white py-1.5 px-2 text-center text-[11px] font-bold text-slate-700 transition-colors">
+              地方・郊外
+            </button>
+          </div>
         </div>
       </div>
 
@@ -180,6 +195,28 @@ const schema = {
             <div id="at-hero-mult" class="text-xs sm:text-sm font-bold text-slate-700 tabular-nums"></div>
           </div>
           <div id="at-hero-reassure" class="mt-3 pt-3 border-t border-slate-200/80 text-xs text-slate-700 leading-relaxed"></div>
+          <div class="mt-3 pt-2.5 border-t border-slate-200/70 flex flex-wrap items-center justify-end gap-1.5 no-print">
+            <button
+              type="button"
+              id="at-copy-btn"
+              class="inline-flex items-center gap-1 rounded-xs border border-emerald-700 bg-white hover:bg-emerald-50 px-2.5 py-1.5 text-[11px] font-bold text-emerald-800 transition-colors whitespace-nowrap"
+            >
+              <svg class="h-3.5 w-3.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+              </svg>
+              <span id="at-copy-label">LINE共有用にコピー</span>
+            </button>
+            <button
+              type="button"
+              id="at-print-btn"
+              class="inline-flex items-center gap-1 rounded-xs border border-slate-300 bg-white hover:bg-slate-50 px-2.5 py-1.5 text-[11px] font-bold text-slate-700 transition-colors whitespace-nowrap"
+            >
+              <svg class="h-3.5 w-3.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+              </svg>
+              <span>印刷・PDF保存</span>
+            </button>
+          </div>
         </div>
 
         <!-- 3枚の主要KPIカード -->
@@ -235,6 +272,7 @@ const schema = {
 
     const state = {
       akiyaMode: "kanri_fuzen", // kanri_fuzen | tokutei | sarachi | proper
+      locTier: "suburb", // urban | suburb | rural
       manualLand: false,
       manualBldg: false,
     };
@@ -260,8 +298,9 @@ const schema = {
       const pref = byPref[elPref.value];
       const tsubo = Number(elLandTsubo.value);
       const bType = elBldg.value;
+      const locFactor = state.locTier === "urban" ? 1.35 : state.locTier === "rural" ? 0.42 : 0.92;
 
-      const landAssessedMan = Math.max(50, Math.round((tsubo * pref.land_price_man_per_tsubo * 0.7) / 10) * 10);
+      const landAssessedMan = Math.max(40, Math.round((tsubo * pref.land_price_man_per_tsubo * locFactor * 0.7) / 10) * 10);
       let bldgAssessedMan = 120;
       if (bType === "wood_mid") bldgAssessedMan = 220;
       else if (bType === "steel") bldgAssessedMan = 280;
@@ -422,8 +461,58 @@ const schema = {
         `<p><strong>なぜ「最大6倍」と言われるのに、実際は「約${landMultEff}倍」なの？</strong><br />` +
         `家が建っている土地（200㎡以下の部分）は、固定資産税の評価額が<strong>6分の1（約16.7%）</strong>に割り引かれています。この割引が外れると計算上は6倍（100%）に戻りますが、実際には急激な負担増を抑えるルール（商業地などと同じ<strong>評価額の70%を上限とする負担調整措置</strong>）が働くため、固定資産税は約4.2倍、都市計画税と合わせると<strong>実質 約${landMultEff}倍</strong>になります。</p>` +
         `<p><strong>相続登記（名義変更）のポイント：</strong><br />` +
-        `${tokiSummary}。なお、土地の評価額が100万円以下の場合は2027年3月末まで土地の登録免許税が免税（0円）になる特例もあります。</p>`;
+        `${tokiSummary}。なお、土地の評価額が100万円以下の場合は2027年3月末まで土地の登録免許税が免税（0円）になる特例もあります。` +
+        ` <a href="/tools/inheritance-deadline/" class="font-bold text-emerald-700 hover:underline">相続登記と3,000万円控除の締切日を逆算する →</a></p>`;
+
+      const pref = byPref[elPref.value];
+      state.shareText =
+        `【実家と空き家の試算表｜空き家の固定資産税・相続登記試算】\n` +
+        `条件：${pref.name} / 敷地約${tsubo}坪（${landSqm}㎡）\n` +
+        `──────────────\n` +
+        `・通常時（1/6軽減中）：年 ${yen(normalTotalTax)}\n` +
+        `・軽減解除後（実効額）：年 ${yen(effTotalTax)}（年 +${yen(Math.max(0, effTotalTax - normalTotalTax))} / 約${landMultEff}倍）\n` +
+        `・5年間の増税目安：+${yen(fiveYearExtra)}\n` +
+        `・相続登記の費用目安：${tokiMode === "done" ? "完了済（0円）" : `約${Math.round(normalTokiCost / 10000)}万円`}\n` +
+        `──────────────\n` +
+        `試算ページ：${window.location.origin}${window.location.pathname}`;
     }
+
+    document.getElementById("at-copy-btn").addEventListener("click", async () => {
+      const lbl = document.getElementById("at-copy-label");
+      try {
+        await navigator.clipboard.writeText(state.shareText || "");
+        if (lbl) {
+          lbl.textContent = "コピーしました";
+          setTimeout(() => {
+            lbl.textContent = "LINE共有用にコピー";
+          }, 2200);
+        }
+      } catch {
+        window.prompt("以下をコピーしてLINEやメールに貼り付けてください：", state.shareText || "");
+      }
+    });
+
+    document.getElementById("at-print-btn").addEventListener("click", () => {
+      window.print();
+    });
+
+    document.querySelectorAll(".at-loc-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        state.locTier = btn.getAttribute("data-loc");
+        document.querySelectorAll(".at-loc-btn").forEach((b) => {
+          const on = b === btn;
+          b.className =
+            b.className
+              .replace(/border-emerald-700|bg-emerald-700|text-white|border-slate-300|bg-white|text-slate-700/g, "")
+              .trim() + (on ? " border-emerald-700 bg-emerald-700 text-white" : " border-slate-300 bg-white text-slate-700");
+        });
+        if (state.locTier === "rural") elCityTax.value = "no";
+        else elCityTax.value = "yes";
+        state.manualLand = false;
+        syncDefaults();
+        recalc();
+      });
+    });
 
     document.querySelectorAll(".st-btn").forEach((btn) => {
       btn.addEventListener("click", () => {

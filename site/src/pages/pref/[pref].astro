@@ -20,12 +20,47 @@ export function getStaticPaths() {
 }
 
 const { pref, detail } = Astro.props;
+
+// 30坪木造解体費と45坪土地相場から、県内で解体費用倒れ（赤字）になりやすい境界地価を算出
+const demo30Man = Math.round(pref.std_30tsubo_demolition_yen / 10000);
+const stdLand45Man = Math.round(pref.land_price_man_per_tsubo * 45);
+const breakevenLandPerTsuboMan = Math.max(1, Math.ceil((demo30Man + 35) / 45));
+const isLowLandPricePref = pref.land_price_man_per_tsubo < 15;
+
+const prefFaqItems = [
+  {
+    q: `${pref.name}で木造30坪の実家を解体すると費用はいくらくらいですか？`,
+    a: `${pref.latest_date}基準の${pref.name}における木造解体坪単価は平均${pref.wood_man_per_tsubo.toFixed(2)}万円/坪です。延床30坪の木造戸建ての場合、付帯撤去や石綿事前調査等を含めた解体総額の目安は約${demo30Man}万円です（前面道路が狭い場合や残置物が多い場合は上振れします）。`,
+  },
+  {
+    q: `${pref.name}の空き家は先に解体して更地にするのと、そのまま売却・買取のどちらが有利ですか？`,
+    a: `${pref.name}の標準住宅地地価（約${pref.land_price_man_per_tsubo.toFixed(1)}万円/坪）の場合、敷地45坪で土地評価は約${stdLand45Man.toLocaleString("ja-JP")}万円ですが、県内の郊外・地方で地価が坪${breakevenLandPerTsuboMan}万円を下回るエリアでは解体費（約${demo30Man}万円）が売却額を上回る費用倒れが起きやすくなります。2024年改正により古家付きで売って買主が翌年2月15日までに解体しても3,000万円特別控除が使えるため、まずは壊さずに査定・買取額を比較するのが安全です。`,
+  },
+  {
+    q: `${pref.name}で空き家を放置して固定資産税の軽減（1/6特例）が外れると年いくら上がりますか？`,
+    a: `${pref.name}の標準的な45坪住宅地では、通常時の固定資産税・都市計画税目安は年間${formatYen(pref.std_normal_tax_annual_yen)}ですが、管理不全空き家等の勧告や更地化で住宅用地の軽減が外れると年間${formatYen(pref.std_heavy_tax_annual_yen)}（年間約${formatYen(pref.std_heavy_tax_annual_yen - pref.std_normal_tax_annual_yen)}の増額）となります。`,
+  },
+];
+
+const prefSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: prefFaqItems.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.a,
+    },
+  })),
+};
 ---
 
 <BaseLayout
   title={`${pref.name}の空き家率・解体工事坪単価・実家処分＆墓じまい相場`}
   description={`${pref.name}の総空き家率${pref.akiya_rate_pct.toFixed(1)}%（全国${pref.akiya_rank}位）・木造解体${pref.wood_man_per_tsubo.toFixed(2)}万円/坪・鉄骨${pref.steel_man_per_tsubo.toFixed(2)}万円/坪・RC${pref.rc_man_per_tsubo.toFixed(2)}万円/坪の推移と、県内での実家処分・固定資産税・墓じまい損益データを掲載。`}
   canonicalPath={`/pref/${pref.slug}/`}
+  schema={prefSchema}
 >
   <nav class="text-xs text-slate-500 mb-4 flex items-center gap-1.5">
     <a href="/" class="hover:text-emerald-700">トップ</a>
@@ -43,7 +78,7 @@ const { pref, detail } = Astro.props;
       </span>
     </div>
     <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900">
-      {pref.name}の空き家率・解体工事坪単価・実家じまい相場
+      {pref.name}の空き家率・解体工事坪単価・実家処分＆墓じまい相場
     </h1>
     <p class="mt-1.5 text-xs sm:text-sm text-slate-600">
       {pref.name}（代表都市：{pref.capital_city}）の解体工事単価・住宅地地価・放置空き家率と、最新税制（住宅用地の軽減解除・相続登記義務化）を反映した試算データです。
@@ -159,6 +194,57 @@ const { pref, detail } = Astro.props;
           }
         </tbody>
       </table>
+    </div>
+  </section>
+
+  <!-- 地域固有の解体赤字境界診断 ＆ 補助金・手続き確認ガイド -->
+  <section class="grid gap-4 lg:grid-cols-2 mb-8">
+    <div class="card-surface rounded p-5 border-l-3 border-l-emerald-700 space-y-2.5">
+      <div class="text-[11px] font-bold text-emerald-700">{pref.name}の損益分岐ポイント</div>
+      <h2 class="text-base font-extrabold text-slate-900">
+        {pref.name}で「先に解体すると赤字（費用倒れ）」になりやすい境界線
+      </h2>
+      <p class="text-xs text-slate-600 leading-relaxed">
+        {pref.name}で延床30坪の木造実家を解体すると<strong>約{demo30Man}万円</strong>が先にかかります。敷地45坪を基準にすると、県内の標準地価（坪約{pref.land_price_man_per_tsubo.toFixed(1)}万円）では土地評価が約{stdLand45Man.toLocaleString("ja-JP")}万円となる一方、
+        <strong>郊外・郡部などで実勢地価が坪{breakevenLandPerTsuboMan}万円を下回るエリアでは、解体費と諸経費が売却額を上回るリスク</strong>が高まります。
+      </p>
+      <p class="text-xs text-slate-700 leading-relaxed bg-slate-50 border border-slate-200 rounded-xs p-3">
+        {isLowLandPricePref
+          ? `${pref.name}は全国平均と比べて住宅地地価が低めのエリアが多いため、自己資金で解体して更地にする前に「古家付き仲介」または「解体・片付け不要の専門買取」の手残りを比較するのが鉄則です。`
+          : `${pref.name}でも${pref.capital_city}などの市街地と郊外・山間部では地価が大きく異なります。売れる見込みが立つ前に解体すると翌年から土地の固定資産税が上がるため、まずは壊さずに査定を取るのが安全です。`}
+      </p>
+    </div>
+
+    <div class="card-surface rounded p-5 border-l-3 border-l-amber-600 space-y-2.5">
+      <div class="text-[11px] font-bold text-amber-800">{pref.name}の公的支援・手続き確認</div>
+      <h2 class="text-base font-extrabold text-slate-900">
+        {pref.name}（{pref.capital_city}ほか各市区町村）で実家処分前に確認すべき3点
+      </h2>
+      <ul class="space-y-2 text-xs text-slate-700 leading-relaxed list-disc pl-4">
+        <li>
+          <strong>老朽空き家解体補助金（着工前申請が必須）：</strong>{pref.name}内の多くの市区町村では、老朽危険空き家の除却に対し30万〜100万円上限の補助制度を設けています。<strong>解体業者と契約・着工した後は対象外</strong>になるため、必ず事前相談してください。
+        </li>
+        <li>
+          <strong>被相続人居住用家屋等確認書（3,000万円控除用）：</strong>空き家3,000万円特別控除を確定申告で使う際は、実家のある{pref.name}内の市区町村役場（住宅課・空き家対策課等）で確認書の発行が必要です。
+        </li>
+        <li>
+          <strong>相続登記と売却期限の確認：</strong>名義が親のままでは売却も解体補助申請もできません。
+          <a href="/tools/inheritance-deadline/" class="font-bold text-emerald-700 hover:underline">相続期限＆3,000万円控除カレンダー</a>で締切日を先に確認しておくと安心です。
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- よくある質問（都道府県固有数値Q&A） -->
+  <section class="card-surface rounded p-5 mb-8">
+    <h2 class="text-base font-extrabold text-slate-900 mb-3">{pref.name}の空き家・実家処分に関するよくある質問</h2>
+    <div class="divide-y divide-slate-100 space-y-3">
+      {prefFaqItems.map((faq, idx) => (
+        <div class={idx > 0 ? "pt-3" : ""}>
+          <h3 class="text-xs sm:text-sm font-extrabold text-slate-900">Q. {faq.q}</h3>
+          <p class="mt-1 text-xs text-slate-600 leading-relaxed">A. {faq.a}</p>
+        </div>
+      ))}
     </div>
   </section>
 

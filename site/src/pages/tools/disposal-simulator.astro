@@ -110,7 +110,7 @@ const schema = {
 
   <div class="grid gap-6 lg:grid-cols-12 items-start">
     <!-- 左：4ステップの選択パネル -->
-    <div class="lg:col-span-5 min-w-0 space-y-4">
+    <div class="lg:col-span-5 min-w-0 space-y-4 no-print">
       <!-- STEP 1. 地域・試算年数 -->
       <div class="card-surface rounded p-5 space-y-3.5">
         <div class="flex items-center justify-between border-b border-slate-100 pb-2">
@@ -247,7 +247,7 @@ const schema = {
         <div class="flex items-center justify-between border-b border-slate-100 pb-2">
           <div class="flex items-center gap-2">
             <span class="inline-flex items-center justify-center rounded-xs bg-emerald-700 px-1.5 py-0.5 text-[10px] font-extrabold text-white">STEP 4</span>
-            <span class="text-xs font-extrabold text-slate-900">部屋の中の荷物・建物の傷み具合</span>
+            <span class="text-xs font-extrabold text-slate-900">部屋の中の荷物・建物の傷み・控除</span>
           </div>
         </div>
         <div class="grid grid-cols-3 gap-1.5" id="cond-group">
@@ -260,6 +260,23 @@ const schema = {
           <button type="button" data-cond="damaged" class="cond-btn rounded-xs border border-slate-300 bg-white py-2 px-2 text-[11px] font-bold text-slate-700 transition-colors">
             荷物が多い・傷みあり<br /><span class="text-[10px] font-normal opacity-80">雨漏り・雑草など</span>
           </button>
+        </div>
+
+        <div class="pt-2.5 border-t border-slate-100">
+          <div class="flex items-center justify-between gap-2 mb-1.5">
+            <span class="text-xs font-bold text-slate-700">空き家3,000万円特別控除（売却時の譲渡税）</span>
+            <a href="/tools/inheritance-deadline/" class="text-[11px] font-bold text-emerald-700 hover:underline whitespace-nowrap">期限・要件を確認 →</a>
+          </div>
+          <div class="grid grid-cols-2 gap-1.5" id="exempt-group">
+            <button type="button" data-exempt="yes" class="exempt-btn rounded-xs border border-emerald-700 bg-emerald-700 py-2 px-2 text-left text-[11px] font-bold text-white transition-colors">
+              <div>特例あり（期限内売却）</div>
+              <div class="text-[10px] font-normal opacity-90 mt-0.5">3,000万円まで譲渡税0円</div>
+            </button>
+            <button type="button" data-exempt="no" class="exempt-btn rounded-xs border border-slate-300 bg-white py-2 px-2 text-left text-[11px] font-bold text-slate-700 transition-colors">
+              <div>特例なし（期限切れ・対象外）</div>
+              <div class="text-[10px] font-normal opacity-80 mt-0.5">譲渡税 20.315%を試算</div>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -324,6 +341,42 @@ const schema = {
             <div class="text-[11px] font-extrabold text-emerald-900 mb-1">この方法を選ぶ3つのメリット</div>
             <ul id="verdict-benefits" class="space-y-1 text-[11.5px] text-slate-700 leading-snug list-disc pl-4"></ul>
           </div>
+
+          <!-- きょうだい分配（換価分割）＆ 親族LINE共有・印刷バー -->
+          <div class="mt-3.5 pt-3 border-t border-emerald-200/70 flex flex-wrap items-center justify-between gap-2.5">
+            <div class="flex flex-wrap items-center gap-2 text-xs">
+              <span class="font-bold text-slate-700 whitespace-nowrap">きょうだい等で分ける場合：</span>
+              <div class="inline-flex rounded-xs border border-slate-300 bg-white overflow-hidden no-print" id="heir-group">
+                <button type="button" data-heirs="1" class="heir-btn px-2 py-1 text-[11px] font-bold bg-emerald-700 text-white transition-colors">1人</button>
+                <button type="button" data-heirs="2" class="heir-btn px-2 py-1 text-[11px] font-bold text-slate-600 border-l border-slate-200 transition-colors">2人</button>
+                <button type="button" data-heirs="3" class="heir-btn px-2 py-1 text-[11px] font-bold text-slate-600 border-l border-slate-200 transition-colors">3人</button>
+                <button type="button" data-heirs="4" class="heir-btn px-2 py-1 text-[11px] font-bold text-slate-600 border-l border-slate-200 transition-colors">4人</button>
+              </div>
+              <span id="heir-share-note" class="font-extrabold text-emerald-900 tabular-nums whitespace-nowrap"></span>
+            </div>
+            <div class="flex items-center gap-1.5 no-print">
+              <button
+                type="button"
+                id="copy-result-btn"
+                class="inline-flex items-center gap-1 rounded-xs border border-emerald-700 bg-white hover:bg-emerald-50 px-2.5 py-1.5 text-[11px] font-bold text-emerald-800 transition-colors whitespace-nowrap"
+              >
+                <svg class="h-3.5 w-3.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+                <span id="copy-result-label">LINE共有用にコピー</span>
+              </button>
+              <button
+                type="button"
+                id="print-result-btn"
+                class="inline-flex items-center gap-1 rounded-xs border border-slate-300 bg-white hover:bg-slate-50 px-2.5 py-1.5 text-[11px] font-bold text-slate-700 transition-colors whitespace-nowrap"
+              >
+                <svg class="h-3.5 w-3.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                </svg>
+                <span>印刷・PDF保存</span>
+              </button>
+            </div>
+          </div>
         </div>
 
         <!-- 3つの選択肢 横並び比較カード -->
@@ -352,7 +405,7 @@ const schema = {
           <div id="card-sarachi" class="rounded border border-slate-200 border-t-3 border-t-slate-400 bg-white p-3.5 flex flex-col justify-between transition-colors min-w-0">
             <div>
               <div class="flex items-center justify-between gap-1 whitespace-nowrap">
-                <span class="text-[11px] font-bold text-slate-700">② 更地で売却</span>
+                <span id="title-sarachi" class="text-[11px] font-bold text-slate-700">② 更地で売却</span>
                 <span id="tag-sarachi" class="hidden px-1.5 py-0.5 rounded-xs bg-emerald-700 text-white text-[10px] font-bold">最有利</span>
               </div>
               <div id="val-sarachi" class="mt-2 font-display text-xl font-extrabold text-slate-900 tabular-nums whitespace-nowrap">—</div>
@@ -417,20 +470,46 @@ const schema = {
           </table>
         </div>
 
+        <!-- 譲渡所得税・3,000万円特別控除の影響ハイライト -->
+        <div id="tax-impact-box" class="mt-4 rounded-xs border border-amber-200 bg-amber-50/70 px-3.5 py-2.5 text-xs text-slate-700 leading-relaxed"></div>
+
         <!-- 自動計算の前提サマリー -->
-        <div id="auto-premise-box" class="mt-5 rounded-xs bg-white border border-slate-200 px-3.5 py-2.5 text-[11px] text-slate-600 leading-relaxed tabular-nums"></div>
+        <div id="auto-premise-box" class="mt-3 rounded-xs bg-white border border-slate-200 px-3.5 py-2.5 text-[11px] text-slate-600 leading-relaxed tabular-nums"></div>
 
         <!-- ワンポイントアドバイス -->
         <div id="disp-insight" class="mt-3 rounded-xs bg-slate-50 border border-slate-200 p-4 text-xs text-slate-700 leading-relaxed space-y-1.5"></div>
       </div>
 
-      <AffiliateCta
-        slotType="sell"
-        title="まずは「建物を壊さず・片付けない状態」でいくらになるか査定を比べてみる"
-        description="先に解体工事を発注してしまうと、万一売れ残ったときに固定資産税の軽減が外れてしまいます。まずは現状のまま「仲介での売却額」と「片付け不要の買取額」を無料で確認してから判断するのが一番安心です。"
-        fallbackHref="/tools/akiya-tax/"
-        fallbackLabel="空き家の固定資産税・相続登記の試算も見る →"
-      />
+      <!-- 診断結果連動の動的CTA（訳あり買取 / 不動産一括査定 / 解体一括見積もりを自動切替） -->
+      <div class="no-print">
+        <div id="cta-wrap-sell">
+          <AffiliateCta
+            slotType="sell"
+            title="まずは「建物を壊さず・片付けない状態」でいくらになるか査定を比べてみる"
+            description="先に解体工事を発注してしまうと、万一売れ残ったときに固定資産税の軽減が外れてしまいます。まずは現状のまま「古家付き仲介」での売却額を複数社で確認してから判断するのが安心です。"
+            fallbackHref="/tools/inheritance-deadline/"
+            fallbackLabel="3,000万円控除の期限と相続手続きを確認する →"
+          />
+        </div>
+        <div id="cta-wrap-akiya" class="hidden">
+          <AffiliateCta
+            slotType="akiya"
+            title="解体・片付け不要の「訳あり・空き家専門買取」で手出し0円の金額を確認する"
+            description="再建築不可・荷物大量・地方で解体すると費用倒れになりやすい実家は、一般仲介で断られても専門買取なら現状のまま最短数週間で現金化できます。解体発注前に買取額を把握しておくのが安全です。"
+            fallbackHref="/compare/non-rebuildable-kaitori-vs-sarachi-trap/"
+            fallbackLabel="再建築不可・訳あり実家の買取 vs 解体比較を見る →"
+          />
+        </div>
+        <div id="cta-wrap-kaitai" class="hidden">
+          <AffiliateCta
+            slotType="kaitai"
+            title="更地売却が有利な条件：解体工事費の相見積もりで手残りを数十万円増やす"
+            description="同じ木造実家でも解体業者の見積もりは30万〜80万円以上の差が出ます。更地にして売却する前に、複数社の解体見積もりと自治体の解体補助金の有無を確認しておきましょう。"
+            fallbackHref="/guide/kaitai-cost-asbestos-2026/"
+            fallbackLabel="解体工事費とアスベスト調査・補助金の詳細を見る →"
+          />
+        </div>
+      </div>
     </div>
   </div>
 
@@ -452,6 +531,9 @@ const schema = {
       ageGroup: "mid35", // old45 | mid35 | new25
       loc: "suburb", // urban | suburb | rural | wakeari
       cond: "normal", // clean | normal | damaged
+      taxExempt: true, // 空き家3,000万円特別控除の適用有無
+      heirs: 1, // 相続人数（換価分割の目安）
+      lastShareText: "",
       overrides: {
         land: false,
         demo: false,
@@ -591,6 +673,15 @@ const schema = {
       if (forceAll || !state.overrides.maint) elManMaint.value = String(auto.baseMaintMan);
     }
 
+    function calcTransferTax(salePriceYen, transferExpenseYen, useExempt) {
+      if (salePriceYen <= 0) return 0;
+      // 親の購入時契約書が不明な場合の法定5%概算取得費・長期譲渡所得税率20.315%
+      const assumedAcquisitionCost = Math.round(salePriceYen * 0.05);
+      const deduction = useExempt ? 30000000 : 0;
+      const taxableGain = Math.max(0, salePriceYen - assumedAcquisitionCost - transferExpenseYen - deduction);
+      return Math.round(taxableGain * 0.20315);
+    }
+
     function recalc() {
       const pref = byPref[elPref.value];
       const c = byCase[elCase.value];
@@ -641,6 +732,10 @@ const schema = {
       const keepNet = -keepTotalOutflow;
 
       // ② 解体して更地仲介売却
+      const isMansion = c.slug === "old-mansion-70sqm-age42";
+      const isExemptEligible = !isMansion && effAge >= 30;
+      const effectiveTaxExempt = isExemptEligible && state.taxExempt;
+
       let sarachiGross = landMarketYen;
       if (state.loc === "wakeari" || c.slug === "non-rebuildable-wood-25tsubo") {
         sarachiGross = Math.round(landMarketYen * 0.38);
@@ -650,26 +745,37 @@ const schema = {
       const sarachiBroker = calcBrokerFee(sarachiGross);
       const waitYears = state.loc === "rural" ? 2 : 1;
       const sarachiWaitTax = sarachiTaxAnnual * waitYears;
-      const sarachiNet = sarachiGross - totalDemoWithResYen - sarachiBroker - sarachiWaitTax;
+      const sarachiTransferTax = calcTransferTax(sarachiGross, demoBodyAndExtYen + sarachiBroker, effectiveTaxExempt);
+      const sarachiNet = sarachiGross - totalDemoWithResYen - sarachiBroker - sarachiWaitTax - sarachiTransferTax;
 
       // ③ 解体せず売却（A: 古家付き仲介 / B: 残置物込み専門買取）
       let furuyaGross = Math.max(0, Math.round(landMarketYen * 0.96 - demoBodyAndExtYen * 0.82));
-      if (effAge < 30 && state.cond !== "damaged" && state.loc !== "wakeari") {
+      if (c.slug === "leased-land-shakuchi-28tsubo") {
+        // 借地権付き実家は地主への譲渡承諾料等を差し引いた借地権実勢で試算
+        furuyaGross = Math.round(landMarketYen * 0.48);
+      } else if (effAge < 30 && state.cond !== "damaged" && state.loc !== "wakeari") {
         furuyaGross = Math.round(landMarketYen * 1.05 + 1800000);
       }
       const furuyaBroker = calcBrokerFee(furuyaGross);
-      const furuyaNet = furuyaGross - furuyaBroker - resYen - normalTaxAnnual;
+      const furuyaTransferTax = calcTransferTax(furuyaGross, furuyaBroker, effectiveTaxExempt);
+      const furuyaNet = furuyaGross - furuyaBroker - resYen - normalTaxAnnual - furuyaTransferTax;
 
-      let kaitoriNet = Math.round(landMarketYen * 0.72 - demoBodyAndExtYen * 0.42);
-      if (state.loc === "wakeari" || state.loc === "rural" || state.cond === "damaged" || c.category === "wakeari") {
-        kaitoriNet = Math.max(Math.round(landMarketYen * 0.54), 600000);
+      let kaitoriGross = Math.round(landMarketYen * 0.72 - demoBodyAndExtYen * 0.42);
+      if (state.loc === "wakeari" || c.category === "wakeari") {
+        kaitoriGross = Math.max(Math.round(landMarketYen * 0.56), 600000);
+      } else if (state.loc === "rural" || state.cond === "damaged") {
+        kaitoriGross = Math.max(Math.round(landMarketYen * 0.62 - demoBodyAndExtYen * 0.35), 550000);
       } else {
-        kaitoriNet = Math.max(Math.round(landMarketYen * 0.45), 500000);
+        kaitoriGross = Math.max(kaitoriGross, Math.round(landMarketYen * 0.48), 500000);
       }
+      const kaitoriTransferTax = calcTransferTax(kaitoriGross, 0, effectiveTaxExempt);
+      const kaitoriNet = kaitoriGross - kaitoriTransferTax;
 
+      // 主軸ルートと最終手残りを100%一致させ、詳細テーブルの足し算に矛盾が出ないようにする
       const useKaitoriAsMain =
-        state.loc === "wakeari" || state.loc === "rural" || state.cond === "damaged" || kaitoriNet >= furuyaNet;
-      const asIsNet = Math.max(furuyaNet, kaitoriNet);
+        state.loc === "wakeari" || c.category === "wakeari" || kaitoriNet >= furuyaNet;
+      const asIsNet = useKaitoriAsMain ? kaitoriNet : furuyaNet;
+      const asIsTransferTax = useKaitoriAsMain ? kaitoriTransferTax : furuyaTransferTax;
       const asIsShortTitle = useKaitoriAsMain ? "③ そのまま買取" : "③ 壊さず売却";
       const asIsFullLabel = useKaitoriAsMain ? "壊さず専門買取" : "壊さず古家付き売却";
 
@@ -685,17 +791,20 @@ const schema = {
         `<div class="flex justify-between whitespace-nowrap"><span>固定資産税計</span><span class="font-semibold text-slate-700">${plainMan(keepTaxTotal)}</span></div>` +
         `<div class="flex justify-between whitespace-nowrap"><span>維持・修繕計</span><span class="font-semibold text-slate-700">${plainMan(keepMaintTotal)}</span></div>`;
 
-      // カード② 解体して更地売却
-      const sarachiCostTotal = totalDemoWithResYen + sarachiBroker + sarachiWaitTax;
+      // カード② 解体して更地売却（区分マンション時は片付け後仲介売却）
+      const sarachiCostTotal = totalDemoWithResYen + sarachiBroker + sarachiWaitTax + sarachiTransferTax;
+      document.getElementById("title-sarachi").textContent = isMansion ? "② 片付け後仲介" : "② 更地で売却";
       document.getElementById("val-sarachi").textContent = signedMan(sarachiNet);
-      document.getElementById("sub-sarachi").textContent = `先行手出し 約${plainMan(totalDemoWithResYen)}`;
+      document.getElementById("sub-sarachi").textContent = isMansion
+        ? `戸別解体不要・片付け約${plainMan(resYen)}`
+        : `先行手出し 約${plainMan(totalDemoWithResYen)}`;
       document.getElementById("note-sarachi").innerHTML =
-        `<div class="flex justify-between whitespace-nowrap"><span>土地売却額</span><span class="font-semibold text-slate-700">${plainMan(sarachiGross)}</span></div>` +
-        `<div class="flex justify-between whitespace-nowrap"><span>解体・諸経費</span><span class="font-semibold text-rose-700">▲${plainMan(sarachiCostTotal)}</span></div>`;
+        `<div class="flex justify-between whitespace-nowrap"><span>${isMansion ? "マンション売却額" : "土地売却額"}</span><span class="font-semibold text-slate-700">${plainMan(sarachiGross)}</span></div>` +
+        `<div class="flex justify-between whitespace-nowrap"><span>${isMansion ? "片付け・税・諸費" : "解体・税・諸費"}</span><span class="font-semibold text-rose-700">▲${plainMan(sarachiCostTotal)}</span></div>`;
 
       // カード③ 壊さず手放す
-      const asIsGrossDisp = useKaitoriAsMain ? kaitoriNet : furuyaGross;
-      const asIsCostDisp = useKaitoriAsMain ? 0 : furuyaBroker + resYen + normalTaxAnnual;
+      const asIsGrossDisp = useKaitoriAsMain ? kaitoriGross : furuyaGross;
+      const asIsCostDisp = useKaitoriAsMain ? kaitoriTransferTax : furuyaBroker + resYen + normalTaxAnnual + furuyaTransferTax;
       document.getElementById("title-as-is").textContent = asIsShortTitle;
       document.getElementById("val-as-is").textContent = signedMan(asIsNet);
       document.getElementById("sub-as-is").textContent = useKaitoriAsMain
@@ -703,7 +812,7 @@ const schema = {
         : `先行片付け 約${plainMan(resYen)}`;
       document.getElementById("note-as-is").innerHTML =
         `<div class="flex justify-between whitespace-nowrap"><span>${useKaitoriAsMain ? "直接買取額" : "古家付売却"}</span><span class="font-semibold text-slate-700">${plainMan(asIsGrossDisp)}</span></div>` +
-        `<div class="flex justify-between whitespace-nowrap"><span>解体・諸経費</span><span class="font-semibold text-emerald-800">${asIsCostDisp === 0 ? "0円（不要）" : `▲${plainMan(asIsCostDisp)}`}</span></div>`;
+        `<div class="flex justify-between whitespace-nowrap"><span>税・諸経費</span><span class="font-semibold text-emerald-800">${asIsCostDisp === 0 ? "0円（不要）" : `▲${plainMan(asIsCostDisp)}`}</span></div>`;
 
       document.getElementById("res-furuya-broker").textContent = signedMan(furuyaNet);
       document.getElementById("res-direct-kaitori").textContent = signedMan(kaitoriNet);
@@ -713,6 +822,20 @@ const schema = {
       const bestNet = Math.max(asIsNet, sarachiNet);
       const diffVsKeep = bestNet - keepNet;
       const diffBetweenSale = Math.abs(asIsNet - sarachiNet);
+
+      // きょうだい分配（換価分割の目安）
+      const perHeirNet = Math.round(bestNet / state.heirs);
+      document.getElementById("heir-share-note").textContent =
+        state.heirs === 1
+          ? `単独相続の手残り目安：${signedMan(bestNet)}`
+          : `${state.heirs}人で分けると 1人あたり ${signedMan(perHeirNet)}`;
+
+      // 診断結果に応じた動的CTAの自動切替
+      const activeCtaSlot = !asIsWins ? "kaitai" : useKaitoriAsMain ? "akiya" : "sell";
+      ["sell", "akiya", "kaitai"].forEach((slot) => {
+        const el = document.getElementById(`cta-wrap-${slot}`);
+        if (el) el.classList.toggle("hidden", slot !== activeCtaSlot);
+      });
 
       const cardSarachi = document.getElementById("card-sarachi");
       const cardAsIs = document.getElementById("card-as-is");
@@ -737,9 +860,8 @@ const schema = {
         tagAsIs.classList.add("hidden");
       }
 
-      document.getElementById("verdict-winner").textContent = asIsWins
-        ? `「${asIsFullLabel}」が +${plainMan(diffBetweenSale)} 有利`
-        : `「解体して更地売却」が +${plainMan(diffBetweenSale)} 有利`;
+      const bestStrategyTitle = asIsWins ? asIsFullLabel : isMansion ? "片付け後の仲介売却" : "解体して更地売却";
+      document.getElementById("verdict-winner").textContent = `「${bestStrategyTitle}」が +${plainMan(diffBetweenSale)} 有利`;
       document.getElementById("verdict-diff-note").textContent =
         `${years}年維持と比べ 合計 +${plainMan(diffVsKeep)} の資産防衛`;
 
@@ -761,12 +883,18 @@ const schema = {
           ];
       document.getElementById("verdict-benefits").innerHTML = benefits.join("");
 
-      // 詳細テーブル更新（全セル1行完結）
+      // 詳細テーブル更新（全セル1行完結・譲渡所得税を正式反映）
       const rows = [
-        ["売却想定額（グロス収入）", "0円", `+${yen(sarachiGross)}`, `+${yen(useKaitoriAsMain ? kaitoriNet : furuyaGross)}`],
+        ["売却想定額（グロス収入）", "0円", `+${yen(sarachiGross)}`, `+${yen(asIsGrossDisp)}`],
         ["建物解体・外構撤去工事費", "0円", `▲${yen(demoBodyAndExtYen)}`, "0円（買主負担）"],
         ["家財（残置物）片付け費", "0円", `▲${yen(resYen)}`, useKaitoriAsMain ? "0円（そのまま）" : `▲${yen(resYen)}`],
         ["仲介手数料（税込）", "0円", `▲${yen(sarachiBroker)}`, useKaitoriAsMain ? "0円（直接買取）" : `▲${yen(furuyaBroker)}`],
+        [
+          effectiveTaxExempt ? "譲渡所得税（3,000万円控除適用）" : "譲渡所得税（控除なし・20.315%）",
+          "0円",
+          sarachiTransferTax > 0 ? `▲${yen(sarachiTransferTax)}` : "0円",
+          asIsTransferTax > 0 ? `▲${yen(asIsTransferTax)}` : "0円",
+        ],
         [
           `固定資産税（${years}年維持 vs 売却待期）`,
           `▲${yen(keepTaxTotal)}`,
@@ -794,12 +922,50 @@ const schema = {
         })
         .join("");
 
+      // 3,000万円特別控除の節税インパクト表示
+      const bestGrossForTax = !asIsWins ? sarachiGross : asIsGrossDisp;
+      const bestExpForTax = !asIsWins ? demoBodyAndExtYen + sarachiBroker : useKaitoriAsMain ? 0 : furuyaBroker;
+      const taxWithExempt = calcTransferTax(bestGrossForTax, bestExpForTax, true);
+      const taxWithoutExempt = calcTransferTax(bestGrossForTax, bestExpForTax, false);
+      const taxSavingYen = Math.max(0, taxWithoutExempt - taxWithExempt);
+      const taxBox = document.getElementById("tax-impact-box");
+      if (!isExemptEligible) {
+        taxBox.className = "mt-4 rounded-xs border border-amber-300 bg-amber-50/70 px-3.5 py-2.5 text-xs text-slate-800 leading-relaxed";
+        taxBox.innerHTML =
+          `<strong>空き家3,000万円特別控除の対象外条件：</strong>${isMansion ? "区分マンション" : "築30年未満（1981年6月以降の新耐震）"}は空き家3,000万円特別控除の対象外のため、譲渡所得税（約<strong class="text-rose-700">${plainMan(taxWithoutExempt)}</strong>・取得費不明5%概算）を差し引いています。親の購入時の売買契約書が見つかれば取得費を差し引いて大きく節税できます。` +
+          ` <a href="/tools/inheritance-deadline/" class="font-bold text-emerald-800 hover:underline whitespace-nowrap">特例の6要件を確認 →</a>`;
+      } else if (effectiveTaxExempt) {
+        const midNote = effAge < 45 ? "（※1981年5月31日以前建築の旧耐震戸建てが要件）" : "";
+        taxBox.className = "mt-4 rounded-xs border border-emerald-200 bg-emerald-50/50 px-3.5 py-2.5 text-xs text-slate-700 leading-relaxed";
+        taxBox.innerHTML =
+          `<strong>空き家3,000万円特別控除の効果：</strong>購入時の契約書が不明（5%概算取得費）の場合、控除を逃すと譲渡所得税が<strong class="text-rose-700">約${plainMan(taxSavingYen)}</strong>増えます。相続開始から<strong>3年目の12月31日</strong>までの売却が期限です${midNote}。` +
+          ` <a href="/tools/inheritance-deadline/" class="font-bold text-emerald-700 hover:underline whitespace-nowrap">締切日と6つの要件を確認 →</a>`;
+      } else {
+        taxBox.className = "mt-4 rounded-xs border border-amber-300 bg-amber-50/70 px-3.5 py-2.5 text-xs text-slate-800 leading-relaxed";
+        taxBox.innerHTML =
+          `<strong>譲渡所得税の影響（控除なし試算中）：</strong>取得費不明（5%概算）・長期譲渡20.315%として<strong class="text-rose-700">約${plainMan(taxWithoutExempt)}</strong>の税金を差し引いています。空き家3,000万円特別控除の要件を満たせば<strong>約${plainMan(taxSavingYen)}</strong>手残りが増えます。` +
+          ` <a href="/tools/inheritance-deadline/" class="font-bold text-emerald-800 hover:underline whitespace-nowrap">対象になるか6問で確認 →</a>`;
+      }
+
       const ageLabel = state.ageGroup === "old45" ? "築45年以上（昭和56年以前）" : state.ageGroup === "new25" ? "築30年未満" : "築30〜44年（標準）";
       document.getElementById("auto-premise-box").innerHTML =
         `<strong>試算の前提条件（${isManual ? "手動調整反映中" : "公的データ自動推計"}）：</strong>` +
         `${pref.name}（木造解体相場 ${pref.wood_man_per_tsubo.toFixed(2)}万円/坪・標準地価 ${pref.land_price_man_per_tsubo.toFixed(1)}万円/坪）／` +
         `延床${c.floor_tsubo}坪・敷地${c.land_tsubo}坪・${ageLabel}／` +
-        `通常固定資産税 年${yen(normalTaxAnnual)}（軽減解除時 年${yen(heavyTaxAnnual)}）`;
+        `3,000万円控除：${effectiveTaxExempt ? "適用あり" : !isExemptEligible ? "対象外（自動オフ）" : "なし"}／通常固定資産税 年${yen(normalTaxAnnual)}`;
+
+      // LINE・メール共有用テキストを生成して保持
+      const heirLine = state.heirs > 1 ? `\n・${state.heirs}人で分けた場合：1人あたり ${signedMan(perHeirNet)}` : "";
+      state.lastShareText =
+        `【実家と空き家の試算表｜手残りシミュレーション結果】\n` +
+        `条件：${pref.name} / 延床${c.floor_tsubo}坪・敷地${c.land_tsubo}坪 / ${ageLabel} / 3,000万円控除${effectiveTaxExempt ? "あり" : "なし"}\n` +
+        `──────────────\n` +
+        `最有力ルート：${bestStrategyTitle}（手残り目安 ${signedMan(bestNet)}）${heirLine}\n` +
+        `① 空き家まま${years}年維持：${signedMan(keepNet)}（年平均 ▲${plainMan(keepTotalOutflow / years)}）\n` +
+        `② 解体して更地売却：${signedMan(sarachiNet)}（解体・片付け目安 ${plainMan(totalDemoWithResYen)}）\n` +
+        `③ 壊さず売却/買取：${signedMan(asIsNet)}（古家付仲介 ${signedMan(furuyaNet)} / 専門買取 ${signedMan(kaitoriNet)}）\n` +
+        `──────────────\n` +
+        `試算ページ：${window.location.origin}${window.location.pathname}?pref=${pref.slug}`;
 
       const warnText =
         state.loc === "wakeari"
@@ -877,6 +1043,46 @@ const schema = {
         syncAutoFields();
         recalc();
       });
+    });
+
+    document.querySelectorAll(".exempt-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        state.taxExempt = btn.getAttribute("data-exempt") === "yes";
+        setGroupActive(".exempt-btn", btn);
+        recalc();
+      });
+    });
+
+    document.querySelectorAll(".heir-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        state.heirs = Number(btn.getAttribute("data-heirs")) || 1;
+        document.querySelectorAll(".heir-btn").forEach((b) => {
+          const on = b === btn;
+          b.className = b.className
+            .replace(/bg-emerald-700|text-white|bg-white|text-slate-600/g, "")
+            .trim() + (on ? " bg-emerald-700 text-white" : " bg-white text-slate-600");
+        });
+        recalc();
+      });
+    });
+
+    document.getElementById("copy-result-btn").addEventListener("click", async () => {
+      const labelEl = document.getElementById("copy-result-label");
+      try {
+        await navigator.clipboard.writeText(state.lastShareText);
+        if (labelEl) {
+          labelEl.textContent = "コピーしました";
+          setTimeout(() => {
+            labelEl.textContent = "LINE共有用にコピー";
+          }, 2200);
+        }
+      } catch {
+        window.prompt("以下の試算結果をコピーしてLINEやメールに貼り付けてください：", state.lastShareText);
+      }
+    });
+
+    document.getElementById("print-result-btn").addEventListener("click", () => {
+      window.print();
     });
 
     elPref.addEventListener("change", () => {

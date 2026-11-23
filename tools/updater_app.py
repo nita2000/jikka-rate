@@ -1,4 +1,4 @@
-"""実家じまいレート データ更新アプリ（Windows向け・標準ライブラリのみ）.
+"""実家と空き家の試算表 データ更新アプリ（Windows向け・標準ライブラリのみ）.
 
 主な特徴:
 - 起動時およびウィンドウ復帰時（<FocusIn>）に Downloads フォルダの最新Excelを自動スキャン
@@ -32,7 +32,7 @@ if str(PIPELINE_DIR) not in sys.path:
 from fetch_jikka_stats import is_valid_jikka_excel, preview_jikka_excel_diff  # noqa: E402
 
 ESTAT_PORTAL_URL = "https://www.e-stat.go.jp/stat-search/files?page=1&toukei=00200522"
-PROD_SITE_URL = "https://jikkarate.com/"
+PROD_SITE_URL = "https://jikka-shisan.com/"
 GITHUB_ACTIONS_URL = "https://github.com/nita2000/jikka-rate/actions"
 
 DATA_PATHS_FOR_GIT = ["data/raw/jikka_cost_trends.csv", "site/src/data"]
@@ -40,7 +40,7 @@ CREATION_FLAGS = getattr(subprocess, "CREATE_NO_WINDOW", 0)
 _py_cli = Path(sys.executable).with_name("python.exe")
 PYTHON_CLI = str(_py_cli if _py_cli.is_file() else Path(sys.executable))
 
-# カラーテーマ（実家じまいレート 本番フォレストグリーンデザインと統一）
+# カラーテーマ（実家と空き家の試算表 本番フォレストグリーンデザインと統一）
 COLOR_BG = "#F8FAFC"
 COLOR_CARD = "#FFFFFF"
 COLOR_BORDER = "#E2E8F0"
@@ -77,7 +77,7 @@ def run_hidden_cmd(
 
 
 def find_latest_jikka_excel(search_dirs: list[Path]) -> Path | None:
-    """指定ディレクトリ群から更新日時が新しい実家じまいレート用Excelを1件見つける。"""
+    """指定ディレクトリ群から更新日時が新しい実家と空き家の試算表用Excelを1件見つける。"""
     candidates: list[Path] = []
     for folder in search_dirs:
         if not folder.is_dir():
@@ -136,7 +136,7 @@ def load_current_summary() -> dict[str, Any] | None:
 class JikkaRateUpdaterApp:
     def __init__(self, root: tk.Tk) -> None:
         self.root = root
-        self.root.title("実家じまいレート データ更新アプリ")
+        self.root.title("実家と空き家の試算表 データ更新アプリ")
         self.root.geometry("760x710")
         self.root.minsize(680, 620)
         self.root.configure(bg=COLOR_BG)
@@ -169,7 +169,7 @@ class JikkaRateUpdaterApp:
         h_inner.pack(fill=tk.BOTH, expand=True, padx=18)
         tk.Label(
             h_inner,
-            text="実家じまいレート  データ更新アプリ",
+            text="実家と空き家の試算表  データ更新アプリ",
             bg=COLOR_PRIMARY,
             fg="#FFFFFF",
             font=font_title,
@@ -401,7 +401,7 @@ class JikkaRateUpdaterApp:
         footer = tk.Frame(container, bg=COLOR_BG)
         footer.pack(fill=tk.X)
         for label, url in [
-            ("本番サイトを開く (jikkarate.com)", PROD_SITE_URL),
+            ("本番サイトを開く (jikka-shisan.com)", PROD_SITE_URL),
             ("GitHub Actions を確認", GITHUB_ACTIONS_URL),
         ]:
             link = tk.Label(
@@ -447,7 +447,7 @@ class JikkaRateUpdaterApp:
         if self.is_busy:
             return
         chosen = filedialog.askopenfilename(
-            title="実家じまいレート 更新用Excelファイルを選択",
+            title="実家と空き家の試算表 更新用Excelファイルを選択",
             initialdir=str(self.downloads_dir if self.downloads_dir.is_dir() else ROOT_DIR),
             filetypes=[("Excelファイル", "*.xlsx")],
         )
@@ -671,7 +671,7 @@ class JikkaRateUpdaterApp:
                     0,
                     lambda: messagebox.showinfo(
                         "本番公開完了",
-                        "データ更新＆GitHubプッシュが完了しました！\n約1〜2分で Cloudflare Pages が自動ビルドされ、jikkarate.com に反映されます。",
+                        "データ更新＆GitHubプッシュが完了しました！\n約1〜2分で Cloudflare Pages が自動ビルドされ、jikka-shisan.com に反映されます。",
                     ),
                 )
             except Exception as exc:

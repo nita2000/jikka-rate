@@ -174,9 +174,9 @@
     "road_condition": "normal",
     "residual_level": "heavy",
     "has_asbestos_risk": true,
-    "market_demand_factor": 0.52,
+    "market_demand_factor": 0.10,
     "annual_extra_maint_yen": 65000,
-    "recommended_slot": "kaitai",
+    "recommended_slot": "akiya",
     "summary": "広い母屋に加えて納屋・農機具倉庫・広い庭がある地方の伝統的な農家実家。先行して全解体すると300万円超の出費になり地価で回収できないケースが多いため、解体前に訳あり・古民家買取と解体費用の双方を見積もるのが鉄則。"
   },
   {
@@ -194,7 +194,7 @@
     "road_condition": "normal",
     "residual_level": "heavy",
     "has_asbestos_risk": false,
-    "market_demand_factor": 0.45,
+    "market_demand_factor": 0.09,
     "annual_extra_maint_yen": 85000,
     "recommended_slot": "akiya",
     "summary": "延床70坪・敷地200坪の超大型古民家。200㎡を超える土地部分は住宅用地特例の軽減率が1/6ではなく1/3になるほか、草刈りや屋根維持費だけで年20万円超が流出するため、古民家再生・専門買取への早期打診が最優先。"
@@ -214,7 +214,7 @@
     "road_condition": "normal",
     "residual_level": "normal",
     "has_asbestos_risk": true,
-    "market_demand_factor": 0.62,
+    "market_demand_factor": 0.15,
     "annual_extra_maint_yen": 120000,
     "recommended_slot": "akiya",
     "summary": "東北・北陸・北海道などの豪雪地帯にある実家。空き家にすると毎冬の雪下ろし・排雪委託だけで年間10〜15万円が確実に消え、1冬放置すると倒壊して特定空き家・損害賠償リスクに直結するため、5年放置の赤字幅が全国最大級となる。"
@@ -234,7 +234,7 @@
     "road_condition": "normal",
     "residual_level": "heavy",
     "has_asbestos_risk": true,
-    "market_demand_factor": 0.48,
+    "market_demand_factor": 0.13,
     "annual_extra_maint_yen": 55000,
     "recommended_slot": "akiya",
     "summary": "宅地と隣接する畑・田んぼをセットで相続したケース。農地法3条・5条の制限により一般の不動産仲介では断られやすいため、農地転用や宅地切り離しに精通した空き家専門買取業者への相談が不可欠。"
@@ -254,7 +254,7 @@
     "road_condition": "normal",
     "residual_level": "normal",
     "has_asbestos_risk": true,
-    "market_demand_factor": 0.55,
+    "market_demand_factor": 0.20,
     "annual_extra_maint_yen": 30000,
     "recommended_slot": "akiya",
     "summary": "市街化調整区域にある実家は、不用意に建物を先に解体して更地にすると「第三者が再建築できなくなる」致命的リスクがある。必ず建物を残した状態で専門買取・仲介査定を受けるべき代表ケース。"
@@ -274,7 +274,7 @@
     "road_condition": "slope",
     "residual_level": "normal",
     "has_asbestos_risk": false,
-    "market_demand_factor": 0.35,
+    "market_demand_factor": 0.10,
     "annual_extra_maint_yen": 96000,
     "recommended_slot": "akiya",
     "summary": "親が購入した別荘・リゾート地の戸建て。固定資産税に加えて別荘地管理費（年6〜15万円）が永続的に発生し、傾斜地のため解体費用も約1.3倍かかることから、1年でも早く手放すほど累積赤字を止められる。"

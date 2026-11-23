@@ -233,29 +233,29 @@
     "metrics_a": {
       "initial_outlay_yen": 3779000,
       "annual_ongoing_yen": 0,
-      "cost_5y_yen": 0,
-      "cost_10y_yen": 0,
-      "net_cash_5y_yen": 14475184,
-      "net_cash_10y_yen": 14475184,
+      "cost_5y_yen": 464613,
+      "cost_10y_yen": 464613,
+      "net_cash_5y_yen": -464613,
+      "net_cash_10y_yen": -464613,
       "short_winner": "農家住宅55坪（母屋＋納屋）の解体売却",
-      "note": "解体費 3,779,000円を先行支出 → 売却後の最終手残り +14,475,184円"
+      "note": "解体費 3,779,000円を先行支出 → 売却後の最終手残り -464,613円"
     },
     "metrics_b": {
       "initial_outlay_yen": 0,
       "annual_ongoing_yen": 0,
       "cost_5y_yen": 0,
       "cost_10y_yen": 0,
-      "net_cash_5y_yen": 8026200,
-      "net_cash_10y_yen": 8026200,
+      "net_cash_5y_yen": 1543500,
+      "net_cash_10y_yen": 1543500,
       "short_winner": "壊さず専門買取",
-      "note": "解体費0円・残置物片付け0円・仲介手数料0円で即現金化 → 手残り +8,026,200円"
+      "note": "解体費0円・残置物片付け0円・仲介手数料0円で即現金化 → 手残り +1,543,500円"
     },
-    "winner_side": "A",
-    "winner_label": "母屋＋納屋を全解体して更地売却",
-    "diff_5y_yen": 6448984,
-    "diff_10y_yen": 6448984,
+    "winner_side": "B",
+    "winner_label": "解体せず現状のまま古民家・空き家買取",
+    "diff_5y_yen": 2008113,
+    "diff_10y_yen": 2008113,
     "payback_years": null,
-    "verdict_short": "解体して更地売却が 約645万円 有利"
+    "verdict_short": "壊さず専門買取が 約201万円 有利"
   },
   {
     "slug": "old-mansion-keep-vs-immediate-sale",
@@ -490,30 +490,30 @@
     "case_b_short": "豪雪地帯45坪（雪下ろし有）",
     "metrics_a": {
       "initial_outlay_yen": 0,
-      "annual_ongoing_yen": 400115,
-      "cost_5y_yen": 2000575,
-      "cost_10y_yen": 4001150,
-      "net_cash_5y_yen": -2000575,
-      "net_cash_10y_yen": -4001150,
+      "annual_ongoing_yen": 373379,
+      "cost_5y_yen": 1866895,
+      "cost_10y_yen": 3733790,
+      "net_cash_5y_yen": -1866895,
+      "net_cash_10y_yen": -3733790,
       "short_winner": "通常維持",
-      "note": "年間維持費 400,115円（固定資産税＋維持管理）が毎年発生"
+      "note": "年間維持費 373,379円（固定資産税＋維持管理）が毎年発生"
     },
     "metrics_b": {
       "initial_outlay_yen": 0,
       "annual_ongoing_yen": 0,
       "cost_5y_yen": 0,
       "cost_10y_yen": 0,
-      "net_cash_5y_yen": 5103840,
-      "net_cash_10y_yen": 5103840,
+      "net_cash_5y_yen": 1234800,
+      "net_cash_10y_yen": 1234800,
       "short_winner": "壊さず専門買取",
-      "note": "解体費0円・残置物片付け0円・仲介手数料0円で即現金化 → 手残り +5,103,840円"
+      "note": "解体費0円・残置物片付け0円・仲介手数料0円で即現金化 → 手残り +1,234,800円"
     },
     "winner_side": "B",
     "winner_label": "次の冬が来る前に空き家専門買取で手放す",
-    "diff_5y_yen": 7104415,
-    "diff_10y_yen": 9104990,
+    "diff_5y_yen": 3101695,
+    "diff_10y_yen": 4968590,
     "payback_years": null,
-    "verdict_short": "壊さず専門買取が 約910万円 有利"
+    "verdict_short": "壊さず専門買取が 約497万円 有利"
   },
   {
     "slug": "villa-akiya-keep-vs-early-disposal",
@@ -533,30 +533,30 @@
     "case_b_short": "別荘空き家28坪（管理費有）",
     "metrics_a": {
       "initial_outlay_yen": 0,
-      "annual_ongoing_yen": 359971,
-      "cost_5y_yen": 1799855,
-      "cost_10y_yen": 3599710,
-      "net_cash_5y_yen": -1799855,
-      "net_cash_10y_yen": -3599710,
+      "annual_ongoing_yen": 340034,
+      "cost_5y_yen": 1700170,
+      "cost_10y_yen": 3400340,
+      "net_cash_5y_yen": -1700170,
+      "net_cash_10y_yen": -3400340,
       "short_winner": "通常維持",
-      "note": "年間維持費 359,971円（固定資産税＋維持管理）が毎年発生"
+      "note": "年間維持費 340,034円（固定資産税＋維持管理）が毎年発生"
     },
     "metrics_b": {
       "initial_outlay_yen": 0,
       "annual_ongoing_yen": 0,
       "cost_5y_yen": 0,
       "cost_10y_yen": 0,
-      "net_cash_5y_yen": 3601500,
-      "net_cash_10y_yen": 3601500,
+      "net_cash_5y_yen": 1029000,
+      "net_cash_10y_yen": 1029000,
       "short_winner": "壊さず専門買取",
-      "note": "解体費0円・残置物片付け0円・仲介手数料0円で即現金化 → 手残り +3,601,500円"
+      "note": "解体費0円・残置物片付け0円・仲介手数料0円で即現金化 → 手残り +1,029,000円"
     },
     "winner_side": "B",
     "winner_label": "訳あり・リゾート対応買取で早期処分",
-    "diff_5y_yen": 5401355,
-    "diff_10y_yen": 7201210,
+    "diff_5y_yen": 2729170,
+    "diff_10y_yen": 4429340,
     "payback_years": null,
-    "verdict_short": "壊さず専門買取が 約720万円 有利"
+    "verdict_short": "壊さず専門買取が 約443万円 有利"
   },
   {
     "slug": "wood-30tsubo-vs-steel-32tsubo-demolition",
@@ -899,8 +899,8 @@
     "winner_label": "墓じまい＋樹木葬（初期38万円・管理料0円）",
     "diff_5y_yen": 330000,
     "diff_10y_yen": 450000,
-    "payback_years": 11.5,
-    "verdict_short": "約11.5年で回収（差額 約45万円）"
+    "payback_years": null,
+    "verdict_short": "墓じまい＋樹木葬（初期38万円・管理料0円）が 約45万円 安い"
   },
   {
     "slug": "public-cemetery-vs-temple-danka-hakajimai",
@@ -942,8 +942,8 @@
     "winner_label": "公営霊園（1.5㎡・檀家なし）の墓じまい＋樹木葬",
     "diff_5y_yen": 107500,
     "diff_10y_yen": 107500,
-    "payback_years": 7.3,
-    "verdict_short": "約7.3年で回収（差額 約11万円）"
+    "payback_years": null,
+    "verdict_short": "公営霊園（1.5㎡・檀家なし）の墓じまい＋樹木葬が 約11万円 安い"
   },
   {
     "slug": "flight-remote-grave-keep-vs-hakajimai",
@@ -1029,6 +1029,6 @@
     "diff_5y_yen": 8718397,
     "diff_10y_yen": 10508412,
     "payback_years": null,
-    "verdict_short": "実家＋墓じまい一括が 約1,051万円 有利"
+    "verdict_short": "実家売却＋墓じまい一括完結が 約1,051万円 有利"
   }
 ]

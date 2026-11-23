@@ -1,0 +1,564 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import AffiliateCta from "../../components/AffiliateCta.astro";
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: "相続手続きの期限＆空き家3,000万円特別控除 逆算カレンダー",
+    applicationCategory: "FinanceApplication",
+    operatingSystem: "All",
+    offers: { "@type": "Offer", price: "0", priceCurrency: "JPY" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@context": "https://schema.org",
+        "@type": "Question",
+        name: "空き家の3,000万円特別控除はいつまでに売却すれば使えますか？",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "相続の開始があった日から3年を経過する日の属する年の12月31日までに売却（引き渡し）することが要件です。たとえば2025年5月に相続が発生した場合、2028年12月31日が期限となります。",
+        },
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Question",
+        name: "相続登記の義務化（過料最大10万円）の期限はいつですか？",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "2024年4月1日以降に発生した相続は、不動産の取得を知った日から3年以内です。2024年3月31日以前に発生していた過去の相続については、2027年3月31日までが猶予期限となっています。",
+        },
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Question",
+        name: "建物を解体せずに古家付きで売っても空き家3,000万円特別控除は使えますか？",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "2024年1月1日以降の譲渡からは税制改正により、売主が解体せず古家付きで売却した場合でも、買主が売買の翌年2月15日までに建物を取り壊すか耐震改修を行えば3,000万円特別控除の対象になります。",
+        },
+      },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="相続手続きの期限＆空き家3,000万円特別控除 逆算カレンダー"
+  description="相続開始日を選ぶだけで、相続放棄（3か月）・準確定申告（4か月）・相続税（10か月）・相続登記義務化（3年）・空き家3,000万円特別控除の売却期限（3年目の12月末）を自動逆算。6問の控除適用チェックとLINE共有・印刷にも対応。"
+  canonicalPath="/tools/inheritance-deadline/"
+  schema={schema}
+>
+  <nav class="text-xs text-slate-500 mb-4 flex items-center gap-1.5 no-print">
+    <a href="/" class="hover:text-emerald-700">トップ</a>
+    <span>/</span>
+    <span class="text-slate-800 font-semibold">相続手続き期限＆3,000万円控除カレンダー</span>
+  </nav>
+
+  <div class="page-header-clean rounded p-5 sm:p-6 mb-6">
+    <div class="eyebrow-label mb-1">相続・実家売却の期限管理ツール</div>
+    <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900">
+      相続手続きの期限＆空き家3,000万円特別控除 逆算カレンダー
+    </h1>
+    <p class="mt-1.5 text-xs sm:text-sm text-slate-600 leading-relaxed">
+      相続開始日（お亡くなりになった日）を入力するだけで、<strong>相続放棄・相続税・相続登記（義務化）・空き家3,000万円特別控除の売却締切日</strong>を一覧で自動計算します。結果はそのまま<strong>LINE共有・印刷（PDF保存）</strong>してご家族の話し合いにご活用いただけます。
+    </p>
+  </div>
+
+  <div class="grid gap-6 lg:grid-cols-12 items-start">
+    <!-- 左：入力パネル -->
+    <div class="lg:col-span-5 min-w-0 space-y-4 no-print">
+      <!-- STEP 1: 相続開始日 -->
+      <div class="card-surface rounded p-5 space-y-3.5 border-l-3 border-l-emerald-700">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+          <div class="flex items-center gap-2">
+            <span class="inline-flex items-center justify-center rounded-xs bg-emerald-700 px-1.5 py-0.5 text-[10px] font-extrabold text-white">STEP 1</span>
+            <span class="text-xs font-extrabold text-slate-900">相続開始日（お亡くなりになった日）</span>
+          </div>
+        </div>
+
+        <label class="block text-xs">
+          <span class="font-bold text-slate-700">日付を選択（わからない場合はおおよそでOK）</span>
+          <input
+            id="inh-date"
+            type="date"
+            class="mt-1.5 w-full rounded-xs border border-slate-300 bg-white px-3 py-2 text-sm font-bold text-slate-900 tabular-nums focus:border-emerald-700 focus:outline-none"
+          />
+        </label>
+
+        <div>
+          <div class="text-[11px] font-bold text-slate-500 mb-1.5">よく使われる目安から選ぶ：</div>
+          <div class="grid grid-cols-2 gap-1.5">
+            <button type="button" data-preset="today" class="date-preset-btn rounded-xs border border-slate-300 bg-white hover:bg-slate-50 py-1.5 px-2 text-[11px] font-bold text-slate-700 transition-colors">
+              本日・これから想定
+            </button>
+            <button type="button" data-preset="1y" class="date-preset-btn rounded-xs border border-slate-300 bg-white hover:bg-slate-50 py-1.5 px-2 text-[11px] font-bold text-slate-700 transition-colors">
+              約1年前（手続き中）
+            </button>
+            <button type="button" data-preset="2y" class="date-preset-btn rounded-xs border border-slate-300 bg-white hover:bg-slate-50 py-1.5 px-2 text-[11px] font-bold text-slate-700 transition-colors">
+              約2年前（期限迫る）
+            </button>
+            <button type="button" data-preset="before2024" class="date-preset-btn rounded-xs border border-slate-300 bg-white hover:bg-slate-50 py-1.5 px-2 text-[11px] font-bold text-slate-700 transition-colors">
+              2024年3月以前の相続
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2: 空き家3,000万円特別控除 6問クイック判定 -->
+      <div class="card-surface rounded p-5 space-y-3.5 border-l-3 border-l-amber-600">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+          <div class="flex items-center gap-2">
+            <span class="inline-flex items-center justify-center rounded-xs bg-emerald-700 px-1.5 py-0.5 text-[10px] font-extrabold text-white">STEP 2</span>
+            <span class="text-xs font-extrabold text-slate-900">空き家3,000万円特別控除 6問判定</span>
+          </div>
+          <span class="text-[11px] text-slate-500">売却時の節税チェック</span>
+        </div>
+
+        <label class="block text-xs">
+          <span class="font-bold text-slate-700">実家の売却想定額（節税目安の算出に使用）</span>
+          <select id="inh-sale-price" class="mt-1 w-full rounded-xs border border-slate-300 bg-white px-2.5 py-2 text-xs font-bold text-slate-900 focus:border-emerald-700 focus:outline-none">
+            <option value="800">約800万円</option>
+            <option value="1500" selected>約1,500万円（全国標準）</option>
+            <option value="2500">約2,500万円</option>
+            <option value="3500">約3,500万円</option>
+            <option value="5000">約5,000万円</option>
+          </select>
+        </label>
+
+        <div class="space-y-2.5 text-xs" id="check-list">
+          <label class="flex items-start gap-2.5 rounded-xs border border-slate-200 bg-slate-50/70 p-2.5 cursor-pointer hover:border-emerald-600 transition-colors">
+            <input type="checkbox" data-req="old_quake" checked class="req-chk mt-0.5 h-4 w-4 accent-emerald-700 shrink-0" />
+            <span>
+              <strong class="text-slate-900 block">① 昭和56年（1981年）5月31日以前建築の戸建て</strong>
+              <span class="text-[11px] text-slate-500">旧耐震の一戸建てが対象（区分マンションは対象外）</span>
+            </span>
+          </label>
+
+          <label class="flex items-start gap-2.5 rounded-xs border border-slate-200 bg-slate-50/70 p-2.5 cursor-pointer hover:border-emerald-600 transition-colors">
+            <input type="checkbox" data-req="lived_alone" checked class="req-chk mt-0.5 h-4 w-4 accent-emerald-700 shrink-0" />
+            <span>
+              <strong class="text-slate-900 block">② 相続直前まで親が1人で居住（または施設入居後に空き家）</strong>
+              <span class="text-[11px] text-slate-500">要介護認定等を受けて老人ホームへ入居していた場合も要件を満たせば対象</span>
+            </span>
+          </label>
+
+          <label class="flex items-start gap-2.5 rounded-xs border border-slate-200 bg-slate-50/70 p-2.5 cursor-pointer hover:border-emerald-600 transition-colors">
+            <input type="checkbox" data-req="unused" checked class="req-chk mt-0.5 h-4 w-4 accent-emerald-700 shrink-0" />
+            <span>
+              <strong class="text-slate-900 block">③ 相続後、賃貸・事業・居住に使っていない</strong>
+              <span class="text-[11px] text-slate-500">一度でも賃貸に出すと特例の対象外になります</span>
+            </span>
+          </label>
+
+          <label class="flex items-start gap-2.5 rounded-xs border border-slate-200 bg-slate-50/70 p-2.5 cursor-pointer hover:border-emerald-600 transition-colors">
+            <input type="checkbox" data-req="under_1oku" checked class="req-chk mt-0.5 h-4 w-4 accent-emerald-700 shrink-0" />
+            <span>
+              <strong class="text-slate-900 block">④ 売却金額が1億円以下である</strong>
+              <span class="text-[11px] text-slate-500">複数人で相続して分割売却する場合は合算して1億円以下</span>
+            </span>
+          </label>
+
+          <label class="flex items-start gap-2.5 rounded-xs border border-slate-200 bg-slate-50/70 p-2.5 cursor-pointer hover:border-emerald-600 transition-colors">
+            <input type="checkbox" data-req="demolish_or_quake" checked class="req-chk mt-0.5 h-4 w-4 accent-emerald-700 shrink-0" />
+            <span>
+              <strong class="text-slate-900 block">⑤ 解体して更地売却、または買主が翌年2月15日までに解体・耐震改修</strong>
+              <span class="text-[11px] text-slate-500">2024年改正により「古家付きで売って買主が解体」でも適用可能</span>
+            </span>
+          </label>
+
+          <label class="flex items-start gap-2.5 rounded-xs border border-slate-200 bg-slate-50/70 p-2.5 cursor-pointer hover:border-emerald-600 transition-colors">
+            <input type="checkbox" data-req="third_party" checked class="req-chk mt-0.5 h-4 w-4 accent-emerald-700 shrink-0" />
+            <span>
+              <strong class="text-slate-900 block">⑥ 親族・同族会社など特別な関係者以外への売却</strong>
+              <span class="text-[11px] text-slate-500">第三者への仲介売却または不動産買取会社への売却が対象</span>
+            </span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- 右：逆算結果パネル -->
+    <div class="lg:col-span-7 min-w-0 space-y-5">
+      <div class="card-surface rounded p-5 sm:p-6">
+        <!-- 最重要の2大締切カード -->
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+          <div>
+            <div class="text-[11px] font-bold text-emerald-700">実家・空き家で絶対に逃せない2大期限</div>
+            <h2 id="res-base-heading" class="text-base font-extrabold text-slate-900">相続手続き 逆算スケジュール</h2>
+          </div>
+          <div class="flex items-center gap-1.5 no-print">
+            <button
+              type="button"
+              id="inh-copy-btn"
+              class="inline-flex items-center gap-1 rounded-xs border border-emerald-700 bg-white hover:bg-emerald-50 px-2.5 py-1.5 text-[11px] font-bold text-emerald-800 transition-colors whitespace-nowrap"
+            >
+              <svg class="h-3.5 w-3.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+              </svg>
+              <span id="inh-copy-label">LINE共有用にコピー</span>
+            </button>
+            <button
+              type="button"
+              id="inh-print-btn"
+              class="inline-flex items-center gap-1 rounded-xs border border-slate-300 bg-white hover:bg-slate-50 px-2.5 py-1.5 text-[11px] font-bold text-slate-700 transition-colors whitespace-nowrap"
+            >
+              <svg class="h-3.5 w-3.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+              </svg>
+              <span>印刷・PDF保存</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-3 mb-5">
+          <div class="rounded border border-emerald-200 border-t-3 border-t-emerald-700 bg-emerald-50/40 p-4">
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-[11px] font-bold text-emerald-900">空き家3,000万円控除 売却期限</span>
+              <span id="badge-exempt-remain" class="px-1.5 py-0.5 rounded-xs text-[10px] font-bold whitespace-nowrap">—</span>
+            </div>
+            <div id="val-exempt-deadline" class="mt-1.5 font-display text-xl font-extrabold text-slate-900 tabular-nums whitespace-nowrap">—</div>
+            <p id="note-exempt-deadline" class="mt-1 text-[11px] text-slate-600 leading-snug">
+              相続開始から3年を経過する年の12月31日までに引き渡し完了が目安
+            </p>
+          </div>
+
+          <div class="rounded border border-slate-200 border-t-3 border-t-amber-600 bg-amber-50/40 p-4">
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-[11px] font-bold text-amber-900">相続登記（名義変更）法定期限</span>
+              <span id="badge-toki-remain" class="px-1.5 py-0.5 rounded-xs text-[10px] font-bold whitespace-nowrap">—</span>
+            </div>
+            <div id="val-toki-deadline" class="mt-1.5 font-display text-xl font-extrabold text-slate-900 tabular-nums whitespace-nowrap">—</div>
+            <p id="note-toki-deadline" class="mt-1 text-[11px] text-slate-600 leading-snug">
+              正当な理由なく放置すると10万円以下の過料の対象
+            </p>
+          </div>
+        </div>
+
+        <!-- 3,000万円特別控除 6問判定結果 -->
+        <div id="exempt-verdict-box" class="rounded border p-4 mb-5 text-xs leading-relaxed"></div>
+
+        <!-- 全手続き期限タイムライン表 -->
+        <div class="mb-2 flex items-baseline justify-between gap-2">
+          <h3 class="text-xs font-extrabold text-slate-900">手続き期限タイムライン（早い順）</h3>
+          <span class="text-[11px] text-slate-400">※土日祝の場合は翌開庁日となる手続きあり</span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-xs border-collapse tabular-nums">
+            <thead>
+              <tr class="border-b border-slate-200 bg-slate-50 text-slate-600 text-left">
+                <th class="py-2.5 px-3 font-bold whitespace-nowrap">期限の目安</th>
+                <th class="py-2.5 px-3 font-bold whitespace-nowrap">締切日・残り</th>
+                <th class="py-2.5 px-3 font-bold">手続き内容と注意点</th>
+              </tr>
+            </thead>
+            <tbody id="timeline-tbody" class="divide-y divide-slate-100"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 関連ツールへの導線 -->
+      <div class="grid sm:grid-cols-2 gap-3 no-print">
+        <a href="/tools/disposal-simulator/" class="card-interactive rounded p-4 block">
+          <div class="text-[11px] font-bold text-emerald-700">次のステップ</div>
+          <div class="text-sm font-extrabold text-slate-900 mt-0.5">実家の手残り金額を30秒試算 →</div>
+          <p class="text-[11px] text-slate-500 mt-1">3,000万円控除あり・なしでの売却手残り差を比較できます。</p>
+        </a>
+        <a href="/tools/akiya-tax/" class="card-interactive rounded p-4 block">
+          <div class="text-[11px] font-bold text-emerald-700">税金・登記費用</div>
+          <div class="text-sm font-extrabold text-slate-900 mt-0.5">空き家の固定資産税・登記費用試算 →</div>
+          <p class="text-[11px] text-slate-500 mt-1">登録免許税（0.4%）と固定資産税の軽減解除インパクトを確認。</p>
+        </a>
+      </div>
+
+      <div class="no-print">
+        <AffiliateCta
+          slotType="sell"
+          title="3,000万円控除の期限に間に合わせるため、まずは現状のまま査定額を把握する"
+          description="実家の売却には査定・相続登記・買主探し・引き渡しまで通常4〜8か月かかります。期限の1年前には売却相場と解体・買取の選択肢を並べておくと、焦って安く手放す失敗を防げます。"
+          fallbackHref="/tools/disposal-simulator/"
+          fallbackLabel="実家の売却手残り・3,000万円控除の差額を試算する →"
+        />
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+    const elDate = document.getElementById("inh-date");
+    const elSalePrice = document.getElementById("inh-sale-price");
+    let shareText = "";
+
+    function toIsoDate(d) {
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, "0");
+      const day = String(d.getDate()).padStart(2, "0");
+      return `${y}-${m}-${day}`;
+    }
+
+    function fmtJpDate(d) {
+      return `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`;
+    }
+
+    function addDays(base, days) {
+      const d = new Date(base.getFullYear(), base.getMonth(), base.getDate());
+      d.setDate(d.getDate() + days);
+      return d;
+    }
+
+    function addMonths(base, months) {
+      const d = new Date(base.getFullYear(), base.getMonth(), base.getDate());
+      const origDay = d.getDate();
+      d.setMonth(d.getMonth() + months);
+      if (d.getDate() < origDay) d.setDate(0);
+      return d;
+    }
+
+    function diffDaysFromToday(targetDate) {
+      const now = new Date();
+      const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      const target = new Date(targetDate.getFullYear(), targetDate.getMonth(), targetDate.getDate());
+      return Math.round((target.getTime() - today.getTime()) / 86400000);
+    }
+
+    function statusBadge(daysLeft) {
+      if (daysLeft < 0) {
+        return {
+          text: `${Math.abs(daysLeft).toLocaleString("ja-JP")}日超過`,
+          cls: "bg-rose-100 text-rose-800",
+        };
+      }
+      if (daysLeft <= 90) {
+        return {
+          text: `あと${daysLeft.toLocaleString("ja-JP")}日（要注意）`,
+          cls: "bg-amber-100 text-amber-900",
+        };
+      }
+      const years = Math.floor(daysLeft / 365);
+      const remMonths = Math.floor((daysLeft % 365) / 30);
+      const label = years >= 1 ? `あと約${years}年${remMonths > 0 ? `${remMonths}か月` : ""}` : `あと${daysLeft.toLocaleString("ja-JP")}日`;
+      return {
+        text: label,
+        cls: "bg-emerald-100 text-emerald-900",
+      };
+    }
+
+    function updateCalendar() {
+      const raw = elDate.value;
+      const parts = raw ? raw.split("-").map(Number) : null;
+      const baseDate =
+        parts && parts.length === 3 ? new Date(parts[0], parts[1] - 1, parts[2]) : new Date();
+
+      document.getElementById("res-base-heading").textContent = `${fmtJpDate(baseDate)} 開始の逆算スケジュール`;
+
+      // 相続登記の期限：2024年3月31日以前の相続は2027年3月31日猶予、以降は3年後
+      const lawStart = new Date(2024, 3, 1); // 2024-04-01
+      const isBeforeLaw = baseDate < lawStart;
+      const tokiDeadline = isBeforeLaw ? new Date(2027, 2, 31) : addMonths(baseDate, 36);
+      const tokiNote = isBeforeLaw
+        ? "2024年3月以前の相続のため、2027年3月31日が猶予期限（過料最大10万円）"
+        : "不動産の取得を知った日から3年以内が義務（過料最大10万円）";
+
+      // 空き家3,000万円特別控除の売却期限：3年を経過する日の属する年の12月31日
+      const threeYearsLater = addMonths(baseDate, 36);
+      const exemptDeadline = new Date(threeYearsLater.getFullYear(), 11, 31);
+
+      const exemptDays = diffDaysFromToday(exemptDeadline);
+      const tokiDays = diffDaysFromToday(tokiDeadline);
+      const exemptB = statusBadge(exemptDays);
+      const tokiB = statusBadge(tokiDays);
+
+      document.getElementById("val-exempt-deadline").textContent = fmtJpDate(exemptDeadline);
+      const isAfter2027 = exemptDeadline.getFullYear() > 2027;
+      document.getElementById("note-exempt-deadline").textContent = isAfter2027
+        ? "相続から3年目の12月末が原則期限（※現行法の特例適用期限は2027年12月31日までの譲渡のため延長動向も要確認）"
+        : "相続開始から3年を経過する年の12月31日までに引き渡し完了が目安";
+      const elExBadge = document.getElementById("badge-exempt-remain");
+      elExBadge.textContent = exemptB.text;
+      elExBadge.className = `px-1.5 py-0.5 rounded-xs text-[10px] font-bold whitespace-nowrap ${exemptB.cls}`;
+
+      document.getElementById("val-toki-deadline").textContent = fmtJpDate(tokiDeadline);
+      document.getElementById("note-toki-deadline").textContent = tokiNote;
+      const elTokiBadge = document.getElementById("badge-toki-remain");
+      elTokiBadge.textContent = tokiB.text;
+      elTokiBadge.className = `px-1.5 py-0.5 rounded-xs text-[10px] font-bold whitespace-nowrap ${tokiB.cls}`;
+
+      // タイムライン生成
+      const events = [
+        {
+          span: "7日以内",
+          date: addDays(baseDate, 7),
+          title: "死亡届・火葬許可申請の提出",
+          detail: "市区町村役場へ提出（葬儀社が代行するのが一般的）。",
+        },
+        {
+          span: "14日以内",
+          date: addDays(baseDate, 14),
+          title: "年金受給停止・健康保険・世帯主変更",
+          detail: "国民年金は14日以内、厚生年金は10日以内。介護保険証の返却も同時に確認。",
+        },
+        {
+          span: "3か月以内",
+          date: addMonths(baseDate, 3),
+          title: "相続放棄・限定承認の申述（家庭裁判所）",
+          detail: "借金や処分が難しい空き家を引き継がない場合は必ず3か月以内に手続き。",
+        },
+        {
+          span: "4か月以内",
+          date: addMonths(baseDate, 4),
+          title: "準確定申告（亡くなった年の所得税申告）",
+          detail: "自営業・不動産収入・一定以上の年金収入があった場合に税務署へ申告。",
+        },
+        {
+          span: "10か月以内",
+          date: addMonths(baseDate, 10),
+          title: "相続税の申告・納付（基礎控除超の場合）",
+          detail: "遺産総額が「3,000万円＋600万円×法定相続人数」を超える場合に必要。",
+        },
+        {
+          span: "2年以内",
+          date: addMonths(baseDate, 24),
+          title: "葬祭費・埋葬料（3〜7万円）の給付申請",
+          detail: "国民健康保険・後期高齢者医療保険から支給。葬儀の翌日から2年で時効。",
+        },
+        {
+          span: isBeforeLaw ? "猶予期限" : "3年以内",
+          date: tokiDeadline,
+          title: "相続登記（不動産の名義変更）※義務化",
+          detail: tokiNote,
+          highlight: true,
+        },
+        {
+          span: "3年目の12月末",
+          date: exemptDeadline,
+          title: "空き家3,000万円特別控除の売却（引き渡し）期限",
+          detail: "この日までに売却を完了しないと、譲渡所得税（最大約600万円）の非課税枠が消滅。買主解体特例を使う場合は翌年2月15日までに解体完了が必要。",
+          highlight: true,
+        },
+      ].sort((a, b) => a.date.getTime() - b.date.getTime());
+
+      document.getElementById("timeline-tbody").innerHTML = events
+        .map((ev) => {
+          const days = diffDaysFromToday(ev.date);
+          const b = statusBadge(days);
+          return `<tr class="${ev.highlight ? "bg-emerald-50/40" : ""}">
+            <td class="py-3 px-3 font-extrabold text-slate-700 whitespace-nowrap align-top">${ev.span}</td>
+            <td class="py-3 px-3 whitespace-nowrap align-top">
+              <div class="font-extrabold text-slate-900">${fmtJpDate(ev.date)}</div>
+              <span class="inline-block mt-1 px-1.5 py-0.5 rounded-xs text-[10px] font-bold ${b.cls}">${b.text}</span>
+            </td>
+            <td class="py-3 px-3 align-top">
+              <div class="font-extrabold text-slate-900">${ev.title}</div>
+              <div class="text-[11px] text-slate-600 mt-0.5 leading-relaxed">${ev.detail}</div>
+            </td>
+          </tr>`;
+        })
+        .join("");
+
+      // 3,000万円特別控除 6問判定
+      const reqLabels = {
+        old_quake: "昭和56年5月31日以前建築の戸建て",
+        lived_alone: "相続直前まで親が1人で居住（または施設入居後に空き家）",
+        unused: "相続後に賃貸・事業・居住へ使っていない",
+        under_1oku: "売却金額が1億円以下",
+        demolish_or_quake: "解体更地または買主による翌年2月15日までの解体・耐震改修",
+        third_party: "親族など特別な関係者以外への売却",
+      };
+      const missing = [];
+      document.querySelectorAll(".req-chk").forEach((chk) => {
+        if (!chk.checked) {
+          missing.push(reqLabels[chk.getAttribute("data-req")]);
+        }
+      });
+
+      const saleMan = Number(elSalePrice.value) || 1500;
+      const saleYen = saleMan * 10000;
+      const brokerYen = saleYen <= 8000000 ? 330000 : Math.round((saleYen * 0.03 + 60000) * 1.1);
+      const gainYen = Math.max(0, saleYen - Math.round(saleYen * 0.05) - brokerYen);
+      const taxNoExemptMan = Math.round((gainYen * 0.20315) / 10000);
+      const taxWithExemptMan = Math.round((Math.max(0, gainYen - 30000000) * 0.20315) / 10000);
+      const saveMan = Math.max(0, taxNoExemptMan - taxWithExemptMan);
+
+      const vBox = document.getElementById("exempt-verdict-box");
+      if (exemptDays < 0) {
+        vBox.className = "rounded border border-rose-200 bg-rose-50/70 p-4 mb-5 text-xs leading-relaxed text-slate-800";
+        vBox.innerHTML =
+          `<div class="font-extrabold text-rose-800 mb-1">空き家3,000万円特別控除の売却期限（${fmtJpDate(exemptDeadline)}）を過ぎています</div>` +
+          `<p>特例が使えない場合、売却額${saleMan.toLocaleString("ja-JP")}万円（取得費不明の5%概算）では譲渡所得税が<strong class="text-rose-800">約${taxNoExemptMan.toLocaleString("ja-JP")}万円</strong>かかる見込みです。親の購入時の売買契約書や建築請負契約書が残っていないか、実家の書類を必ず探しておきましょう（取得費が証明できれば大幅に節税できます）。</p>`;
+      } else if (missing.length === 0) {
+        vBox.className = "rounded border border-emerald-200 bg-emerald-50/60 p-4 mb-5 text-xs leading-relaxed text-slate-800";
+        vBox.innerHTML =
+          `<div class="font-extrabold text-emerald-900 mb-1">空き家3,000万円特別控除の対象となる可能性が高いです（節税目安：約${saveMan.toLocaleString("ja-JP")}万円）</div>` +
+          `<p>売却想定額${saleMan.toLocaleString("ja-JP")}万円（取得費不明5%概算）の場合、<strong>${fmtJpDate(exemptDeadline)}</strong>までに売却・引き渡しを終えることで譲渡所得税を<strong>約${taxNoExemptMan.toLocaleString("ja-JP")}万円 → ${taxWithExemptMan.toLocaleString("ja-JP")}万円</strong>へ抑えられます。売却活動と登記には半年ほどかかるため、遅くとも期限の1年前には査定と名義確認を始めるのが安全です。</p>`;
+      } else {
+        vBox.className = "rounded border border-amber-300 bg-amber-50/70 p-4 mb-5 text-xs leading-relaxed text-slate-800";
+        vBox.innerHTML =
+          `<div class="font-extrabold text-amber-900 mb-1">確認が必要な要件が ${missing.length} 件あります（特例が使えない場合の譲渡税目安：約${taxNoExemptMan.toLocaleString("ja-JP")}万円）</div>` +
+          `<p class="mb-1.5">現在チェックが外れている項目：</p>` +
+          `<ul class="list-disc pl-4 space-y-0.5 text-[11px] text-slate-700">${missing.map((m) => `<li>${m}</li>`).join("")}</ul>` +
+          `<p class="mt-1.5 text-[11px] text-slate-600">※特例が使えない場合でも、親が購入した際の契約書・領収書が見つかれば取得費を差し引いて譲渡所得税を大幅に減らせます。</p>`;
+      }
+
+      // LINE共有用テキスト生成
+      shareText =
+        `【実家と空き家の試算表｜相続手続き期限メモ】\n` +
+        `相続開始日：${fmtJpDate(baseDate)}\n` +
+        `──────────────\n` +
+        `・相続放棄（3か月）：${fmtJpDate(addMonths(baseDate, 3))}\n` +
+        `・準確定申告（4か月）：${fmtJpDate(addMonths(baseDate, 4))}\n` +
+        `・相続税申告（10か月）：${fmtJpDate(addMonths(baseDate, 10))}\n` +
+        `・相続登記義務化：${fmtJpDate(tokiDeadline)}（${tokiB.text}）\n` +
+        `・空き家3,000万円控除 売却期限：${fmtJpDate(exemptDeadline)}（${exemptB.text}）\n` +
+        `──────────────\n` +
+        `控除判定：${missing.length === 0 && exemptDays >= 0 ? `6要件クリア（節税目安 約${saveMan}万円）` : "要確認項目あり"}\n` +
+        `詳細ページ：${window.location.origin}${window.location.pathname}`;
+    }
+
+    // 初期日付を本日に設定
+    const initToday = new Date();
+    elDate.value = toIsoDate(initToday);
+
+    document.querySelectorAll(".date-preset-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const type = btn.getAttribute("data-preset");
+        const now = new Date();
+        let target = now;
+        if (type === "1y") target = addMonths(now, -12);
+        else if (type === "2y") target = addMonths(now, -24);
+        else if (type === "before2024") target = new Date(2023, 5, 15);
+        elDate.value = toIsoDate(target);
+        updateCalendar();
+      });
+    });
+
+    elDate.addEventListener("change", updateCalendar);
+    elSalePrice.addEventListener("change", updateCalendar);
+    document.querySelectorAll(".req-chk").forEach((chk) => {
+      chk.addEventListener("change", updateCalendar);
+    });
+
+    document.getElementById("inh-copy-btn").addEventListener("click", async () => {
+      const lbl = document.getElementById("inh-copy-label");
+      try {
+        await navigator.clipboard.writeText(shareText);
+        if (lbl) {
+          lbl.textContent = "コピーしました";
+          setTimeout(() => {
+            lbl.textContent = "LINE共有用にコピー";
+          }, 2200);
+        }
+      } catch {
+        window.prompt("以下をコピーしてLINEやメールに貼り付けてください：", shareText);
+      }
+    });
+
+    document.getElementById("inh-print-btn").addEventListener("click", () => {
+      window.print();
+    });
+
+    updateCalendar();
+  </script>
+</BaseLayout>

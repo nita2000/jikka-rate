@@ -53,7 +53,7 @@ def calc_property_tax(
     city_rate = float(pt["city_planning_tax_rate"]) if include_city_tax else 0.0
 
     land_sqm = round(land_tsubo * 3.305785, 1)
-    land_market_yen = round(land_tsubo * land_price_man_per_tsubo * 10000 * max(0.35, min(1.3, market_demand_factor)))
+    land_market_yen = round(land_tsubo * land_price_man_per_tsubo * 10000 * max(0.08, min(1.3, market_demand_factor)))
     land_assessed_yen = round(land_market_yen * float(pt["market_to_assessed_land_ratio"]))
 
     # 小規模住宅用地（200㎡以下：固定1/6・都市計画1/3）と一般住宅用地（200㎡超：固定1/3・都市計画2/3）
@@ -308,8 +308,8 @@ def calc_case_comprehensive(
         land_market = round(12800000 * (land_price_man_per_tsubo / 24.5) ** 0.55)
 
     # シナリオ1：解体して更地仲介売却
-    if case["slug"] == "non-rebuildable-wood-25tsubo":
-        # 再建築不可を誤って解体すると土地価値が40%以下に暴落
+    if case["slug"] in ("non-rebuildable-wood-25tsubo", "urban-control-area-38tsubo"):
+        # 再建築不可・市街化調整区域を誤って解体すると再建築制限で土地価値が大きく下落
         sarachi_gross_sale = round(land_market * 0.38)
     elif case["slug"] == "leased-land-shakuchi-28tsubo":
         # 借地権を自費解体して地主へ無償返還すると売却収入0円

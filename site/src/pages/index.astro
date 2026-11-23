@@ -39,10 +39,10 @@ const pageSchema = [
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "実家じまいレート",
-    url: (Astro.site ?? "https://jikkarate.com").toString(),
+    name: "実家と空き家の試算表",
+    url: (Astro.site ?? "https://jikka-shisan.com").toString(),
     description:
-      "全国47都道府県の解体工事費用・土地相場・空き家の固定資産税・相続登記・墓じまい費用を公的統計にもとづいて試算し、実家を壊して売るか・そのまま手放すかの損益分岐点がわかるサイト。",
+      "全国47都道府県の解体工事費用・土地相場・空き家の固定資産税・譲渡所得税（3,000万円特別控除）・相続登記期限・墓じまい費用を公的統計にもとづいて試算し、実家を壊して売るか・そのまま手放すかの損益分岐点がわかるサイト。",
   },
   {
     "@context": "https://schema.org",
@@ -51,7 +51,7 @@ const pageSchema = [
     description:
       "総務省・国土交通省・厚生労働省の公的統計と2026年最新空き家税制・相続登記基準をもとに集計した解体工事単価および損益分岐データセット。",
     temporalCoverage: `${siteMeta.date_from}/${siteMeta.date_to}`,
-    creator: { "@type": "Organization", name: "実家じまいレート" },
+    creator: { "@type": "Organization", name: "実家と空き家の試算表" },
   },
 ];
 ---
@@ -195,17 +195,17 @@ const pageSchema = [
     </div>
   </section>
 
-  <!-- 3つのお悩み別シミュレーター導線 -->
-  <section class="mb-12">
+  <!-- 4つのお悩み別シミュレーター導線 -->
+  <section class="mb-10">
     <div class="flex flex-wrap items-end justify-between gap-2 mb-5">
       <div>
         <div class="eyebrow-label">お悩み別の30秒シミュレーター</div>
-        <h2 class="mt-0.5 text-xl sm:text-2xl font-extrabold text-slate-900">いま気になっている項目を4つ選ぶだけで試算できます</h2>
+        <h2 class="mt-0.5 text-xl sm:text-2xl font-extrabold text-slate-900">いま気になっている項目を選ぶだけで試算できます</h2>
       </div>
       <p class="text-xs text-slate-500">※正確な坪数や査定額がわからなくても、だいたいの目安で試算できます</p>
     </div>
 
-    <div class="grid gap-4 md:grid-cols-3">
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       <a href="/tools/disposal-simulator/" class="card-interactive rounded p-5 border-t-3 border-t-emerald-700 flex flex-col justify-between">
         <div>
           <div class="flex items-center justify-between text-[11px] font-bold text-emerald-700">
@@ -215,17 +215,17 @@ const pageSchema = [
               </svg>
               実家の手放し方
             </span>
-            <span class="px-1.5 py-0.5 rounded-xs bg-emerald-50 text-emerald-800">3択手残り比較</span>
+            <span class="px-1.5 py-0.5 rounded-xs bg-emerald-50 text-emerald-800">手残り比較</span>
           </div>
-          <h3 class="mt-2.5 text-base font-extrabold text-slate-900 leading-snug">
-            実家を「壊して売る」「そのまま売る・買取」「空き家で維持」手残り試算
+          <h3 class="mt-2.5 text-sm sm:text-[15px] font-extrabold text-slate-900 leading-snug">
+            壊して売る・そのまま売却買取・空き家維持の手残り試算
           </h3>
           <p class="mt-1.5 text-xs text-slate-600 leading-relaxed">
-            先に150万〜250万円払って解体するべきか、壊さず古家付き売却や片付け不要の買取にするべきか、最終的な手残り金額を即比較します。
+            解体費・譲渡税（3,000万円控除）・きょうだい分配まで一括比較。結果のLINE共有・印刷にも対応。
           </p>
         </div>
         <div class="mt-4 pt-3 border-t border-slate-100 text-xs font-bold text-emerald-700">
-          実家の手残り金額を計算する →
+          手残り金額を試算する →
         </div>
       </a>
 
@@ -236,19 +236,42 @@ const pageSchema = [
               <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
-              空き家の税金・名義変更
+              空き家の税金
             </span>
-            <span class="px-1.5 py-0.5 rounded-xs bg-amber-50 text-amber-900">固定資産税・相続登記</span>
+            <span class="px-1.5 py-0.5 rounded-xs bg-amber-50 text-amber-900">固定資産税</span>
           </div>
-          <h3 class="mt-2.5 text-base font-extrabold text-slate-900 leading-snug">
-            空き家の固定資産税はいくら上がる？（最大6倍・実効4.2倍）＆相続登記試算
+          <h3 class="mt-2.5 text-sm sm:text-[15px] font-extrabold text-slate-900 leading-snug">
+            空き家の固定資産税（軽減解除）＆相続登記の費用試算
           </h3>
           <p class="mt-1.5 text-xs text-slate-600 leading-relaxed">
-            住宅用地の軽減（1/6特例）が外れると年いくらの増税になるのか、相続登記（名義変更）の費用と増税を防ぐ手順をわかりやすく算出します。
+            住宅用地の1/6軽減が外れたときの増税額と、相続登記の登録免許税・過料を防ぐ手順を算出します。
           </p>
         </div>
         <div class="mt-4 pt-3 border-t border-slate-100 text-xs font-bold text-amber-800">
-          空き家の税金と対策を確認する →
+          税金と対策を確認する →
+        </div>
+      </a>
+
+      <a href="/tools/inheritance-deadline/" class="card-interactive rounded p-5 border-t-3 border-t-rose-600 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between text-[11px] font-bold text-rose-700">
+            <span class="inline-flex items-center gap-1.5">
+              <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              期限・控除判定
+            </span>
+            <span class="px-1.5 py-0.5 rounded-xs bg-rose-50 text-rose-800">締切逆算</span>
+          </div>
+          <h3 class="mt-2.5 text-sm sm:text-[15px] font-extrabold text-slate-900 leading-snug">
+            相続手続き期限＆空き家3,000万円特別控除 逆算カレンダー
+          </h3>
+          <p class="mt-1.5 text-xs text-slate-600 leading-relaxed">
+            相続開始日から相続放棄・相続登記・3,000万円控除の売却締切日を自動計算。6問の控除判定付き。
+          </p>
+        </div>
+        <div class="mt-4 pt-3 border-t border-slate-100 text-xs font-bold text-rose-700">
+          締切日と要件を確認する →
         </div>
       </a>
 
@@ -259,21 +282,44 @@ const pageSchema = [
               <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              遠方のお墓・永代供養
+              遠方のお墓
             </span>
-            <span class="px-1.5 py-0.5 rounded-xs bg-slate-100 text-slate-700">回収年数ライン</span>
+            <span class="px-1.5 py-0.5 rounded-xs bg-slate-100 text-slate-700">回収年数</span>
           </div>
-          <h3 class="mt-2.5 text-base font-extrabold text-slate-900 leading-snug">
-            遠方のお墓を維持 vs 墓じまい（永代供養・樹木葬）15年費用＆回収年数試算
+          <h3 class="mt-2.5 text-sm sm:text-[15px] font-extrabold text-slate-900 leading-snug">
+            遠方のお墓維持 vs 墓じまい・樹木葬 15年損益試算
           </h3>
           <p class="mt-1.5 text-xs text-slate-600 leading-relaxed">
-            毎年のお墓参り交通費・管理料・お布施と、墓石を撤去して樹木葬や永代供養へ移す費用を比べ、何年目に元が取れるかを試算します。
+            毎年の帰省費・管理料と、墓石撤去＋永代供養への改葬費用を比べ、何年で元が取れるか試算します。
           </p>
         </div>
         <div class="mt-4 pt-3 border-t border-slate-100 text-xs font-bold text-slate-700">
-          墓じまいの費用と回収年数を試算 →
+          墓じまい費用を試算する →
         </div>
       </a>
+    </div>
+
+    <!-- 築古・訳あり実家の4大お悩みショートカット -->
+    <div class="mt-5 card-surface rounded p-4 sm:p-5 bg-slate-50/60">
+      <div class="text-xs font-extrabold text-slate-800 mb-3">「うちの実家は売れるの？」よくある4つのケースからすぐ調べる</div>
+      <div class="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-4 text-xs">
+        <a href="/compare/sarachi-sale-vs-furuya-kaitori-30tsubo/" class="rounded-xs border border-slate-200 bg-white hover:border-emerald-700 px-3 py-2.5 transition-colors block">
+          <div class="font-extrabold text-slate-900">解体すると赤字になりそう</div>
+          <div class="text-[11px] text-slate-500 mt-0.5">更地解体 vs 壊さず買取の損益分岐 →</div>
+        </a>
+        <a href="/compare/non-rebuildable-kaitori-vs-sarachi-trap/" class="rounded-xs border border-slate-200 bg-white hover:border-emerald-700 px-3 py-2.5 transition-colors block">
+          <div class="font-extrabold text-slate-900">道が狭い・建て替え不可（再建築不可）</div>
+          <div class="text-[11px] text-slate-500 mt-0.5">解体厳禁の理由と買取手残り比較 →</div>
+        </a>
+        <a href="/compare/heavy-residual-clean-vs-as-is-kaitori/" class="rounded-xs border border-slate-200 bg-white hover:border-emerald-700 px-3 py-2.5 transition-colors block">
+          <div class="font-extrabold text-slate-900">家具・荷物がそのまま残っている</div>
+          <div class="text-[11px] text-slate-500 mt-0.5">自費片付け vs 現状そのまま買取 →</div>
+        </a>
+        <a href="/compare/kominka-55tsubo-sarachi-vs-kaitori/" class="rounded-xs border border-slate-200 bg-white hover:border-emerald-700 px-3 py-2.5 transition-colors block">
+          <div class="font-extrabold text-slate-900">地方の広い実家・母屋＋納屋</div>
+          <div class="text-[11px] text-slate-500 mt-0.5">300万円超の解体費用倒れ回避策 →</div>
+        </a>
+      </div>
     </div>
   </section>
 

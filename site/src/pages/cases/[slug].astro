@@ -85,7 +85,11 @@ const schema = {
 ---
 
 <BaseLayout
-  title={`${item.name}の解体費用・空き家維持費・売却手残り相場`}
+  title={
+    isGrave
+      ? `${item.name}の墓じまい・永代供養費用と回収年数`
+      : `${item.name}の解体費・維持費・売却手残り相場`
+  }
   description={`${item.name}（${item.spec_note}）の最新費用を試算。${isGrave && haka ? `墓じまい総額${formatYen(haka.initial_total_yen)}・回収期間約${haka.payback_years}年・15年負担軽減${formatYen(haka.saving_15y_yen)}。` : `解体・片付け総額${formatYen(demo.total_demolition_yen)}・年間維持費${formatYen(maint.annual_keep_normal)}・3つの売却ルート手残りを掲載。`}`}
   canonicalPath={`/cases/${item.slug}/`}
   schema={schema}

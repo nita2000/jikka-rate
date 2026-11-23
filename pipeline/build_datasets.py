@@ -294,7 +294,12 @@ def build_all(raw_csv: Path = RAW_CSV, out_dir: Path = SITE_DATA_DIR) -> dict[st
             winner_label = pair["option_b_label"]
             winner_side = "B"
 
-        payback_years = metrics_b.get("payback_years") or metrics_a.get("payback_years")
+        is_keep_vs_haka = "grave_keep" in (pair["strategy_a"], pair["strategy_b"])
+        payback_years = (
+            (metrics_b.get("payback_years") or metrics_a.get("payback_years"))
+            if is_keep_vs_haka
+            else None
+        )
         diff_man = round(diff_10y / 10000)
         if payback_years:
             verdict_short = f"約{payback_years}年で回収（差額 約{diff_man:,}万円）"
@@ -303,13 +308,21 @@ def build_all(raw_csv: Path = RAW_CSV, out_dir: Path = SITE_DATA_DIR) -> dict[st
                 win_short = "解体して更地売却" if winner_side == "A" else metrics_b.get("short_winner", winner_label)
             elif pair["case_a"] == pair["case_b"] and pair["strategy_b"] == "sarachi_sale":
                 win_short = metrics_a.get("short_winner", winner_label) if winner_side == "A" else "解体して更地売却"
+            elif pair["category"] == "hakajimai_choice":
+                if pair["slug"] == "jikka-and-grave-keep-vs-total-jikkajimai":
+                    win_short = "実家売却＋墓じまい一括完結"
+                else:
+                    win_short = winner_label
             else:
                 win_short = (
                     metrics_a.get("short_winner", winner_label)
                     if winner_side == "A"
                     else metrics_b.get("short_winner", winner_label)
                 )
-            verdict_short = f"{win_short}が 約{diff_man:,}万円 有利"
+            if pair["category"] == "hakajimai_choice" and pair["slug"] != "jikka-and-grave-keep-vs-total-jikkajimai":
+                verdict_short = f"{win_short}が 約{diff_man:,}万円 安い"
+            else:
+                verdict_short = f"{win_short}が 約{diff_man:,}万円 有利"
 
         enriched_pairs.append(
             {
@@ -364,8 +377,8 @@ def build_all(raw_csv: Path = RAW_CSV, out_dir: Path = SITE_DATA_DIR) -> dict[st
         )
 
     meta = {
-        "site_name": "実家じまいレート",
-        "site_domain": "jikkarate.com",
+        "site_name": "実家と空き家の試算表",
+        "site_domain": "jikka-shisan.com",
         "date_from": date_from,
         "date_to": date_to,
         "total_points": len(national_series),
