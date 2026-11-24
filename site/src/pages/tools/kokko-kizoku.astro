@@ -1,0 +1,575 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import AffiliateCta from "../../components/AffiliateCta.astro";
+import prefectures from "../../data/prefectures.json";
+
+const kokkoSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "相続土地国庫帰属制度で土地を国に返す費用はいくらですか？",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "申請時の審査手数料（1筆につき14,000円・不承認でも返還不可）と、承認後の負担金（原則一律20万円、市街化区域・用途地域内の宅地や農用地区域等の農地・森林は面積に応じた法定算定式）がかかります。建物がある実家の場合は、申請前に自費で解体して更地にする費用も必要です。",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "空き家が建っている実家もそのまま国庫帰属制度で国に返せますか？",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "建物が建っている土地は法律上の却下事由に該当するため、そのままでは申請できません。国庫帰属を使うには先に建物を解体し、残置物や古い工作物も撤去して更地にする必要があるため、まず解体不要で引き取れる専門買取の可否を確認するのが安全です。",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "国庫帰属制度と相続放棄はどちらを選ぶべきですか？",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "相続放棄は相続開始を知ってから3か月以内に家庭裁判所へ申述すれば負担金は不要ですが、預貯金や自宅などプラスの財産もすべて放棄することになります。プラスの遺産がある場合は、不要な土地だけを対象にできる専門買取や国庫帰属制度を検討します。",
+      },
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="売れない実家・土地の最終出口｜相続土地国庫帰属制度の負担金・解体費・維持費比較"
+  description="法務省の法定算定式（宅地・農地・森林・一律20万円）にもとづき、相続土地国庫帰属制度の負担金・審査手数料・解体必須コストを自動計算。10年維持・相続放棄・専門買取の4択を比較できます。"
+  canonicalPath="/tools/kokko-kizoku/"
+  schema={kokkoSchema}
+>
+  <nav class="text-xs text-slate-500 mb-4 flex items-center gap-1.5 no-print">
+    <a href="/" class="hover:text-emerald-700">トップ</a>
+    <span>/</span>
+    <span class="text-slate-800 font-semibold">売れない土地の出口・国庫帰属試算</span>
+  </nav>
+
+  <!-- ページヘッダー -->
+  <div class="page-header-clean rounded p-5 sm:p-6 mb-6">
+    <div class="eyebrow-label mb-1.5">相続土地国庫帰属制度・法定算定式対応</div>
+    <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900 leading-snug">
+      売れない実家・土地を「国に返す」といくらかかる？国庫帰属 vs 維持 vs 買取を比較
+    </h1>
+    <p class="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed max-w-3xl">
+      「買い手がつかない地方の実家や山林を国に返したい」という場合でも、<strong>建物があると解体費（150〜250万円）が先に必要</strong>になるなど見落としやすい出費があります。法務省の負担金算定式にもとづき、国庫帰属・10年維持・相続放棄・専門買取の総負担を比較できます。
+    </p>
+  </div>
+
+  <div class="grid gap-6 lg:grid-cols-12 items-start print-tool-grid">
+    <!-- 左：入力パネル -->
+    <div class="lg:col-span-5 min-w-0 space-y-4 no-print">
+      <!-- STEP 1 -->
+      <div class="card-surface rounded p-5 space-y-3 border-l-3 border-l-emerald-700">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+          <div class="flex items-center gap-2">
+            <span class="inline-flex items-center justify-center rounded-xs bg-emerald-700 px-1.5 py-0.5 text-[10px] font-extrabold text-white">STEP 1</span>
+            <span class="text-xs font-extrabold text-slate-900">土地の種目・区域（法務省区分）</span>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 gap-2" id="kk-type-group">
+          <button type="button" data-kind="general" class="kk-kind-btn rounded-xs border border-emerald-700 bg-emerald-700 py-2.5 px-3 text-left text-xs font-bold text-white transition-colors">
+            <div>地方・郊外の宅地・農地・原野（市街化区域外）</div>
+            <div class="text-[10px] font-normal opacity-90 mt-0.5">原則：面積にかかわらず負担金 一律20万円</div>
+          </button>
+          <button type="button" data-kind="urban_takuchi" class="kk-kind-btn rounded-xs border border-slate-300 bg-white py-2.5 px-3 text-left text-xs font-bold text-slate-700 hover:bg-slate-50 transition-colors">
+            <div>市街化区域・用途地域内の宅地</div>
+            <div class="text-[10px] font-normal opacity-80 mt-0.5">面積（㎡）に応じた6段階の法定算定式</div>
+          </button>
+          <button type="button" data-kind="special_nochi" class="kk-kind-btn rounded-xs border border-slate-300 bg-white py-2.5 px-3 text-left text-xs font-bold text-slate-700 hover:bg-slate-50 transition-colors">
+            <div>農用地区域・土地改良区域・市街化区域内の農地</div>
+            <div class="text-[10px] font-normal opacity-80 mt-0.5">田・畑で管理負荷が高い区域の法定算定式</div>
+          </button>
+          <button type="button" data-kind="forest" class="kk-kind-btn rounded-xs border border-slate-300 bg-white py-2.5 px-3 text-left text-xs font-bold text-slate-700 hover:bg-slate-50 transition-colors">
+            <div>森林・山林（全国一律で面積算定）</div>
+            <div class="text-[10px] font-normal opacity-80 mt-0.5">面積（㎡）に応じた6段階の法定算定式</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="card-surface rounded p-5 space-y-3 border-l-3 border-l-emerald-700">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+          <div class="flex items-center gap-2">
+            <span class="inline-flex items-center justify-center rounded-xs bg-emerald-700 px-1.5 py-0.5 text-[10px] font-extrabold text-white">STEP 2</span>
+            <span class="text-xs font-extrabold text-slate-900">都道府県・土地の広さ・筆数</span>
+          </div>
+        </div>
+        <label class="block text-xs">
+          <span class="font-bold text-slate-700">土地のある都道府県</span>
+          <select id="kk-pref" class="mt-1 w-full rounded-xs border border-slate-300 bg-white px-3 py-2 text-xs font-bold text-slate-900 focus:border-emerald-700 focus:outline-none">
+            {prefectures.map((p) => (
+              <option value={p.slug} selected={p.slug === "nagano"}>
+                {p.name}（木造解体目安 {p.wood_man_per_tsubo.toFixed(2)}万円/坪）
+              </option>
+            ))}
+          </select>
+        </label>
+        <div class="grid grid-cols-2 gap-3">
+          <label class="block text-xs">
+            <span class="font-bold text-slate-700">登記簿の土地面積（㎡）</span>
+            <input id="kk-area" type="number" min="20" max="50000" step="10" value="200" class="mt-1 w-full rounded-xs border border-slate-300 px-2.5 py-2 text-xs font-bold tabular-nums" />
+            <span id="kk-tsubo-hint" class="block text-[10px] text-slate-500 mt-1 tabular-nums">約 60.5坪</span>
+          </label>
+          <label class="block text-xs">
+            <span class="font-bold text-slate-700">申請する土地の筆数</span>
+            <select id="kk-lots" class="mt-1 w-full rounded-xs border border-slate-300 bg-white px-2.5 py-2 text-xs font-bold text-slate-800">
+              <option value="1" selected>1筆（審査手数料 1.4万円）</option>
+              <option value="2">2筆（審査手数料 2.8万円）</option>
+              <option value="3">3筆（審査手数料 4.2万円）</option>
+              <option value="5">5筆（審査手数料 7.0万円）</option>
+            </select>
+            <span class="block text-[10px] text-slate-500 mt-1">隣接・同種目は合算申出可</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="card-surface rounded p-5 space-y-3 border-l-3 border-l-amber-600">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+          <div class="flex items-center gap-2">
+            <span class="inline-flex items-center justify-center rounded-xs bg-emerald-700 px-1.5 py-0.5 text-[10px] font-extrabold text-white">STEP 3</span>
+            <span class="text-xs font-extrabold text-slate-900">建物の有無と年間維持費の目安</span>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-2" id="kk-bldg-group">
+          <button type="button" data-bldg="yes" class="kk-bldg-btn rounded-xs border border-emerald-700 bg-emerald-700 py-2 px-2.5 text-left text-[11px] font-bold text-white transition-colors">
+            <div>古い家（建物）あり</div>
+            <div class="text-[10px] font-normal opacity-90 mt-0.5">申請前に解体・更地化が必須</div>
+          </button>
+          <button type="button" data-bldg="no" class="kk-bldg-btn rounded-xs border border-slate-300 bg-white py-2 px-2.5 text-left text-[11px] font-bold text-slate-700 hover:bg-slate-50 transition-colors">
+            <div>すでに更地・山林・農地</div>
+            <div class="text-[10px] font-normal opacity-80 mt-0.5">建物解体費は不要</div>
+          </button>
+        </div>
+        <div id="kk-floor-wrap" class="grid grid-cols-2 gap-3 pt-1">
+          <label class="block text-xs">
+            <span class="font-bold text-slate-700">建物の延床面積（坪）</span>
+            <input id="kk-floor" type="number" min="10" max="120" step="5" value="35" class="mt-1 w-full rounded-xs border border-slate-300 px-2.5 py-1.5 text-xs font-bold tabular-nums" />
+          </label>
+          <label class="block text-xs">
+            <span class="font-bold text-slate-700">現在の年間維持・税金目安</span>
+            <input id="kk-annual" type="number" min="1" max="100" step="1" value="18" class="mt-1 w-full rounded-xs border border-slate-300 px-2.5 py-1.5 text-xs font-bold tabular-nums" />
+            <span class="block text-[10px] text-slate-500 mt-0.5">万円/年（税金＋草刈り等）</span>
+          </label>
+        </div>
+        <div id="kk-land-annual-wrap" class="hidden pt-1">
+          <label class="block text-xs">
+            <span class="font-bold text-slate-700">現在の年間維持費・固定資産税目安（万円/年）</span>
+            <input id="kk-annual-land" type="number" min="1" max="100" step="1" value="6" class="mt-1 w-full rounded-xs border border-slate-300 px-2.5 py-1.5 text-xs font-bold tabular-nums" />
+          </label>
+        </div>
+      </div>
+
+      <!-- STEP 4: 6問 却下・不承認リスクチェック -->
+      <div class="card-surface rounded p-5 space-y-3 border-l-3 border-l-slate-600">
+        <div class="border-b border-slate-100 pb-2">
+          <div class="flex items-center gap-2">
+            <span class="inline-flex items-center justify-center rounded-xs bg-slate-700 px-1.5 py-0.5 text-[10px] font-extrabold text-white">STEP 4</span>
+            <span class="text-xs font-extrabold text-slate-900">却下・不承認になりやすい条件チェック</span>
+          </div>
+          <p class="text-[11px] text-slate-500 mt-1">当てはまる項目にチェックを入れてください（1つでもあると審査が通りにくくなります）。</p>
+        </div>
+        <div class="space-y-2 text-xs text-slate-700" id="kk-risk-checks">
+          <label class="flex items-start gap-2 cursor-pointer">
+            <input type="checkbox" class="kk-risk mt-0.5 rounded-xs border-slate-300 text-rose-600" data-label="抵当権・賃借権等の権利設定" />
+            <span>抵当権や賃借権・地上権が登記に残っている</span>
+          </label>
+          <label class="flex items-start gap-2 cursor-pointer">
+            <input type="checkbox" class="kk-risk mt-0.5 rounded-xs border-slate-300 text-rose-600" data-label="隣地との境界不明・紛争" />
+            <span>隣地との境界が不明確、または争いがある</span>
+          </label>
+          <label class="flex items-start gap-2 cursor-pointer">
+            <input type="checkbox" class="kk-risk mt-0.5 rounded-xs border-slate-300 text-rose-600" data-label="急傾斜の崖・擁壁管理負荷" />
+            <span>勾配30度以上・高さ5m以上の崖や老朽擁壁がある</span>
+          </label>
+          <label class="flex items-start gap-2 cursor-pointer">
+            <input type="checkbox" class="kk-risk mt-0.5 rounded-xs border-slate-300 text-rose-600" data-label="放置車両・産廃・古井戸・樹木" />
+            <span>廃車・ブロック塀・残置物・地中埋設物などが残っている</span>
+          </label>
+          <label class="flex items-start gap-2 cursor-pointer">
+            <input type="checkbox" class="kk-risk mt-0.5 rounded-xs border-slate-300 text-rose-600" data-label="通路・墓地・ため池など他人の利用" />
+            <span>近隣の通路・水道管・墓地・ため池として利用されている</span>
+          </label>
+          <label class="flex items-start gap-2 cursor-pointer">
+            <input type="checkbox" class="kk-risk mt-0.5 rounded-xs border-slate-300 text-rose-600" data-label="相続登記が未完了" />
+            <span>まだ亡くなった親・祖父母名義のまま（相続登記が未了）</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- 右：試算結果・4択出口比較 -->
+    <div id="kk-result-panel" class="lg:col-span-7 min-w-0 space-y-5 print-result-col scroll-mt-20">
+      <div class="card-surface rounded p-5 sm:p-6 print-result-card">
+        <!-- 結論ヒーロー -->
+        <div id="kk-hero" class="rounded border border-slate-200 border-l-4 border-l-amber-600 bg-amber-50/50 p-4 sm:p-5 mb-5 print-keep-together">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
+            <span class="text-[11px] font-bold tracking-wider text-amber-900">相続土地国庫帰属制度の総コスト試算</span>
+            <span id="kk-badge" class="px-2 py-0.5 rounded-xs text-[11px] font-bold bg-amber-100 text-amber-900">建物解体が必要</span>
+          </div>
+          <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+            <div class="flex flex-wrap items-baseline gap-x-2">
+              <span class="text-xs sm:text-sm font-extrabold text-slate-800">国庫帰属の総持ち出し目安：</span>
+              <span id="kk-total-outlay" class="font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 tabular-nums whitespace-nowrap">—</span>
+            </div>
+            <div id="kk-fee-breakdown" class="text-xs font-bold text-slate-600 tabular-nums"></div>
+          </div>
+          <p id="kk-verdict-note" class="mt-2.5 pt-2.5 border-t border-amber-200/70 text-xs text-slate-700 leading-relaxed"></p>
+
+          <div class="mt-3 pt-2.5 border-t border-amber-200/70 flex flex-wrap items-center justify-end gap-1.5 no-print">
+            <button
+              type="button"
+              id="kk-copy-btn"
+              class="inline-flex items-center gap-1 rounded-xs border border-emerald-700 bg-white hover:bg-emerald-50 px-2.5 py-1.5 text-[11px] font-bold text-emerald-800 transition-colors whitespace-nowrap"
+            >
+              <span id="kk-copy-label">LINE共有用にコピー</span>
+            </button>
+            <button
+              type="button"
+              id="kk-print-btn"
+              class="inline-flex items-center gap-1 rounded-xs border border-slate-300 bg-white hover:bg-slate-50 px-2.5 py-1.5 text-[11px] font-bold text-slate-700 transition-colors whitespace-nowrap"
+            >
+              印刷・PDF保存
+            </button>
+          </div>
+        </div>
+
+        <!-- 却下・不承認リスクアラート -->
+        <div id="kk-risk-alert" class="hidden rounded-xs border border-rose-300 bg-rose-50/70 p-3.5 mb-5 text-xs text-rose-900 leading-relaxed"></div>
+
+        <!-- 4つの最終出口比較表 -->
+        <div class="mb-5">
+          <h2 class="text-sm font-extrabold text-slate-900 mb-2.5">売れない実家・土地の「4つの最終出口」比較</h2>
+          <div class="overflow-x-auto">
+            <table class="w-full text-xs border-collapse tabular-nums">
+              <thead>
+                <tr class="bg-slate-50 border-y border-slate-200 text-slate-600">
+                  <th class="py-2.5 px-2.5 text-left font-bold">出口の選択肢</th>
+                  <th class="py-2.5 px-2.5 text-right font-bold whitespace-nowrap">総負担目安</th>
+                  <th class="py-2.5 px-2.5 text-left font-bold">条件・注意点</th>
+                </tr>
+              </thead>
+              <tbody id="kk-compare-tbody" class="divide-y divide-slate-100"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 国庫帰属コストの内訳 -->
+        <div class="rounded-xs bg-slate-50 border border-slate-200 p-4 text-xs text-slate-700 space-y-2">
+          <div class="font-extrabold text-slate-900">国庫帰属の法定コスト内訳（法務省基準）</div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 tabular-nums">
+            <div class="flex justify-between border-b border-slate-200/70 pb-1">
+              <span>負担金（10年分管理費相当）</span>
+              <strong id="kk-part-burden" class="text-slate-900">—</strong>
+            </div>
+            <div class="flex justify-between border-b border-slate-200/70 pb-1">
+              <span>審査手数料（1.4万円×筆数）</span>
+              <strong id="kk-part-exam" class="text-slate-900">—</strong>
+            </div>
+            <div class="flex justify-between border-b border-slate-200/70 pb-1">
+              <span>事前解体・残置物撤去目安</span>
+              <strong id="kk-part-demo" class="text-rose-700">—</strong>
+            </div>
+            <div class="flex justify-between border-b border-slate-200/70 pb-1">
+              <span>相続登記・測量等の実費目安</span>
+              <strong id="kk-part-misc" class="text-slate-900">—</strong>
+            </div>
+          </div>
+          <p id="kk-formula-note" class="text-[11px] text-slate-500 pt-1 leading-relaxed"></p>
+        </div>
+      </div>
+
+      <!-- 条件連動の動的CTA（建物あり：解体前に専門買取確認 / 更地・未登記：相続登記相談） -->
+      <div class="no-print">
+        <div id="kk-cta-akiya">
+          <AffiliateCta
+            slotType="akiya"
+            title="約200万円払って解体・国庫帰属する前に「建物のまま引き取れるか」を確認する"
+            description="国庫帰属制度は建物があると申請できないため、高額な解体費＋負担金が先にかかります。一般的な仲介で断られた古い実家や山林付き物件でも、訳あり専門の買取窓口なら持ち出し0円で引き取れるケースがあります。"
+            fallbackHref="/tools/disposal-simulator/"
+            fallbackLabel="解体 vs 専門買取の手残り差を試算する →"
+          />
+        </div>
+        <div id="kk-cta-sozoku" class="hidden">
+          <AffiliateCta
+            slotType="sozoku"
+            title="国庫帰属や処分を進める前提となる「相続登記・名義整理」を司法書士へ相談する"
+            description="国庫帰属制度の申請も、売却や無償譲渡も、亡くなった親・祖父母名義のままでは進められません。まずは相続登記や共有名義の整理方針を専門家へ確認しておくと手戻りを防げます。"
+            fallbackHref="/tools/inheritance-deadline/"
+            fallbackLabel="相続登記の期限と手続きを確認する →"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- スマホ専用：下部固定ミニ結果バー -->
+  <div
+    id="kk-mobile-bar"
+    class="fixed bottom-0 inset-x-0 z-30 border-t border-slate-200 bg-white/95 backdrop-blur-sm px-4 py-2.5 shadow-lg transition-all duration-200 lg:hidden no-print"
+  >
+    <div class="mx-auto max-w-6xl flex items-center justify-between gap-3">
+      <div class="min-w-0">
+        <div id="kk-mob-label" class="text-[10px] font-bold text-slate-500 truncate">国庫帰属の総持ち出し目安</div>
+        <div id="kk-mob-value" class="font-display text-base font-extrabold text-slate-900 tabular-nums truncate">—</div>
+      </div>
+      <a
+        href="#kk-result-panel"
+        class="shrink-0 rounded-xs bg-emerald-700 hover:bg-emerald-800 text-white px-3.5 py-2 text-xs font-bold transition-colors whitespace-nowrap"
+      >
+        比較を見る ↓
+      </a>
+    </div>
+  </div>
+
+  <script is:inline define:vars={{ prefsData: prefectures }}>
+    const byPref = Object.fromEntries(prefsData.map((p) => [p.slug, p]));
+    const state = {
+      kind: "general", // general | urban_takuchi | special_nochi | forest
+      hasBuilding: true,
+      shareText: "",
+    };
+
+    const elPref = document.getElementById("kk-pref");
+    const elArea = document.getElementById("kk-area");
+    const elLots = document.getElementById("kk-lots");
+    const elFloor = document.getElementById("kk-floor");
+    const elAnnual = document.getElementById("kk-annual");
+    const elAnnualLand = document.getElementById("kk-annual-land");
+
+    function yen(n) {
+      return `${Math.round(n).toLocaleString("ja-JP")}円`;
+    }
+
+    function man(n) {
+      return `約${Math.round(n / 10000).toLocaleString("ja-JP")}万円`;
+    }
+
+    // 法務省施行令にもとづく正確な負担金算定式（1,000円未満切捨て）
+    function calcStatutoryBurden(kind, areaSqm) {
+      const m2 = Math.max(1, areaSqm);
+      let raw = 200000;
+      let formulaDesc = "市街化区域外・用途地域外の宅地・農地・原野等：面積にかかわらず一律20万円";
+
+      if (kind === "urban_takuchi") {
+        if (m2 <= 50) raw = m2 * 4070 + 208000;
+        else if (m2 <= 100) raw = m2 * 2720 + 276000;
+        else if (m2 <= 200) raw = m2 * 2450 + 303000;
+        else if (m2 <= 400) raw = m2 * 2250 + 343000;
+        else if (m2 <= 800) raw = m2 * 2110 + 399000;
+        else raw = m2 * 2010 + 479000;
+        formulaDesc = `市街化区域・用途地域内の宅地（${m2}㎡）：法務省の面積区分別算定式（1,000円未満切捨て）`;
+      } else if (kind === "special_nochi") {
+        if (m2 <= 250) raw = m2 * 1210 + 208000;
+        else if (m2 <= 500) raw = m2 * 850 + 298000;
+        else if (m2 <= 1000) raw = m2 * 810 + 318000;
+        else if (m2 <= 2000) raw = m2 * 740 + 388000;
+        else if (m2 <= 4000) raw = m2 * 650 + 568000;
+        else raw = m2 * 640 + 608000;
+        formulaDesc = `農用地区域・土地改良区域・市街化区域内の農地（${m2}㎡）：法務省の面積区分別算定式（1,000円未満切捨て）`;
+      } else if (kind === "forest") {
+        if (m2 <= 750) raw = m2 * 59 + 210000;
+        else if (m2 <= 1500) raw = m2 * 24 + 237000;
+        else if (m2 <= 3000) raw = m2 * 17 + 248000;
+        else if (m2 <= 6000) raw = m2 * 12 + 263000;
+        else if (m2 <= 12000) raw = m2 * 8 + 287000;
+        else raw = m2 * 6 + 311000;
+        formulaDesc = `森林・山林（${m2}㎡）：全国一律の面積区分別算定式（1,000円未満切捨て）`;
+      }
+      return {
+        burdenYen: Math.floor(raw / 1000) * 1000,
+        formulaDesc,
+      };
+    }
+
+    function recalc() {
+      const pref = byPref[elPref.value];
+      const areaSqm = Math.max(20, Number(elArea.value) || 200);
+      const lots = Math.max(1, Number(elLots.value) || 1);
+      const floorTsubo = Math.max(10, Number(elFloor.value) || 35);
+      const annualKeepYen = (state.hasBuilding ? Math.max(1, Number(elAnnual.value) || 18) : Math.max(1, Number(elAnnualLand.value) || 6)) * 10000;
+
+      document.getElementById("kk-tsubo-hint").textContent = `約 ${(areaSqm / 3.305785).toFixed(1)}坪`;
+      document.getElementById("kk-floor-wrap").classList.toggle("hidden", !state.hasBuilding);
+      document.getElementById("kk-land-annual-wrap").classList.toggle("hidden", state.hasBuilding);
+
+      const { burdenYen, formulaDesc } = calcStatutoryBurden(state.kind, areaSqm);
+      const examFeeYen = lots * 14000;
+      const demoYen = state.hasBuilding
+        ? Math.round(floorTsubo * pref.wood_man_per_tsubo * 10000 + 220000 + 280000 + 240000)
+        : 0;
+      const miscYen = 120000; // 相続登記・境界確認・書類作成等の標準実費目安
+      const totalKokkoYen = burdenYen + examFeeYen + demoYen + miscYen;
+      const keep10yYen = annualKeepYen * 10;
+
+      // リスクチェック集計
+      const risks = [];
+      if (state.hasBuilding) risks.push("建物あり（更地化前の申請は却下）");
+      document.querySelectorAll(".kk-risk:checked").forEach((cb) => {
+        risks.push(cb.getAttribute("data-label") || "");
+      });
+
+      // ヒーロー更新
+      const badge = document.getElementById("kk-badge");
+      const hero = document.getElementById("kk-hero");
+      document.getElementById("kk-total-outlay").textContent = yen(totalKokkoYen);
+      document.getElementById("kk-fee-breakdown").textContent =
+        `負担金 ${yen(burdenYen)} ＋ 手数料 ${yen(examFeeYen)}${demoYen > 0 ? ` ＋ 解体目安 ${man(demoYen)}` : ""}`;
+
+      if (state.hasBuilding) {
+        hero.className = "rounded border border-slate-200 border-l-4 border-l-amber-600 bg-amber-50/50 p-4 sm:p-5 mb-5 print-keep-together";
+        badge.className = "px-2 py-0.5 rounded-xs text-[11px] font-bold bg-amber-100 text-amber-900";
+        badge.textContent = "申請前に解体・更地化が必須";
+        document.getElementById("kk-verdict-note").innerHTML =
+          `<strong>最重要ポイント：</strong>建物が建ったままでは国庫帰属を申請できません。自費解体（${pref.name}目安 ${man(demoYen)}）＋負担金（${yen(burdenYen)}）で<strong>合計 ${man(totalKokkoYen)} の持ち出し</strong>になるため、解体を発注する前に「建物のまま専門買取で0円〜引き取ってもらえないか」を最優先で確認するのが安全です。`;
+      } else {
+        hero.className = "rounded border border-slate-200 border-l-4 border-l-emerald-700 bg-emerald-50/50 p-4 sm:p-5 mb-5 print-keep-together";
+        badge.className = "px-2 py-0.5 rounded-xs text-[11px] font-bold bg-emerald-100 text-emerald-900";
+        badge.textContent = keep10yYen > totalKokkoYen ? "10年維持より国庫帰属が割安" : "売却・無償譲渡も並行確認";
+        document.getElementById("kk-verdict-note").innerHTML =
+          `<strong>試算のポイント：</strong>すでに更地・山林・農地のため解体費は不要です。国庫帰属の総目安（${yen(totalKokkoYen)}）に対し、10年間持ち続ける維持負担は<strong>${yen(keep10yYen)}</strong>（20年で${yen(keep10yYen * 2)}）。売却や隣地への無償譲渡が難しい場合は、次世代へ負債を残さない出口として有効です。`;
+      }
+
+      // リスクアラート
+      const alertEl = document.getElementById("kk-risk-alert");
+      if (risks.length > 0) {
+        alertEl.classList.remove("hidden");
+        alertEl.innerHTML =
+          `<strong>審査上の注意点（${risks.length}件該当）：</strong>${risks.join("／")}。<br />` +
+          `審査手数料（${yen(examFeeYen)}）は却下・不承認でも返還されないため、申請前に法務局の事前相談や専門家確認を行うことが重要です。`;
+      } else {
+        alertEl.classList.add("hidden");
+      }
+
+      // 4択比較表
+      const compareRows = [
+        {
+          name: "① 専門買取（そのまま引き取り）",
+          cost: "持ち出し 0円〜",
+          cls: "text-emerald-800 font-extrabold",
+          note: "解体・片付け不要で0円〜数十万円で引き取ってもらえる可能性を最初に確認すべき選択肢。",
+        },
+        {
+          name: "② 相続土地国庫帰属制度（国へ返す）",
+          cost: `▲${yen(totalKokkoYen)}`,
+          cls: state.hasBuilding ? "text-rose-700 font-extrabold" : "text-slate-900 font-extrabold",
+          note: state.hasBuilding
+            ? `建物解体（${man(demoYen)}）＋負担金（${yen(burdenYen)}）＋手数料等。審査期間は半年〜1年目安。`
+            : `負担金（${yen(burdenYen)}）＋手数料（${yen(examFeeYen)}）＋登記等実費。承認後は管理義務から完全解放。`,
+        },
+        {
+          name: "③ そのまま10年間維持・放置",
+          cost: `▲${yen(keep10yYen)}`,
+          cls: "text-rose-700 font-bold",
+          note: `年${man(annualKeepYen)}の税金・草刈り等が継続。20年で▲${yen(keep10yYen * 2)}＋子世代へ引き継ぎ。`,
+        },
+        {
+          name: "④ 相続放棄（家庭裁判所・3か月以内）",
+          cost: "実費数千円〜数万円",
+          cls: "text-slate-700 font-bold",
+          note: "相続開始から3か月以内限定。預貯金などプラスの財産もすべて放棄する必要があり、次順位の親族へ移行。",
+        },
+      ];
+      document.getElementById("kk-compare-tbody").innerHTML = compareRows
+        .map(
+          (r) => `<tr>
+            <td class="py-2.5 px-2.5 font-bold text-slate-900 whitespace-nowrap">${r.name}</td>
+            <td class="py-2.5 px-2.5 text-right whitespace-nowrap ${r.cls}">${r.cost}</td>
+            <td class="py-2.5 px-2.5 text-slate-600 leading-relaxed">${r.note}</td>
+          </tr>`,
+        )
+        .join("");
+
+      document.getElementById("kk-part-burden").textContent = yen(burdenYen);
+      document.getElementById("kk-part-exam").textContent = yen(examFeeYen);
+      document.getElementById("kk-part-demo").textContent = demoYen > 0 ? yen(demoYen) : "0円（建物なし）";
+      document.getElementById("kk-part-misc").textContent = yen(miscYen);
+      document.getElementById("kk-formula-note").textContent = `適用区分：${formulaDesc}。`;
+
+      // CTA動的切替
+      document.getElementById("kk-cta-akiya").classList.toggle("hidden", !state.hasBuilding);
+      document.getElementById("kk-cta-sozoku").classList.toggle("hidden", state.hasBuilding);
+
+      // スマホ固定バー更新
+      document.getElementById("kk-mob-label").textContent = state.hasBuilding
+        ? `解体＋負担金（10年維持 ${man(keep10yYen)}）`
+        : `負担金 ${yen(burdenYen)}（10年維持 ${man(keep10yYen)}）`;
+      document.getElementById("kk-mob-value").textContent = `国庫帰属計 ${man(totalKokkoYen)}`;
+
+      state.shareText =
+        `【実家と空き家の試算表｜相続土地国庫帰属制度 試算結果】\n` +
+        `条件：${pref.name} / ${areaSqm}㎡（約${(areaSqm / 3.305785).toFixed(1)}坪）/ ${lots}筆 / ${state.hasBuilding ? `建物あり（約${floorTsubo}坪）` : "更地・土地のみ"}\n` +
+        `──────────────\n` +
+        `・国庫帰属の総持ち出し目安：${yen(totalKokkoYen)}（負担金 ${yen(burdenYen)}＋手数料 ${yen(examFeeYen)}${demoYen > 0 ? `＋解体目安 ${man(demoYen)}` : ""}）\n` +
+        `・10年間そのまま維持した場合：${yen(keep10yYen)}\n` +
+        `──────────────\n` +
+        `試算ページ：${window.location.origin}${window.location.pathname}`;
+    }
+
+    document.querySelectorAll(".kk-kind-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        state.kind = btn.getAttribute("data-kind") || "general";
+        document.querySelectorAll(".kk-kind-btn").forEach((b) => {
+          const on = b === btn;
+          b.className =
+            "kk-kind-btn rounded-xs border py-2.5 px-3 text-left text-xs font-bold transition-colors " +
+            (on ? "border-emerald-700 bg-emerald-700 text-white" : "border-slate-300 bg-white text-slate-700 hover:bg-slate-50");
+        });
+        recalc();
+      });
+    });
+
+    document.querySelectorAll(".kk-bldg-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        state.hasBuilding = btn.getAttribute("data-bldg") === "yes";
+        document.querySelectorAll(".kk-bldg-btn").forEach((b) => {
+          const on = b === btn;
+          b.className =
+            "kk-bldg-btn rounded-xs border py-2 px-2.5 text-left text-[11px] font-bold transition-colors " +
+            (on ? "border-emerald-700 bg-emerald-700 text-white" : "border-slate-300 bg-white text-slate-700 hover:bg-slate-50");
+        });
+        recalc();
+      });
+    });
+
+    [elPref, elArea, elLots, elFloor, elAnnual, elAnnualLand].forEach((el) => {
+      el.addEventListener("input", recalc);
+      el.addEventListener("change", recalc);
+    });
+    document.querySelectorAll(".kk-risk").forEach((cb) => cb.addEventListener("change", recalc));
+
+    document.getElementById("kk-copy-btn").addEventListener("click", async () => {
+      const lbl = document.getElementById("kk-copy-label");
+      try {
+        await navigator.clipboard.writeText(state.shareText);
+        if (lbl) {
+          lbl.textContent = "コピーしました";
+          setTimeout(() => (lbl.textContent = "LINE共有用にコピー"), 2200);
+        }
+      } catch {
+        window.prompt("以下の試算結果をコピーして共有してください：", state.shareText);
+      }
+    });
+    document.getElementById("kk-print-btn").addEventListener("click", () => window.print());
+
+    const kkMobBar = document.getElementById("kk-mobile-bar");
+    const kkResPanel = document.getElementById("kk-result-panel");
+    if (kkMobBar && kkResPanel && "IntersectionObserver" in window) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          const visible = entries[0]?.isIntersecting;
+          kkMobBar.classList.toggle("translate-y-full", Boolean(visible));
+          kkMobBar.classList.toggle("opacity-0", Boolean(visible));
+          kkMobBar.classList.toggle("pointer-events-none", Boolean(visible));
+        },
+        { threshold: 0.12 },
+      );
+      io.observe(kkResPanel);
+    }
+
+    recalc();
+  </script>
+</BaseLayout>

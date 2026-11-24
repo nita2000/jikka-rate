@@ -39,6 +39,7 @@ export const GET: APIRoute = ({ site }) => {
 - 空き家の固定資産税（住宅用地特例解除）＆相続登記費用シミュレーター: ${baseUrl}/tools/akiya-tax/
 - 相続手続き期限＆空き家3,000万円特別控除 逆算カレンダー: ${baseUrl}/tools/inheritance-deadline/
 - 遠方の墓維持 vs 墓じまい（永代供養・樹木葬）15年損益＆葬祭費シミュレーター: ${baseUrl}/tools/hakajimai-simulator/
+- 売れない実家・土地の最終出口（相続土地国庫帰属制度・法定負担金 vs 維持・買取・相続放棄）シミュレーター: ${baseUrl}/tools/kokko-kizoku/
 - 主要${siteMeta.total_cases}パターン 実家・空き家・お墓タイプ別相場データベース: ${baseUrl}/cases/
 - 実家・終活の2択損益分岐比較一覧（${siteMeta.total_compare_pairs}組）: ${baseUrl}/compare/
 - 全国47都道府県別 空き家率・解体坪単価・葬祭費一覧: ${baseUrl}/pref/

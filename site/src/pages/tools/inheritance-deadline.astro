@@ -362,9 +362,12 @@ const schema = [
         ? "2024年3月以前の相続のため、2027年3月31日が猶予期限（過料最大10万円）"
         : "不動産の取得を知った日から3年以内が義務（過料最大10万円）";
 
-      // 空き家3,000万円特別控除の売却期限：3年を経過する日の属する年の12月31日
+      // 空き家3,000万円特別控除の売却期限：「3年を経過する日の属する年の12月31日」と「現行法適用期限（2027年12月31日）」の早い方
       const threeYearsLater = addMonths(baseDate, 36);
-      const exemptDeadline = new Date(threeYearsLater.getFullYear(), 11, 31);
+      const principleExemptDeadline = new Date(threeYearsLater.getFullYear(), 11, 31);
+      const statutorySunset = new Date(2027, 11, 31);
+      const isAfter2027 = principleExemptDeadline > statutorySunset;
+      const exemptDeadline = isAfter2027 ? statutorySunset : principleExemptDeadline;
 
       const exemptDays = diffDaysFromToday(exemptDeadline);
       const tokiDays = diffDaysFromToday(tokiDeadline);
@@ -372,9 +375,8 @@ const schema = [
       const tokiB = statusBadge(tokiDays);
 
       document.getElementById("val-exempt-deadline").textContent = fmtJpDate(exemptDeadline);
-      const isAfter2027 = exemptDeadline.getFullYear() > 2027;
       document.getElementById("note-exempt-deadline").textContent = isAfter2027
-        ? "相続から3年目の12月末が原則期限（※現行法の特例適用期限は2027年12月31日までの譲渡のため延長動向も要確認）"
+        ? `現行法の適用期限は2027年12月31日まで（※制度が延長された場合の原則期限は ${fmtJpDate(principleExemptDeadline)}）`
         : "相続開始から3年を経過する年の12月31日までに引き渡し完了が目安";
       const elExBadge = document.getElementById("badge-exempt-remain");
       elExBadge.textContent = exemptB.text;

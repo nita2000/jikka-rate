@@ -74,7 +74,9 @@ const schema = {
         },
         {
           "@type": "Question",
-          name: `${item.short_name}は解体して更地売却とそのまま売却・買取のどちらが得ですか？`,
+          name: isMansion
+            ? `${item.short_name}は片付け後の仲介売却と専門買取のどちらが得ですか？`
+            : `${item.short_name}は解体して更地売却とそのまま売却・買取のどちらが得ですか？`,
           acceptedAnswer: {
             "@type": "Answer",
             text: `試算上、最も有利なのは「${disp.best_strategy_label}（最終手残り目安 ${formatSignedYen(disp.best_sale_net_yen)}）」です。`,
@@ -406,11 +408,15 @@ const schema = {
 
   <AffiliateCta
     slotType={(item.recommended_slot as AffiliateSlot) || "sell"}
-    title={`${item.short_name}は「${isGrave ? "新しい供養先の比較" : disp.best_strategy_label}」から検討するのがもっとも安心`}
+    title={
+      isGrave
+        ? `${item.short_name}の墓じまいを進める前に、全体の費用と手順を確認する`
+        : `${item.short_name}は「${disp.best_strategy_label}」を軸に、今の状態での目安を確認する`
+    }
     description={
       isGrave
-        ? "墓石の撤去工事を頼む前に、まず移転先となる樹木葬・永代供養墓の空き状況と総額を比較して受入先を決めることで、手戻りなくスムーズに進められます。"
-        : "解体工事や遺品整理の費用を先払いする前に、まずは今の状態でいくらで売却・買取できるかを把握し、手残りがもっとも多い方法を確認しましょう。"
+        ? "墓じまいは石材撤去だけでなく、改葬許可申請・閉眼供養・受入先の手配まで順序が重要です。家族で話し合う前に、全体の段取りと費用目安がわかる資料を手元に揃えておくと手戻りを防げます。"
+        : "解体工事や遺品整理の費用を先払いする前に、まずは現状のまま売却・買取した場合の目安を確認しておくと、持ち出しリスクを抑えて手残りの多い方法を選べます。"
     }
     fallbackHref={isGrave ? "/tools/hakajimai-simulator/" : `/tools/disposal-simulator/?case=${item.slug}`}
     fallbackLabel={`${item.short_name}を自分の都道府県で試算する →`}

@@ -2,12 +2,48 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import AffiliateCta from "../../components/AffiliateCta.astro";
 import GuideSidebar from "../../components/GuideSidebar.astro";
+
+const guideSchema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: "空き家の固定資産税が「最大6倍（実効4.2倍）」に増える仕組みと勧告前の対策",
+    description:
+      "2023年12月施行の改正空家等対策特措法で新設された管理不全空き家による住宅用地特例（1/6・1/3）解除の仕組み、実効約4.2倍になる負担調整措置、指導から勧告までの流れを解説。",
+    dateModified: "2026-11-24",
+    author: { "@type": "Organization", name: "実家と空き家の試算表" },
+    publisher: { "@type": "Organization", name: "実家と空き家の試算表" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "空き家を放置するといきなり固定資産税が6倍になりますか？",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "いきなり増税されるわけではなく、自治体からの「指導」に従わず改善されない場合に「勧告」を受け、その翌年（1月1日時点）から住宅用地の軽減が解除されます。また負担調整措置（評価額の70%上限）により、固定資産税単体では実質約4.2倍（都市計画税合算で約3.6〜4.2倍）になります。",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "管理不全空き家の勧告を避けるために先に解体して更地にしても大丈夫ですか？",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "建物を解体して更地にした時点で住宅用地の軽減（1/6）が外れるため、売却の目処が立つ前に更地にすると勧告を受けた場合と同じく高い固定資産税を毎年支払うことになります。",
+        },
+      },
+    ],
+  },
+];
 ---
 
 <BaseLayout
   title="空き家の固定資産税が「最大6倍（実効4.2倍）」に増える仕組みと勧告前の対策"
   description="2023年12月施行の改正空家等対策特措法で新設された「管理不全空き家」による住宅用地特例（1/6・1/3）解除の仕組み、なぜ実効約4.2倍になるのか、勧告前の売却・買取対策を解説します。"
   canonicalPath="/guide/akiya-6x-tax-2023-reform/"
+  schema={guideSchema}
 >
   <nav class="text-xs text-slate-500 mb-4 flex items-center gap-1.5">
     <a href="/" class="hover:text-emerald-700">トップ</a><span>/</span>
@@ -57,6 +93,24 @@ import GuideSidebar from "../../components/GuideSidebar.astro";
         <p>
           ご自身の実家で軽減が外れた場合の増税額は、<a href="/tools/akiya-tax/" class="text-emerald-700 font-bold underline">空き家の固定資産税・相続登記シミュレーター</a>で試算できます。
         </p>
+
+        <h2 class="text-lg font-extrabold text-slate-900 border-b border-slate-200 pb-2 pt-2">4. 自治体からの通知フロー（いきなり増税ではないが放置は厳禁）</h2>
+        <ol class="list-decimal pl-5 space-y-1.5">
+          <li><strong>実態調査・助言</strong>：近隣からの連絡や定期パトロールで劣化が確認されると、所有者へ現状確認の文書が届きます。</li>
+          <li><strong>指導（管理不全空き家）</strong>：窓割れ・屋根破損・雑草越境などの改善を求める正式な「指導」が行われます。この段階ではまだ固定資産税は1/6のままです。</li>
+          <li><strong>勧告（ここで住宅用地の軽減が解除）</strong>：指導に応じず改善されない場合、「勧告」が発出され、翌年1月1日賦課分から固定資産税・都市計画税の軽減が外れます。</li>
+          <li><strong>特定空き家への移行・命令・行政代執行</strong>：倒壊危険がさらに進むと特定空き家として命令（過料50万円以下）、最悪の場合は自治体が強制解体して費用を所有者へ請求します。</li>
+        </ol>
+
+        <div class="pt-2 border-t border-slate-100">
+          <div class="text-xs font-extrabold text-slate-900 mb-2">傷みや荷物が気になる実家の関連相場</div>
+          <div class="flex flex-wrap gap-2 text-xs">
+            <a href="/cases/termite-rainleak-damaged-30tsubo/" class="rounded-xs border border-slate-200 bg-slate-50 hover:border-emerald-600 px-2.5 py-1 font-bold text-slate-700 hover:text-emerald-800">雨漏り・シロアリ被害実家 →</a>
+            <a href="/cases/heavy-residual-hoarder-32tsubo/" class="rounded-xs border border-slate-200 bg-slate-50 hover:border-emerald-600 px-2.5 py-1 font-bold text-slate-700 hover:text-emerald-800">残置物大量の実家 →</a>
+            <a href="/cases/fire-damaged-akiya-30tsubo/" class="rounded-xs border border-slate-200 bg-slate-50 hover:border-emerald-600 px-2.5 py-1 font-bold text-slate-700 hover:text-emerald-800">火災跡地・焼損実家 →</a>
+            <a href="/compare/keep-6x-heavy-vs-demolish-sarachi-hold/" class="rounded-xs border border-slate-200 bg-slate-50 hover:border-emerald-600 px-2.5 py-1 font-bold text-slate-700 hover:text-emerald-800">重課維持 vs 解体更地維持の比較 →</a>
+          </div>
+        </div>
       </div>
 
       <AffiliateCta

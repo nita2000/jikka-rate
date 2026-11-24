@@ -63,7 +63,7 @@
         "furuya_gross_sale_yen": 7413600,
         "furuya_broker_fee_yen": 330000,
         "furuya_net_proceeds_yen": 7003600,
-        "kaitori_net_proceeds_yen": 3781575,
+        "kaitori_net_proceeds_yen": 5863950,
         "best_sale_net_yen": 7065625,
         "best_strategy_label": "解体して更地で仲介売却",
         "net_benefit_vs_10y_keep_yen": 10047821
@@ -214,7 +214,7 @@
         "furuya_gross_sale_yen": 8796400,
         "furuya_broker_fee_yen": 356281,
         "furuya_net_proceeds_yen": 8160119,
-        "kaitori_net_proceeds_yen": 4630500,
+        "kaitori_net_proceeds_yen": 7038750,
         "best_sale_net_yen": 8323337,
         "best_strategy_label": "解体して更地で仲介売却",
         "net_benefit_vs_10y_keep_yen": 11465131
@@ -365,7 +365,7 @@
         "furuya_gross_sale_yen": 16206000,
         "furuya_broker_fee_yen": 600798,
         "furuya_net_proceeds_yen": 15525202,
-        "kaitori_net_proceeds_yen": 5762400,
+        "kaitori_net_proceeds_yen": 9061650,
         "best_sale_net_yen": 15525202,
         "best_strategy_label": "壊さず古家付きで仲介売却",
         "net_benefit_vs_10y_keep_yen": 19040052
@@ -516,7 +516,7 @@
         "furuya_gross_sale_yen": 9916720,
         "furuya_broker_fee_yen": 393252,
         "furuya_net_proceeds_yen": 9243468,
-        "kaitori_net_proceeds_yen": 5206740,
+        "kaitori_net_proceeds_yen": 7927590,
         "best_sale_net_yen": 9398632,
         "best_strategy_label": "解体して更地で仲介売却",
         "net_benefit_vs_10y_keep_yen": 12819200
@@ -667,7 +667,7 @@
         "furuya_gross_sale_yen": 11225200,
         "furuya_broker_fee_yen": 436432,
         "furuya_net_proceeds_yen": 10508768,
-        "kaitori_net_proceeds_yen": 5865300,
+        "kaitori_net_proceeds_yen": 8957550,
         "best_sale_net_yen": 10661827,
         "best_strategy_label": "解体して更地で仲介売却",
         "net_benefit_vs_10y_keep_yen": 14275141
@@ -818,7 +818,7 @@
         "furuya_gross_sale_yen": 12093616,
         "furuya_broker_fee_yen": 465089,
         "furuya_net_proceeds_yen": 11348527,
-        "kaitori_net_proceeds_yen": 6019650,
+        "kaitori_net_proceeds_yen": 9481530,
         "best_sale_net_yen": 11642938,
         "best_strategy_label": "解体して更地で仲介売却",
         "net_benefit_vs_10y_keep_yen": 15138090
@@ -969,7 +969,7 @@
         "furuya_gross_sale_yen": 12818020,
         "furuya_broker_fee_yen": 488995,
         "furuya_net_proceeds_yen": 11749025,
-        "kaitori_net_proceeds_yen": 6791400,
+        "kaitori_net_proceeds_yen": 10281562,
         "best_sale_net_yen": 12136694,
         "best_strategy_label": "解体して更地で仲介売却",
         "net_benefit_vs_10y_keep_yen": 16064642
@@ -1120,7 +1120,7 @@
         "furuya_gross_sale_yen": 9188080,
         "furuya_broker_fee_yen": 369207,
         "furuya_net_proceeds_yen": 8538873,
-        "kaitori_net_proceeds_yen": 4836300,
+        "kaitori_net_proceeds_yen": 7351950,
         "best_sale_net_yen": 8697085,
         "best_strategy_label": "解体して更地で仲介売却",
         "net_benefit_vs_10y_keep_yen": 11906001
@@ -1875,10 +1875,10 @@
         "furuya_gross_sale_yen": 1895920,
         "furuya_broker_fee_yen": 284388,
         "furuya_net_proceeds_yen": 1331532,
-        "kaitori_net_proceeds_yen": 1749300,
-        "best_sale_net_yen": 1749300,
+        "kaitori_net_proceeds_yen": 1941150,
+        "best_sale_net_yen": 1941150,
         "best_strategy_label": "壊さず・片付けず専門買取",
-        "net_benefit_vs_10y_keep_yen": 4757032
+        "net_benefit_vs_10y_keep_yen": 4948882
       },
       "hakajimai": null,
       "ten_year_curve": [
@@ -2177,7 +2177,7 @@
         "furuya_gross_sale_yen": 10604880,
         "furuya_broker_fee_yen": 415961,
         "furuya_net_proceeds_yen": 10108919,
-        "kaitori_net_proceeds_yen": 5556600,
+        "kaitori_net_proceeds_yen": 8471250,
         "best_sale_net_yen": 10108919,
         "best_strategy_label": "壊さず古家付きで仲介売却",
         "net_benefit_vs_10y_keep_yen": 13753157
@@ -2328,7 +2328,7 @@
         "furuya_gross_sale_yen": 9745360,
         "furuya_broker_fee_yen": 387597,
         "furuya_net_proceeds_yen": 9077763,
-        "kaitori_net_proceeds_yen": 5433120,
+        "kaitori_net_proceeds_yen": 7969170,
         "best_sale_net_yen": 9077763,
         "best_strategy_label": "壊さず古家付きで仲介売却",
         "net_benefit_vs_10y_keep_yen": 12858747
@@ -2479,7 +2479,7 @@
         "furuya_gross_sale_yen": 7973800,
         "furuya_broker_fee_yen": 330000,
         "furuya_net_proceeds_yen": 7363800,
-        "kaitori_net_proceeds_yen": 4733400,
+        "kaitori_net_proceeds_yen": 6683025,
         "best_sale_net_yen": 7363800,
         "best_strategy_label": "壊さず古家付きで仲介売却",
         "net_benefit_vs_10y_keep_yen": 11172926
@@ -2630,7 +2630,7 @@
         "furuya_gross_sale_yen": 7537000,
         "furuya_broker_fee_yen": 330000,
         "furuya_net_proceeds_yen": 6627000,
-        "kaitori_net_proceeds_yen": 4723110,
+        "kaitori_net_proceeds_yen": 6457485,
         "best_sale_net_yen": 6740723,
         "best_strategy_label": "解体して更地で仲介売却",
         "net_benefit_vs_10y_keep_yen": 10463403
@@ -2781,7 +2781,7 @@
         "furuya_gross_sale_yen": 11498140,
         "furuya_broker_fee_yen": 445439,
         "furuya_net_proceeds_yen": 10472701,
-        "kaitori_net_proceeds_yen": 6194580,
+        "kaitori_net_proceeds_yen": 9280718,
         "best_sale_net_yen": 10828424,
         "best_strategy_label": "解体して更地で仲介売却",
         "net_benefit_vs_10y_keep_yen": 14637864
@@ -2929,12 +2929,12 @@
         "sarachi_gross_sale_yen": 12800000,
         "sarachi_broker_fee_yen": 488400,
         "sarachi_net_proceeds_yen": 12063436,
-        "furuya_gross_sale_yen": 12107600,
-        "furuya_broker_fee_yen": 465551,
-        "furuya_net_proceeds_yen": 11422049,
-        "kaitori_net_proceeds_yen": 5376000,
+        "furuya_gross_sale_yen": 12032000,
+        "furuya_broker_fee_yen": 463056,
+        "furuya_net_proceeds_yen": 11348944,
+        "kaitori_net_proceeds_yen": 9125250,
         "best_sale_net_yen": 12063436,
-        "best_strategy_label": "解体して更地で仲介売却",
+        "best_strategy_label": "管理費がかさむ前に仲介売却",
         "net_benefit_vs_10y_keep_yen": 16225826
       },
       "hakajimai": null,
@@ -3234,10 +3234,10 @@
         "furuya_gross_sale_yen": 3399462,
         "furuya_broker_fee_yen": 330000,
         "furuya_net_proceeds_yen": 2789462,
-        "kaitori_net_proceeds_yen": 2898350,
-        "best_sale_net_yen": 2898350,
+        "kaitori_net_proceeds_yen": 3031482,
+        "best_sale_net_yen": 3031482,
         "best_strategy_label": "壊さず・片付けず専門買取",
-        "net_benefit_vs_10y_keep_yen": 5739052
+        "net_benefit_vs_10y_keep_yen": 5872184
       },
       "hakajimai": null,
       "ten_year_curve": [
@@ -3385,7 +3385,7 @@
         "furuya_gross_sale_yen": 6884080,
         "furuya_broker_fee_yen": 330000,
         "furuya_net_proceeds_yen": 5974080,
-        "kaitori_net_proceeds_yen": 4873050,
+        "kaitori_net_proceeds_yen": 5684700,
         "best_sale_net_yen": 6341936,
         "best_strategy_label": "解体して更地で仲介売却",
         "net_benefit_vs_10y_keep_yen": 9528192
@@ -3536,7 +3536,7 @@
         "furuya_gross_sale_yen": 8267200,
         "furuya_broker_fee_yen": 338818,
         "furuya_net_proceeds_yen": 7648382,
-        "kaitori_net_proceeds_yen": 5446350,
+        "kaitori_net_proceeds_yen": 6641850,
         "best_sale_net_yen": 7794870,
         "best_strategy_label": "解体して更地で仲介売却",
         "net_benefit_vs_10y_keep_yen": 10997356
@@ -3687,10 +3687,10 @@
         "furuya_gross_sale_yen": 2995120,
         "furuya_broker_fee_yen": 330000,
         "furuya_net_proceeds_yen": 2385120,
-        "kaitori_net_proceeds_yen": 2548000,
-        "best_sale_net_yen": 2548000,
+        "kaitori_net_proceeds_yen": 2668350,
+        "best_sale_net_yen": 2668350,
         "best_strategy_label": "壊さず・片付けず専門買取",
-        "net_benefit_vs_10y_keep_yen": 6680662
+        "net_benefit_vs_10y_keep_yen": 6801012
       },
       "hakajimai": null,
       "ten_year_curve": [
@@ -3838,7 +3838,7 @@
         "furuya_gross_sale_yen": 4702576,
         "furuya_broker_fee_yen": 330000,
         "furuya_net_proceeds_yen": 4092576,
-        "kaitori_net_proceeds_yen": 3694600,
+        "kaitori_net_proceeds_yen": 4050030,
         "best_sale_net_yen": 4132615,
         "best_strategy_label": "解体して更地で仲介売却",
         "net_benefit_vs_10y_keep_yen": 7194891
@@ -3989,7 +3989,7 @@
         "furuya_gross_sale_yen": 5754160,
         "furuya_broker_fee_yen": 330000,
         "furuya_net_proceeds_yen": 5144160,
-        "kaitori_net_proceeds_yen": 4127760,
+        "kaitori_net_proceeds_yen": 4776510,
         "best_sale_net_yen": 5265876,
         "best_strategy_label": "解体して更地で仲介売却",
         "net_benefit_vs_10y_keep_yen": 8299932
@@ -4291,7 +4291,7 @@
         "furuya_gross_sale_yen": 6221920,
         "furuya_broker_fee_yen": 330000,
         "furuya_net_proceeds_yen": 5311920,
-        "kaitori_net_proceeds_yen": 4471740,
+        "kaitori_net_proceeds_yen": 5168640,
         "best_sale_net_yen": 5698082,
         "best_strategy_label": "解体して更地で仲介売却",
         "net_benefit_vs_10y_keep_yen": 9066926
@@ -4442,7 +4442,7 @@
         "furuya_gross_sale_yen": 3886720,
         "furuya_broker_fee_yen": 330000,
         "furuya_net_proceeds_yen": 2976720,
-        "kaitori_net_proceeds_yen": 3057600,
+        "kaitori_net_proceeds_yen": 3349200,
         "best_sale_net_yen": 3357020,
         "best_strategy_label": "解体して更地で仲介売却",
         "net_benefit_vs_10y_keep_yen": 6286890
@@ -4593,7 +4593,7 @@
         "furuya_gross_sale_yen": 5887120,
         "furuya_broker_fee_yen": 330000,
         "furuya_net_proceeds_yen": 5277120,
-        "kaitori_net_proceeds_yen": 4242420,
+        "kaitori_net_proceeds_yen": 4895670,
         "best_sale_net_yen": 5383310,
         "best_strategy_label": "解体して更地で仲介売却",
         "net_benefit_vs_10y_keep_yen": 8445454
@@ -4744,7 +4744,7 @@
         "furuya_gross_sale_yen": 5163520,
         "furuya_broker_fee_yen": 330000,
         "furuya_net_proceeds_yen": 4253520,
-        "kaitori_net_proceeds_yen": 3898440,
+        "kaitori_net_proceeds_yen": 4374840,
         "best_sale_net_yen": 4624550,
         "best_strategy_label": "解体して更地で仲介売却",
         "net_benefit_vs_10y_keep_yen": 7714776
@@ -6057,7 +6057,7 @@
         "furuya_gross_sale_yen": 8267200,
         "furuya_broker_fee_yen": 338818,
         "furuya_net_proceeds_yen": 6928382,
-        "kaitori_net_proceeds_yen": 3678975,
+        "kaitori_net_proceeds_yen": 5921850,
         "best_sale_net_yen": 7074870,
         "best_strategy_label": "解体して更地で仲介売却",
         "net_benefit_vs_10y_keep_yen": 11157356

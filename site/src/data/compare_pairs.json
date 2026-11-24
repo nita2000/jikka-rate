@@ -30,17 +30,17 @@
       "annual_ongoing_yen": 0,
       "cost_5y_yen": 0,
       "cost_10y_yen": 0,
-      "net_cash_5y_yen": 4630500,
-      "net_cash_10y_yen": 4630500,
+      "net_cash_5y_yen": 7038750,
+      "net_cash_10y_yen": 7038750,
       "short_winner": "壊さず専門買取",
-      "note": "解体費0円・残置物片付け0円・仲介手数料0円で即現金化 → 手残り +4,630,500円"
+      "note": "解体費0円・残置物片付け0円・仲介手数料0円で即現金化 → 手残り +7,038,750円"
     },
     "winner_side": "A",
     "winner_label": "自費で解体して更地仲介売却",
-    "diff_5y_yen": 3692837,
-    "diff_10y_yen": 3692837,
+    "diff_5y_yen": 1284587,
+    "diff_10y_yen": 1284587,
     "payback_years": null,
-    "verdict_short": "解体して更地売却が 約369万円 有利"
+    "verdict_short": "解体して更地売却が 約128万円 有利"
   },
   {
     "slug": "furuya-broker-vs-sarachi-sale-30tsubo",
@@ -202,17 +202,17 @@
       "annual_ongoing_yen": 0,
       "cost_5y_yen": 0,
       "cost_10y_yen": 0,
-      "net_cash_5y_yen": 4873050,
-      "net_cash_10y_yen": 4873050,
+      "net_cash_5y_yen": 5684700,
+      "net_cash_10y_yen": 5684700,
       "short_winner": "壊さず専門買取",
-      "note": "解体費0円・残置物片付け0円・仲介手数料0円で即現金化 → 手残り +4,873,050円"
+      "note": "解体費0円・残置物片付け0円・仲介手数料0円で即現金化 → 手残り +5,684,700円"
     },
     "winner_side": "A",
     "winner_label": "遺品整理・片付けを発注してから仲介売却",
-    "diff_5y_yen": 1101030,
-    "diff_10y_yen": 1101030,
+    "diff_5y_yen": 289380,
+    "diff_10y_yen": 289380,
     "payback_years": null,
-    "verdict_short": "古家付き仲介売却が 約110万円 有利"
+    "verdict_short": "古家付き仲介売却が 約29万円 有利"
   },
   {
     "slug": "kominka-55tsubo-sarachi-vs-kaitori",
@@ -288,17 +288,17 @@
       "annual_ongoing_yen": 0,
       "cost_5y_yen": 0,
       "cost_10y_yen": 0,
-      "net_cash_5y_yen": 11422049,
-      "net_cash_10y_yen": 11422049,
+      "net_cash_5y_yen": 11348944,
+      "net_cash_10y_yen": 11348944,
       "short_winner": "早期の仲介売却",
-      "note": "解体せず仲介売却 → 売却後の最終手残り +11,422,049円"
+      "note": "解体せず仲介売却 → 売却後の最終手残り +11,348,944円"
     },
     "winner_side": "B",
     "winner_label": "管理費がかさむ前に仲介売却",
-    "diff_5y_yen": 13422144,
-    "diff_10y_yen": 15422239,
+    "diff_5y_yen": 13349039,
+    "diff_10y_yen": 15349134,
     "payback_years": null,
-    "verdict_short": "早期の仲介売却が 約1,542万円 有利"
+    "verdict_short": "早期の仲介売却が 約1,535万円 有利"
   },
   {
     "slug": "shakuchi-return-sarachi-vs-kaitori",
@@ -331,17 +331,17 @@
       "annual_ongoing_yen": 0,
       "cost_5y_yen": 0,
       "cost_10y_yen": 0,
-      "net_cash_5y_yen": 2548000,
-      "net_cash_10y_yen": 2548000,
+      "net_cash_5y_yen": 2668350,
+      "net_cash_10y_yen": 2668350,
       "short_winner": "壊さず専門買取",
-      "note": "解体費0円・残置物片付け0円・仲介手数料0円で即現金化 → 手残り +2,548,000円"
+      "note": "解体費0円・残置物片付け0円・仲介手数料0円で即現金化 → 手残り +2,668,350円"
     },
     "winner_side": "B",
     "winner_label": "借地権付き建物のまま専門会社へ買取売却",
-    "diff_5y_yen": 4672817,
-    "diff_10y_yen": 4672817,
+    "diff_5y_yen": 4793167,
+    "diff_10y_yen": 4793167,
     "payback_years": null,
-    "verdict_short": "壊さず専門買取が 約467万円 有利"
+    "verdict_short": "壊さず専門買取が 約479万円 有利"
   },
   {
     "slug": "akiya-normal-tax-vs-6x-heavy-tax",

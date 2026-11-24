@@ -25,13 +25,30 @@ import taxRules from "../data/tax_rules.json";
     </div>
 
     <div class="card-surface rounded p-5 sm:p-6 space-y-4 text-sm text-slate-700 leading-relaxed">
-      <h2 class="text-base font-extrabold text-slate-900 border-b border-slate-200 pb-2">1. 公的統計および一次データ出典</h2>
-      <ul class="list-disc pl-5 space-y-1.5 text-xs sm:text-sm">
-        <li>都道府県別空き家率・放置空き家統計：総務省統計局「住宅・土地統計調査（e-Stat）」</li>
-        <li>工事・修繕・火葬料金推移：総務省統計局「小売物価統計調査（e-Stat）」および各自治体公表の公営斎場・国民健康保険葬祭費基準</li>
-        <li>住宅地地価・建築物除却基準：国土交通省「都道府県地価調査」および建築物除却・石綿対策関連公表資料</li>
-        <li>墓じまい（改葬）統計：厚生労働省「衛生行政報告例（埋葬及び火葬の死体・死胎数並びに改葬数）」</li>
-      </ul>
+      <h2 class="text-base font-extrabold text-slate-900 border-b border-slate-200 pb-2">1. 公的統計・法定基準と独自試算モデルの区分</h2>
+      <p class="text-xs sm:text-sm">
+        当サイトの数値は、読者の方が前提を誤解しないよう<strong>「公的統計・法定ルールにもとづく基準値」</strong>と<strong>「当サイト独自の試算モデル値」</strong>を組み合わせて構成しています。
+      </p>
+      <div class="grid gap-4 sm:grid-cols-2 text-xs">
+        <div class="rounded-xs border border-emerald-200 bg-emerald-50/40 p-3.5 space-y-1.5">
+          <div class="font-extrabold text-emerald-900">① 公的統計・法定基準にもとづく項目</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-700 leading-relaxed">
+            <li>都道府県別の総空き家率・放置型空き家率：総務省統計局「住宅・土地統計調査」</li>
+            <li>住宅地地価の地域水準：国土交通省「都道府県地価調査」等</li>
+            <li>改葬（墓じまい）件数の推移：厚生労働省「衛生行政報告例」</li>
+            <li>葬祭費給付金・公営火葬料：各自治体公表の国民健康保険・公営斎場基準</li>
+            <li>税制・法定算定式：固定資産税（1.4%）・都市計画税（0.3%）・住宅用地特例と負担調整70%上限・登録免許税（0.4%）・長期譲渡所得税（20.315%）・空き家3,000万円特別控除（相続人3人以上は各2,000万円）・仲介手数料上限（800万円以下33万円特例）・相続土地国庫帰属制度の負担金法定算定式</li>
+          </ul>
+        </div>
+        <div class="rounded-xs border border-slate-200 bg-slate-50/70 p-3.5 space-y-1.5">
+          <div class="font-extrabold text-slate-900">② 独自試算モデルによる概算項目</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-700 leading-relaxed">
+            <li>47都道府県別の構造別解体坪単価（木造・鉄骨・RC）：総務省「小売物価統計調査」等の維持修繕・工事指数トレンドと市場相場基準をもとに、地域差オフセットを組み込んだ独自推計モデル値</li>
+            <li>古家付き仲介・直接買取の想定価格係数：解体費見込み値引き・再建築可否・残置物量を加味した標準的な試算係数</li>
+            <li>空き家年間維持費・墓石撤去費・離檀御礼：一般的な実務相場レンジの中央値目安</li>
+          </ul>
+        </div>
+      </div>
 
       <h2 class="text-base font-extrabold text-slate-900 border-b border-slate-200 pb-2 pt-2">2. 適用している法改正・税制ルール</h2>
       <ul class="list-disc pl-5 space-y-1 text-xs sm:text-sm">

@@ -307,9 +307,20 @@ const schema = {
               <input id="man-maint" type="number" step="1" min="2" max="200" class="mt-1 w-full rounded-xs border border-slate-300 px-2.5 py-1.5 tabular-nums" />
             </label>
           </div>
+          <div>
+            <label class="block">
+              <span class="font-bold text-slate-700">自治体の空き家解体補助金（着工前申請が条件）</span>
+              <select id="man-subsidy" class="mt-1 w-full rounded-xs border border-slate-300 bg-white px-2.5 py-1.5 text-xs font-medium text-slate-800">
+                <option value="0" selected>補助金なし・未確認（0円）</option>
+                <option value="30">補助上限 30万円を想定</option>
+                <option value="50">補助上限 50万円を想定</option>
+                <option value="100">補助上限 100万円を想定</option>
+              </select>
+            </label>
+          </div>
           <div class="pt-1 flex justify-end">
             <button type="button" id="reset-auto-btn" class="text-[11px] font-bold text-emerald-700 hover:underline">
-              公的統計の自動計算に戻す ↺
+              自動試算の初期値に戻す ↺
             </button>
           </div>
         </div>
@@ -317,7 +328,7 @@ const schema = {
     </div>
 
     <!-- 右：診断結果・ユーザーメリット・3ルート比較（改行落ち防止設計） -->
-    <div class="lg:col-span-7 min-w-0 space-y-5 print-result-col">
+    <div id="disp-result-panel" class="lg:col-span-7 min-w-0 space-y-5 print-result-col scroll-mt-20">
       <div class="card-surface rounded p-5 sm:p-6 print-result-card">
         <!-- 最上段：結論カード -->
         <div id="verdict-hero" class="rounded border border-slate-200 border-l-4 border-l-emerald-700 bg-emerald-50/60 p-4 sm:p-5 mb-5 print-keep-together">
@@ -480,13 +491,13 @@ const schema = {
         <div id="disp-insight" class="mt-3 rounded-xs bg-slate-50 border border-slate-200 p-4 text-xs text-slate-700 leading-relaxed space-y-1.5"></div>
       </div>
 
-      <!-- 診断結果連動の動的CTA（訳あり買取 / 不動産一括査定 / 解体一括見積もりを自動切替） -->
+      <!-- 診断結果連動の動的CTA（訳あり買取 / 売却相談 / 解体見積もりを自動切替） -->
       <div class="no-print">
         <div id="cta-wrap-sell">
           <AffiliateCta
             slotType="sell"
-            title="まずは「建物を壊さず・片付けない状態」でいくらになるか査定を比べてみる"
-            description="先に解体工事を発注してしまうと、万一売れ残ったときに固定資産税の軽減が外れてしまいます。まずは現状のまま「古家付き仲介」での売却額を複数社で確認してから判断するのが安心です。"
+            title="まずは「建物を壊さず・片付けない状態」での実勢目安と手続きを確認する"
+            description="上記の試算は都道府県平均にもとづく概算であり、実際には前面道路の幅員・再建築の可否・近隣の成約事例で ±200万〜500万円ほど差が出ます。先に解体して固定資産税の軽減を外してしまう前に、現状のままの売却目安を確認しておくのが安全です。"
             fallbackHref="/tools/inheritance-deadline/"
             fallbackLabel="3,000万円控除の期限と相続手続きを確認する →"
           />
@@ -494,8 +505,8 @@ const schema = {
         <div id="cta-wrap-akiya" class="hidden">
           <AffiliateCta
             slotType="akiya"
-            title="解体・片付け不要の「訳あり・空き家専門買取」で手出し0円の金額を確認する"
-            description="再建築不可・荷物大量・地方で解体すると費用倒れになりやすい実家は、一般仲介で断られても専門買取なら現状のまま最短数週間で現金化できます。解体発注前に買取額を把握しておくのが安全です。"
+            title="解体・片付け不要の「訳あり・空き家専門買取」で持ち出し0円の金額を確認する"
+            description="再建築不可・荷物大量・地方で解体すると費用倒れになりやすい実家は、一般の仲介で断られても専門買取なら現状のまま現金化できるケースがあります。解体や片付けを発注する前に買取目安を把握しておくのが安全です。"
             fallbackHref="/compare/non-rebuildable-kaitori-vs-sarachi-trap/"
             fallbackLabel="再建築不可・訳あり実家の買取 vs 解体比較を見る →"
           />
@@ -503,13 +514,32 @@ const schema = {
         <div id="cta-wrap-kaitai" class="hidden">
           <AffiliateCta
             slotType="kaitai"
-            title="更地売却が有利な条件：解体工事費の相見積もりで手残りを数十万円増やす"
-            description="同じ木造実家でも解体業者の見積もりは30万〜80万円以上の差が出ます。更地にして売却する前に、複数社の解体見積もりと自治体の解体補助金の有無を確認しておきましょう。"
+            title="更地売却が有利な条件：解体工事費の明細と自治体補助金を確認して手残りを増やす"
+            description="同じ木造実家でも解体工事の見積もりは外構・残置物・アスベスト処理の扱いで30万〜80万円以上の差が出ます。着工前の自治体解体補助金とあわせて正確な見積もりを確認しておきましょう。"
             fallbackHref="/guide/kaitai-cost-asbestos-2026/"
             fallbackLabel="解体工事費とアスベスト調査・補助金の詳細を見る →"
           />
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- スマホ専用：下部固定ミニ結果バー（入力中もリアルタイム試算額を常時表示） -->
+  <div
+    id="disp-mobile-bar"
+    class="fixed bottom-0 inset-x-0 z-30 border-t border-slate-200 bg-white/95 backdrop-blur-sm px-4 py-2.5 shadow-lg transition-all duration-200 lg:hidden no-print"
+  >
+    <div class="mx-auto max-w-6xl flex items-center justify-between gap-3">
+      <div class="min-w-0">
+        <div id="disp-mob-label" class="text-[10px] font-bold text-slate-500 truncate">最有力ルートの試算目安</div>
+        <div id="disp-mob-value" class="font-display text-base font-extrabold text-emerald-800 tabular-nums truncate">—</div>
+      </div>
+      <a
+        href="#disp-result-panel"
+        class="shrink-0 rounded-xs bg-emerald-700 hover:bg-emerald-800 text-white px-3.5 py-2 text-xs font-bold transition-colors whitespace-nowrap"
+      >
+        結果を見る ↓
+      </a>
     </div>
   </div>
 
@@ -548,6 +578,7 @@ const schema = {
     const elManDemo = document.getElementById("man-demo");
     const elManRes = document.getElementById("man-res");
     const elManMaint = document.getElementById("man-maint");
+    const elSubsidy = document.getElementById("man-subsidy");
 
     function ageToGroup(years) {
       if (years >= 45) return "old45";
@@ -673,13 +704,19 @@ const schema = {
       if (forceAll || !state.overrides.maint) elManMaint.value = String(auto.baseMaintMan);
     }
 
-    function calcTransferTax(salePriceYen, transferExpenseYen, useExempt) {
+    function calcTransferTax(salePriceYen, transferExpenseYen, useExempt, heirsCount = 1) {
       if (salePriceYen <= 0) return 0;
       // 親の購入時契約書が不明な場合の法定5%概算取得費・長期譲渡所得税率20.315%
+      // 2024年1月改正：相続人1〜2人は1人上限3,000万円、相続人3人以上は1人上限2,000万円
       const assumedAcquisitionCost = Math.round(salePriceYen * 0.05);
-      const deduction = useExempt ? 30000000 : 0;
-      const taxableGain = Math.max(0, salePriceYen - assumedAcquisitionCost - transferExpenseYen - deduction);
-      return Math.round(taxableGain * 0.20315);
+      const totalGain = Math.max(0, salePriceYen - assumedAcquisitionCost - transferExpenseYen);
+      if (!useExempt) {
+        return Math.round(totalGain * 0.20315);
+      }
+      const n = Math.max(1, heirsCount);
+      const perHeirLimit = n >= 3 ? 20000000 : 30000000;
+      const perHeirTaxable = Math.max(0, totalGain / n - perHeirLimit);
+      return Math.round(perHeirTaxable * 0.20315 * n);
     }
 
     function recalc() {
@@ -690,9 +727,11 @@ const schema = {
 
       const landMarketYen = Math.max(0, Number(elManLand.value) || 0) * 10000;
       const demoBodyAndExtYen = Math.max(0, Number(elManDemo.value) || 0) * 10000;
+      const subsidyYen = Math.min(demoBodyAndExtYen, Math.max(0, Number(elSubsidy?.value) || 0) * 10000);
+      const netDemoBodyYen = Math.max(0, demoBodyAndExtYen - subsidyYen);
       const resYen = Math.max(0, Number(elManRes.value) || 0) * 10000;
       const maintAnnualYen = Math.max(0, Number(elManMaint.value) || 0) * 10000;
-      const totalDemoWithResYen = demoBodyAndExtYen + resYen;
+      const totalDemoWithResYen = netDemoBodyYen + resYen;
 
       // 固定資産税・都市計画税計算
       const landSqm = c.land_tsubo * 3.305785;
@@ -733,7 +772,8 @@ const schema = {
 
       // ② 解体して更地仲介売却
       const isMansion = c.slug === "old-mansion-70sqm-age42";
-      const isExemptEligible = !isMansion && effAge >= 30;
+      // 空き家3,000万円特別控除の法定要件：昭和56年（1981年）5月31日以前建築（2026年時点で築45年以上）の戸建て
+      const isExemptEligible = !isMansion && effAge >= 45;
       const effectiveTaxExempt = isExemptEligible && state.taxExempt;
 
       let sarachiGross = landMarketYen;
@@ -745,19 +785,21 @@ const schema = {
       const sarachiBroker = calcBrokerFee(sarachiGross);
       const waitYears = state.loc === "rural" ? 2 : 1;
       const sarachiWaitTax = sarachiTaxAnnual * waitYears;
-      const sarachiTransferTax = calcTransferTax(sarachiGross, demoBodyAndExtYen + sarachiBroker, effectiveTaxExempt);
+      const sarachiTransferTax = calcTransferTax(sarachiGross, netDemoBodyYen + sarachiBroker, effectiveTaxExempt, state.heirs);
       const sarachiNet = sarachiGross - totalDemoWithResYen - sarachiBroker - sarachiWaitTax - sarachiTransferTax;
 
       // ③ 解体せず売却（A: 古家付き仲介 / B: 残置物込み専門買取）
       let furuyaGross = Math.max(0, Math.round(landMarketYen * 0.96 - demoBodyAndExtYen * 0.82));
-      if (c.slug === "leased-land-shakuchi-28tsubo") {
+      if (isMansion) {
+        furuyaGross = Math.round(landMarketYen * 0.94);
+      } else if (c.slug === "leased-land-shakuchi-28tsubo") {
         // 借地権付き実家は地主への譲渡承諾料等を差し引いた借地権実勢で試算
         furuyaGross = Math.round(landMarketYen * 0.48);
       } else if (effAge < 30 && state.cond !== "damaged" && state.loc !== "wakeari") {
         furuyaGross = Math.round(landMarketYen * 1.05 + 1800000);
       }
       const furuyaBroker = calcBrokerFee(furuyaGross);
-      const furuyaTransferTax = calcTransferTax(furuyaGross, furuyaBroker, effectiveTaxExempt);
+      const furuyaTransferTax = calcTransferTax(furuyaGross, furuyaBroker, effectiveTaxExempt, state.heirs);
       const furuyaNet = furuyaGross - furuyaBroker - resYen - normalTaxAnnual - furuyaTransferTax;
 
       let kaitoriGross = Math.round(landMarketYen * 0.72 - demoBodyAndExtYen * 0.42);
@@ -768,7 +810,7 @@ const schema = {
       } else {
         kaitoriGross = Math.max(kaitoriGross, Math.round(landMarketYen * 0.48), 500000);
       }
-      const kaitoriTransferTax = calcTransferTax(kaitoriGross, 0, effectiveTaxExempt);
+      const kaitoriTransferTax = calcTransferTax(kaitoriGross, 0, effectiveTaxExempt, state.heirs);
       const kaitoriNet = kaitoriGross - kaitoriTransferTax;
 
       // 主軸ルートと最終手残りを100%一致させ、詳細テーブルの足し算に矛盾が出ないようにする
@@ -865,6 +907,11 @@ const schema = {
       document.getElementById("verdict-diff-note").textContent =
         `${years}年維持と比べ 合計 +${plainMan(diffVsKeep)} の資産防衛`;
 
+      const mobLbl = document.getElementById("disp-mob-label");
+      const mobVal = document.getElementById("disp-mob-value");
+      if (mobLbl) mobLbl.textContent = `最有力：${bestStrategyTitle}`;
+      if (mobVal) mobVal.textContent = `手残り目安 ${signedMan(bestNet)}`;
+
       // 3つのメリット（それぞれ簡潔な1行に収まる長さに最適化）
       const benefits = asIsWins
         ? [
@@ -886,11 +933,18 @@ const schema = {
       // 詳細テーブル更新（PC幅で横スクロールせず収まる簡潔表記）
       const rows = [
         ["売却想定額（収入）", "0円", `+${yen(sarachiGross)}`, `+${yen(asIsGrossDisp)}`],
-        ["解体・外構撤去費", "0円", isMansion ? "0円" : `▲${yen(demoBodyAndExtYen)}`, "0円"],
+        [
+          subsidyYen > 0 ? `解体・外構費（補助▲${plainMan(subsidyYen)}）` : "解体・外構撤去費",
+          "0円",
+          isMansion ? "0円" : `▲${yen(netDemoBodyYen)}`,
+          "0円",
+        ],
         ["家財片付け費", "0円", `▲${yen(resYen)}`, useKaitoriAsMain ? "0円" : `▲${yen(resYen)}`],
         ["仲介手数料（税込）", "0円", `▲${yen(sarachiBroker)}`, useKaitoriAsMain ? "0円" : `▲${yen(furuyaBroker)}`],
         [
-          effectiveTaxExempt ? "譲渡所得税（控除適用）" : "譲渡所得税（20.315%）",
+          effectiveTaxExempt
+            ? `譲渡所得税（${state.heirs >= 3 ? "各2,000万" : "3,000万"}控除）`
+            : "譲渡所得税（20.315%）",
           "0円",
           sarachiTransferTax > 0 ? `▲${yen(sarachiTransferTax)}` : "0円",
           asIsTransferTax > 0 ? `▲${yen(asIsTransferTax)}` : "0円",
@@ -924,35 +978,36 @@ const schema = {
 
       // 3,000万円特別控除の節税インパクト表示
       const bestGrossForTax = !asIsWins ? sarachiGross : asIsGrossDisp;
-      const bestExpForTax = !asIsWins ? demoBodyAndExtYen + sarachiBroker : useKaitoriAsMain ? 0 : furuyaBroker;
-      const taxWithExempt = calcTransferTax(bestGrossForTax, bestExpForTax, true);
-      const taxWithoutExempt = calcTransferTax(bestGrossForTax, bestExpForTax, false);
+      const bestExpForTax = !asIsWins ? netDemoBodyYen + sarachiBroker : useKaitoriAsMain ? 0 : furuyaBroker;
+      const taxWithExempt = calcTransferTax(bestGrossForTax, bestExpForTax, true, state.heirs);
+      const taxWithoutExempt = calcTransferTax(bestGrossForTax, bestExpForTax, false, state.heirs);
       const taxSavingYen = Math.max(0, taxWithoutExempt - taxWithExempt);
+      const heirLimitLabel = state.heirs >= 3 ? `1人上限2,000万円（${state.heirs}人計 最大${state.heirs * 2000}万円）` : state.heirs === 2 ? "1人上限3,000万円（2人計 最大6,000万円）" : "上限3,000万円";
       const taxBox = document.getElementById("tax-impact-box");
       if (!isExemptEligible) {
         taxBox.className = "mt-4 rounded-xs border border-amber-300 bg-amber-50/70 px-3.5 py-2.5 text-xs text-slate-800 leading-relaxed";
         taxBox.innerHTML =
-          `<strong>空き家3,000万円特別控除の対象外条件：</strong>${isMansion ? "区分マンション" : "築30年未満（1981年6月以降の新耐震）"}は空き家3,000万円特別控除の対象外のため、譲渡所得税（約<strong class="text-rose-700">${plainMan(taxWithoutExempt)}</strong>・取得費不明5%概算）を差し引いています。親の購入時の売買契約書が見つかれば取得費を差し引いて大きく節税できます。` +
+          `<strong>空き家3,000万円特別控除の対象外条件：</strong>${isMansion ? "区分マンション" : "昭和56年（1981年）6月以降の建築（築45年未満）"}は法定要件の対象外のため、譲渡所得税（約<strong class="text-rose-700">${plainMan(taxWithoutExempt)}</strong>・取得費不明5%概算）を差し引いています。${!isMansion ? "昭和56年5月31日以前の旧耐震戸建てなら、STEP 2で「築45年以上」を選ぶと控除ありで試算できます。" : ""}親の購入時の売買契約書が見つかれば取得費を差し引いて大きく節税できます。` +
           ` <a href="/tools/inheritance-deadline/" class="font-bold text-emerald-800 hover:underline whitespace-nowrap">特例の6要件を確認 →</a>`;
       } else if (effectiveTaxExempt) {
-        const midNote = effAge < 45 ? "（※1981年5月31日以前建築の旧耐震戸建てが要件）" : "";
         taxBox.className = "mt-4 rounded-xs border border-emerald-200 bg-emerald-50/50 px-3.5 py-2.5 text-xs text-slate-700 leading-relaxed";
         taxBox.innerHTML =
-          `<strong>空き家3,000万円特別控除の効果：</strong>購入時の契約書が不明（5%概算取得費）の場合、控除を逃すと譲渡所得税が<strong class="text-rose-700">約${plainMan(taxSavingYen)}</strong>増えます。相続開始から<strong>3年目の12月31日</strong>までの売却が期限です${midNote}。` +
+          `<strong>空き家3,000万円特別控除の効果（${heirLimitLabel}）：</strong>購入時の契約書が不明（5%概算取得費）の場合、控除を逃すと譲渡所得税が<strong class="text-rose-700">約${plainMan(taxSavingYen)}</strong>増えます。相続開始から<strong>3年目の12月31日</strong>までの売却が期限です。` +
           ` <a href="/tools/inheritance-deadline/" class="font-bold text-emerald-700 hover:underline whitespace-nowrap">締切日と6つの要件を確認 →</a>`;
       } else {
         taxBox.className = "mt-4 rounded-xs border border-amber-300 bg-amber-50/70 px-3.5 py-2.5 text-xs text-slate-800 leading-relaxed";
         taxBox.innerHTML =
-          `<strong>譲渡所得税の影響（控除なし試算中）：</strong>取得費不明（5%概算）・長期譲渡20.315%として<strong class="text-rose-700">約${plainMan(taxWithoutExempt)}</strong>の税金を差し引いています。空き家3,000万円特別控除の要件を満たせば<strong>約${plainMan(taxSavingYen)}</strong>手残りが増えます。` +
+          `<strong>譲渡所得税の影響（控除なし試算中）：</strong>取得費不明（5%概算）・長期譲渡20.315%として<strong class="text-rose-700">約${plainMan(taxWithoutExempt)}</strong>の税金を差し引いています。空き家3,000万円特別控除（${heirLimitLabel}）の要件を満たせば<strong>約${plainMan(taxSavingYen)}</strong>手残りが増えます。` +
           ` <a href="/tools/inheritance-deadline/" class="font-bold text-emerald-800 hover:underline whitespace-nowrap">対象になるか6問で確認 →</a>`;
       }
 
-      const ageLabel = state.ageGroup === "old45" ? "築45年以上（昭和56年以前）" : state.ageGroup === "new25" ? "築30年未満" : "築30〜44年（標準）";
+      const ageLabel = state.ageGroup === "old45" ? "築45年以上（昭和56年以前）" : state.ageGroup === "new25" ? "築30年未満" : "築30〜44年（昭和57年〜）";
+      const subsidyNote = subsidyYen > 0 ? `／解体補助金 ${plainMan(subsidyYen)}` : "";
       document.getElementById("auto-premise-box").innerHTML =
-        `<strong>試算の前提条件（${isManual ? "手動調整反映中" : "公的データ自動推計"}）：</strong>` +
-        `${pref.name}（木造解体相場 ${pref.wood_man_per_tsubo.toFixed(2)}万円/坪・標準地価 ${pref.land_price_man_per_tsubo.toFixed(1)}万円/坪）／` +
-        `延床${c.floor_tsubo}坪・敷地${c.land_tsubo}坪・${ageLabel}／` +
-        `3,000万円控除：${effectiveTaxExempt ? "適用あり" : !isExemptEligible ? "対象外（自動オフ）" : "なし"}／通常固定資産税 年${yen(normalTaxAnnual)}`;
+        `<strong>試算の前提条件（${isManual ? "手動調整反映中" : "地域相場モデル自動試算"}）：</strong>` +
+        `${pref.name}（木造解体目安 ${pref.wood_man_per_tsubo.toFixed(2)}万円/坪・標準地価 ${pref.land_price_man_per_tsubo.toFixed(1)}万円/坪）／` +
+        `延床${c.floor_tsubo}坪・敷地${c.land_tsubo}坪・${ageLabel}${subsidyNote}／` +
+        `特別控除：${effectiveTaxExempt ? `適用あり（${heirLimitLabel}）` : !isExemptEligible ? "対象外（自動オフ）" : "なし"}／通常固定資産税 年${yen(normalTaxAnnual)}`;
 
       // LINE・メール共有用テキストを生成して保持
       const heirLine = state.heirs > 1 ? `\n・${state.heirs}人で分けた場合：1人あたり ${signedMan(perHeirNet)}` : "";
@@ -1116,11 +1171,31 @@ const schema = {
       });
     });
 
+    if (elSubsidy) {
+      elSubsidy.addEventListener("change", recalc);
+    }
+
     document.getElementById("reset-auto-btn").addEventListener("click", () => {
       state.overrides = { land: false, demo: false, res: false, maint: false };
+      if (elSubsidy) elSubsidy.value = "0";
       syncAutoFields(true);
       recalc();
     });
+
+    const mobBar = document.getElementById("disp-mobile-bar");
+    const resPanel = document.getElementById("disp-result-panel");
+    if (mobBar && resPanel && "IntersectionObserver" in window) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          const visible = entries[0]?.isIntersecting;
+          mobBar.classList.toggle("translate-y-full", Boolean(visible));
+          mobBar.classList.toggle("opacity-0", Boolean(visible));
+          mobBar.classList.toggle("pointer-events-none", Boolean(visible));
+        },
+        { threshold: 0.12 },
+      );
+      io.observe(resPanel);
+    }
 
     syncAutoFields(true);
     recalc();

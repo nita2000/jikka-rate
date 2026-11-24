@@ -15,6 +15,7 @@ export const GET: APIRoute = ({ site }) => {
     "/tools/akiya-tax/",
     "/tools/inheritance-deadline/",
     "/tools/hakajimai-simulator/",
+    "/tools/kokko-kizoku/",
     "/cases/",
     "/compare/",
     "/pref/",

@@ -2,12 +2,56 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import AffiliateCta from "../../components/AffiliateCta.astro";
 import GuideSidebar from "../../components/GuideSidebar.astro";
+
+const guideSchema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: "相続登記の義務化（2027年3月末猶予期限）と空き家3,000万円特別控除「買主解体」の実務ポイント",
+    description:
+      "2024年4月施行の相続登記義務化（過去相続分は2027年3月31日期限）、相続人申告登記、2026年4月住所変更登記義務化、および買主解体・相続人3人以上2,000万円上限を含む空き家3,000万円特別控除の実務手順を解説。",
+    dateModified: "2026-11-24",
+    author: { "@type": "Organization", name: "実家と空き家の試算表" },
+    publisher: { "@type": "Organization", name: "実家と空き家の試算表" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "2024年4月より前に亡くなった親や祖父母名義の実家はいつまでに相続登記が必要ですか？",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "2024年4月1日の義務化より前に発生していた相続も対象となり、原則として2027年（令和9年）3月31日が猶予期限です。遺産分割協議が間に合わない場合は、法務局へ「相続人申告登記」を行うことで過料（10万円以下）を回避できます。",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "空き家3,000万円特別控除は相続人が3人以上いるといくらになりますか？",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "2024年（令和6年）1月1日以降の譲渡から、対象の家屋・敷地を取得した相続人が3人以上の場合は、1人あたりの特別控除上限が3,000万円から2,000万円に引き下げられました（1人〜2人の場合は1人あたり3,000万円）。",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "買主解体で3,000万円特別控除を使うときの注意点は何ですか？",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "売買契約書に「買主が譲渡年の翌年2月15日までに家屋を解体（または耐震改修）すること」および解体完了後の確認書取得への協力条項を明記し、期限までに確実に工事を完了してもらう必要があります。",
+        },
+      },
+    ],
+  },
+];
 ---
 
 <BaseLayout
-  title="相続登記の義務化（10万円過料）と空き家3,000万円特別控除「買主解体要件」の活用法"
-  description="2024年4月施行の相続登記義務化（2027年3月末の過去相続分猶予期限）、2026年4月施行の住所変更登記義務化、および2024年改正で使いやすくなった「買主側解体による空き家3,000万円特別控除」を解説します。"
+  title="相続登記の義務化（2027年3月末期限）と空き家3,000万円特別控除の活用法"
+  description="2024年4月施行の相続登記義務化（過去相続分の2027年3月末猶予期限・相続人申告登記）、2026年4月住所変更登記義務化、および買主解体・相続人3人以上2,000万円上限を含む空き家3,000万円特別控除を解説。"
   canonicalPath="/guide/sozoku-toki-penalty-3000man/"
+  schema={guideSchema}
 >
   <nav class="text-xs text-slate-500 mb-4 flex items-center gap-1.5">
     <a href="/" class="hover:text-emerald-700">トップ</a><span>/</span>
@@ -43,8 +87,32 @@ import GuideSidebar from "../../components/GuideSidebar.astro";
           従来は「売主（相続人）が売却前に自分で解体して更地にする（または耐震リフォームする）」必要がありましたが、<strong>2024年1月1日以降の譲渡からは「古家付きのまま売却し、買主（購入者や買取会社）が譲渡年の翌年2月15日までに解体または耐震改修工事を行った場合」も対象</strong>に広がりました。
         </p>
         <p>
-          ただし、この特例には<strong>「相続開始から3年を経過する日の属する年の12月31日までに売却すること」</strong>という期限があるため、相続後3年以内に売却を完了させることが大切です。
+          ただし、この特例には<strong>「相続開始から3年を経過する日の属する年の12月31日」と「現行制度の適用期限（2027年12月31日）」のうち早い方までに売却すること</strong>という期限があります。ご自身の実家の締切日は<a href="/tools/inheritance-deadline/" class="text-emerald-700 font-bold underline">相続期限・3,000万円控除逆算カレンダー</a>で確認できます。
         </p>
+
+        <h2 class="text-lg font-extrabold text-slate-900 border-b border-slate-200 pb-2 pt-2">3. 遺産分割がまとまらないときの「相続人申告登記」と未登記増築の注意点</h2>
+        <ul class="list-disc pl-5 space-y-1.5">
+          <li><strong>相続人申告登記（暫定的に義務を果たす制度）</strong>：2027年3月31日の猶予期限までにきょうだい間で遺産分割がまとまらない場合でも、法務局へ「自分が相続人であること」を単独で申し出れば、相続登記義務を果たしたものとみなされ過料を回避できます（※売却するには後日正式な遺産分割と相続登記が必要です）。</li>
+          <li><strong>共有名義のまま放置するリスク</strong>：法定相続分のまま共有名義にすると、将来の売却や解体時に全員の合意が必要になり、1人でも認知症や連絡不通になると処分できなくなります。</li>
+          <li><strong>未登記の増築・離れがある場合</strong>：古い実家では増築部分や物置が未登記のまま残っているケースが多く、そのままでは通常の住宅ローン審査が通らず一般売却が難しくなるため、登記整理または現状買取の比較が必要です。</li>
+        </ul>
+
+        <h2 class="text-lg font-extrabold text-slate-900 border-b border-slate-200 pb-2 pt-2">4. 買主解体で3,000万円控除を使う際の契約チェックポイント</h2>
+        <ol class="list-decimal pl-5 space-y-1.5">
+          <li><strong>売買契約書に特約を入れる</strong>：買主が譲渡年の<strong>翌年2月15日まで</strong>に解体工事（または耐震改修）を完了させること、および解体前後の写真提供・確認書類への協力を明記します。</li>
+          <li><strong>市区町村から「被相続人居住用家屋等確認書」を取得する</strong>：確定申告の添付書類として実家所在地の自治体から発行を受ける必要があります（発行まで2〜4週間かかるため早めに申請）。</li>
+          <li><strong>相続人3人以上は1人上限2,000万円</strong>：2024年改正により、対象家屋・敷地を取得した相続人が3人以上の場合は1人あたりの控除上限が2,000万円になります。</li>
+        </ol>
+
+        <div class="pt-2 border-t border-slate-100">
+          <div class="text-xs font-extrabold text-slate-900 mb-2">関連する事例・ツール</div>
+          <div class="flex flex-wrap gap-2 text-xs">
+            <a href="/cases/shared-inheritance-undivided-32tsubo/" class="rounded-xs border border-slate-200 bg-slate-50 hover:border-emerald-600 px-2.5 py-1 font-bold text-slate-700 hover:text-emerald-800">共有名義・未分割実家の相場 →</a>
+            <a href="/cases/unregistered-extension-34tsubo/" class="rounded-xs border border-slate-200 bg-slate-50 hover:border-emerald-600 px-2.5 py-1 font-bold text-slate-700 hover:text-emerald-800">未登記増築あり実家の相場 →</a>
+            <a href="/compare/seller-demolition-vs-buyer-demolition-3000man/" class="rounded-xs border border-slate-200 bg-slate-50 hover:border-emerald-600 px-2.5 py-1 font-bold text-slate-700 hover:text-emerald-800">売主解体 vs 買主解体の比較 →</a>
+            <a href="/tools/kokko-kizoku/" class="rounded-xs border border-slate-200 bg-slate-50 hover:border-emerald-600 px-2.5 py-1 font-bold text-slate-700 hover:text-emerald-800">売れない土地の国庫帰属試算 →</a>
+          </div>
+        </div>
       </div>
 
       <AffiliateCta

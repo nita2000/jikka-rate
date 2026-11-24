@@ -2,12 +2,48 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import AffiliateCta from "../../components/AffiliateCta.astro";
 import GuideSidebar from "../../components/GuideSidebar.astro";
+
+const guideSchema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: "実家は「解体して更地売却」と「古家付き・そのまま買取」のどっちが手残りが多いか？",
+    description:
+      "実家売却で先に解体すべきか、古家付きのまま売却・専門買取に出すべきかの損益分岐点、先に壊してはいけない4条件、および3ルートの比較を解説。",
+    dateModified: "2026-11-24",
+    author: { "@type": "Organization", name: "実家と空き家の試算表" },
+    publisher: { "@type": "Organization", name: "実家と空き家の試算表" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "古い実家は先に解体して更地にしないと売れませんか？",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "必ずしも先に解体する必要はありません。古家付き土地として売り出し、買主が決まってから引き渡し前に解体する「解体更地渡し」や、買主側で翌年2月15日までに解体する特例、あるいは解体・片付け不要の専門買取を選べば、先行持ち出しや更地増税のリスクを防げます。",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "絶対に先に解体してはいけない実家の特徴は何ですか？",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "再建築不可物件（接道2m未満）、市街化調整区域・農地付き実家、地価が坪15万円以下の地方の広い実家（解体費用倒れリスク）、および借地権付き実家の4タイプは、先に自費で解体すると大きな損失になりやすいため注意が必要です。",
+        },
+      },
+    ],
+  },
+];
 ---
 
 <BaseLayout
   title="実家は「解体して更地売却」と「古家付き・そのまま買取」のどっちが手残りが多いか？"
   description="実家を売るときに150万〜250万円かけて先に解体すべきか、古家付きのまま売却・買取に出すべきかの損益分岐点と、先に解体してはいけない4つの物件条件を解説します。"
   canonicalPath="/guide/sarachi-vs-furuya-breakeven/"
+  schema={guideSchema}
 >
   <nav class="text-xs text-slate-500 mb-4 flex items-center gap-1.5">
     <a href="/" class="hover:text-emerald-700">トップ</a><span>/</span>
@@ -42,10 +78,52 @@ import GuideSidebar from "../../components/GuideSidebar.astro";
           <li><strong>借地権付き実家</strong>：自費で解体して地主に更地返還すると150万円超の持ち出しになりますが、借地権付き建物のまま買取・譲渡すれば解体費負担を避けられる可能性があります。</li>
         </ol>
 
-        <h2 class="text-lg font-extrabold text-slate-900 border-b border-slate-200 pb-2 pt-2">3. 手残りを増やすための安全な手順</h2>
+        <h2 class="text-lg font-extrabold text-slate-900 border-b border-slate-200 pb-2 pt-2">3. 3つの手放し方の特徴と向いている実家</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-xs border-collapse">
+            <thead>
+              <tr class="bg-slate-50 border-y border-slate-200 text-slate-600 text-left">
+                <th class="py-2 px-2.5 font-bold">手放し方</th>
+                <th class="py-2 px-2.5 font-bold">先行出費</th>
+                <th class="py-2 px-2.5 font-bold">向いている実家</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr>
+                <td class="py-2 px-2.5 font-bold text-slate-900 whitespace-nowrap">古家付き仲介</td>
+                <td class="py-2 px-2.5">片付け費のみ</td>
+                <td class="py-2 px-2.5">都市部・郊外の一般的な住宅地で、買主解体特例を使える実家</td>
+              </tr>
+              <tr>
+                <td class="py-2 px-2.5 font-bold text-slate-900 whitespace-nowrap">解体して更地売却</td>
+                <td class="py-2 px-2.5 text-rose-700 font-bold">150〜300万円</td>
+                <td class="py-2 px-2.5">駅近・人気エリアで更地需要が高く、すぐに買い手がつく立地</td>
+              </tr>
+              <tr>
+                <td class="py-2 px-2.5 font-bold text-emerald-800 whitespace-nowrap">現状のまま専門買取</td>
+                <td class="py-2 px-2.5 text-emerald-700 font-bold">0円</td>
+                <td class="py-2 px-2.5">再建築不可・借地権・残置物大量・長屋・擁壁・地方の築古実家</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 class="text-lg font-extrabold text-slate-900 border-b border-slate-200 pb-2 pt-2">4. 手残りを増やすための安全な手順</h2>
         <p>
           まずは<strong>建物を壊さず・家財も片付けない状態</strong>で、「①古家付きでの仲介売却」と「②荷物そのままの専門買取」の手残りを<a href="/tools/disposal-simulator/" class="text-emerald-700 font-bold underline">実家の手放し方シミュレーター</a>で比較してから動くのが安心です。
         </p>
+
+        <div class="pt-2 border-t border-slate-100">
+          <div class="text-xs font-extrabold text-slate-900 mb-2">先に壊してはいけない・相談が多い訳あり実家の相場</div>
+          <div class="flex flex-wrap gap-2 text-xs">
+            <a href="/cases/non-rebuildable-wood-25tsubo/" class="rounded-xs border border-slate-200 bg-slate-50 hover:border-emerald-600 px-2.5 py-1 font-bold text-slate-700 hover:text-emerald-800">再建築不可25坪 →</a>
+            <a href="/cases/leased-land-shakuchi-28tsubo/" class="rounded-xs border border-slate-200 bg-slate-50 hover:border-emerald-600 px-2.5 py-1 font-bold text-slate-700 hover:text-emerald-800">借地権付き実家 →</a>
+            <a href="/cases/nagaya-rowhouse-22tsubo-age50/" class="rounded-xs border border-slate-200 bg-slate-50 hover:border-emerald-600 px-2.5 py-1 font-bold text-slate-700 hover:text-emerald-800">長屋・連棟式22坪 →</a>
+            <a href="/cases/slope-retaining-wall-30tsubo/" class="rounded-xs border border-slate-200 bg-slate-50 hover:border-emerald-600 px-2.5 py-1 font-bold text-slate-700 hover:text-emerald-800">擁壁・高低差あり →</a>
+            <a href="/cases/stigmatized-lonely-death-28tsubo/" class="rounded-xs border border-slate-200 bg-slate-50 hover:border-emerald-600 px-2.5 py-1 font-bold text-slate-700 hover:text-emerald-800">孤独死・心理的瑕疵 →</a>
+            <a href="/cases/suburban-newtown-32tsubo-age38/" class="rounded-xs border border-slate-200 bg-slate-50 hover:border-emerald-600 px-2.5 py-1 font-bold text-slate-700 hover:text-emerald-800">郊外団地・ニュータウン →</a>
+          </div>
+        </div>
       </div>
 
       <AffiliateCta

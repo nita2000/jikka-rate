@@ -156,7 +156,7 @@ const schema = {
     </div>
 
     <!-- 右：診断結果・15年比較カード（改行落ち防止設計） -->
-    <div class="lg:col-span-7 min-w-0 space-y-5 print-result-col">
+    <div id="hk-result-panel" class="lg:col-span-7 min-w-0 space-y-5 print-result-col scroll-mt-20">
       <div class="card-surface rounded p-5 sm:p-6 print-result-card">
         <!-- 最上段：結論ヒーロー -->
         <div id="hk-hero" class="rounded border border-slate-200 border-l-4 border-l-emerald-700 bg-emerald-50/60 p-4 sm:p-5 mb-5 print-keep-together">
@@ -270,11 +270,30 @@ const schema = {
 
       <AffiliateCta
         slotType="kuyo"
-        title="まずはご自宅近くの「樹木葬・永代供養墓」の資料を取り寄せて雰囲気と費用を見比べる"
-        description="墓じまいを進める際は、今のお墓を撤去するよりも先に「新しい受け入れ先（樹木葬や永代供養墓）」を決めて受入証明書をもらうのが最初の手順です。人気の霊園は区画が埋まりやすいため、早めにパンフレットで比較しておくと安心です。"
+        title="家族・親戚と話し合う前に、墓じまいの費用内訳と手順がわかる資料を取り寄せる"
+        description="墓じまいは石材撤去だけでなく、寺院・霊園への相談、改葬許可申請、新しい供養先の受入証明書取得まで順序が大切です。具体的な費用と流れをまとめた資料を手元に置いておくと、親族への説明もスムーズに進みます。"
         fallbackHref="/compare/temple-grave-keep-15y-vs-hakajimai-jumokusou/"
         fallbackLabel="遠方のお墓維持 vs 樹木葬の詳しい比較データを見る →"
       />
+    </div>
+  </div>
+
+  <!-- スマホ専用：下部固定ミニ結果バー -->
+  <div
+    id="hk-mobile-bar"
+    class="fixed bottom-0 inset-x-0 z-30 border-t border-slate-200 bg-white/95 backdrop-blur-sm px-4 py-2.5 shadow-lg transition-all duration-200 lg:hidden no-print"
+  >
+    <div class="mx-auto max-w-6xl flex items-center justify-between gap-3">
+      <div class="min-w-0">
+        <div id="hk-mob-label" class="text-[10px] font-bold text-slate-500 truncate">15年間の試算目安</div>
+        <div id="hk-mob-value" class="font-display text-base font-extrabold text-emerald-800 tabular-nums truncate">—</div>
+      </div>
+      <a
+        href="#hk-result-panel"
+        class="shrink-0 rounded-xs bg-emerald-700 hover:bg-emerald-800 text-white px-3.5 py-2 text-xs font-bold transition-colors whitespace-nowrap"
+      >
+        結果を見る ↓
+      </a>
     </div>
   </div>
 
@@ -430,6 +449,16 @@ const schema = {
         `<p><strong>何年で元が取れるかの目安：</strong>現在、毎年のお墓参り帰省や管理料に <strong>${yen(keepAnnualYen)}</strong> かかっている場合、墓じまいをすると<strong>約 ${paybackYears} 年目</strong>で初期費用（${yen(initialTotalYen)}）の元が取れ、それ以降は毎年 <strong>${yen(annualSaving)}</strong> の出費がなくなります。</p>` +
         `<p><strong>トラブルを防ぐ進め方：</strong>お寺（菩提寺）にお墓がある場合は、先に石材店を呼ぶのではなく、まずご住職へ「遠方で通うのが難しくなり、子ども世代に負担を残せないため」と丁寧に相談するのが円満に進めるコツです。</p>`;
 
+      const hkMobLbl = document.getElementById("hk-mob-label");
+      const hkMobVal = document.getElementById("hk-mob-value");
+      if (hkMobLbl && hkMobVal) {
+        hkMobLbl.textContent = `墓じまい初期 ${plainMan(initialTotalYen)}（約${paybackYears}年回収）`;
+        hkMobVal.textContent =
+          diff15y >= 0
+            ? `15年で ${yen(diff15y)} 負担減`
+            : `15年差 ${yen(Math.abs(diff15y))}`;
+      }
+
       state.shareText =
         `【実家と空き家の試算表｜墓じまい・永代供養 15年試算】\n` +
         `お墓の所在地：${pref.name}\n` +
@@ -521,6 +550,21 @@ const schema = {
       syncFields(true);
       recalc();
     });
+
+    const hkMobBar = document.getElementById("hk-mobile-bar");
+    const hkResPanel = document.getElementById("hk-result-panel");
+    if (hkMobBar && hkResPanel && "IntersectionObserver" in window) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          const visible = entries[0]?.isIntersecting;
+          hkMobBar.classList.toggle("translate-y-full", Boolean(visible));
+          hkMobBar.classList.toggle("opacity-0", Boolean(visible));
+          hkMobBar.classList.toggle("pointer-events-none", Boolean(visible));
+        },
+        { threshold: 0.12 },
+      );
+      io.observe(hkResPanel);
+    }
 
     syncFields(true);
     recalc();

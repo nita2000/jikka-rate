@@ -27,6 +27,83 @@ const stdLand45Man = Math.round(pref.land_price_man_per_tsubo * 45);
 const breakevenLandPerTsuboMan = Math.max(1, Math.ceil((demo30Man + 35) / 45));
 const isLowLandPricePref = pref.land_price_man_per_tsubo < 15;
 
+// 地域ブロック固有の実家・空き家リスク特徴（47ページの固有情報を補強）
+const regionRiskNoteMap: Record<string, { title: string; body: string; cases: Array<{ slug: string; label: string }> }> = {
+  北海道: {
+    title: "積雪・凍結による屋根破損と冬期解体の割増に注意",
+    body: "積雪による屋根のたわみ・水道管破裂が1冬で進みやすく、冬季は除雪・養生費で解体見積もりが上振れする傾向があります。雪解け前から売却・買取の査定を進めておくと維持費を抑えられます。",
+    cases: [
+      { slug: "snow-country-wood-45tsubo", label: "豪雪地帯の木造45坪" },
+      { slug: "kominka-farm-55tsubo-age60", label: "地方古民家55坪" },
+      { slug: "remote-island-hokkaido-grave-2sqm", label: "超遠方のお墓2㎡" },
+    ],
+  },
+  東北: {
+    title: "広い敷地・雪害リスクにより「解体費用倒れ」が起きやすい地域",
+    body: "延床40〜55坪超の木造実家が多く、先に解体すると200万〜300万円以上の持ち出しが土地価格を上回りやすいのが特徴です。雪下ろし負担が続く前に現状のまま買取・譲渡の可否を確認するのが安全です。",
+    cases: [
+      { slug: "snow-country-wood-45tsubo", label: "豪雪地帯の木造45坪" },
+      { slug: "rural-farmland-attached-42tsubo", label: "農地付き実家42坪" },
+      { slug: "shared-inheritance-undivided-32tsubo", label: "共有名義・未分割実家" },
+    ],
+  },
+  関東: {
+    title: "狭小道路・再建築不可・旧ニュータウンの擁壁と相続税評価に注意",
+    body: "地価水準が高いため、解体して更地にするか古家付きで売るかで手残りが数百万円変わります。一方、旗竿地・接道2m未満の再建築不可物件や斜面擁壁付き住宅は、先に壊すと建て替え不可や擁壁補修費で大きく損をするため注意が必要です。",
+    cases: [
+      { slug: "non-rebuildable-wood-25tsubo", label: "再建築不可の木造25坪" },
+      { slug: "slope-retaining-wall-30tsubo", label: "高低差・擁壁あり30坪" },
+      { slug: "leased-land-shakuchi-28tsubo", label: "借地権付き実家28坪" },
+    ],
+  },
+  中部: {
+    title: "都市部と山間・農村部の地価差が大きく、エリア別判断が必須",
+    body: "県庁所在地周辺の住宅地では更地・古家付き仲介で手残りを伸ばしやすい一方、郊外や山間部では解体費が売却額を上回りやすくなります。未登記の離れ・倉庫がある実家は相続登記と同時に整理が必要です。",
+    cases: [
+      { slug: "unregistered-extension-34tsubo", label: "未登記増築あり34坪" },
+      { slug: "villa-resort-akiya-28tsubo", label: "別荘・リゾート空き家" },
+      { slug: "heavy-residual-hoarder-32tsubo", label: "残置物大量の実家32坪" },
+    ],
+  },
+  近畿: {
+    title: "連棟長屋・狭小路地・市街化調整区域の扱いと残置物整理に注意",
+    body: "旧市街地では切り離し工事が必要な長屋（連棟式）や重機が入れない狭小路地が多く、手壊し解体で坪単価が跳ね上がりやすい傾向があります。壊さず再生ノウハウのある専門買取との比較が有効です。",
+    cases: [
+      { slug: "nagaya-rowhouse-22tsubo-age50", label: "長屋・連棟式22坪" },
+      { slug: "narrow-road-hand-demolition-28tsubo", label: "重機不可・狭小道路28坪" },
+      { slug: "stigmatized-lonely-death-28tsubo", label: "孤独死・心理的瑕疵物件" },
+    ],
+  },
+  中国: {
+    title: "放置型空き家率が高く、老朽化による管理不全勧告リスクに注意",
+    body: "全国平均を上回る空き家率の自治体が多く、屋根瓦のずれや雑草越境に対する自治体の指導・勧告が増えています。築古の農村実家や共有名義のまま放置された家屋は、早めの名義整理と買取相談が安心です。",
+    cases: [
+      { slug: "kominka-farm-55tsubo-age60", label: "地方古民家55坪" },
+      { slug: "shared-inheritance-undivided-32tsubo", label: "共有名義・未分割実家" },
+      { slug: "fire-damaged-akiya-30tsubo", label: "火災跡地・焼損実家" },
+    ],
+  },
+  四国: {
+    title: "空き家率全国上位エリア。解体補助金の事前確認と国庫帰属も視野に",
+    body: "空き家率が全国トップクラスで買い手がつきにくい郊外エリアが多いため、自己資金で先に解体すると回収できないリスクが高まります。自治体補助金の上限確認とあわせ、現状買取や国庫帰属の条件も比較しておくと安全です。",
+    cases: [
+      { slug: "rural-farmland-attached-42tsubo", label: "農地付き実家42坪" },
+      { slug: "termite-rainleak-damaged-30tsubo", label: "シロアリ・雨漏り実家" },
+      { slug: "community-kyodo-grave-2sqm", label: "地方の共同墓地2㎡" },
+    ],
+  },
+  "九州・沖縄": {
+    title: "台風・シロアリ・塩害による劣化進行が早く、放置コストが膨らみやすい",
+    body: "高温多湿・台風襲来により空き家の雨漏りやシロアリ被害が数年で進みやすく、隣家への屋根材飛散リスクが問題になりやすい地域です。RC造実家は解体費が高額になりやすいため、解体前に現状売却の可否を確認してください。",
+    cases: [
+      { slug: "termite-rainleak-damaged-30tsubo", label: "シロアリ・雨漏り実家" },
+      { slug: "rc-35tsubo-age40", label: "RC造35坪（解体高額）" },
+      { slug: "fire-damaged-akiya-30tsubo", label: "火災跡地・焼損実家" },
+    ],
+  },
+};
+const regionNote = regionRiskNoteMap[pref.region] || regionRiskNoteMap["中部"];
+
 const prefFaqItems = [
   {
     q: `${pref.name}で木造30坪の実家を解体すると費用はいくらくらいですか？`,
@@ -232,6 +309,22 @@ const prefSchema = {
           <a href="/tools/inheritance-deadline/" class="font-bold text-emerald-700 hover:underline">相続期限＆3,000万円控除カレンダー</a>で締切日を先に確認しておくと安心です。
         </li>
       </ul>
+      <div class="pt-2 border-t border-slate-100">
+        <div class="text-xs font-extrabold text-slate-900 mb-1">
+          {pref.region}エリアの特徴：{regionNote.title}
+        </div>
+        <p class="text-xs text-slate-600 leading-relaxed mb-2">{regionNote.body}</p>
+        <div class="flex flex-wrap gap-1.5">
+          {regionNote.cases.map((rc) => (
+            <a
+              href={`/cases/${rc.slug}/`}
+              class="rounded-xs border border-slate-200 bg-slate-50 hover:border-emerald-600 hover:bg-emerald-50/40 px-2.5 py-1 text-[11px] font-bold text-slate-700 hover:text-emerald-800 transition-colors"
+            >
+              {rc.label}の相場 →
+            </a>
+          ))}
+        </div>
+      </div>
     </div>
   </section>
 
@@ -281,8 +374,8 @@ const prefSchema = {
 
   <AffiliateCta
     slotType="sell"
-    title={`${pref.name}の実家は解体前に「古家付き査定」と「専門買取」を比較する`}
-    description={`${pref.name}で30坪の木造実家を解体すると約${formatManYen(pref.std_30tsubo_demolition_yen)}が先行発生します。先に解体せず、まずは現状のまま売却・買取相場を確認してください。`}
+    title={`${pref.name}の実家は解体する前に「現状のままの売却・買取目安」を確認する`}
+    description={`${pref.name}で30坪の木造実家を解体すると約${formatManYen(pref.std_30tsubo_demolition_yen)}が先行発生します。同じ県内でも立地や接道条件で売却額は数百万円変わるため、解体を発注する前に現状のままの目安と手続きを確認しておくのが安全です。`}
     fallbackHref={`/tools/disposal-simulator/?pref=${pref.slug}`}
     fallbackLabel={`${pref.name}の単価で10年損益を試算 →`}
   />

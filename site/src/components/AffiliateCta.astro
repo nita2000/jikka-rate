@@ -62,48 +62,53 @@ const tone = toneMap[slotType];
       <h3 class="text-base font-extrabold text-slate-900 leading-snug">{title}</h3>
       <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">{description}</p>
       {
-        hasExternal && (
-          <p class="text-[11px] text-slate-500">
-            ※実際の売却額・解体工事費・供養費用は立地や道路条件・荷物の量により変わります。複数社の見積もりを比較する際の基準としてご活用ください。
-          </p>
+        hasExternal && entry.disclaimer && (
+          <p class="text-[11px] text-slate-500 leading-relaxed">{entry.disclaimer}</p>
         )
       }
     </div>
-    <div class="pt-0.5">
+    <div class="pt-0.5 space-y-1.5">
+      <div>
+        {
+          hasExternal ? (
+            <a
+              href={entry.url}
+              target="_blank"
+              rel="nofollow noopener sponsored"
+              referrerpolicy="no-referrer-when-downgrade"
+              attributionsrc={entry.useAttributionSrc ? "" : undefined}
+              data-affiliate-slot={slotType}
+              data-affiliate-label={entry.providerLabel}
+              class={`inline-flex items-center justify-center text-center px-4 py-2.5 rounded-xs text-xs sm:text-sm font-bold transition-colors ${tone.btn}`}
+            >
+              {entry.buttonText}
+            </a>
+          ) : (
+            <a
+              href={fallbackHref}
+              class={`inline-flex items-center justify-center text-center px-4 py-2.5 rounded-xs text-xs sm:text-sm font-bold transition-colors ${tone.btn}`}
+            >
+              {fallbackLabel}
+            </a>
+          )
+        }
+        {hasExternal && entry.impPixel && (
+          <img
+            src={entry.impPixel}
+            alt=""
+            width="1"
+            height="1"
+            style="border:none;"
+            loading="lazy"
+            class="inline-block w-px h-px align-middle"
+          />
+        )}
+      </div>
       {
-        hasExternal ? (
-          <a
-            href={entry.url}
-            target="_blank"
-            rel="nofollow noopener sponsored"
-            referrerpolicy="no-referrer-when-downgrade"
-            attributionsrc={entry.useAttributionSrc ? "" : undefined}
-            data-affiliate-slot={slotType}
-            data-affiliate-label={entry.providerLabel}
-            class={`inline-flex items-center justify-center text-center px-4 py-2.5 rounded-xs text-xs sm:text-sm font-bold transition-colors ${tone.btn}`}
-          >
-            {entry.buttonText}
-          </a>
-        ) : (
-          <a
-            href={fallbackHref}
-            class={`inline-flex items-center justify-center text-center px-4 py-2.5 rounded-xs text-xs sm:text-sm font-bold transition-colors ${tone.btn}`}
-          >
-            {fallbackLabel}
-          </a>
+        hasExternal && entry.microCopy && (
+          <p class="text-[11px] text-slate-500 leading-relaxed">{entry.microCopy}</p>
         )
       }
-      {hasExternal && entry.impPixel && (
-        <img
-          src={entry.impPixel}
-          alt=""
-          width="1"
-          height="1"
-          style="border:none;"
-          loading="lazy"
-          class="inline-block w-px h-px align-middle"
-        />
-      )}
     </div>
   </div>
 </aside>

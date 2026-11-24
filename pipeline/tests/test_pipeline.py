@@ -142,6 +142,15 @@ class DatasetOutputTests(unittest.TestCase):
         self.assertIsNone(by_pair["public-cemetery-vs-temple-danka-hakajimai"]["payback_years"])
         self.assertIsNotNone(by_pair["temple-grave-keep-15y-vs-hakajimai-jumokusou"]["payback_years"])
 
+        # 区分マンションの最適戦略ラベルに「解体」「更地」が混入しないこと
+        mansion = by_case["old-mansion-70sqm-age42"]
+        self.assertNotIn("更地", mansion["calc"]["disposal"]["best_strategy_label"])
+        self.assertNotIn("解体", mansion["calc"]["disposal"]["best_strategy_label"])
+
+        # 通常ケースの買取額が単純42%固定ではなく解体費控除の計算値を反映していること
+        std_wood = by_case["wood-30tsubo-age40"]["calc"]["disposal"]
+        self.assertGreater(std_wood["kaitori_net_proceeds_yen"], round(std_wood["land_market_yen"] * 0.42))
+
     def test_dist_internal_links_if_built(self) -> None:
         import re
 
@@ -149,7 +158,7 @@ class DatasetOutputTests(unittest.TestCase):
         if not dist_dir.exists():
             return
         html_files = list(dist_dir.rglob("*.html"))
-        self.assertEqual(len(html_files), 131)
+        self.assertEqual(len(html_files), 132)
         for hf in html_files:
             text = hf.read_text(encoding="utf-8")
             for m in re.finditer(r'href="(/[^"#?]*)"', text):

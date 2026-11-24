@@ -2,12 +2,48 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import AffiliateCta from "../../components/AffiliateCta.astro";
 import GuideSidebar from "../../components/GuideSidebar.astro";
+
+const guideSchema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: "解体工事の坪単価（木造・鉄骨・RC）とアスベスト調査・残置物費用の内訳",
+    description:
+      "構造別の解体工事坪単価、アスベスト事前調査義務化・外構撤去・残置物・狭小道路割増の内訳と、自治体解体補助金の着工前申請ポイントを解説。",
+    dateModified: "2026-11-24",
+    author: { "@type": "Organization", name: "実家と空き家の試算表" },
+    publisher: { "@type": "Organization", name: "実家と空き家の試算表" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "木造30坪の解体見積もりが「坪単価×30坪」より高くなるのはなぜですか？",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "坪単価は建物本体のみの工事費であることが多く、実際には外構・ブロック塀・庭木撤去（20〜40万円）、家財残置物処分（15〜60万円）、有資格者によるアスベスト事前調査・成形板撤去（15〜35万円）、狭小道路の手壊し割増などが別計上されるためです。",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "自治体の空き家解体補助金は工事が終わってからでも申請できますか？",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "ほとんどの自治体では「解体業者との契約前・着工前」の事前申請および現地調査（老朽度判定）が必須です。着工後や解体完了後は原則として補助対象外になります。",
+        },
+      },
+    ],
+  },
+];
 ---
 
 <BaseLayout
   title="解体工事の坪単価（木造・鉄骨・RC）とアスベスト調査・残置物費用の内訳"
   description="構造別の解体工事坪単価（木造4.8万円・鉄骨6.3万円・RC7.8万円/坪）と、アスベスト事前調査義務化・家財残置物・狭小道路割増によって見積額がいくら変わるかを解説します。"
   canonicalPath="/guide/kaitai-cost-asbestos-2026/"
+  schema={guideSchema}
 >
   <nav class="text-xs text-slate-500 mb-4 flex items-center gap-1.5">
     <a href="/" class="hover:text-emerald-700">トップ</a><span>/</span>
@@ -43,10 +79,27 @@ import GuideSidebar from "../../components/GuideSidebar.astro";
           <li><strong>狭小道路・重機進入不可の手壊し割増（＋20〜30%増）</strong>：前面道路が狭く重機やダンプが入らない場合、作業日数が増えるため30万〜60万円高くなります。</li>
         </ol>
 
-        <h2 class="text-lg font-extrabold text-slate-900 border-b border-slate-200 pb-2 pt-2">3. 解体出費を抑える2つのポイント</h2>
+        <h2 class="text-lg font-extrabold text-slate-900 border-b border-slate-200 pb-2 pt-2">3. 自治体の空き家解体補助金を使うときの注意点</h2>
+        <ul class="list-disc pl-5 space-y-1.5">
+          <li><strong>必ず「契約・着工前」に役場へ相談</strong>：多くの市区町村では老朽危険空き家の除却に30万〜100万円上限の補助金がありますが、着工後の申請は不可です。</li>
+          <li><strong>補助金が出ても固定資産税は上がる</strong>：補助を受けて更地にしても、1月1日時点で建物がなければ住宅用地の軽減（1/6）が外れます（一部自治体では跡地活用条件付きで減免制度あり）。</li>
+          <li><strong>滅失登記（1か月以内）を忘れずに</strong>：解体後は解体業者から「建物滅失証明書」を受け取り、法務局へ滅失登記を申請します。</li>
+        </ul>
+
+        <h2 class="text-lg font-extrabold text-slate-900 border-b border-slate-200 pb-2 pt-2">4. 解体出費を抑える2つのポイント</h2>
         <p>
           ①そもそも売主が解体する必要があるか<a href="/tools/disposal-simulator/" class="text-emerald-700 font-bold underline">実家の手放し方シミュレーター</a>で「古家付き売却・買取」と比較すること、②解体する場合は不動産会社の下請け任せにせず解体専門会社の明細見積もりを比較することが有効です。
         </p>
+
+        <div class="pt-2 border-t border-slate-100">
+          <div class="text-xs font-extrabold text-slate-900 mb-2">解体費が高くなりやすい実家ケースの内訳</div>
+          <div class="flex flex-wrap gap-2 text-xs">
+            <a href="/cases/asbestos-slate-roof-30tsubo/" class="rounded-xs border border-slate-200 bg-slate-50 hover:border-emerald-600 px-2.5 py-1 font-bold text-slate-700 hover:text-emerald-800">アスベスト屋根30坪 →</a>
+            <a href="/cases/narrow-road-hand-demolition-28tsubo/" class="rounded-xs border border-slate-200 bg-slate-50 hover:border-emerald-600 px-2.5 py-1 font-bold text-slate-700 hover:text-emerald-800">重機不可・手壊し28坪 →</a>
+            <a href="/cases/nisetai-50tsubo-age35/" class="rounded-xs border border-slate-200 bg-slate-50 hover:border-emerald-600 px-2.5 py-1 font-bold text-slate-700 hover:text-emerald-800">二世帯50坪の解体総額 →</a>
+            <a href="/cases/hiraya-24tsubo-age45/" class="rounded-xs border border-slate-200 bg-slate-50 hover:border-emerald-600 px-2.5 py-1 font-bold text-slate-700 hover:text-emerald-800">木造平屋24坪（坪単価割高） →</a>
+          </div>
+        </div>
       </div>
 
       <AffiliateCta

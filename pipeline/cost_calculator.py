@@ -321,11 +321,14 @@ def calc_case_comprehensive(
     # 更地にしてから売れるまでの1年分の更地固定資産税を加味
     sarachi_net_proceeds = sarachi_gross_sale - demo_info["total_demolition_yen"] - sarachi_broker_fee - tax_info["sarachi_total_tax_annual"]
 
-    # シナリオ2：古家付き仲介売却（買主側での解体見込み値引き85%反映＋売主の残置物片付け）
-    furuya_gross_sale = round(land_market * 0.96 - demo_info["total_demolition_yen"] * 0.82)
-    if case["building_age_years"] <= 32 and case["category"] in ("wood_standard", "steel_rc"):
+    # シナリオ2：古家付き仲介売却（買主側での解体見込み値引き82%反映＋売主の残置物片付け）
+    if case["slug"] == "old-mansion-70sqm-age42":
+        furuya_gross_sale = round(land_market * 0.94)
+    elif case["building_age_years"] <= 32 and case["category"] in ("wood_standard", "steel_rc"):
         # 築30年前後の新耐震・軽量鉄骨等は中古戸建てとして建物プラス評価
         furuya_gross_sale = round(land_market * 1.05 + 1800000)
+    else:
+        furuya_gross_sale = round(land_market * 0.96 - demo_info["total_demolition_yen"] * 0.82)
     furuya_gross_sale = max(0, furuya_gross_sale)
     furuya_broker_fee = calc_brokerage_fee(furuya_gross_sale, tax_rules)
     furuya_net_proceeds = furuya_gross_sale - furuya_broker_fee - demo_info["residual_items_yen"]
@@ -338,9 +341,9 @@ def calc_case_comprehensive(
     )
     if case["category"] == "wakeari":
         # 訳あり・再建築不可・借地権・残置物大量は専門買取業者が再生ノウハウを持つため最低買取保証ラインを維持
-        kaitori_gross = max(round(land_market * 0.52), 800000)
+        kaitori_gross = max(kaitori_gross, round(land_market * 0.52), 800000)
     else:
-        kaitori_gross = max(round(land_market * 0.42), 500000)
+        kaitori_gross = max(kaitori_gross, round(land_market * 0.42), 500000)
     kaitori_net_proceeds = kaitori_gross  # 直接買取のため仲介手数料・解体費・残置物費すべて0円
 
     # 墓じまい計算（お墓または実家＋墓セット）
@@ -396,13 +399,15 @@ def calc_case_comprehensive(
 
     # 最適戦略の判定（カード上で途切れない端正なラベル）
     best_sale_net = max(sarachi_net_proceeds, furuya_net_proceeds, kaitori_net_proceeds)
-    if kaitori_net_proceeds >= sarachi_net_proceeds and kaitori_net_proceeds >= furuya_net_proceeds:
+    if case["slug"] == "old-mansion-70sqm-age42":
+        if kaitori_net_proceeds >= sarachi_net_proceeds and kaitori_net_proceeds >= furuya_net_proceeds:
+            best_strategy_label = "片付け不要の専門買取"
+        else:
+            best_strategy_label = "管理費がかさむ前に仲介売却"
+    elif kaitori_net_proceeds >= sarachi_net_proceeds and kaitori_net_proceeds >= furuya_net_proceeds:
         best_strategy_label = "壊さず・片付けず専門買取"
     elif furuya_net_proceeds >= sarachi_net_proceeds:
-        if case["slug"] == "old-mansion-70sqm-age42":
-            best_strategy_label = "管理費がかさむ前に仲介売却"
-        else:
-            best_strategy_label = "壊さず古家付きで仲介売却"
+        best_strategy_label = "壊さず古家付きで仲介売却"
     else:
         best_strategy_label = "解体して更地で仲介売却"
 

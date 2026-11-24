@@ -179,7 +179,7 @@ const schema = {
     </div>
 
     <!-- 右：診断結果・安心の対策ガイド -->
-    <div class="lg:col-span-7 min-w-0 space-y-5 print-result-col">
+    <div id="at-result-panel" class="lg:col-span-7 min-w-0 space-y-5 print-result-col scroll-mt-20">
       <div class="card-surface rounded p-5 sm:p-6 print-result-card">
         <!-- 最上段：結論ヒーロー -->
         <div id="at-hero" class="rounded border border-slate-200 border-l-4 border-l-rose-600 bg-rose-50/50 p-4 sm:p-5 mb-5 print-keep-together">
@@ -264,6 +264,25 @@ const schema = {
         fallbackHref="/tools/disposal-simulator/"
         fallbackLabel="実家を壊さず売った場合の手残り金額を試算する →"
       />
+    </div>
+  </div>
+
+  <!-- スマホ専用：下部固定ミニ結果バー -->
+  <div
+    id="at-mobile-bar"
+    class="fixed bottom-0 inset-x-0 z-30 border-t border-slate-200 bg-white/95 backdrop-blur-sm px-4 py-2.5 shadow-lg transition-all duration-200 lg:hidden no-print"
+  >
+    <div class="mx-auto max-w-6xl flex items-center justify-between gap-3">
+      <div class="min-w-0">
+        <div id="at-mob-label" class="text-[10px] font-bold text-slate-500 truncate">5年間の税負担インパクト</div>
+        <div id="at-mob-value" class="font-display text-base font-extrabold text-rose-700 tabular-nums truncate">—</div>
+      </div>
+      <a
+        href="#at-result-panel"
+        class="shrink-0 rounded-xs bg-emerald-700 hover:bg-emerald-800 text-white px-3.5 py-2 text-xs font-bold transition-colors whitespace-nowrap"
+      >
+        結果を見る ↓
+      </a>
     </div>
   </div>
 
@@ -464,6 +483,20 @@ const schema = {
         `${tokiSummary}。なお、土地の評価額が100万円以下の場合は2027年3月末まで土地の登録免許税が免税（0円）になる特例もあります。` +
         ` <a href="/tools/inheritance-deadline/" class="font-bold text-emerald-700 hover:underline">相続登記と3,000万円控除の締切日を逆算する →</a></p>`;
 
+      const atMobLbl = document.getElementById("at-mob-label");
+      const atMobVal = document.getElementById("at-mob-value");
+      if (atMobLbl && atMobVal) {
+        if (state.akiyaMode === "proper") {
+          atMobLbl.textContent = "住宅用地の軽減（1/6）を継続";
+          atMobVal.className = "font-display text-base font-extrabold text-emerald-800 tabular-nums truncate";
+          atMobVal.textContent = `年 ${yen(normalTotalTax)}（増額なし）`;
+        } else {
+          atMobLbl.textContent = `軽減解除時（年 +${yen(annualExtraTax)}）`;
+          atMobVal.className = "font-display text-base font-extrabold text-rose-700 tabular-nums truncate";
+          atMobVal.textContent = `5年計 +${yen(fiveYearExtra)}`;
+        }
+      }
+
       const pref = byPref[elPref.value];
       state.shareText =
         `【実家と空き家の試算表｜空き家の固定資産税・相続登記試算】\n` +
@@ -554,6 +587,21 @@ const schema = {
       syncDefaults(true);
       recalc();
     });
+
+    const atMobBar = document.getElementById("at-mobile-bar");
+    const atResPanel = document.getElementById("at-result-panel");
+    if (atMobBar && atResPanel && "IntersectionObserver" in window) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          const visible = entries[0]?.isIntersecting;
+          atMobBar.classList.toggle("translate-y-full", Boolean(visible));
+          atMobBar.classList.toggle("opacity-0", Boolean(visible));
+          atMobBar.classList.toggle("pointer-events-none", Boolean(visible));
+        },
+        { threshold: 0.12 },
+      );
+      io.observe(atResPanel);
+    }
 
     syncDefaults(true);
     recalc();

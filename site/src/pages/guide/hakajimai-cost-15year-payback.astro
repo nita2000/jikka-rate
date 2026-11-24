@@ -2,12 +2,48 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import AffiliateCta from "../../components/AffiliateCta.astro";
 import GuideSidebar from "../../components/GuideSidebar.astro";
+
+const guideSchema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: "墓じまい費用相場（35〜80万円）は何年で元が取れる？遠方の墓維持 vs 樹木葬・永代供養",
+    description:
+      "厚生労働省統計で年間16万件を超える改葬（墓じまい）の費用内訳、遠方のお墓維持との15年損益分岐点、および親族・寺院トラブルを防ぐ5ステップ手順を解説。",
+    dateModified: "2026-11-24",
+    author: { "@type": "Organization", name: "実家と空き家の試算表" },
+    publisher: { "@type": "Organization", name: "実家と空き家の試算表" },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "墓じまいは最初に何から始めればよいですか？",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "まず親族間で方針を合意し、次に新しい受け入れ先（永代供養墓・樹木葬・納骨堂など）を決めて「受入証明書」を取得するのが基本手順です。寺院墓地の場合は、石材店へ発注する前に必ずご住職へ丁寧に相談します。",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "遠方のお墓を墓じまいすると何年くらいで元が取れますか？",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "年間の管理料・お布施・帰省交通費の合計が年10万円前後の場合、総額45〜80万円の墓じまい＋永代供養・樹木葬へ移行すると約4.5〜8年で初期費用を回収でき、15年間で65〜100万円以上の負担軽減になります。",
+        },
+      },
+    ],
+  },
+];
 ---
 
 <BaseLayout
   title="墓じまい費用相場（35〜80万円）は何年で元が取れる？遠方の墓維持 vs 樹木葬・永代供養"
   description="厚生労働省統計で年間16万件を超えた墓じまい（改葬）の費用内訳と、遠方の墓を維持し続ける場合（管理料＋お布施＋帰省費）との15年損益分岐点を解説します。"
   canonicalPath="/guide/hakajimai-cost-15year-payback/"
+  schema={guideSchema}
 >
   <nav class="text-xs text-slate-500 mb-4 flex items-center gap-1.5">
     <a href="/" class="hover:text-emerald-700">トップ</a><span>/</span>
@@ -51,12 +87,31 @@ import GuideSidebar from "../../components/GuideSidebar.astro";
         <p>
           ご自身の帰省距離とお墓の広さでの回収年数は、<a href="/tools/hakajimai-simulator/" class="text-emerald-700 font-bold underline">墓じまい・永代供養シミュレーター</a>で試算できます。
         </p>
+
+        <h2 class="text-lg font-extrabold text-slate-900 border-b border-slate-200 pb-2 pt-2">3. トラブルを防ぐ墓じまいの5ステップ手順</h2>
+        <ol class="list-decimal pl-5 space-y-1.5">
+          <li><strong>親族への相談と合意形成</strong>：お墓を継ぐ人がいない現状と15年コストを共有し、事後報告にならないようにします。</li>
+          <li><strong>新しい受け入れ先の決定（受入証明書の取得）</strong>：永代供養墓・樹木葬・納骨堂などを決め、受入証明書を発行してもらいます。</li>
+          <li><strong>現在の寺院・霊園への相談（埋蔵証明書の取得）</strong>：感謝を伝えて円満に閉眼供養の日程と埋蔵証明書を依頼します。</li>
+          <li><strong>市区町村役場での「改葬許可証」の申請</strong>：現在のお墓がある自治体へ提出します（郵送対応の自治体も増えています）。</li>
+          <li><strong>閉眼供養・遺骨取り出し・墓石撤去・新しい供養先への納骨</strong>：更地返還後に受領確認をして完了です。</li>
+        </ol>
+
+        <div class="pt-2 border-t border-slate-100">
+          <div class="text-xs font-extrabold text-slate-900 mb-2">タイプ別のお墓・墓じまい相場</div>
+          <div class="flex flex-wrap gap-2 text-xs">
+            <a href="/cases/temple-grave-2sqm-far/" class="rounded-xs border border-slate-200 bg-slate-50 hover:border-emerald-600 px-2.5 py-1 font-bold text-slate-700 hover:text-emerald-800">遠方の寺院墓地2㎡ →</a>
+            <a href="/cases/community-kyodo-grave-2sqm/" class="rounded-xs border border-slate-200 bg-slate-50 hover:border-emerald-600 px-2.5 py-1 font-bold text-slate-700 hover:text-emerald-800">地方の共同墓地2㎡ →</a>
+            <a href="/cases/mountain-grave-slope-2.5sqm/" class="rounded-xs border border-slate-200 bg-slate-50 hover:border-emerald-600 px-2.5 py-1 font-bold text-slate-700 hover:text-emerald-800">山間・階段難所墓 →</a>
+            <a href="/compare/flight-remote-grave-keep-vs-hakajimai/" class="rounded-xs border border-slate-200 bg-slate-50 hover:border-emerald-600 px-2.5 py-1 font-bold text-slate-700 hover:text-emerald-800">飛行機帰省の墓維持 vs 墓じまい →</a>
+          </div>
+        </div>
       </div>
 
       <AffiliateCta
         slotType="kuyo"
-        title="お墓の都道府県・帰省距離・新しい供養先を選んで15年収支を試算する"
-        description="各自治体の葬祭費給付金（3万〜7万円）や公営火葬料の目安もあわせて確認できます。"
+        title="家族・親戚と話し合う前に、墓じまいの費用内訳と手順がわかる資料を取り寄せる"
+        description="墓じまいの段取りや必要書類・費用目安をまとめた資料を手元に置いておくと、親族や寺院への相談も落ち着いて進められます。"
         fallbackHref="/tools/hakajimai-simulator/"
         fallbackLabel="自分の条件で墓じまい回収年数を試算する →"
       />

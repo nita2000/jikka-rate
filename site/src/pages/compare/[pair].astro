@@ -173,8 +173,16 @@ const compareSchema = {
 
   <AffiliateCta
     slotType={ctaSlot}
-    title={`「${pair.winner_label}」を進める前に、実際の査定額・見積額を無料で確認する`}
-    description="地域や物件状態によって売却額・解体費・改葬費は数十万円変動します。複数社の無料査定・見積もりを取って実額を当てはめることで、後悔のない判断ができます。"
+    title={
+      isHaka
+        ? `「${pair.winner_label}」を進める前に、墓じまいの費用内訳と手順を確認する`
+        : `「${pair.winner_label}」を進める前に、ご自身の実家条件での目安を確認する`
+    }
+    description={
+      isHaka
+        ? "墓石撤去や改葬の費用は区画の広さ・立地・寺院や霊園の条件によって大きく変わります。手続きを始める前に、費用と段取りが整理された資料で全体像を確認しておくと安心です。"
+        : "同じ都道府県内でも、前面道路の幅員・再建築の可否・荷物の量によって売却額や解体費は数百万円変わります。解体や片付けを先行せず、現状のままでの目安を確認してから方針を決めるのが安全です。"
+    }
     fallbackHref={isHaka ? "/tools/hakajimai-simulator/" : `/tools/disposal-simulator/?case=${caseA.slug}`}
     fallbackLabel="シミュレーターに自分の条件を入れて試算する →"
   />

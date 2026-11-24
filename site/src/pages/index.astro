@@ -276,6 +276,28 @@ const pageSchema = [
       </a>
     </div>
 
+    <!-- 5つ目のツール：売れない実家・土地の最終出口（国庫帰属制度） -->
+    <a
+      href="/tools/kokko-kizoku/"
+      class="mt-4 card-interactive rounded p-4 sm:p-5 border-l-3 border-l-slate-700 flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+    >
+      <div class="min-w-0">
+        <div class="flex flex-wrap items-center gap-2 text-[11px] font-bold text-slate-600">
+          <span class="px-1.5 py-0.5 rounded-xs bg-slate-100 text-slate-700">売れない土地の最終出口</span>
+          <span>法務省の法定算定式対応</span>
+        </div>
+        <h3 class="mt-1 text-sm sm:text-[15px] font-extrabold text-slate-900">
+          相続土地国庫帰属制度の負担金・解体必須コスト vs 10年維持・専門買取シミュレーター
+        </h3>
+        <p class="mt-1 text-xs text-slate-600 leading-relaxed">
+          「買い手がつかない実家・山林・農地を国に返すといくらかかる？」負担金（一律20万円〜面積算定）と建物解体費を合算して比較できます。
+        </p>
+      </div>
+      <div class="shrink-0 text-xs font-bold text-emerald-700 whitespace-nowrap">
+        国庫帰属と出口を比較する →
+      </div>
+    </a>
+
     <!-- 築古・訳あり実家の4大お悩みショートカット -->
     <div class="mt-5 card-surface rounded p-4 sm:p-5 bg-slate-50/60">
       <div class="text-xs font-extrabold text-slate-800 mb-3">「うちの実家は売れるの？」よくある4つのケースからすぐ調べる</div>
@@ -296,6 +318,18 @@ const pageSchema = [
           <div class="font-extrabold text-slate-900">地方の広い実家・母屋＋納屋</div>
           <div class="text-[11px] text-slate-500 mt-0.5">300万円超の解体費用倒れ回避策 →</div>
         </a>
+      </div>
+      <div class="mt-3.5 pt-3 border-t border-slate-200/80 flex flex-wrap items-center gap-1.5 text-[11px]">
+        <span class="font-bold text-slate-600 mr-1">特殊条件の相場：</span>
+        <a href="/cases/leased-land-shakuchi-28tsubo/" class="rounded-xs border border-slate-200 bg-white hover:border-emerald-700 px-2 py-0.5 font-bold text-slate-700 hover:text-emerald-800">借地権</a>
+        <a href="/cases/shared-inheritance-undivided-32tsubo/" class="rounded-xs border border-slate-200 bg-white hover:border-emerald-700 px-2 py-0.5 font-bold text-slate-700 hover:text-emerald-800">共有名義・未分割</a>
+        <a href="/cases/unregistered-extension-34tsubo/" class="rounded-xs border border-slate-200 bg-white hover:border-emerald-700 px-2 py-0.5 font-bold text-slate-700 hover:text-emerald-800">未登記増築</a>
+        <a href="/cases/nagaya-rowhouse-22tsubo-age50/" class="rounded-xs border border-slate-200 bg-white hover:border-emerald-700 px-2 py-0.5 font-bold text-slate-700 hover:text-emerald-800">長屋・連棟式</a>
+        <a href="/cases/slope-retaining-wall-30tsubo/" class="rounded-xs border border-slate-200 bg-white hover:border-emerald-700 px-2 py-0.5 font-bold text-slate-700 hover:text-emerald-800">高低差・擁壁</a>
+        <a href="/cases/stigmatized-lonely-death-28tsubo/" class="rounded-xs border border-slate-200 bg-white hover:border-emerald-700 px-2 py-0.5 font-bold text-slate-700 hover:text-emerald-800">孤独死・事故物件</a>
+        <a href="/cases/fire-damaged-akiya-30tsubo/" class="rounded-xs border border-slate-200 bg-white hover:border-emerald-700 px-2 py-0.5 font-bold text-slate-700 hover:text-emerald-800">火災跡地</a>
+        <a href="/cases/nisetai-50tsubo-age35/" class="rounded-xs border border-slate-200 bg-white hover:border-emerald-700 px-2 py-0.5 font-bold text-slate-700 hover:text-emerald-800">二世帯50坪</a>
+        <a href="/cases/suburban-newtown-32tsubo-age38/" class="rounded-xs border border-slate-200 bg-white hover:border-emerald-700 px-2 py-0.5 font-bold text-slate-700 hover:text-emerald-800">郊外団地</a>
       </div>
     </div>
   </section>
@@ -560,8 +594,8 @@ const pageSchema = [
 
   <AffiliateCta
     slotType="sell"
-    title="実家を解体する前・維持費がかさむ前に「いまの状態のままいくらで売れるか」を知っておく"
-    description="先に150万〜250万円かけて解体してしまうと、売れ残った場合に固定資産税の軽減が外れてしまいます。まずは建物を壊さず・荷物も片付けない状態で「通常の仲介査定」と「そのまま買取」の両方を比較するのが一番安心です。"
+    title="実家を解体する前・維持費がかさむ前に「いまの状態のままいくらになるか」を確認しておく"
+    description="先に150万〜250万円かけて解体してしまうと、売れ残った場合に固定資産税の軽減が外れてしまいます。まずは建物を壊さず・荷物も片付けない状態で、現状のまま売却・買取した場合の目安と手続きを確認するのが安全です。"
     fallbackHref="/tools/disposal-simulator/"
     fallbackLabel="実家の手残り金額を30秒で試算する →"
   />
