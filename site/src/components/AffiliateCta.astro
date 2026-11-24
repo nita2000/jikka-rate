@@ -43,6 +43,11 @@ const toneMap: Record<AffiliateSlot, { left: string; labelColor: string; btn: st
     labelColor: "text-emerald-800",
     btn: "bg-emerald-800 hover:bg-emerald-900 text-white",
   },
+  sozoku: {
+    left: "border-l-emerald-700",
+    labelColor: "text-emerald-700",
+    btn: "bg-emerald-700 hover:bg-emerald-800 text-white",
+  },
 };
 
 const tone = toneMap[slotType];
@@ -72,7 +77,7 @@ const tone = toneMap[slotType];
             target="_blank"
             rel="nofollow noopener sponsored"
             referrerpolicy="no-referrer-when-downgrade"
-            attributionsrc
+            attributionsrc={entry.useAttributionSrc ? "" : undefined}
             data-affiliate-slot={slotType}
             data-affiliate-label={entry.providerLabel}
             class={`inline-flex items-center justify-center text-center px-4 py-2.5 rounded-xs text-xs sm:text-sm font-bold transition-colors ${tone.btn}`}
