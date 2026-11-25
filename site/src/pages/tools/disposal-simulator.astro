@@ -94,7 +94,7 @@ const schema = {
 
 <BaseLayout
   title="実家を「壊して売る」「そのまま売る」「空き家で維持」手残り金額シミュレーター"
-  description="住所や個人情報の入力なし・4つの選択だけで30秒試算。都道府県別の土地相場・解体費用・空き家の固定資産税をもとに、先に解体して売る場合と、壊さずそのまま売却・買取する場合の手残り金額を比較します。"
+  description="4つの条件を選ぶだけで30秒試算。都道府県別の土地相場・解体費用・空き家の固定資産税・譲渡所得税（3,000万円特別控除）をもとに、先に解体して売る場合と、壊さず売却・買取する場合の手残り金額を比較します。"
   canonicalPath="/tools/disposal-simulator/"
   schema={schema}
 >
@@ -198,11 +198,11 @@ const schema = {
         <div class="pt-2 border-t border-slate-100">
           <div class="text-xs font-bold text-slate-700 mb-1.5">② 築年数の目安（わかる範囲で選択）</div>
           <div class="grid grid-cols-3 gap-1.5" id="age-group">
-            <button type="button" data-age="old45" class="age-btn rounded-xs border border-slate-300 bg-white py-2 px-2 text-center text-[11px] font-bold text-slate-600 transition-colors">
-              築45年以上<br /><span class="text-[10px] font-normal opacity-85">昭和56年以前</span>
+            <button type="button" data-age="old45" class="age-btn rounded-xs border border-emerald-700 bg-emerald-700 py-2 px-2 text-center text-[11px] font-bold text-white transition-colors">
+              築45年以上<br /><span class="text-[10px] font-normal opacity-90">昭和56年以前</span>
             </button>
-            <button type="button" data-age="mid35" class="age-btn rounded-xs border border-emerald-700 bg-emerald-700 py-2 px-2 text-center text-[11px] font-bold text-white transition-colors">
-              築30〜44年<br /><span class="text-[10px] font-normal opacity-90">昭和57年〜平成初期</span>
+            <button type="button" data-age="mid35" class="age-btn rounded-xs border border-slate-300 bg-white py-2 px-2 text-center text-[11px] font-bold text-slate-600 transition-colors">
+              築30〜44年<br /><span class="text-[10px] font-normal opacity-85">昭和57年〜平成初期</span>
             </button>
             <button type="button" data-age="new25" class="age-btn rounded-xs border border-slate-300 bg-white py-2 px-2 text-center text-[11px] font-bold text-slate-600 transition-colors">
               築30年未満<br /><span class="text-[10px] font-normal opacity-85">平成中期以降</span>
@@ -268,15 +268,16 @@ const schema = {
             <a href="/tools/inheritance-deadline/" class="text-[11px] font-bold text-emerald-700 hover:underline whitespace-nowrap">期限・要件を確認 →</a>
           </div>
           <div class="grid grid-cols-2 gap-1.5" id="exempt-group">
-            <button type="button" data-exempt="yes" class="exempt-btn rounded-xs border border-emerald-700 bg-emerald-700 py-2 px-2 text-left text-[11px] font-bold text-white transition-colors">
+            <button type="button" id="exempt-yes-btn" data-exempt="yes" class="exempt-btn rounded-xs border border-emerald-700 bg-emerald-700 py-2 px-2 text-left text-[11px] font-bold text-white transition-colors">
               <div>特例あり（期限内売却）</div>
-              <div class="text-[10px] font-normal opacity-90 mt-0.5">3,000万円まで譲渡税0円</div>
+              <div id="exempt-yes-sub" class="text-[10px] font-normal opacity-90 mt-0.5">3,000万円まで譲渡税0円</div>
             </button>
-            <button type="button" data-exempt="no" class="exempt-btn rounded-xs border border-slate-300 bg-white py-2 px-2 text-left text-[11px] font-bold text-slate-700 transition-colors">
+            <button type="button" id="exempt-no-btn" data-exempt="no" class="exempt-btn rounded-xs border border-slate-300 bg-white py-2 px-2 text-left text-[11px] font-bold text-slate-700 transition-colors">
               <div>特例なし（期限切れ・対象外）</div>
               <div class="text-[10px] font-normal opacity-80 mt-0.5">譲渡税 20.315%を試算</div>
             </button>
           </div>
+          <p id="exempt-ui-hint" class="hidden mt-1.5 text-[11px] text-amber-800 leading-snug"></p>
         </div>
       </div>
 
@@ -558,7 +559,7 @@ const schema = {
 
     const state = {
       spanYears: 10,
-      ageGroup: "mid35", // old45 | mid35 | new25
+      ageGroup: "old45", // old45 | mid35 | new25
       loc: "suburb", // urban | suburb | rural | wakeari
       cond: "normal", // clean | normal | damaged
       taxExempt: true, // 空き家3,000万円特別控除の適用有無
@@ -707,16 +708,47 @@ const schema = {
     function calcTransferTax(salePriceYen, transferExpenseYen, useExempt, heirsCount = 1) {
       if (salePriceYen <= 0) return 0;
       // 親の購入時契約書が不明な場合の法定5%概算取得費・長期譲渡所得税率20.315%
-      // 2024年1月改正：相続人1〜2人は1人上限3,000万円、相続人3人以上は1人上限2,000万円
+      // 2024年1月改正：相続人1〜2人は1人上限3,000万円、相続人3人以上は1人上限2,000万円（譲渡対価1億円以下が要件）
       const assumedAcquisitionCost = Math.round(salePriceYen * 0.05);
       const totalGain = Math.max(0, salePriceYen - assumedAcquisitionCost - transferExpenseYen);
-      if (!useExempt) {
+      if (!useExempt || salePriceYen > 100000000) {
         return Math.round(totalGain * 0.20315);
       }
       const n = Math.max(1, heirsCount);
       const perHeirLimit = n >= 3 ? 20000000 : 30000000;
       const perHeirTaxable = Math.max(0, totalGain / n - perHeirLimit);
       return Math.round(perHeirTaxable * 0.20315 * n);
+    }
+
+    function syncExemptButtonsUI(eligible, reasonText) {
+      const btnYes = document.getElementById("exempt-yes-btn");
+      const btnNo = document.getElementById("exempt-no-btn");
+      const subYes = document.getElementById("exempt-yes-sub");
+      const hint = document.getElementById("exempt-ui-hint");
+      if (!btnYes || !btnNo) return;
+
+      if (!eligible) {
+        btnYes.disabled = true;
+        btnYes.className =
+          "exempt-btn rounded-xs border border-slate-200 bg-slate-100 py-2 px-2 text-left text-[11px] font-bold text-slate-400 cursor-not-allowed transition-colors";
+        btnNo.className =
+          "exempt-btn rounded-xs border border-emerald-700 bg-emerald-700 py-2 px-2 text-left text-[11px] font-bold text-white transition-colors";
+        if (subYes) subYes.textContent = "現在の条件では対象外";
+        if (hint) {
+          hint.textContent = reasonText;
+          hint.classList.remove("hidden");
+        }
+      } else {
+        btnYes.disabled = false;
+        if (subYes) subYes.textContent = state.heirs >= 3 ? "1人2,000万円まで非課税" : "3,000万円まで譲渡税0円";
+        btnYes.className =
+          "exempt-btn rounded-xs border py-2 px-2 text-left text-[11px] font-bold transition-colors " +
+          (state.taxExempt ? "border-emerald-700 bg-emerald-700 text-white" : "border-slate-300 bg-white text-slate-700 hover:bg-slate-50");
+        btnNo.className =
+          "exempt-btn rounded-xs border py-2 px-2 text-left text-[11px] font-bold transition-colors " +
+          (!state.taxExempt ? "border-emerald-700 bg-emerald-700 text-white" : "border-slate-300 bg-white text-slate-700 hover:bg-slate-50");
+        if (hint) hint.classList.add("hidden");
+      }
     }
 
     function recalc() {
@@ -772,9 +804,16 @@ const schema = {
 
       // ② 解体して更地仲介売却
       const isMansion = c.slug === "old-mansion-70sqm-age42";
-      // 空き家3,000万円特別控除の法定要件：昭和56年（1981年）5月31日以前建築（2026年時点で築45年以上）の戸建て
-      const isExemptEligible = !isMansion && effAge >= 45;
+      const isOver100M = landMarketYen > 100000000;
+      // 空き家3,000万円特別控除の法定要件：昭和56年（1981年）5月31日以前建築（築45年以上）の戸建て＋売却代金1億円以下
+      const isExemptEligible = !isMansion && effAge >= 45 && !isOver100M;
       const effectiveTaxExempt = isExemptEligible && state.taxExempt;
+      const exemptDisqualifyReason = isMansion
+        ? "※区分マンションは空き家3,000万円特別控除の対象外です。"
+        : isOver100M
+          ? "※売却代金が1億円を超える場合は空き家3,000万円特別控除の対象外です。"
+          : "※昭和56年（1981年）5月31日以前建築の戸建てが要件のため、築45年未満は自動で対象外にしています。";
+      syncExemptButtonsUI(isExemptEligible, exemptDisqualifyReason);
 
       let sarachiGross = landMarketYen;
       if (state.loc === "wakeari" || c.slug === "non-rebuildable-wood-25tsubo") {
@@ -986,8 +1025,13 @@ const schema = {
       const taxBox = document.getElementById("tax-impact-box");
       if (!isExemptEligible) {
         taxBox.className = "mt-4 rounded-xs border border-amber-300 bg-amber-50/70 px-3.5 py-2.5 text-xs text-slate-800 leading-relaxed";
+        const reasonLabel = isMansion
+          ? "区分マンション"
+          : isOver100M
+            ? "売却代金1億円超"
+            : "昭和56年（1981年）6月以降の建築（築45年未満）";
         taxBox.innerHTML =
-          `<strong>空き家3,000万円特別控除の対象外条件：</strong>${isMansion ? "区分マンション" : "昭和56年（1981年）6月以降の建築（築45年未満）"}は法定要件の対象外のため、譲渡所得税（約<strong class="text-rose-700">${plainMan(taxWithoutExempt)}</strong>・取得費不明5%概算）を差し引いています。${!isMansion ? "昭和56年5月31日以前の旧耐震戸建てなら、STEP 2で「築45年以上」を選ぶと控除ありで試算できます。" : ""}親の購入時の売買契約書が見つかれば取得費を差し引いて大きく節税できます。` +
+          `<strong>空き家3,000万円特別控除の対象外条件：</strong>${reasonLabel}は法定要件の対象外のため、譲渡所得税（約<strong class="text-rose-700">${plainMan(taxWithoutExempt)}</strong>・取得費不明5%概算）を差し引いています。${!isMansion && !isOver100M ? "昭和56年5月31日以前の旧耐震戸建てなら、STEP 2で「築45年以上」を選ぶと控除ありで試算できます。" : ""}親の購入時の売買契約書が見つかれば取得費を差し引いて大きく節税できます。` +
           ` <a href="/tools/inheritance-deadline/" class="font-bold text-emerald-800 hover:underline whitespace-nowrap">特例の6要件を確認 →</a>`;
       } else if (effectiveTaxExempt) {
         taxBox.className = "mt-4 rounded-xs border border-emerald-200 bg-emerald-50/50 px-3.5 py-2.5 text-xs text-slate-700 leading-relaxed";
@@ -1185,15 +1229,13 @@ const schema = {
     const mobBar = document.getElementById("disp-mobile-bar");
     const resPanel = document.getElementById("disp-result-panel");
     if (mobBar && resPanel && "IntersectionObserver" in window) {
-      const io = new IntersectionObserver(
-        (entries) => {
-          const visible = entries[0]?.isIntersecting;
-          mobBar.classList.toggle("translate-y-full", Boolean(visible));
-          mobBar.classList.toggle("opacity-0", Boolean(visible));
-          mobBar.classList.toggle("pointer-events-none", Boolean(visible));
-        },
-        { threshold: 0.12 },
-      );
+      const updateMobBar = (entry) => {
+        const shouldHide = Boolean(entry?.isIntersecting) || (entry ? entry.boundingClientRect.top < 0 : false);
+        mobBar.classList.toggle("translate-y-full", shouldHide);
+        mobBar.classList.toggle("opacity-0", shouldHide);
+        mobBar.classList.toggle("pointer-events-none", shouldHide);
+      };
+      const io = new IntersectionObserver((entries) => updateMobBar(entries[0]), { threshold: 0.05 });
       io.observe(resPanel);
     }
 

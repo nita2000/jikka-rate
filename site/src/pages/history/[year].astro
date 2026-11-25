@@ -11,6 +11,41 @@ export function getStaticPaths() {
 }
 
 const { item } = Astro.props;
+const otherYears = historyYearly.filter((y) => y.year !== item.year);
+
+const yearContextMap: Record<string, { headline: string; points: string[]; advice: string }> = {
+  "2024": {
+    headline: "建設2024年問題・相続登記義務化・3,000万円控除改正が重なった転換の年",
+    points: [
+      "2024年1月：空き家3,000万円特別控除が拡充され、買主が翌年2月15日までに解体・耐震改修する場合も適用可能に（相続人3人以上は1人上限2,000万円へ変更）。",
+      "2024年4月：建設業の時間外労働上限規制（2024年問題）と相続登記の申請義務化（3年以内・過料10万円以下）が同時スタート。",
+      "2024年7月：800万円以下の低廉な空き家等について、宅建業者の仲介手数料上限が33万円（税込）へ見直され、地方空き家の流通が動き始めた。",
+    ],
+    advice:
+      "2023年10月からのアスベスト有資格者事前調査の完全義務化と重なり、2024年以降は木造30坪の解体総額が「本体工事＋付帯・石綿費」で180万〜210万円帯へ切り上がりました。",
+  },
+  "2025": {
+    headline: "産廃処分費と人件費の高止まりが定着し、「壊さず手放す」判断が広がった年",
+    points: [
+      "産業廃棄物（木くず・コンクリートがら・石綿含有成形板）の中間処理費と運搬コストが上昇し、構造別坪単価が前年比でじわじわと切り上がり。",
+      "2023年12月施行の「管理不全空き家」に対する自治体の実態調査・指導が全国で本格化し、放置コストの認知が拡大。",
+      "地方・郊外では解体費が土地売却額を上回る「費用倒れ」事例が増え、買主解体特例や現状そのまま買取を選ぶ所有者が増加。",
+    ],
+    advice:
+      "解体単価の上昇局面では、売却の目処が立つ前に自費解体すると手残りを大きく削られやすいため、現状のままでの査定・買取確認を優先する流れが定着しています。",
+  },
+  "2026": {
+    headline: "住所変更登記義務化が施行され、2027年3月末「相続登記猶予期限」直前の年",
+    points: [
+      "2026年4月：不動産所有者の住所・氏名変更登記が義務化（変更日から2年以内・5万円以下の過料）。",
+      "2027年3月31日に迫る「過去の相続分を含む相続登記義務化の猶予期限」に向け、親・祖父母名義のままの実家整理と相談が急増。",
+      "木造解体坪単価は全国平均4.8万円/坪前後、鉄骨造6.3万円/坪・RC造7.8万円/坪の高水準が継続し、自治体解体補助金（着工前申請）の活用有無で手残りに大きな差。",
+    ],
+    advice:
+      "2027年3月末の相続登記猶予期限、および現行法で2027年12月末までの空き家3,000万円特別控除期限を見据え、逆算カレンダーと手残り試算を早めに確認しておくことが重要です。",
+  },
+};
+const ctx = yearContextMap[item.year] || yearContextMap["2026"];
 ---
 
 <BaseLayout
@@ -88,6 +123,37 @@ const { item } = Astro.props;
           }
         </tbody>
       </table>
+    </div>
+  </section>
+
+  <!-- 当該年の法改正・解体コスト背景 -->
+  <section class="card-surface rounded p-5 sm:p-6 mt-6 space-y-4">
+    <div>
+      <div class="eyebrow-label mb-1">{item.year}年の背景・制度トピック</div>
+      <h2 class="text-base font-extrabold text-slate-900">{ctx.headline}</h2>
+    </div>
+    <ul class="list-disc pl-5 space-y-1.5 text-xs sm:text-sm text-slate-700 leading-relaxed">
+      {ctx.points.map((pt) => <li>{pt}</li>)}
+    </ul>
+    <p class="rounded-xs bg-slate-50 border border-slate-200 p-3.5 text-xs text-slate-700 leading-relaxed">
+      <strong>実家・空き家所有者への影響：</strong>{ctx.advice}
+    </p>
+    <div class="pt-2 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs">
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="font-bold text-slate-500">他の年を見る：</span>
+        {otherYears.map((y) => (
+          <a
+            href={`/history/${y.year}/`}
+            class="rounded-xs border border-slate-200 bg-white hover:border-emerald-700 px-2.5 py-1 font-bold text-slate-700 hover:text-emerald-800 transition-colors"
+          >
+            {y.year}年データ →
+          </a>
+        ))}
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <a href="/tools/disposal-simulator/" class="font-bold text-emerald-700 hover:underline">実家の手残り試算 →</a>
+        <a href="/tools/inheritance-deadline/" class="font-bold text-emerald-700 hover:underline">相続期限カレンダー →</a>
+      </div>
     </div>
   </section>
 </BaseLayout>

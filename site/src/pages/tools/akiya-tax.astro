@@ -593,12 +593,13 @@ const schema = {
     if (atMobBar && atResPanel && "IntersectionObserver" in window) {
       const io = new IntersectionObserver(
         (entries) => {
-          const visible = entries[0]?.isIntersecting;
-          atMobBar.classList.toggle("translate-y-full", Boolean(visible));
-          atMobBar.classList.toggle("opacity-0", Boolean(visible));
-          atMobBar.classList.toggle("pointer-events-none", Boolean(visible));
+          const entry = entries[0];
+          const shouldHide = Boolean(entry?.isIntersecting) || (entry ? entry.boundingClientRect.top < 0 : false);
+          atMobBar.classList.toggle("translate-y-full", shouldHide);
+          atMobBar.classList.toggle("opacity-0", shouldHide);
+          atMobBar.classList.toggle("pointer-events-none", shouldHide);
         },
-        { threshold: 0.12 },
+        { threshold: 0.05 },
       );
       io.observe(atResPanel);
     }

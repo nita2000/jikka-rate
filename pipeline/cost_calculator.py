@@ -511,9 +511,26 @@ def evaluate_strategy_metrics(
             "note": f"解体せず仲介売却 → 売却後の最終手残り {net_proceeds:+,}円",
         }
 
+    if strategy == "demolition_cost_only":
+        # 敷地面積の差を排除し、建物構造・道路・アスベストによる純粋な解体処分コスト差を比較する
+        total_demo = demo["total_demolition_yen"]
+        return {
+            "initial_outlay_yen": total_demo,
+            "annual_ongoing_yen": 0,
+            "cost_5y_yen": total_demo,
+            "cost_10y_yen": total_demo,
+            "net_cash_5y_yen": -total_demo,
+            "net_cash_10y_yen": -total_demo,
+            "short_winner": f"{case_enriched['short_name']}の解体",
+            "note": f"本体 {demo['building_body_yen']:,}円＋付帯・残置・石綿計 {total_demo - demo['building_body_yen']:,}円＝解体総額 {total_demo:,}円",
+        }
+
     if strategy == "buyer_demolition_3000man":
         # 2024年改正：古家付きで譲渡し買主が翌年2月15日までに解体して3,000万円特別控除を適用
-        net_proceeds = disp["furuya_net_proceeds_yen"] + round(tax["sarachi_total_tax_annual"] * 0.8)
+        # 売主が先行解体しないため更地固定資産税の待期負担と先行資金リスクを回避しつつ、更地実勢から解体見込み相当のみ調整
+        buyer_demo_gross = max(0, round(disp["land_market_yen"] * 0.99 - demo["total_demolition_yen"] * 0.82))
+        buyer_demo_broker = calc_brokerage_fee(buyer_demo_gross, tax_rules)
+        net_proceeds = buyer_demo_gross - buyer_demo_broker - demo["residual_items_yen"]
         return {
             "initial_outlay_yen": demo["residual_items_yen"],
             "annual_ongoing_yen": 0,
@@ -522,7 +539,7 @@ def evaluate_strategy_metrics(
             "net_cash_5y_yen": net_proceeds,
             "net_cash_10y_yen": net_proceeds,
             "short_winner": "古家付き売却（買主解体）",
-            "note": f"先行解体ゼロで3,000万円控除適用 → 最終手残り {net_proceeds:+,}円",
+            "note": f"先行解体ゼロ・更地増税なしで3,000万円控除適用 → 最終手残り {net_proceeds:+,}円",
         }
 
     if strategy == "direct_kaitori":

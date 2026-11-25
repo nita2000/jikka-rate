@@ -175,13 +175,13 @@
     "category": "structure_demolition",
     "category_label": "構造・広さ別の解体＆維持比較",
     "case_a": "wood-30tsubo-age40",
-    "strategy_a": "sarachi_sale",
-    "option_a_label": "木造30坪の解体・更地売却",
+    "strategy_a": "demolition_cost_only",
+    "option_a_label": "木造30坪の解体工事総額",
     "case_b": "light-steel-32tsubo-age35",
-    "strategy_b": "sarachi_sale",
-    "option_b_label": "軽量鉄骨32坪の解体・更地売却",
-    "title": "木造30坪 vs 軽量鉄骨32坪 解体工事費用・固定資産税・売却手取り比較",
-    "angle": "ハウスメーカーの軽量鉄骨造は木造に比べて解体費用がいくら高く、中古戸建て売却といくら差が出るか"
+    "strategy_b": "demolition_cost_only",
+    "option_b_label": "軽量鉄骨32坪の解体工事総額",
+    "title": "木造30坪 vs 軽量鉄骨32坪 解体工事費用の総額比較",
+    "angle": "敷地面積の差を除いた純粋な解体コストで、ハウスメーカーの軽量鉄骨造は木造よりいくら高くなるか"
   },
   {
     "slug": "wood-35tsubo-vs-rc-35tsubo-demolition",

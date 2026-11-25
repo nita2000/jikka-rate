@@ -124,6 +124,12 @@ const kokkoSchema = {
             <span class="block text-[10px] text-slate-500 mt-1">隣接・同種目は合算申出可</span>
           </label>
         </div>
+        <div id="kk-combine-wrap" class="hidden pt-1 border-t border-slate-100">
+          <label class="flex items-start gap-2 text-xs text-slate-700 cursor-pointer">
+            <input type="checkbox" id="kk-combine-lots" checked class="mt-0.5 rounded-xs border-slate-300 text-emerald-700" />
+            <span>隣接する同一種目の土地として<strong>負担金を合算申出</strong>する（飛び地や別種目の場合はチェックを外すと筆数分で計算）</span>
+          </label>
+        </div>
       </div>
 
       <!-- STEP 3 -->
@@ -336,9 +342,20 @@ const kokkoSchema = {
     const elPref = document.getElementById("kk-pref");
     const elArea = document.getElementById("kk-area");
     const elLots = document.getElementById("kk-lots");
+    const elCombineWrap = document.getElementById("kk-combine-wrap");
+    const elCombineLots = document.getElementById("kk-combine-lots");
     const elFloor = document.getElementById("kk-floor");
     const elAnnual = document.getElementById("kk-annual");
     const elAnnualLand = document.getElementById("kk-annual-land");
+
+    function syncBuildingButtonsUI() {
+      document.querySelectorAll(".kk-bldg-btn").forEach((b) => {
+        const on = (b.getAttribute("data-bldg") === "yes") === state.hasBuilding;
+        b.className =
+          "kk-bldg-btn rounded-xs border py-2 px-2.5 text-left text-[11px] font-bold transition-colors " +
+          (on ? "border-emerald-700 bg-emerald-700 text-white" : "border-slate-300 bg-white text-slate-700 hover:bg-slate-50");
+      });
+    }
 
     function yen(n) {
       return `${Math.round(n).toLocaleString("ja-JP")}円`;
@@ -395,8 +412,17 @@ const kokkoSchema = {
       document.getElementById("kk-tsubo-hint").textContent = `約 ${(areaSqm / 3.305785).toFixed(1)}坪`;
       document.getElementById("kk-floor-wrap").classList.toggle("hidden", !state.hasBuilding);
       document.getElementById("kk-land-annual-wrap").classList.toggle("hidden", state.hasBuilding);
+      if (elCombineWrap) elCombineWrap.classList.toggle("hidden", lots <= 1);
 
-      const { burdenYen, formulaDesc } = calcStatutoryBurden(state.kind, areaSqm);
+      const isCombined = lots <= 1 || Boolean(elCombineLots?.checked);
+      const { burdenYen: singleBurdenYen, formulaDesc } = calcStatutoryBurden(state.kind, areaSqm);
+      const burdenYen = isCombined ? singleBurdenYen : singleBurdenYen * lots;
+      const lotsNote =
+        lots > 1
+          ? isCombined
+            ? `（${lots}筆・合算申出ありで1筆扱い）`
+            : `（${lots}筆・飛び地等の個別算定×${lots}）`
+          : "";
       const examFeeYen = lots * 14000;
       const demoYen = state.hasBuilding
         ? Math.round(floorTsubo * pref.wood_man_per_tsubo * 10000 + 220000 + 280000 + 240000)
@@ -483,11 +509,11 @@ const kokkoSchema = {
         )
         .join("");
 
-      document.getElementById("kk-part-burden").textContent = yen(burdenYen);
+      document.getElementById("kk-part-burden").textContent = `${yen(burdenYen)}${lotsNote}`;
       document.getElementById("kk-part-exam").textContent = yen(examFeeYen);
       document.getElementById("kk-part-demo").textContent = demoYen > 0 ? yen(demoYen) : "0円（建物なし）";
       document.getElementById("kk-part-misc").textContent = yen(miscYen);
-      document.getElementById("kk-formula-note").textContent = `適用区分：${formulaDesc}。`;
+      document.getElementById("kk-formula-note").textContent = `適用区分：${formulaDesc}${lotsNote}。`;
 
       // CTA動的切替
       document.getElementById("kk-cta-akiya").classList.toggle("hidden", !state.hasBuilding);
@@ -518,6 +544,11 @@ const kokkoSchema = {
             "kk-kind-btn rounded-xs border py-2.5 px-3 text-left text-xs font-bold transition-colors " +
             (on ? "border-emerald-700 bg-emerald-700 text-white" : "border-slate-300 bg-white text-slate-700 hover:bg-slate-50");
         });
+        // 森林・農地を選択した場合は原則建物なしへ自動切替（手動で建物ありへ戻すことも可能）
+        if (state.kind === "forest" || state.kind === "special_nochi") {
+          state.hasBuilding = false;
+          syncBuildingButtonsUI();
+        }
         recalc();
       });
     });
@@ -525,12 +556,7 @@ const kokkoSchema = {
     document.querySelectorAll(".kk-bldg-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
         state.hasBuilding = btn.getAttribute("data-bldg") === "yes";
-        document.querySelectorAll(".kk-bldg-btn").forEach((b) => {
-          const on = b === btn;
-          b.className =
-            "kk-bldg-btn rounded-xs border py-2 px-2.5 text-left text-[11px] font-bold transition-colors " +
-            (on ? "border-emerald-700 bg-emerald-700 text-white" : "border-slate-300 bg-white text-slate-700 hover:bg-slate-50");
-        });
+        syncBuildingButtonsUI();
         recalc();
       });
     });
@@ -539,6 +565,7 @@ const kokkoSchema = {
       el.addEventListener("input", recalc);
       el.addEventListener("change", recalc);
     });
+    if (elCombineLots) elCombineLots.addEventListener("change", recalc);
     document.querySelectorAll(".kk-risk").forEach((cb) => cb.addEventListener("change", recalc));
 
     document.getElementById("kk-copy-btn").addEventListener("click", async () => {
@@ -560,12 +587,13 @@ const kokkoSchema = {
     if (kkMobBar && kkResPanel && "IntersectionObserver" in window) {
       const io = new IntersectionObserver(
         (entries) => {
-          const visible = entries[0]?.isIntersecting;
-          kkMobBar.classList.toggle("translate-y-full", Boolean(visible));
-          kkMobBar.classList.toggle("opacity-0", Boolean(visible));
-          kkMobBar.classList.toggle("pointer-events-none", Boolean(visible));
+          const entry = entries[0];
+          const shouldHide = Boolean(entry?.isIntersecting) || (entry ? entry.boundingClientRect.top < 0 : false);
+          kkMobBar.classList.toggle("translate-y-full", shouldHide);
+          kkMobBar.classList.toggle("opacity-0", shouldHide);
+          kkMobBar.classList.toggle("pointer-events-none", shouldHide);
         },
-        { threshold: 0.12 },
+        { threshold: 0.05 },
       );
       io.observe(kkResPanel);
     }

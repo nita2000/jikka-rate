@@ -556,12 +556,13 @@ const schema = {
     if (hkMobBar && hkResPanel && "IntersectionObserver" in window) {
       const io = new IntersectionObserver(
         (entries) => {
-          const visible = entries[0]?.isIntersecting;
-          hkMobBar.classList.toggle("translate-y-full", Boolean(visible));
-          hkMobBar.classList.toggle("opacity-0", Boolean(visible));
-          hkMobBar.classList.toggle("pointer-events-none", Boolean(visible));
+          const entry = entries[0];
+          const shouldHide = Boolean(entry?.isIntersecting) || (entry ? entry.boundingClientRect.top < 0 : false);
+          hkMobBar.classList.toggle("translate-y-full", shouldHide);
+          hkMobBar.classList.toggle("opacity-0", shouldHide);
+          hkMobBar.classList.toggle("pointer-events-none", shouldHide);
         },
-        { threshold: 0.12 },
+        { threshold: 0.05 },
       );
       io.observe(hkResPanel);
     }

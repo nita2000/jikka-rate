@@ -151,6 +151,10 @@ class DatasetOutputTests(unittest.TestCase):
         std_wood = by_case["wood-30tsubo-age40"]["calc"]["disposal"]
         self.assertGreater(std_wood["kaitori_net_proceeds_yen"], round(std_wood["land_market_yen"] * 0.42))
 
+        # 比較ペアの論理整合（木造30坪 vs 軽量鉄骨32坪は木造が解体安、売主解体 vs 買主解体は買主解体が有利）
+        self.assertEqual(by_pair["wood-30tsubo-vs-steel-32tsubo-demolition"]["winner_side"], "A")
+        self.assertEqual(by_pair["seller-demolition-vs-buyer-demolition-3000man"]["winner_side"], "B")
+
     def test_dist_internal_links_if_built(self) -> None:
         import re
 
