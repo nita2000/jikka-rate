@@ -407,15 +407,21 @@ const schema = {
   }
 
   <AffiliateCta
-    slotType={(item.recommended_slot as AffiliateSlot) || "sell"}
+    slotType={
+      item.slug === "leased-land-shakuchi-28tsubo"
+        ? "shakuchi"
+        : item.recommended_slot === "akiya" && item.category !== "wakeari"
+          ? "akiya_house"
+          : ((item.recommended_slot as AffiliateSlot) || "sell")
+    }
     title={
       isGrave
-        ? `${item.short_name}の墓じまいを進める前に、全体の費用と手順を確認する`
+        ? `${item.short_name}の墓じまいを進める前に、全体の費用見積もりと手順を相談する`
         : `${item.short_name}は「${disp.best_strategy_label}」を軸に、今の状態での目安を確認する`
     }
     description={
       isGrave
-        ? "墓じまいは石材撤去だけでなく、改葬許可申請・閉眼供養・受入先の手配まで順序が重要です。家族で話し合う前に、全体の段取りと費用目安がわかる資料を手元に揃えておくと手戻りを防げます。"
+        ? "墓じまいは石材撤去だけでなく、改葬許可申請・閉眼供養・受入先の手配まで順序が重要です。家族で話し合う前に、全体の段取りと費用目安を専門窓口へ確認しておくと手戻りを防げます。"
         : "解体工事や遺品整理の費用を先払いする前に、まずは現状のまま売却・買取した場合の目安を確認しておくと、持ち出しリスクを抑えて手残りの多い方法を選べます。"
     }
     fallbackHref={isGrave ? "/tools/hakajimai-simulator/" : `/tools/disposal-simulator/?case=${item.slug}`}

@@ -23,13 +23,18 @@ const ma = pair.metrics_a;
 const mb = pair.metrics_b;
 const isHaka = pair.category === "hakajimai_choice";
 const spanLabel = isHaka ? "15年間" : "10年間";
-const ctaSlot: AffiliateSlot = isHaka
-  ? "kuyo"
-  : pair.strategy_a === "direct_kaitori" || pair.strategy_b === "direct_kaitori"
-    ? "akiya"
-    : pair.category === "structure_demolition"
-      ? "kaitai"
-      : "sell";
+const ctaSlot: AffiliateSlot =
+  pair.slug === "shakuchi-return-sarachi-vs-kaitori"
+    ? "shakuchi"
+    : isHaka
+      ? "kuyo"
+      : pair.strategy_a === "direct_kaitori" || pair.strategy_b === "direct_kaitori"
+        ? caseA.category === "wakeari"
+          ? "akiya"
+          : "akiya_house"
+        : pair.category === "structure_demolition"
+          ? "kaitai"
+          : "sell";
 
 const compareSchema = {
   "@context": "https://schema.org",
@@ -180,7 +185,7 @@ const compareSchema = {
     }
     description={
       isHaka
-        ? "墓石撤去や改葬の費用は区画の広さ・立地・寺院や霊園の条件によって大きく変わります。手続きを始める前に、費用と段取りが整理された資料で全体像を確認しておくと安心です。"
+        ? "墓石撤去や改葬の費用は区画の広さ・立地・寺院や霊園の条件によって大きく変わります。手続きを始める前に、全体の費用見積もりと代行手順を専門窓口へ確認しておくと安心です。"
         : "同じ都道府県内でも、前面道路の幅員・再建築の可否・荷物の量によって売却額や解体費は数百万円変わります。解体や片付けを先行せず、現状のままでの目安を確認してから方針を決めるのが安全です。"
     }
     fallbackHref={isHaka ? "/tools/hakajimai-simulator/" : `/tools/disposal-simulator/?case=${caseA.slug}`}

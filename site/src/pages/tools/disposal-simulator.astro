@@ -506,10 +506,28 @@ const schema = {
         <div id="cta-wrap-akiya" class="hidden">
           <AffiliateCta
             slotType="akiya"
-            title="解体・片付け不要の「訳あり・空き家専門買取」で持ち出し0円の金額を確認する"
-            description="再建築不可・荷物大量・地方で解体すると費用倒れになりやすい実家は、一般の仲介で断られても専門買取なら現状のまま現金化できるケースがあります。解体や片付けを発注する前に買取目安を把握しておくのが安全です。"
+            title="解体・片付け不要の「訳あり物件専門買取」で持ち出し0円の金額を確認する"
+            description="再建築不可・狭小道路・荷物大量・事故物件などは、一般の仲介で断られても訳あり専門買取なら現状のまま現金化できるケースがあります。解体や片付けを発注する前に買取目安を把握しておくのが安全です。"
             fallbackHref="/compare/non-rebuildable-kaitori-vs-sarachi-trap/"
             fallbackLabel="再建築不可・訳あり実家の買取 vs 解体比較を見る →"
+          />
+        </div>
+        <div id="cta-wrap-akiya_house" class="hidden">
+          <AffiliateCta
+            slotType="akiya_house"
+            title="解体・片付け不要の「空き家・中古戸建て専門買取」で持ち出し0円の金額を確認する"
+            description="解体すると費用倒れになりやすい地方・郊外の空き家や広い実家でも、空き家専門買取なら解体費・残置物処分費をかけずに現状のまま手放せるケースがあります。解体発注前に買取目安を確認しておきましょう。"
+            fallbackHref="/compare/kominka-55tsubo-sarachi-vs-kaitori/"
+            fallbackLabel="地方実家の解体 vs そのまま買取比較を見る →"
+          />
+        </div>
+        <div id="cta-wrap-shakuchi" class="hidden">
+          <AffiliateCta
+            slotType="shakuchi"
+            title="自費解体して更地返還する前に「借地権付き建物のまま手放せるか」を相談する"
+            description="借地権付きの実家は、自費で解体して地主へ無償返還すると解体費だけ持ち出しになりますが、借地権専門の窓口へ相談すれば建物のまま買い取ってもらえる可能性があります。"
+            fallbackHref="/compare/shakuchi-return-sarachi-vs-kaitori/"
+            fallbackLabel="借地権の更地返還 vs そのまま買取比較を見る →"
           />
         </div>
         <div id="cta-wrap-kaitai" class="hidden">
@@ -911,9 +929,19 @@ const schema = {
           ? `単独相続の手残り目安：${signedMan(bestNet)}`
           : `${state.heirs}人で分けると 1人あたり ${signedMan(perHeirNet)}`;
 
-      // 診断結果に応じた動的CTAの自動切替
-      const activeCtaSlot = !asIsWins ? "kaitai" : useKaitoriAsMain ? "akiya" : "sell";
-      ["sell", "akiya", "kaitai"].forEach((slot) => {
+      // 診断結果に応じた動的CTAの自動切替（5枠：借地権 / 訳あり買取 / 一般空き家買取 / 売却相談 / 解体）
+      const isShakuchi = c.slug === "leased-land-shakuchi-28tsubo";
+      const isWakeariCase = state.loc === "wakeari" || c.category === "wakeari";
+      const activeCtaSlot = isShakuchi
+        ? "shakuchi"
+        : !asIsWins
+          ? "kaitai"
+          : useKaitoriAsMain
+            ? isWakeariCase
+              ? "akiya"
+              : "akiya_house"
+            : "sell";
+      ["sell", "akiya", "akiya_house", "shakuchi", "kaitai"].forEach((slot) => {
         const el = document.getElementById(`cta-wrap-${slot}`);
         if (el) el.classList.toggle("hidden", slot !== activeCtaSlot);
       });

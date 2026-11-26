@@ -4,7 +4,7 @@
  * ASP提携後、各枠にクリックURL（url）と計測用1px画像URL（impPixel）を設定するだけで、
  * 全ページのCTAおよびシミュレーター結果連動型の動的CTAへ一斉反映されます。
  */
-export type AffiliateSlot = "akiya" | "sell" | "kaitai" | "kuyo" | "sozoku";
+export type AffiliateSlot = "akiya" | "akiya_house" | "shakuchi" | "sell" | "kaitai" | "kuyo" | "sozoku";
 
 export interface AffiliateEntry {
   url: string;
@@ -17,15 +17,35 @@ export interface AffiliateEntry {
 }
 
 export const AFFILIATE_LINKS: Record<AffiliateSlot, AffiliateEntry> = {
-  /** 1. 訳あり物件・空き家専門買取（訳アリ不動産買取専門店【ラクウル】） */
+  /** 1. 訳あり物件専門買取（訳アリ不動産買取専門店【ラクウル】） */
   akiya: {
     url: "https://px.a8.net/svt/ejp?a8mat=4BGS18+3F8X6A+56AO+5YJRM",
     impPixel: "https://www16.a8.net/0.gif?a8mat=4BGS18+3F8X6A+56AO+5YJRM",
-    providerLabel: "訳あり物件・空き家専門買取（ラクウル）",
+    providerLabel: "訳あり物件専門買取（ラクウル）",
     buttonText: "訳あり物件の専門店【ラクウル】",
     microCopy: "解体や片付けを始める前の段階で、現状のままの買取目安を確認できます。",
     disclaimer:
       "※実際の買取額は立地・接道条件・残置物や建物の状態により異なります。解体を発注する前の判断材料としてご活用ください。",
+  },
+  /** 1-b. 空き家・中古戸建て専門買取（空き家・中古戸建ての買取専門【ラクウル】） */
+  akiya_house: {
+    url: "https://px.a8.net/svt/ejp?a8mat=4BGS18+42GTRM+56AO+HV7V6",
+    impPixel: "https://www15.a8.net/0.gif?a8mat=4BGS18+42GTRM+56AO+HV7V6",
+    providerLabel: "空き家・中古戸建て専門買取（ラクウル）",
+    buttonText: "空き家・中古戸建ての買取専門【ラクウル】",
+    microCopy: "解体費や片付け費用をかける前に、空き家そのままの買取目安を確認できます。",
+    disclaimer:
+      "※実際の買取額は立地・築年数・敷地条件や残置物の量により異なります。解体を発注する前の判断材料としてご活用ください。",
+  },
+  /** 1-c. 借地権専門相談・買取（借地権 無料相談ドットコム） */
+  shakuchi: {
+    url: "https://px.a8.net/svt/ejp?a8mat=4BGS18+4MPKC2+5TEW+5YJRM",
+    impPixel: "https://www14.a8.net/0.gif?a8mat=4BGS18+4MPKC2+5TEW+5YJRM",
+    providerLabel: "借地権の売却・買取相談（借地権 無料相談ドットコム）",
+    buttonText: "相談からワンストップで対応【借地権 無料相談ドットコム】",
+    microCopy: "地主への承諾交渉や解体返還が必要になる前に、借地権付き建物のまま手放せるか相談できます。",
+    disclaimer:
+      "※借地権の評価や譲渡承諾料は契約内容・残存期間・地主との交渉条件により異なります。自費解体して更地返還する前に専門窓口へ確認するのが安全です。",
   },
   /** 2. 実家・相続不動産の売却相談（相続の窓口） */
   sell: {
@@ -47,13 +67,13 @@ export const AFFILIATE_LINKS: Record<AffiliateSlot, AffiliateEntry> = {
     disclaimer:
       "※解体工事費は前面道路の幅員・地中埋設物・アスベスト事前調査の結果により変動します。着工前の自治体補助金とあわせて確認してください。",
   },
-  /** 4. 墓じまい・永代供養・葬儀資料請求（【ミキワ】墓じまい資料請求 等） */
+  /** 4. 墓じまい代行・相見積もり相談（墓じまいパートナーズ） */
   kuyo: {
-    url: "//af.moshimo.com/af/c/click?a_id=5918328&p_id=1672&pc_id=3119&pl_id=90825",
-    impPixel: "//i.moshimo.com/af/i/impression?a_id=5918328&p_id=1672&pc_id=3119&pl_id=90825",
-    providerLabel: "墓じまい資料請求（ミキワ）",
-    buttonText: "墓じまいの費用・手順の資料を請求する →",
-    microCopy: "墓石撤去から行政手続き・改葬までの流れと費用目安を、家族会議用の資料として手元で確認できます。",
+    url: "//af.moshimo.com/af/c/click?a_id=5918327&p_id=7496&pc_id=21651&pl_id=93975",
+    impPixel: "//i.moshimo.com/af/i/impression?a_id=5918327&p_id=7496&pc_id=21651&pl_id=93975",
+    providerLabel: "墓じまい代行・相見積もり相談（墓じまいパートナーズ）",
+    buttonText: "墓じまいの費用目安・代行手順を相談する →",
+    microCopy: "離檀の段取り・行政手続き・石材撤去の見積もりまで、家族会議の前に全体費用を確認できます。",
     disclaimer:
       "※実際の墓じまい費用は区画の広さ・搬出経路・寺院や霊園の規約により異なります。撤去工事の前に全体の費用と手順を確認しておくと安心です。",
     useAttributionSrc: true,
